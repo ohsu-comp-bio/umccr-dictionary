@@ -1,0 +1,148 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: file
+title: File
+type: object
+namespace: http://gdc.nci.nih.gov
+category: data_file
+program: '*'
+project: '*'
+description: A type of Information Content Entity specific to OS
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: assay
+  backref: files
+  label: reference_to
+  target_type: assay
+  multiplicity: many_to_one
+  required: true
+required:
+- submitter_id
+- type
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - File
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # File
+  fileFormat:
+    description: Format of a file (e.g. txt, csv, fastq, bam, etc.)
+    enum:
+    - Hdf5
+    - Bedgraph
+    - Idx
+    - Idat
+    - Bam
+    - Bai
+    - Excel
+    - Powerpoint
+    - Tif
+    - Tiff
+    - OME-TIFF
+    - Png
+    - Doc
+    - Pdf
+    - Fasta
+    - Fastq
+    - Sam
+    - Vcf
+    - Bcf
+    - Maf
+    - Bed
+    - Chp
+    - Cel
+    - Sif
+    - Tsv
+    - Csv
+    - Txt
+    - Plink
+    - Bigwig
+    - Wiggle
+    - Gct
+    - Bgzip
+    - Zip
+    - Seg
+    - Html
+    - Mov
+    - Hyperlink
+    - Svs
+    - Md
+    - Flagstat
+    - Gtf
+    - Raw
+    - Msf
+    - Rmd
+    - BednarrowPeak
+    - BedbroadPeak
+    - BedgappedPeak
+    - Avi
+    - Pzfx
+    - Fig
+    - Xml
+    - Tar
+    - Rscript
+    - Abf
+    - Bpm
+    - Dat
+    - Jpg
+    - Locs
+    - Sentrixdescriptorfile
+    - Pythonscript
+    - Sav
+    - Gzip
+    - Sdf
+    - RData
+    - Hic
+    - Ab1
+    - 7z
+    - Gff3
+    - Json
+    - Sqlite
+    - Svg
+    - Sra
+    - Recal
+    - Tranches
+    - Mtx
+    - TagAlign
+    - Dup
+    - DICOM
+    - Czi
+    - Mex
+    - Cloupe
+    - Am
+    - Cellam
+    - Mpg
+    - M
+  filename:
+    type: string
+    description: 'Name of a file '

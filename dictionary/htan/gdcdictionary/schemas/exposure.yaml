@@ -1,0 +1,127 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: exposure
+title: Exposure
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Individual's exposure to carcenogens
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: exposures
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Exposure
+  subtype:
+    enum:
+    - TimeBetweenWakingandFirstSmoke
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # TimeBetweenWakingandFirstSmoke
+  # Exposure
+  AlcoholExposure:
+    description: Indicate if individual has alcohol exposure
+    enum:
+    - Yes-AlcoholExposure
+    - No-AlcoholExposure
+    - NotReported
+  AsbestosExposure:
+    description: The yes/no/unknown indicator used to describe whether the patient
+      was exposed to asbestos.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  CoalDustExposure:
+    description: The yes/no/unknown indicator used to describe whether a patient was
+      exposed to fine powder derived by the crushing of coal.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  EnvironmentalTobaccoSmokeExposure:
+    description: The yes/no/unknown indicator used to describe whether a patient was
+      exposed to smoke that is emitted from burning tobacco, including cigarettes,
+      pipes, and cigars. This includes tobacco smoke exhaled by smokers.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  RadonExposure:
+    description: The yes/no/unknown indicator used to describe whether the patient
+      was exposed to radon.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  RespirableCrystallineSilicaExposure:
+    description: The yes/no/unknown indicator used to describe whether a patient was
+      exposured to respirable crystalline silica, a widespread, naturally occurring,
+      crystalline metal oxide that consists of different forms including quartz, cristobalite,
+      tridymite, tripoli, ganister, chert and novaculite.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  SmokingExposure:
+    description: Indicate if individual has smoking exposure
+    enum:
+    - Yes-SmokingExposure
+    - No-SmokingExposure
+    - NotReported
+  StartDaysfromIndex:
+    type: string
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  patients:
+    $ref: _definitions.yaml#/to_many
