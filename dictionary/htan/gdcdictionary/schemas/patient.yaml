@@ -17,12 +17,6 @@ systemProperties:
 - created_datetime
 - updated_datetime
 links:
-- name: biospecimen
-  backref: patients
-  label: refers_to
-  target_type: biospecimen
-  multiplicity: many_to_many
-  required: true
 - name: projects
   backref: patients
   label: reference_to
@@ -33,7 +27,6 @@ required:
 - submitter_id
 - type
 - projects
-- biospecimen
 uniqueKeys:
 - - id
 - - project_id
@@ -6964,5 +6957,3 @@ properties:
   therapies:
     $ref: _definitions.yaml#/to_many
   # Patient
-  biospecimen:
-    $ref: _definitions.yaml#/to_many

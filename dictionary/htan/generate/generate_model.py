@@ -309,17 +309,24 @@ class Gen3Configuration(object):
         for neighbor_id in self.node['neighbors']:
             _neighbor = self.schema.node(neighbor_id)
             _backref = inflection.pluralize(self._name(_neighbor))
-            template["properties"][_backref] = {"$ref": "_definitions.yaml#/to_many"}            
+            if _backref == 'patients':
+                print(f"Skipping link {template['id']}->{_backref}")
+                continue
+            template["properties"][_backref] = {
+                "$ref": "_definitions.yaml#/to_many"}
 
         if len(node['properties']) > 0:  # len(node['subclasses']) == 0 and
             self.properties(template, node)
 
         if self.parent:
             parent_link = self.parent_link()
-            template['links'].append(parent_link)
-            template['required'].append(parent_link['name'])
-            template["properties"][parent_link['name']] = {
-                "$ref": "_definitions.yaml#/to_many"}
+            if parent_link['name'] == 'biospecimen' and parent_link['backref']:
+                print(f"Skipping link {parent_link['name']}->{parent_link['backref']}")
+            else:
+                template['links'].append(parent_link)
+                template['required'].append(parent_link['name'])
+                template["properties"][parent_link['name']] = {
+                    "$ref": "_definitions.yaml#/to_many"}
 
         # special case for patient, link back to project
         if template['id'] == 'patient':
@@ -333,7 +340,7 @@ class Gen3Configuration(object):
                     "required": True
                 }
             )
-        # special case for file, link back to biospecimen
+        # special case for file, link back to assay
         if template['id'] == 'file':
             template["links"].append(
                 {
@@ -410,8 +417,6 @@ class Gen3Configuration(object):
                 ]
             }
             template["required"].extend(['data_type', 'data_format', 'data_category'])
-
-   
         # special case for assay, link back to biospecimen
         if template['id'] == 'assay':
             template["links"].append(
@@ -435,12 +440,12 @@ class Gen3Configuration(object):
                     "backref": "biospecimens",
                     "label": "reference_to",
                     "target_type": "patient",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "one_to_many",
                     "required": True
                 }
             )
             template["properties"]["patient"] = {
-                "$ref": "_definitions.yaml#/to_many"
+                "$ref": "_definitions.yaml#/to_one"
             }
 
 
