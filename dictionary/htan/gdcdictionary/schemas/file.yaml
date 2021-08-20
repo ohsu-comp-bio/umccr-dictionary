@@ -23,10 +23,19 @@ links:
   target_type: assay
   multiplicity: many_to_one
   required: true
+- name: core_metadata_collections
+  backref: files
+  label: data_from
+  target_type: core_metadata_collection
+  multiplicity: many_to_one
+  required: false
 required:
 - submitter_id
 - type
 - projects
+- data_type
+- data_format
+- data_category
 uniqueKeys:
 - - id
 - - project_id
@@ -55,7 +64,40 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   # File
-  fileFormat:
+  filename:
+    type: string
+    description: 'Name of a file '
+  assay:
+    $ref: _definitions.yaml#/to_one
+  core_metadata_collections:
+    $ref: _definitions.yaml#/to_many
+  $ref: _definitions.yaml#/data_file_properties
+  data_format:
+    term:
+      $ref: _terms.yaml#/data_format
+    enum:
+    - VCF
+    - junc
+    - tbi
+    - txt
+    - tsv
+    - xlsx
+    - bam
+    - bai
+    - fastq
+    - bigWig
+    - crai
+    - cram
+    - bed
+    - bim
+    - fam
+    - pdf
+    - idat
+    - svs
+    - tab
+    - gds
+    - other
+  data_type:
     description: Format of a file (e.g. txt, csv, fastq, bam, etc.)
     enum:
     - Hdf5
@@ -143,6 +185,16 @@ properties:
     - Cellam
     - Mpg
     - M
-  filename:
-    type: string
-    description: 'Name of a file '
+  data_category:
+    term:
+      $ref: _terms.yaml#/data_category
+    enum:
+    - Analysis
+    - Sequencing Reads
+    - Single Nucleotide Variation
+    - Simple Nucleotide Variation
+    - Transcriptome Profiling
+    - Clinical
+    - Imaging
+    - Supplemental
+    - Other

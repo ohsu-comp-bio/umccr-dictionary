@@ -18,7 +18,7 @@ systemProperties:
 - created_datetime
 - updated_datetime
 links:
-- name: biospecimens
+- name: biospecimen
   backref: files
   label: reference_to
   target_type: biospecimen
@@ -369,3 +369,5 @@ properties:
     description: The type and level of assay this metadata applies to (e.g. RPPA,
       Nanostring DSP, etc.)
   # Sequencing
+  biospecimen:
+    $ref: _definitions.yaml#/to_one

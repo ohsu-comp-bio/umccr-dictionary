@@ -1,12 +1,38 @@
-To Run
+# Generate - reads HTAN schema and generates Gen3 model
+
+
+## Setup
+
+```
+$ dictionary/htan/generate/
+$ python3.7 -m venv   venv
+```
+
+## Fetch HTAN datamodel 
+
+> Note this is not versioned - upstream changes may break generation
 
 ```
 wget https://raw.githubusercontent.com/ncihtan/schematic/main/data/schema_org_schemas/HTAN.jsonld
 
-cd dictionary/htan/generate/ ; python3  generate_model.py --id bts:Patient ; cd ../../.. ; make test dd=htan ;  make compile dd=htan ;  make load dd=htan
-cd dictionary/htan/generate/ ; python3  generate_model.py --id bts:Biospecimen ; cd ../../.. ; make test dd=htan ;  make compile dd=htan ;  make load dd=htan
-cd dictionary/htan/generate/ ; python3  generate_model.py --id bts:Assay ; cd ../../.. ; make test dd=htan ;  make compile dd=htan ;  make load dd=htan
-cd dictionary/htan/generate/ ; python3  generate_model.py --id bts:File ; cd ../../.. ; make test dd=htan ;  make compile dd=htan ;  make load dd=htan
-  
+```
+
+## Generate gen3 schema entities
 
 ```
+cd dictionary/htan/generate/ ;\
+    python3  generate_model.py --id bts:Patient ;\
+    python3  generate_model.py --id bts:Biospecimen ;\
+    python3  generate_model.py --id bts:Assay ;\
+    python3  generate_model.py --id bts:File ;\
+    cd ../../.. ;
+```
+
+## Test, compile and view datamodel
+```
+make test dd=htan ;  make compile dd=htan ;  make load dd=htan
+```
+
+## View datamodel
+
+Navigate to `http://localhost:8080/#schema/htan.json`

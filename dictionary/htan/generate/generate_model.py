@@ -345,14 +345,78 @@ class Gen3Configuration(object):
                     "required": True
                 }
             )
-            # template["properties"]["files"] = {
-            #     "$ref": "_definitions.yaml#/to_many"
-            # }
+            template["links"].append(
+                {
+                    "name": "core_metadata_collections",
+                    "backref": "files",
+                    "label": "data_from",
+                    "target_type": "core_metadata_collection",
+                    "multiplicity": "many_to_one",
+                    "required": False
+                }
+            )
+            template["properties"]["assay"] = {
+                "$ref": "_definitions.yaml#/to_one"
+            }
+            template["properties"]["core_metadata_collections"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
+            template["properties"]["$ref"] =  "_definitions.yaml#/data_file_properties"
+            template["properties"]["data_format"] = {
+                "term": {
+                    "$ref": "_terms.yaml#/data_format"
+                },
+                "enum": [
+                    "VCF",
+                    "junc",
+                    "tbi",
+                    "txt",
+                    "tsv",
+                    "xlsx",
+                    "bam",
+                    "bai",
+                    "fastq",
+                    "bigWig",
+                    "crai",
+                    "cram",
+                    "bed",
+                    "bim",
+                    "fam",
+                    "pdf",
+                    "idat",
+                    "svs",
+                    "tab",
+                    "gds",
+                    "other"
+                ]
+            }
+            # move HTAN fileFormat to gen3 required field data_type
+            template["properties"]["data_type"] = template["properties"]["fileFormat"]
+            del template["properties"]["fileFormat"]
+            template["properties"]["data_category"] = {
+                "term": {
+                    "$ref": "_terms.yaml#/data_category"
+                },
+                "enum": [
+                    "Analysis",
+                    "Sequencing Reads",
+                    "Single Nucleotide Variation",
+                    "Simple Nucleotide Variation",
+                    "Transcriptome Profiling",
+                    "Clinical",
+                    "Imaging",
+                    "Supplemental",
+                    "Other"
+                ]
+            }
+            template["required"].extend(['data_type', 'data_format', 'data_category'])
+
+   
         # special case for assay, link back to biospecimen
         if template['id'] == 'assay':
             template["links"].append(
                 {
-                    "name": "biospecimens",
+                    "name": "biospecimen",
                     "backref": "files",
                     "label": "reference_to",
                     "target_type": "biospecimen",
@@ -360,23 +424,26 @@ class Gen3Configuration(object):
                     "required": True
                 }
             )
-            # template["properties"]["files"] = {
-            #     "$ref": "_definitions.yaml#/to_many"
-            # }
+            template["properties"]["biospecimen"] = {
+                "$ref": "_definitions.yaml#/to_one"
+            }
+        # special case for biospecimen, link back to patient
+        if template['id'] == 'biospecimen':
+            template["links"].append(
+                {
+                    "name": "patient",
+                    "backref": "biospecimens",
+                    "label": "reference_to",
+                    "target_type": "patient",
+                    "multiplicity": "many_to_one",
+                    "required": True
+                }
+            )
+            template["properties"]["patient"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
 
 
-        # # special case for biospecimen, link back to patients
-        # if template['id'] == 'biospecimen':
-        #     template["links"].append(
-        #         {
-        #             "name": "patients",
-        #             "backref": "biospecimens",
-        #             "label": "reference_to",
-        #             "target_type": "patient",
-        #             "multiplicity": "many_to_many",
-        #             "required": True
-        #         }
-        #     )
 
         # save this node
         yaml_string = dump(template, sort_keys=False)

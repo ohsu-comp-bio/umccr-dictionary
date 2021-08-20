@@ -17,7 +17,13 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- name: patient
+  backref: biospecimens
+  label: reference_to
+  target_type: patient
+  multiplicity: many_to_one
+  required: true
 required:
 - submitter_id
 - type
@@ -669,3 +675,5 @@ properties:
   TumorInfiltratingLymphocytes:
     type: string
     description: Measure of Tumor-Infiltrating Lymphocytes [Number]
+  patient:
+    $ref: _definitions.yaml#/to_many
