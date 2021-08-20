@@ -1,0 +1,1509 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: follow_up
+title: FollowUp
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Individual's follow up exams
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: follow_ups
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - FollowUp
+  subtype:
+    enum:
+    - AnatomicSite
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # AnatomicSite
+  # FollowUp
+  AIDSRiskFactors:
+    description: The text term used to describe a risk factor of the acquired immunodeficiency
+      syndrome (AIDS) that the patient either had at time time of the study or experienced
+      in the past.
+    enum:
+    - Candidiasis
+    - Coccidioidomycosis
+    - Cryptococcosis
+    - Cytomegalovirus
+    - Encephalopathy
+    - HerpesSimplexVirus
+    - Histoplasmosis
+    - Isosporiasis
+    - MycobacteriumaviumComplex
+    - Mycobacteriumtuberculosis
+    - Mycobacterium
+    - NOS
+    - Nocardiosis
+    - PneumocystisPneumonia
+    - Pneumonia
+    - NOS
+    - ProgressiveMultifocalLeukoencephalopathy
+    - SalmonellaSepticemia
+    - Toxoplasmosis
+    - WastingSyndrome
+  AdverseEvent:
+    description: Text that represents the Common Terminology Criteria for Adverse
+      Events low level term name for an adverse event.
+    enum:
+    - AbdominalDistension
+    - AbdominalInfection
+    - AbdominalPain
+    - AbdominalSoftTissueNecrosis
+    - AbducensNerveDisorder
+    - AccessoryNerveDisorder
+    - Acidosis
+    - AcousticNerveDisorderNOS
+    - ActivatedPartialThromboplastinTimeProlonged
+    - AcuteCoronarySyndrome
+    - AcuteKidneyInjury
+    - AdrenalInsufficiency
+    - AdultRespiratoryDistressSyndrome
+    - Agitation
+    - Akathisia
+    - AlanineAminotransferaseIncreased
+    - AlcoholIntolerance
+    - AlkalinePhosphataseIncreased
+    - Alkalosis
+    - AllergicReaction
+    - AllergicRhinitis
+    - Alopecia
+    - Amnesia
+    - AnalFistula
+    - AnalHemorrhage
+    - AnalMucositis
+    - AnalNecrosis
+    - AnalPain
+    - AnalStenosis
+    - AnalUlcer
+    - Anaphylaxis
+    - Anemia
+    - AnkleFracture
+    - AnorectalInfection
+    - Anorexia
+    - Anorgasmia
+    - Anxiety
+    - AorticInjury
+    - AorticValveDisease
+    - Aphonia
+    - Apnea
+    - Appendicitis
+    - AppendicitisPerforated
+    - Arachnoiditis
+    - ArterialInjury
+    - ArteritisInfective
+    - Arthralgia
+    - Arthritis
+    - Ascites
+    - AspartateAminotransferaseIncreased
+    - Aspiration
+    - Asystole
+    - Ataxia
+    - Atelectasis
+    - AtrialFibrillation
+    - AtrialFlutter
+    - AtrioventricularBlockComplete
+    - AtrioventricularBlockFirstDegree
+    - AutoimmuneDisorder
+    - AvascularNecrosis
+    - Azoospermia
+    - BackPain
+    - BileDuctStenosis
+    - BiliaryAnastomoticLeak
+    - BiliaryFistula
+    - BiliaryTractInfection
+    - BladderAnastomoticLeak
+    - BladderInfection
+    - BladderPerforation
+    - BladderSpasm
+    - Bloating
+    - BloodandLymphaticSystemDisordersOther
+    - BloodAntidiureticHormoneAbnormal
+    - BloodBilirubinIncreased
+    - BloodCorticotrophinDecreased
+    - BloodGonadotrophinAbnormal
+    - BloodProlactinAbnormal
+    - BlurredVision
+    - BodyOdor
+    - BoneInfection
+    - BoneMarrowHypocellular
+    - BonePain
+    - BrachialPlexopathy
+    - BreastAtrophy
+    - BreastInfection
+    - BreastPain
+    - BronchialFistula
+    - BronchialInfection
+    - BronchialObstruction
+    - BronchialStricture
+    - BronchopleuralFistula
+    - BronchopulmonaryHemorrhage
+    - Bronchospasm
+    - Bruising
+    - BullousDermatitis
+    - Burn
+    - ButtockPain
+    - CapillaryLeakSyndrome
+    - CarbonMonoxideDiffusingCapacityDecreased
+    - CardiacArrest
+    - CardiacDisordersOther
+    - CardiacTroponinIIncreased
+    - CardiacTroponinTIncreased
+    - Cataract
+    - CatheterRelatedInfection
+    - CD4LymphocytesDecreased
+    - CecalHemorrhage
+    - CecalInfection
+    - CentralNervousSystemNecrosis
+    - CerebrospinalFluidLeakage
+    - CervicitisInfection
+    - Cheilitis
+    - ChestPainCardiac
+    - ChestWallPain
+    - Chills
+    - Cholecystitis
+    - CholesterolHigh
+    - ChronicKidneyDisease
+    - Chylothorax
+    - CognitiveDisturbance
+    - Colitis
+    - ColonicFistula
+    - ColonicHemorrhage
+    - ColonicObstruction
+    - ColonicPerforation
+    - ColonicStenosis
+    - ColonicUlcer
+    - ConcentrationImpairment
+    - ConductionDisorder
+    - Confusion
+    - Congenital
+    - FamilialandGeneticDisordersOther
+    - Conjunctivitis
+    - ConjunctivitisInfective
+    - Constipation
+    - ConstrictivePericarditis
+    - CornealInfection
+    - CornealUlcer
+    - Cough
+    - CPKIncreased
+    - CranialNerveInfection
+    - CreatinineIncreased
+    - Cushingoid
+    - CystitisNoninfective
+    - CytokineReleaseSyndrome
+    - DeathNeonatal
+    - DeathNOS
+    - Dehydration
+    - DelayedOrgasm
+    - DelayedPuberty
+    - Delirium
+    - Delusions
+    - DentalCaries
+    - DepressedLevelofConsciousness
+    - Depression
+    - DermatitisRadiation
+    - DeviceRelatedInfection
+    - Diarrhea
+    - DisseminatedIntravascularCoagulation
+    - Dizziness
+    - DryEye
+    - DryMouth
+    - DrySkin
+    - DuodenalFistula
+    - DuodenalHemorrhage
+    - DuodenalInfection
+    - DuodenalObstruction
+    - DuodenalPerforation
+    - DuodenalStenosis
+    - DuodenalUlcer
+    - Dysarthria
+    - Dysesthesia
+    - Dysgeusia
+    - Dysmenorrhea
+    - Dyspareunia
+    - Dyspepsia
+    - Dysphagia
+    - Dysphasia
+    - Dyspnea
+    - EarandLabyrinthDisordersOther
+    - EarPain
+    - EdemaCerebral
+    - EdemaFace
+    - EdemaLimbs
+    - EdemaTrunk
+    - EjaculationDisorder
+    - EjectionFractionDecreased
+    - ElectrocardiogramQTCorrectedIntervalProlonged
+    - EncephalitisInfection
+    - EncephalomyelitisInfection
+    - Encephalopathy
+    - EndocarditisInfective
+    - EndocrineDisordersOther
+    - Endophthalmitis
+    - Enterocolitis
+    - EnterocolitisInfectious
+    - EnterovesicalFistula
+    - Epistaxis
+    - ErectileDysfunction
+    - ErythemaMultiforme
+    - Erythroderma
+    - EsophagealAnastomoticLeak
+    - EsophagealFistula
+    - EsophagealHemorrhage
+    - EsophagealInfection
+    - EsophagealNecrosis
+    - EsophagealObstruction
+    - EsophagealPain
+    - EsophagealPerforation
+    - EsophagealStenosis
+    - EsophagealUlcer
+    - EsophagealVaricesHemorrhage
+    - Esophagitis
+    - Euphoria
+    - Exostosis
+    - ExternalEarInflammation
+    - ExternalEarPain
+    - ExtraocularMuscleParesis
+    - ExtrapyramidalDisorder
+    - EyeDisordersOther
+    - EyeInfection
+    - EyePain
+    - EyelidFunctionDisorder
+    - FacialMuscleWeakness
+    - FacialNerveDisorder
+    - FacialPain
+    - Fall
+    - FallopianTubeAnastomoticLeak
+    - FallopianTubeObstruction
+    - FallopianTubePerforation
+    - FallopianTubeStenosis
+    - FatAtrophy
+    - Fatigue
+    - FebrileNeutropenia
+    - FecalIncontinence
+    - FemaleGenitalTractFistula
+    - FeminizationAcquired
+    - FetalDeath
+    - FetalGrowthRetardation
+    - Fever
+    - FibrinogenDecreased
+    - FibrosisDeepConnectiveTissue
+    - FlankPain
+    - FlashingLights
+    - Flatulence
+    - Floaters
+    - FluLikeSymptoms
+    - Flushing
+    - ForcedExpiratoryVolumeDecreased
+    - Fracture
+    - GaitDisturbance
+    - GallbladderFistula
+    - GallbladderInfection
+    - GallbladderNecrosis
+    - GallbladderObstruction
+    - GallbladderPain
+    - GallbladderPerforation
+    - GastricAnastomoticLeak
+    - GastricFistula
+    - GastricHemorrhage
+    - GastricNecrosis
+    - GastricPerforation
+    - GastricStenosis
+    - GastricUlcer
+    - Gastritis
+    - GastroesophagealRefluxDisease
+    - GastrointestinalAnastomoticLeak
+    - GastrointestinalDisordersOther
+    - GastrointestinalFistula
+    - GastrointestinalPain
+    - GastrointestinalStomaNecrosis
+    - Gastroparesis
+    - GeneralDisordersandAdministrationSiteConditionsOther
+    - GeneralizedMuscleWeakness
+    - GenitalEdema
+    - GGTIncreased
+    - GingivalPain
+    - Glaucoma
+    - GlossopharyngealNerveDisorder
+    - GlucoseIntolerance
+    - GrowthAccelerated
+    - GrowthHormoneAbnormal
+    - GrowthSuppression
+    - GumInfection
+    - Gynecomastia
+    - Hallucinations
+    - HaptoglobinDecreased
+    - HeadSoftTissueNecrosis
+    - Headache
+    - HearingImpaired
+    - HeartFailure
+    - Hematoma
+    - Hematosalpinx
+    - Hematuria
+    - HemoglobinIncreased
+    - Hemoglobinuria
+    - Hemolysis
+    - HemolyticUremicSyndrome
+    - HemorrhoidalHemorrhage
+    - Hemorrhoids
+    - HepaticFailure
+    - HepaticHemorrhage
+    - HepaticInfection
+    - HepaticNecrosis
+    - HepaticPain
+    - HepatitisViral
+    - HepatobiliaryDisordersOther
+    - Hiccups
+    - HipFracture
+    - Hirsutism
+    - Hoarseness
+    - HotFlashes
+    - Hydrocephalus
+    - Hypercalcemia
+    - Hyperglycemia
+    - Hyperhidrosis
+    - Hyperkalemia
+    - Hypermagnesemia
+    - Hypernatremia
+    - Hyperparathyroidism
+    - Hypersomnia
+    - Hypertension
+    - Hyperthyroidism
+    - Hypertrichosis
+    - Hypertriglyceridemia
+    - Hyperuricemia
+    - Hypoalbuminemia
+    - Hypocalcemia
+    - HypoglossalNerveDisorder
+    - Hypoglycemia
+    - Hypohidrosis
+    - Hypokalemia
+    - Hypomagnesemia
+    - Hyponatremia
+    - Hypoparathyroidism
+    - Hypophosphatemia
+    - Hypotension
+    - Hypothermia
+    - Hypothyroidism
+    - Hypoxia
+    - IlealFistula
+    - IlealHemorrhage
+    - IlealObstruction
+    - IlealPerforation
+    - IlealStenosis
+    - IlealUlcer
+    - Ileus
+    - ImmuneSystemDisordersOther
+    - InfectionsandInfestationsOther
+    - InfectiveMyositis
+    - InfusionRelatedReaction
+    - InfusionSiteExtravasation
+    - InjectionSiteReaction
+    - InjurytoCarotidArtery
+    - InjurytoInferiorVenaCava
+    - InjurytoJugularVein
+    - InjurytoSuperiorVenaCava
+    - Injury
+    - PoisoningandProceduralComplicationsOther
+    - INRIncreased
+    - Insomnia
+    - IntestinalStomaLeak
+    - IntestinalStomaObstruction
+    - IntestinalStomaSiteBleeding
+    - Intra-AbdominalHemorrhage
+    - IntracranialHemorrhage
+    - IntraoperativeArterialInjury
+    - IntraoperativeBreastInjury
+    - IntraoperativeCardiacInjury
+    - IntraoperativeEarInjury
+    - IntraoperativeEndocrineInjury
+    - IntraoperativeGastrointestinalInjury
+    - IntraoperativeHeadandNeckInjury
+    - IntraoperativeHemorrhage
+    - IntraoperativeHepatobiliaryInjury
+    - IntraoperativeMusculoskeletalInjury
+    - IntraoperativeNeurologicalInjury
+    - IntraoperativeOcularInjury
+    - IntraoperativeRenalInjury
+    - IntraoperativeReproductiveTractInjury
+    - IntraoperativeRespiratoryInjury
+    - IntraoperativeSkinInjury
+    - IntraoperativeSplenicInjury
+    - IntraoperativeUrinaryInjury
+    - IntraoperativeVenousInjury
+    - InvestigationsOther
+    - IronOverload
+    - IrregularMenstruation
+    - Irritability
+    - IschemiaCerebrovascular
+    - IVthNerveDisorder
+    - JejunalFistula
+    - JejunalHemorrhage
+    - JejunalObstruction
+    - JejunalPerforation
+    - JejunalStenosis
+    - JejunalUlcer
+    - JointEffusion
+    - JointInfection
+    - JointRangeofMotionDecreased
+    - JointRangeofMotionDecreasedCervicalSpine
+    - JointRangeofMotionDecreasedLumbarSpine
+    - Keratitis
+    - KidneyAnastomoticLeak
+    - KidneyInfection
+    - Kyphosis
+    - LactationDisorder
+    - LargeIntestinalAnastomoticLeak
+    - LaryngealEdema
+    - LaryngealFistula
+    - LaryngealHemorrhage
+    - LaryngealInflammation
+    - LaryngealMucositis
+    - LaryngealObstruction
+    - LaryngealStenosis
+    - Laryngitis
+    - LaryngopharyngealDysesthesia
+    - Laryngospasm
+    - LeftVentricularSystolicDysfunction
+    - Lethargy
+    - LeukemiaSecondarytoOncologyChemotherapy
+    - Leukocytosis
+    - Leukoencephalopathy
+    - LibidoDecreased
+    - LibidoIncreased
+    - LipInfection
+    - LipPain
+    - LipaseIncreased
+    - Lipohypertrophy
+    - LocalizedEdema
+    - Lordosis
+    - LowerGastrointestinalHemorrhage
+    - LungInfection
+    - LymphGlandInfection
+    - LymphLeakage
+    - LymphNodePain
+    - Lymphedema
+    - Lymphocele
+    - LymphocyteCountDecreased
+    - LymphocyteCountIncreased
+    - Malabsorption
+    - Malaise
+    - Mania
+    - MediastinalHemorrhage
+    - MediastinalInfection
+    - MemoryImpairment
+    - Meningismus
+    - Meningitis
+    - Menopause
+    - Menorrhagia
+    - MetabolismandNutritionDisordersOther
+    - MiddleEarInflammation
+    - MitralValveDisease
+    - Mobitz(Type)IIAtrioventricularBlock
+    - MobitzTypeI
+    - MovementsInvoluntary
+    - MucosalInfection
+    - MucositisOral
+    - Multi-OrganFailure
+    - MuscleWeaknessLeft-Sided
+    - MuscleWeaknessLowerLimb
+    - MuscleWeaknessRight-Sided
+    - MuscleWeaknessTrunk
+    - MuscleWeaknessUpperLimb
+    - MusculoskeletalandConnectiveTissueDisordersOther
+    - MusculoskeletalDeformity
+    - Myalgia
+    - Myelitis
+    - MyelodysplasticSyndrome
+    - MyocardialInfarction
+    - Myocarditis
+    - Myositis
+    - NailDiscoloration
+    - NailInfection
+    - NailLoss
+    - NailRidging
+    - NasalCongestion
+    - Nausea
+    - NeckEdema
+    - NeckPain
+    - NeckSoftTissueNecrosis
+    - NeoplasmsBenign
+    - MalignantandUnspecified(InclCystsandPolyps)Other
+    - NervousSystemDisordersOther
+    - Neuralgia
+    - NeutrophilCountDecreased
+    - NightBlindness
+    - NippleDeformity
+    - Non-CardiacChestPain
+    - Nystagmus
+    - Obesity
+    - ObstructionGastric
+    - OculomotorNerveDisorder
+    - OlfactoryNerveDisorder
+    - Oligospermia
+    - OpticNerveDisorder
+    - OralCavityFistula
+    - OralDysesthesia
+    - OralHemorrhage
+    - OralPain
+    - OsteonecrosisofJaw
+    - Osteoporosis
+    - OtitisExterna
+    - OtitisMedia
+    - OvarianHemorrhage
+    - OvarianInfection
+    - OvarianRupture
+    - OvulationPain
+    - Pain
+    - PaininExtremity
+    - PainofSkin
+    - Palmar-PlantarErythrodysesthesiaSyndrome
+    - Palpitations
+    - PancreasInfection
+    - PancreaticAnastomoticLeak
+    - PancreaticDuctStenosis
+    - PancreaticEnzymesDecreased
+    - PancreaticFistula
+    - PancreaticHemorrhage
+    - PancreaticNecrosis
+    - Pancreatitis
+    - Papilledema
+    - PapulopustularRash
+    - Paresthesia
+    - Paronychia
+    - ParoxysmalAtrialTachycardia
+    - PelvicFloorMuscleWeakness
+    - PelvicInfection
+    - PelvicPain
+    - PelvicSoftTissueNecrosis
+    - PenileInfection
+    - PenilePain
+    - PerforationBileDuct
+    - PericardialEffusion
+    - PericardialTamponade
+    - Pericarditis
+    - PerinealPain
+    - PeriodontalDisease
+    - PeriorbitalEdema
+    - PeriorbitalInfection
+    - PeripheralIschemia
+    - PeripheralMotorNeuropathy
+    - PeripheralNerveInfection
+    - PeripheralSensoryNeuropathy
+    - PeritonealInfection
+    - PeritonealNecrosis
+    - PersonalityChange
+    - PhantomPain
+    - PharyngealAnastomoticLeak
+    - PharyngealFistula
+    - PharyngealHemorrhage
+    - PharyngealMucositis
+    - PharyngealNecrosis
+    - PharyngealStenosis
+    - Pharyngitis
+    - PharyngolaryngealPain
+    - Phlebitis
+    - PhlebitisInfective
+    - Photophobia
+    - Photosensitivity
+    - PlateletCountDecreased
+    - PleuralEffusion
+    - PleuralHemorrhage
+    - PleuralInfection
+    - PleuriticPain
+    - Pneumonitis
+    - Pneumothorax
+    - PortalHypertension
+    - PortalVeinThrombosis
+    - PostnasalDrip
+    - PostoperativeHemorrhage
+    - PostoperativeThoracicProcedureComplication
+    - PrecociousPuberty
+    - Pregnancy
+    - PuerperiumandPerinatalConditionsOther
+    - PrematureDelivery
+    - PrematureMenopause
+    - Presyncope
+    - Proctitis
+    - ProductiveCough
+    - ProlapseofIntestinalStoma
+    - ProlapseofUrostomy
+    - ProstateInfection
+    - ProstaticHemorrhage
+    - ProstaticObstruction
+    - ProstaticPain
+    - Proteinuria
+    - Pruritus
+    - PsychiatricDisordersOther
+    - Psychosis
+    - PulmonaryEdema
+    - PulmonaryFibrosis
+    - PulmonaryFistula
+    - PulmonaryHypertension
+    - PulmonaryValveDisease
+    - Purpura
+    - PyramidalTractSyndrome
+    - RadiationRecallReaction(Dermatologic)
+    - Radiculitis
+    - RashAcneiform
+    - RashMaculo-Papular
+    - RashPustular
+    - RectalAnastomoticLeak
+    - RectalFistula
+    - RectalHemorrhage
+    - RectalMucositis
+    - RectalNecrosis
+    - RectalObstruction
+    - RectalPain
+    - RectalPerforation
+    - RectalStenosis
+    - RectalUlcer
+    - RecurrentLaryngealNervePalsy
+    - RenalandUrinaryDisordersOther
+    - RenalCalculi
+    - RenalColic
+    - RenalHemorrhage
+    - ReproductiveSystemandBreastDisordersOther
+    - RespiratoryFailure
+    - Respiratory
+    - ThoracicandMediastinalDisordersOther
+    - Restlessness
+    - RestrictiveCardiomyopathy
+    - RetinalDetachment
+    - RetinalTear
+    - RetinalVascularDisorder
+    - RetinoicAcidSyndrome
+    - Retinopathy
+    - RetroperitonealHemorrhage
+    - ReversiblePosteriorLeukoencephalopathySyndrome
+    - RhinitisInfective
+    - RightVentricularDysfunction
+    - SalivaryDuctInflammation
+    - SalivaryGlandFistula
+    - SalivaryGlandInfection
+    - ScalpPain
+    - ScleralDisorder
+    - Scoliosis
+    - ScrotalInfection
+    - ScrotalPain
+    - Seizure
+    - Sepsis
+    - Seroma
+    - SerumAmylaseIncreased
+    - SerumSickness
+    - SickSinusSyndrome
+    - SinusBradycardia
+    - SinusDisorder
+    - SinusPain
+    - SinusTachycardia
+    - Sinusitis
+    - SkinandSubcutaneousTissueDisordersOther
+    - SkinAtrophy
+    - SkinHyperpigmentation
+    - SkinHypopigmentation
+    - SkinInduration
+    - SkinInfection
+    - SkinUlceration
+    - SleepApnea
+    - SmallIntestinalAnastomoticLeak
+    - SmallIntestinalMucositis
+    - SmallIntestinalObstruction
+    - SmallIntestinalPerforation
+    - SmallIntestinalStenosis
+    - SmallIntestineInfection
+    - SmallIntestineUlcer
+    - Sneezing
+    - SocialCircumstancesOther
+    - SoftTissueInfection
+    - SoftTissueNecrosisLowerLimb
+    - SoftTissueNecrosisUpperLimb
+    - Somnolence
+    - SoreThroat
+    - Spasticity
+    - SpermaticCordAnastomoticLeak
+    - SpermaticCordHemorrhage
+    - SpermaticCordObstruction
+    - SpinalFracture
+    - SpleenDisorder
+    - SplenicInfection
+    - StenosisofGastrointestinalStoma
+    - Stevens-JohnsonSyndrome
+    - StomaSiteInfection
+    - StomachPain
+    - StomalUlcer
+    - Stridor
+    - Stroke
+    - SuddenDeathNOS
+    - SuicidalIdeation
+    - SuicideAttempt
+    - SuperficialSoftTissueFibrosis
+    - SuperficialThrombophlebitis
+    - SuperiorVenaCavaSyndrome
+    - SupraventricularTachycardia
+    - SurgicalandMedicalProceduresOther
+    - Syncope
+    - Telangiectasia
+    - TesticularDisorder
+    - TesticularHemorrhage
+    - TesticularPain
+    - ThromboembolicEvent
+    - ThromboticThrombocytopenicPurpura
+    - Tinnitus
+    - ToothDevelopmentDisorder
+    - ToothDiscoloration
+    - ToothInfection
+    - Toothache
+    - ToxicEpidermalNecrolysis
+    - TrachealFistula
+    - TrachealHemorrhage
+    - TrachealMucositis
+    - TrachealObstruction
+    - TrachealStenosis
+    - Tracheitis
+    - TracheostomySiteBleeding
+    - TransientIschemicAttacks
+    - TreatmentRelatedSecondaryMalignancy
+    - Tremor
+    - TricuspidValveDisease
+    - TrigeminalNerveDisorder
+    - Trismus
+    - TumorLysisSyndrome
+    - TumorPain
+    - Typhlitis
+    - UnequalLimbLength
+    - UnintendedPregnancy
+    - UpperGastrointestinalHemorrhage
+    - UpperRespiratoryInfection
+    - UretericAnastomoticLeak
+    - UrethralAnastomoticLeak
+    - UrethralInfection
+    - UrinaryFistula
+    - UrinaryFrequency
+    - UrinaryIncontinence
+    - UrinaryRetention
+    - UrinaryTractInfection
+    - UrinaryTractObstruction
+    - UrinaryTractPain
+    - UrinaryUrgency
+    - UrineDiscoloration
+    - UrineOutputDecreased
+    - UrostomyLeak
+    - UrostomyObstruction
+    - UrostomySiteBleeding
+    - UrostomyStenosis
+    - Urticaria
+    - UterineAnastomoticLeak
+    - UterineFistula
+    - UterineHemorrhage
+    - UterineInfection
+    - UterineObstruction
+    - UterinePain
+    - UterinePerforation
+    - Uveitis
+    - VaginalAnastomoticLeak
+    - VaginalDischarge
+    - VaginalDryness
+    - VaginalFistula
+    - VaginalHemorrhage
+    - VaginalInfection
+    - VaginalInflammation
+    - VaginalObstruction
+    - VaginalPain
+    - VaginalPerforation
+    - VaginalStricture
+    - Vaginismus
+    - VagusNerveDisorder
+    - VasDeferensAnastomoticLeak
+    - VascularAccessComplication
+    - VascularDisordersOther
+    - Vasculitis
+    - VasovagalReaction
+    - VenousInjury
+    - VentricularArrhythmia
+    - VentricularFibrillation
+    - VentricularTachycardia
+    - Vertigo
+    - VestibularDisorder
+    - Virilization
+    - VisceralArterialIschemia
+    - VitalCapacityAbnormal
+    - VitreousHemorrhage
+    - VoiceAlteration
+    - Vomiting
+    - VulvalInfection
+    - WateringEyes
+    - WeightGain
+    - WeightLoss
+    - Wheezing
+    - WhiteBloodCellDecreased
+    - Wolff-Parkinson-WhiteSyndrome
+    - WoundComplication
+    - WoundDehiscence
+    - WoundInfection
+    - WristFracture
+  AdverseEventGrade:
+    description: The text term used to describe a specific histone variants, which
+      are proteins that substitute for the core canonical histones.
+    enum:
+    - Grade1
+    - Grade2
+    - Grade3
+    - Grade4
+    - Grade5
+  BMI:
+    type: string
+    description: A calculated numerical quantity that represents an individual's weight
+      to height ratio.
+  BarrettsEsophagusGobletCellsPresent:
+    type: string
+    description: TBD
+  BodySurfaceArea:
+    type: string
+    description: Numeric value used to represent the 2-dimensional extent of the body
+      surface relating height to weight.
+  CD4Count:
+    type: string
+    description: The text term used to describe the outcome of the procedure to determine
+      the amount of the CD4 expressing cells in a sample.
+  CDCHIVRiskFactors:
+    description: The text term used to describe a risk factor for human immunodeficiency
+      virus, as described by the Center for Disease Control.
+    enum:
+    - Hemophiliac
+    - HeterosexualContact
+    - HomosexualContact
+    - IntravenousDrugUser
+    - None
+    - TransfusionRecipient
+    - Unknown
+    - NotReported
+  CauseofResponse:
+    type: string
+    description: The text term used to describe the suspected cause or reason for
+      the patient disease response.
+  Comorbidity:
+    description: The text term used to describe a comorbidity disease, which coexists
+      with the patient's malignant disease.
+    enum:
+    - AcuteRenalFailure
+    - Adenocarcinoma
+    - AdrenocorticalInsufficiency
+    - AdenomatousPolyposisColi
+    - Allergies
+    - Alpha-1Antitrypsin
+    - Anemia
+    - Anxiety
+    - Arrhythmia
+    - Arthritis
+    - Asthma
+    - AtrialFibrillation
+    - AvascularNecrosis
+    - Barrett'sEsophagus
+    - BasalCellCarcinoma
+    - Beckwith-Wiedemann
+    - Behcet'sDisease
+    - BiliaryDisorder
+    - BloodClots
+    - BoneFracture(s)
+    - Bronchitis
+    - CalciumChannelBlockers
+    - Cancer
+    - Cataracts
+    - CeliacDisease
+    - Cirrhosis
+    - UnknownEtiology
+    - CerebrovascularDisease
+    - Cholelithiasis
+    - ChronicRenalFailure
+    - ColonPolyps
+    - CommonVariableImmunodeficiency
+    - CongestiveHeartFailure(CHF)
+    - ConnectiveTissueDisorder
+    - COPD
+    - CoronaryArteryDisease
+    - Crohn'sDisease
+    - CryptogenicOrganizingPneumonia
+    - DeepVeinThrombosis/Thromboembolism
+    - Denys-DrashSyndrome
+    - Depression
+    - Diabetes
+    - Diabetes
+    - TypeII
+    - DiabeticNeuropathy
+    - DietControlledDiabetes
+    - Diverticulitis
+    - DVT/PE
+    - Dyslipidemia
+    - Epilepsy
+    - Eczema
+    - Epstein-BarrVirus
+    - FamilialAdenomatousPolyposis
+    - FanconiAnemia
+    - Fibrosis
+    - GastroesophagealRefluxDisease
+    - GERD
+    - Glaucoma
+    - GlycogenStorageDisease
+    - Gout
+    - GonadalDysfunction
+    - GorlinSyndrome
+    - H.pyloriInfection
+    - Hashimoto'sThyroiditis
+    - Headache
+    - HeartDisease
+    - Hemihypertrophy
+    - HemorrhagicCystitis
+    - Hepatitis
+    - HepatitisAInfection
+    - HepatitisBInfection
+    - HepatitisCInfection
+    - ChronicHepatitis
+    - HereditaryNon-polyposisColonCancer
+    - Herpes
+    - HighGradeLiverDysplasticNodule
+    - HIV/AIDS
+    - HumanPapillomavirusInfection
+    - HUS/TTP
+    - Hypercholesterolemia
+    - Hypercalcemia
+    - Hyperglycemia
+    - Hyperlipidemia
+    - Hypertension
+    - Hypospadias
+    - Hypothyroidism
+    - InflammatoryBowelDisease
+    - InsulinControlledDiabetes
+    - InterstitialPneumontisorARDS
+    - IntraductalPapillaryMucinousNeoplasm
+    - IronOverload
+    - IschemicHeartDisease
+    - ITP
+    - JointReplacement
+    - KidneyDisease
+    - LiverCirrhosis(LiverDisease)
+    - LiverToxicity(Non-Infectious)
+    - Li-FraumeniSyndrome
+    - LowGradeLiverDysplasticNodule
+    - Lupus
+    - LynchSyndrome
+    - MAI
+    - MyastheniaGravis
+    - MyocardialInfarction
+    - NeuroendocrineTumor
+    - NonalcoholicSteatohepatitis
+    - Obesity
+    - Organtransplant(site)
+    - Osteoarthritis
+    - OsteoporosisorOsteopenia
+    - Other
+    - OtherCancerWithin5Years
+    - OtherNonmalignantSystemicDisease
+    - OtherPulmonaryComplications
+    - Pancreatitis
+    - Pain(Various)
+    - PepticUlcer(Ulcer)
+    - PeripheralNeuropathy
+    - PeripheralVascularDisease
+    - Peutz-JeghersDisease
+    - PregnancyinPatientorPartner
+    - PrimarySclerosingCholangitis
+    - Psoriasis
+    - PulmonaryFibrosis
+    - PulmonaryHemorrhage
+    - RenalFailure(RequiringDialysis)
+    - RenalDialysis
+    - RenalInsufficiency
+    - RheumatologicDisease
+    - RheumatoidArthritis
+    - Rubinstein-TaybiSyndrome
+    - Sarcoidosis
+    - Seizure
+    - Sleepapnea
+    - Smoking
+    - Steatosis
+    - Stroke
+    - TransientIschemicAttack
+    - Tuberculosis
+    - TurcotSyndrome
+    - Tyrosinemia
+    - UlcerativeColitis
+    - WagrSyndrome
+    - Unknown
+    - NotReported
+  ComorbidityMethodofDiagnosis:
+    description: The text term used to describe the method used to diagnose the patient's
+      comorbidity disease.
+    enum:
+    - Histology
+    - Pathology
+    - Radiology
+    - Unknown
+    - NotReported
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  DLCORefPredictivePercent:
+    type: string
+    description: The value, as a percentage of predicted lung volume, measuring the
+      amount of carbon monoxide detected in a patient's lungs.
+  DaystoAdverseEvent:
+    type: string
+    description: Number of days between the date used for index and the date of the
+      patient's adverse event.
+  DaystoComorbidity:
+    type: string
+    description: Number of days between the date used for index and the date the patient
+      was diagnosed with a comorbidity.
+  DaystoFollowUp:
+    type: string
+    description: Number of days between the date used for index and the date of the
+      patient's last follow-up appointment or contact.
+  DaystoImaging:
+    type: string
+    description: Number of days between the date used for index and the date the imaging
+      or scan was performed on the patient.
+  DiabetesTreatmentType:
+    description: Text term used to describe the types of treatment used to manage
+      diabetes.
+    enum:
+    - Alpha-GlucosidaseInhibitor
+    - Biguanide
+    - Diet
+    - InjectedInsulin
+    - Insulin
+    - OralHypoglycemic
+    - Sulfonylurea
+    - Thiazolidinedione
+    - Other
+    - Unknown
+    - NotReported
+  DiseaseResponse:
+    description: Code assigned to describe the patient's response or outcome to the
+      disease.
+    enum:
+    - AJ-AdjuvantTherapy
+    - BED-BiochemicalEvidenceofDisease
+    - CPD-ClinicalProgression
+    - CR-CompleteResponse
+    - CRU-CompleteResponseUnconfirmed
+    - DU-DiseaseUnchanged
+    - IMR-Immunoresponse
+    - IPD-Immunoprogression
+    - MR-Minimal/Marginalresponse
+    - MX-MixedResponse
+    - Non-CR/Non-PD-Non-CR/Non-PD
+    - NPB-NoPalliativeBenefit
+    - NR-NoResponse
+    - PA-PalliativeTherapy
+    - PB-PalliativeBenefit
+    - PD-ProgressiveDisease
+    - PDM-PersistentDistantMetastasis
+    - PLD-PersistentLocoregionalDisease
+    - PPD-Pseudoprogression
+    - PR-PartialResponse
+    - PSR-Pseudoresponse
+    - RD-ResponsiveDisease
+    - RP-Response
+    - RPD-RadiographicProgressiveDisease
+    - SCR-StringentCompleteResponse
+    - SD-StableDisease
+    - SPD-SurgicalProgression
+    - TE-TooEarly
+    - TF-TumorFree
+    - VGPR-VeryGoodPartialResponse
+    - WT-WithTumor
+    - Unknown
+    - NotReported
+  ECOGPerformanceStatus:
+    description: The ECOG functional performance status of the patient/participant.
+    enum:
+    - '0'
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+  EvidenceofRecurrenceType:
+    description: The text term used to describe the type of evidence used to determine
+      whether the patient's disease recurred
+    enum:
+    - BiopsywithHistologicConfirmation
+    - ConvincingImageSource
+    - PositiveBiomarkers
+  FEV1FVCPostBronchPercent:
+    type: string
+    description: Percentage value to represent result of Forced Expiratory Volume
+      in 1 second (FEV1) divided by the Forced Vital Capacity (FVC) post-bronchodilator.
+  FEV1FVCPreBronchPercent:
+    type: string
+    description: Percentage value to represent result of Forced Expiratory Volume
+      in 1 second (FEV1) divided by the Forced Vital Capacity (FVC) pre-bronchodilator.
+  FEV1RefPostBronchPercent:
+    type: string
+    description: The percentage comparison to a normal value reference range of the
+      volume of air that a patient can forcibly exhale from the lungs in one second
+      post-bronchodilator.
+  FEV1RefPreBronchPercent:
+    type: string
+    description: The percentage comparison to a normal value reference range of the
+      volume of air that a patient can forcibly exhale from the lungs in one second
+      pre-bronchodilator.
+  HAARTTreatmentIndicator:
+    description: The text term used to indicate whether the patient received Highly
+      Active Antiretroviral Therapy (HAART).
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  HIVViralLoad:
+    type: string
+    description: Numeric value that represents the concentration of an analyte or
+      aliquot extracted from the sample or sample portion, measured in milligrams
+      per milliliter.
+  HPVPositiveType:
+    description: Text classification to represent the strain or type of human papillomavirus
+      identified in an individual.
+    enum:
+    - '16'
+    - '18'
+    - '26'
+    - '31'
+    - '33'
+    - '35'
+    - '39'
+    - '45'
+    - '51'
+    - '52'
+    - '53'
+    - '56'
+    - '58'
+    - '59'
+    - '63'
+    - '66'
+    - '68'
+    - '70'
+    - '73'
+    - '82'
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  Height:
+    type: string
+    description: The height of the patient in centimeters.
+  HepatitisSustainedVirologicalResponse:
+    description: The yes/no/unknown indicator used to describe whether the patient
+      received treatment for a risk factor the patient had at the time of or prior
+      to their diagnosis.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  HormonalContraceptiveUse:
+    description: The text term used to indicate whether the patient used hormonal
+      contraceptives.
+    enum:
+    - CurrentUser
+    - FormerUser
+    - NeverUsed
+    - Unknown
+    - NotReported
+  HysterectomyMarginsInvolved:
+    description: The text term used to indicate whether the patient's disease was
+      determined to be involved based on the surgical margins of the hysterectomy.
+    enum:
+    - Bladder
+    - MacroscopicParametrium
+    - MicroscopicParametrium
+    - None
+    - Vagina
+    - Unknown
+    - NotReported
+  HysterectomyType:
+    description: The text term used to describe the type of hysterectomy the patient
+      had.
+    enum:
+    - HysterectomyNOS
+    - Notperformed
+    - RadicalHysterectomy
+    - SimpleHysterectomy
+    - Unknown
+    - NotReported
+  ImagingResult:
+    description: The text term used to describe the result of the imaging or scan
+      performed on the patient.
+    enum:
+    - Positive
+    - Indeterminate
+    - Negative
+    - NotPerformed
+    - Unknown
+    - NotReported
+  ImagingType:
+    description: The text term used to describe the type of imaging or scan performed
+      on the patient.
+    enum:
+    - 99mTcBoneScintigraphy
+    - CTScan
+    - MRI
+    - PET
+  ImmunosuppressiveTreatmentType:
+    description: The text term used to describe the type of immunosuppresive treatment
+      the patient received.
+    enum:
+    - Anti-TNFTherapy
+    - Azathioprine
+    - Cyclophosphamide
+    - Methotrexate
+    - None
+    - Other
+    - Unknown
+    - NotReported
+  KarnofskyPerformanceStatus:
+    description: Text term used to describe the classification used of the functional
+      capabilities of a person.
+    enum:
+    - '0'
+    - '10'
+    - '20'
+    - '30'
+    - '40'
+    - '50'
+    - '60'
+    - '70'
+    - '80'
+    - '90'
+    - '100'
+  MenopauseStatus:
+    description: Text term used to describe the patient's menopause status.
+    enum:
+    - Premenopausal
+    - Perimenopausal
+    - Postmenopausal
+    - Unknown
+    - NotReported
+  NadirCD4Count:
+    type: string
+    description: Numeric value that represents the lowest point to which the CD4 count
+      has dropped (nadir).
+  PancreatitisOnsetYear:
+    type: string
+    description: TBD
+  PregnancyOutcome:
+    description: The text term used to describe the type of pregnancy the patient
+      had
+    enum:
+    - EctopicPregnancy
+    - InducedAbortion
+    - LiveBirth
+    - Miscarriage
+    - Stillbirth
+    - Unknown
+    - NotReported
+  ProgressionorRecurrence:
+    description: Yes/No/unknown indicator to identify whether a patient has had a
+      new tumor event after initial treatment.
+    enum:
+    - Yes-ProgressionorRecurrence
+    - 'No'
+    - Unknown
+    - NotReported
+  RecistTargetedRegionsNumber:
+    type: string
+    description: Numeric value that represents the number of baseline target lesions,
+      as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria
+  RecistTargetedRegionsSum:
+    type: string
+    description: Numeric value that represents the sum of baseline target lesions,
+      as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria.
+  RefluxTreatmentType:
+    description: Text term used to describe the types of treatment used to manage
+      gastroesophageal reflux disease (GERD).
+    enum:
+    - Antacids
+    - H2Blockers
+    - MedicallyTreated
+    - NoTreatment
+    - NotApplicable
+    - NotReported
+    - ProtonPumpInhibitors
+    - SurgicallyTreated
+    - Unknown
+  RiskFactor:
+    description: The text term used to describe a risk factor the patient had at the
+      time of or prior to their diagnosis.
+    enum:
+    - AlcoholConsumption
+    - AlcoholicLiverDisease
+    - AllergyAnimalNOS
+    - AllergyAnt
+    - AllergyBee
+    - AllergyCat
+    - AllergyDairyorLactose
+    - AllergyDog
+    - AllergyEggs
+    - AllergyFoodNOS
+    - AllergyFruit
+    - AllergyMeat
+    - AllergyMoldorDust
+    - AllergyNuts
+    - AllergyProcessedFoods
+    - AllergySeafood
+    - AllergyWasp
+    - Alpha-1AntitrypsinDeficiency
+    - AutoimmuneAtrophicChronicGastritis
+    - Barrett'sEsophagus
+    - Beckwith-Wiedemann
+    - Behcet'sDisease
+    - Cancer
+    - Cholelithiasis
+    - ChronicHepatitis
+    - Cirrhosis
+    - ColonPolyps
+    - Commonvariableimmunedeficiency(CVID)
+    - Denys-DrashSyndrome
+    - DiabetesNOS
+    - DiabetesTypeI
+    - DiabetesTypeII
+    - Diet
+    - Diverticulitis
+    - Endometriosis
+    - Endosalpingiosis
+    - Eczema
+    - Epstein-BarrVirus
+    - FamilialAdenomatousPolyposis
+    - FanconiAnemia
+    - Fibrosis
+    - GastricPolyp(s)
+    - Gilbert'sSyndrome
+    - GorlinSyndrome
+    - Hashimoto'sThyroiditis
+    - HayFever
+    - Headache
+    - HelicobacterPylori-AssociatedGastritis
+    - HematologicDisorderNOS
+    - Hemihypertrophy
+    - Hemochromatosis
+    - HepaticEncephalopathy
+    - HepatitisBInfection
+    - HepatitisCInfection
+    - HepatitisNOS
+    - HighGradeDysplasia
+    - HIV
+    - HumanPapillomavirusInfection
+    - Hypospadias
+    - IntestinalMetaplasia
+    - IronOverload
+    - Li-FraumeniSyndrome
+    - LowGradeDysplasia
+    - LymphocyticThyroiditis
+    - LynchSyndrome
+    - MyastheniaGravis
+    - NonalcoholicFattyLiverDisease
+    - NonalcoholicSteatohepatitis
+    - Obesity
+    - OralContraceptives
+    - Pancreatitis
+    - ParasiticDiseaseofBiliaryTract
+    - PrimarySclerosingCholangitis
+    - RecurrentPyogenicCholangitis
+    - RefluxDisease
+    - RheumatoidArthritis
+    - Rubinstein-TaybiSyndrome
+    - Sarcoidosis
+    - Seizure
+    - SensoryChanges
+    - Seroustubalintraepithelialcarcinoma(STIC)
+    - Steatosis
+    - Tattoo
+    - ThyroidNodularHyperplasia
+    - TobaccoNOS
+    - TobaccoSmokeless
+    - TobaccoSmoking
+    - TurcotSyndrome
+    - UndescendedTestis
+    - VisionChanges
+    - WagrSyndrome
+    - Unknown
+    - NotReported
+  RiskFactorTreatment:
+    description: The yes/no/unknown indicator used to describe whether the patient
+      received treatment for a risk factor the patient had at the time of or prior
+      to their diagnosis.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  ScanTracerUsed:
+    description: The text term used to describe the type of tracer used during the
+      imaging or scan of the patient.
+    enum:
+    - Acetate
+    - Axumin
+    - Choline
+    - PSMA
+    - SodiumFluoride
+  ViralHepatitisSerologies:
+    description: Text term that describes the kind of serological laboratory test
+      used to determine the patient's hepatitus status.
+    enum:
+    - HBVCoreAntibody
+    - HBVDNA
+    - HBVGenotype
+    - HBVSurfaceAntibody
+    - HCVGenotype
+    - HepatitisBSurfaceAntigen
+    - HepatitisCAntibody
+    - HepatitisCVirusRNA
+    - Unknown
+    - NotReported
+  Weight:
+    type: string
+    description: The weight of the patient measured in kilograms.
+  patients:
+    $ref: _definitions.yaml#/to_many

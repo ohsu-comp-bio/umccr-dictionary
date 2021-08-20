@@ -1,0 +1,76 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: family_history
+title: FamilyHistory
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Individual's family cancer history
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: family_histories
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - FamilyHistory
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # FamilyHistory
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  RelativewithCancerHistory:
+    description: The yes/no/unknown indicator used to describe whether any of the
+      patient's relatives have a history of cancer.
+    enum:
+    - Yes-CancerHistoryRelative
+    - None
+    - Unknown
+    - NotReported
+  patients:
+    $ref: _definitions.yaml#/to_many

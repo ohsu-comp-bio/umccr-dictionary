@@ -1,0 +1,380 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: demographic
+title: Demographics
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Individual biomedical demographics attributes
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: demographics
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Demographics
+  subtype:
+    enum:
+    - AgeatIndex
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # AgeatIndex
+  # Demographics
+  AgeIsObfuscated:
+    description: The age of the patient has been modified for compliance reasons.
+      The actual age differs from what is reported. Other date intervals for this
+      patient may also be modified.
+    enum:
+    - 'True'
+    - 'False'
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  CountryofResidence:
+    description: Country of Residence at enrollment
+    enum:
+    - Afghanistan
+    - Albania
+    - Algeria
+    - Andorra
+    - Angola
+    - Anguilla
+    - AntiguaandBarbuda
+    - Argentina
+    - Armenia
+    - Aruba
+    - Australia
+    - Austria
+    - Azerbaijan
+    - Bahamas
+    - Bahrain
+    - Bangladesh
+    - Barbados
+    - Belarus
+    - Belgium
+    - Belize
+    - Benin
+    - Bermuda
+    - Bhutan
+    - Bolivia
+    - BosniaandHerzegovina
+    - Botswana
+    - Brazil
+    - Brunei
+    - Bulgaria
+    - BurkinaFaso
+    - Burundi
+    - Cambodia
+    - Cameroon
+    - Canada
+    - CapeVerde
+    - CaymanIslands
+    - CentralAfricanRepublic
+    - Chad
+    - Chile
+    - China
+    - Colombia
+    - Comoros
+    - Congo
+    - CookIslands
+    - CostaRica
+    - Coted'Ivoire
+    - Croatia
+    - Cuba
+    - Curacao
+    - Cyprus
+    - CzechRepublic(Czechia)
+    - DemocraticRepublicoftheCongo
+    - Denmark
+    - Djibouti
+    - Dominica
+    - DominicanRepublic
+    - Ecuador
+    - Egypt
+    - ElSalvador
+    - EquatorialGuinea
+    - Eritrea
+    - Estonia
+    - Eswatini
+    - Ethiopia
+    - FalklandIslands(Malvinas)
+    - FaroeIslands
+    - FederatedStatesofMicronesia
+    - Fiji
+    - Finland
+    - France
+    - FrenchGuiana
+    - FrenchPolynesia
+    - Gabon
+    - Gambia
+    - Georgia
+    - Germany
+    - Ghana
+    - Gibraltar
+    - Greece
+    - Greenland
+    - Grenada
+    - Guadeloupe
+    - Guam
+    - Guatemala
+    - Guernsey
+    - Guinea
+    - Guinea-Bissau
+    - Guyana
+    - Haiti
+    - HolySee
+    - Honduras
+    - HongKong
+    - Hungary
+    - Iceland
+    - India
+    - Indonesia
+    - Iran
+    - Iraq
+    - Ireland
+    - IsleofMan
+    - Israel
+    - Italy
+    - Jamaica
+    - Japan
+    - Jersey
+    - Jordan
+    - Kazakhstan
+    - Kenya
+    - Kiribati
+    - Kosovo
+    - Kuwait
+    - Kyrgyzstan
+    - Laos
+    - Latvia
+    - Lebanon
+    - Lesotho
+    - Liberia
+    - Libya
+    - Liechtenstein
+    - Lithuania
+    - Luxembourg
+    - Macau
+    - Madagascar
+    - Malawi
+    - Malaysia
+    - Maldives
+    - Mali
+    - Malta
+    - MarshallIslands
+    - Martinique
+    - Mauritania
+    - Mauritius
+    - Mayotte
+    - Mexico
+    - Moldova
+    - Monaco
+    - Mongolia
+    - Montenegro
+    - Montserrat
+    - Morocco
+    - Mozambique
+    - Myanmar
+    - Namibia
+    - Nauru
+    - Nepal
+    - Netherlands
+    - NewCaledonia
+    - NewZealand
+    - Nicaragua
+    - Niger
+    - Nigeria
+    - Niue
+    - NorthKorea
+    - NorthMacedonia
+    - NorthernMarianaIslands
+    - Norway
+    - Oman
+    - Pakistan
+    - Palau
+    - Panama
+    - PapuaNewGuinea
+    - Paraguay
+    - Peru
+    - Philippines
+    - Poland
+    - Portugal
+    - PuertoRico
+    - Qatar
+    - Reunion
+    - Romania
+    - Russia
+    - Rwanda
+    - SaintHelenaAscensionandTristandaCunha
+    - SaintKittsandNevis
+    - SaintLucia
+    - SaintPierreandMiquelon
+    - SaintVincentandtheGrenadines
+    - Samoa
+    - SanMarino
+    - SaoTomeandPrincipe
+    - SaudiArabia
+    - Senegal
+    - Serbia
+    - Seychelles
+    - SierraLeone
+    - Singapore
+    - Slovakia
+    - Slovenia
+    - SolomonIslands
+    - Somalia
+    - SouthAfrica
+    - SouthKorea
+    - SouthSudan
+    - Spain
+    - SriLanka
+    - StateofPalestine
+    - Sudan
+    - Suriname
+    - Svalbard&JanMayenIslands
+    - Sweden
+    - Switzerland
+    - Syria
+    - Taiwan
+    - Tajikistan
+    - Tanzania
+    - Thailand
+    - Timor-Leste
+    - Togo
+    - Tokelau
+    - Tonga
+    - TrinidadandTobago
+    - Tunisia
+    - Turkey
+    - Turkmenistan
+    - Tuvalu
+    - Uganda
+    - Ukraine
+    - UnitedArabEmirates
+    - UnitedKingdom
+    - UnitedStates
+    - Uruguay
+    - Uzbekistan
+    - Vanuatu
+    - Venezuela
+    - Vietnam
+    - VirginIslandsBritish
+    - VirginIslandsU.S.
+    - WallisandFutuna
+    - WesternSahara
+    - Yemen
+    - Zambia
+    - Zimbabwe
+  DaystoBirth:
+    type: string
+    description: Number of days between the date used for index and the date from
+      a person's date of birth represented as a calculated negative number of days.
+  Ethnicity:
+    description: An individual's self-described social and cultural grouping, specifically
+      whether an individual describes themselves as Hispanic or Latino. The provided
+      values are based on the categories defined by the U.S. Office of Management
+      and Business and used by the U.S. Census Bureau.
+    enum:
+    - Hispanicorlatino
+    - Nothispanicorlatino
+    - Unknown
+    - NotReported
+    - Notallowedtocollect
+  Gender:
+    description: Text designations that identify gender. Gender is described as the
+      assemblage of properties that distinguish people on the basis of their societal
+      roles. [Identification of gender is based upon self-report and may come from
+      a form, questionnaire, interview, etc.]
+    enum:
+    - Female
+    - Male
+    - Unknown
+    - Unspecified
+    - NotReported
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  OccupationDurationYears:
+    type: string
+    description: The number of years a patient worked in a specific occupation.
+  PrematureAtBirth:
+    description: The yes/no/unknown indicator used to describe whether the patient
+      was premature (less than 37 weeks gestation) at birth.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  Race:
+    description: An arbitrary classification of a taxonomic group that is a division
+      of a species. It usually arises as a consequence of geographical isolation withina
+      a species and is characterized by shared heredity, physical attributes and behavior,
+      and in the case of humans, by common history, nationality, or geographic distribution.
+    enum:
+    - White
+    - Americanindianoralaskanative
+    - Blackorafricanamerican
+    - Asian
+    - Nativehawaiianorotherpacificislander
+    - Other
+    - Unknown
+    - NotReported
+    - Notallowedtocollect
+  VitalStatus:
+    description: The survival state of the person registered on the protocol.
+    enum:
+    - Alive
+    - Dead
+    - Unknown
+    - NotReported
+  WeeksGestationatBirth:
+    type: string
+    description: Numeric value used to describe the number of weeks starting from
+      the approximate date of the biological mother's last menstrual period and ending
+      with the birth of the patient.
+  YearOfBirth:
+    type: string
+    description: Numeric value to represent the calendar year in which an individual
+      was born.
+  patients:
+    $ref: _definitions.yaml#/to_many

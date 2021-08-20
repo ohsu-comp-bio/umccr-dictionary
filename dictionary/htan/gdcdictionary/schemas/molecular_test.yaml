@@ -1,0 +1,588 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: molecular_test
+title: MolecularTest
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Individual's clinical molecular test data
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: molecular_tests
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - MolecularTest
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # MolecularTest
+  AAChange:
+    type: string
+    description: 'Alphanumeric value used to describe the amino acid change for a
+      specific genetic variant. Example: R116Q. Note: This node is meant to capture
+      molecular tests that were completed clinically for the participant and only
+      includes data from diagnostic array that was completed prior to research sequencing
+      was done. Do not include data related to research assay outputs here.'
+  Antigen:
+    description: 'The text term used to describe an antigen included in molecular
+      testing. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+    enum:
+    - BCL6
+    - CA-125
+    - CA19-9
+    - CCND1
+    - CD10
+    - CD117
+    - CD138
+    - CD14
+    - CD15
+    - CD19
+    - CD20
+    - CD22
+    - CD23
+    - CD25
+    - CD3
+    - CD30
+    - CD33
+    - CD34
+    - CD45
+    - CD5
+    - CD56
+    - CD7
+    - CD79A
+    - CEA
+    - HLA-DR
+    - Mesothelin
+    - NSE
+    - SquamousCellCarcinomaAntigen
+    - Unknown
+    - NotReported
+  BloodTestNormalRangeLower:
+    type: string
+    description: Numeric value used to describe the lower limit of the normal range
+      used to describe a healthy individual at the institution where the test was
+      completed.
+  BloodTestNormalRangeUpper:
+    type: string
+    description: Numeric value used to describe the upper limit of the normal range
+      used to describe a healthy individual at the institution where the test was
+      completed.
+  CellCount:
+    type: string
+    description: 'Numeric value used to describe the number of cells used for molecular
+      testing. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+  Chromosome:
+    description: 'The text term used to describe a chromosome targeted or included
+      in molecular testing. If a specific genetic variant is being reported, this
+      property can be used to capture the chromosome where that variant is located.
+      Note: This node is meant to capture molecular tests that were completed clinically
+      for the participant and only includes data from diagnostic array that was completed
+      prior to research sequencing was done. Do not include data related to research
+      assay outputs here.'
+    enum:
+    - Chr1
+    - Chr2
+    - Chr3
+    - Chr4
+    - Chr5
+    - Chr6
+    - Chr7
+    - Chr8
+    - Chr9
+    - Chr10
+    - Chr11
+    - Chr12
+    - Chr13
+    - Chr14
+    - Chr15
+    - Chr16
+    - Chr17
+    - Chr18
+    - Chr19
+    - Chr20
+    - Chr21
+    - Chr22
+    - Chr23
+    - ChrM
+    - ChrX
+    - ChrY
+    - Unknown
+    - NotReported
+  ClinicalBiospecimenType:
+    description: 'The text term used to describe the biological material used for
+      testing, diagnostic, treatment or research purposes. Note: This node is meant
+      to capture molecular tests that were completed clinically for the participant
+      and only includes data from diagnostic array that was completed prior to research
+      sequencing was done. Do not include data related to research assay outputs here.'
+    enum:
+    - Blood
+    - BoneMarrow
+    - BuccalMucosa
+    - BuffyCoat
+    - CerebrospinalFluid
+    - ConnectiveTissue
+    - EmbryonicFluid
+    - EmbryonicTissue
+    - Feces
+    - Granulocyte
+    - MuscleTissue
+    - NerveTissue
+    - PeritonealFluid
+    - Plasma
+    - PleuralFluid
+    - Saliva
+    - Serum
+    - Skin
+    - SoftTissue
+    - TissueNOS
+    - UninvolvedTissueNOS
+    - Urine
+    - Unknown
+    - NotReported
+  Clonality:
+    description: 'The text term used to describe whether a genomic variant is related
+      by descent from a single progenitor cell. Note: This node is meant to capture
+      molecular tests that were completed clinically for the participant and only
+      includes data from diagnostic array that was completed prior to research sequencing
+      was done. Do not include data related to research assay outputs here.'
+    enum:
+    - Clonal
+    - Non-clonal
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  CopyNumber:
+    type: string
+    description: 'Numeric value used to describe the number of times a section of
+      the genome is repeated or copied within an insertion, duplication or deletion
+      variant. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+  Cytoband:
+    type: string
+    description: 'Alphanumeric value used to describe the cytoband or chromosomal
+      location targeted or included in molecular analysis. If a specific genetic variant
+      is being reported, this property can be used to capture the cytoband where the
+      variant is located. Format: [chromosome][chromosome arm].[band+sub-bands]. Example:
+      17p13.1. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+  Exon:
+    type: string
+    description: 'Exon number targeted or included in a molecular analysis. If a specific
+      genetic variant is being reported, this property can be used to capture the
+      exon where that variant is located. Note: This node is meant to capture molecular
+      tests that were completed clinically for the participant and only includes data
+      from diagnostic array that was completed prior to research sequencing was done.
+      Do not include data related to research assay outputs here.'
+  GeneSymbol:
+    type: string
+    description: 'The text term used to describe a gene targeted or included in molecular
+      analysis. For rearrangements, this is should be used to represent the reference
+      gene. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  HistoneFamily:
+    description: The text term used to describe the family, or classification of a
+      group of basic proteins found in chromatin, called histones.
+    enum:
+    - H1
+    - H2A
+    - H2B
+    - H3
+    - H4
+    - Unknown
+    - NotReported
+  HistoneVariant:
+    description: The text term used to describe a specific histone variants, which
+      are proteins that substitute for the core canonical histones.
+    enum:
+    - CENP-A
+    - H2A-Bbd
+    - H2A.X
+    - H2A.Z
+    - H2A.Z.1
+    - H2A.Z.2
+    - H2A.Z.2.2
+    - H3.1
+    - H3.2
+    - H3.3
+    - H3.5
+    - H3.X
+    - H3.Y
+    - H3t(H3.4)
+    - MH2A
+    - MH2A.1
+    - MH2A.2
+    - Unknown
+    - NotReported
+  Intron:
+    type: string
+    description: Intron number targeted or included in molecular analysis. If a specific
+      genetic variant is being reported, this property can be used to capture the
+      intron where that variant is located.
+  LaboratoryTest:
+    description: The text term used to describe the medical testing used to diagnose,
+      treat or further understand a patient's disease.
+    enum:
+    - AbsoluteNeutrophil
+    - Albumin
+    - AlphaFetoprotein
+    - B-cellgenotyping
+    - Basophil
+    - Beta2Microglobulin
+    - BloodUreaNitrogen
+    - C-ReactiveProtein
+    - Calcium
+    - Cellularity
+    - CirculatingTumorCells
+    - Creatinine
+    - Eosinophil
+    - Epstein-BarrVirus
+    - Glucose
+    - Hematocrit
+    - Hemoglobin
+    - HPV-E6/E7
+    - HumanChorionicGonadotropin
+    - HumanPapillomavirus
+    - ImmunoglobulinA
+    - ImmunoglobulinG
+    - ImmunoglobulinM
+    - LactateDehydrogenase
+    - Leukocytes
+    - LuteinizingHormone
+    - Lymphoblasts
+    - Lymphocytes
+    - MProtein
+    - Metamyelocytes
+    - Myeloblasts
+    - Myelocytes
+    - NeutrophilBands
+    - Platelets
+    - Prolymphocytes
+    - Promonocytes
+    - Promyelocytes
+    - SegmentedNeutrophil
+    - SerumFreeImmunoglobulinLightChain
+    - Kappa
+    - SerumFreeImmunoglobulinLightChain
+    - Lambda
+    - SerumFreeImmunoglobulinLightChain
+    - NOS
+    - Testosterone
+    - TotalBilirubin
+    - TotalProtein
+    - Unknown
+    - NotReported
+  LociAbnormalCount:
+    type: string
+    description: Numeric value used to describe the number of loci determined to be
+      abnormal.
+  LociCount:
+    type: string
+    description: Numeric value used to describe the number of loci tested.
+  Locus:
+    type: string
+    description: 'Alphanumeric value used to describe the locus of a specific genetic
+      variant. Example: NM_001126114.'
+  MismatchRepairMutation:
+    description: 'The yes/no/unknown indicator used to describe whether the mutation
+      included in molecular testing was known to have an affect on the mismatch repair
+      process. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  MolecularAnalysisMethod:
+    description: 'The text term used to describe the method used for molecular analysis.
+      Note: This node is meant to capture molecular tests that were completed clinically
+      for the participant and only includes data from diagnostic array that was completed
+      prior to research sequencing was done. Do not include data related to research
+      assay outputs here.'
+    enum:
+    - ComparativeGenomicHybridization
+    - CytogeneticsNOS
+    - FISH
+    - FlowCytometry
+    - IHC
+    - ISH
+    - Karyotype
+    - Microarray
+    - MicrosatelliteAnalysis
+    - NuclearStaining
+    - Other
+    - RNASequencing
+    - RT-PCR
+    - SequencingNOS
+    - SouthernBlotting
+    - TargetedSequencing
+    - WGS
+    - WXS
+    - Unknown
+    - NotReported
+    - NotApplicable
+  MolecularConsequence:
+    description: 'The text term used to describe the molecular consequence of genetic
+      variation. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+    enum:
+    - 3PrimeUTRVariant
+    - 5PrimeUTRVariant
+    - CodingSequenceVariant
+    - DownstreamGeneVariant
+    - FeatureElongation
+    - FeatureTruncation
+    - FrameshiftVariant
+    - IncompleteTerminalCodonVariant
+    - InframeDeletion
+    - InframeInsertion
+    - IntergenicVariant
+    - IntronVariant
+    - MaturemiRNAVariant
+    - MissenseVariant
+    - NMDTranscriptVariant
+    - Non-codingTranscriptExonVariant
+    - Non-codingTranscriptVariant
+    - ProteinAlteringVariant
+    - RegulatoryRegionAblation
+    - RegulatoryRegionAmplification
+    - RegulatoryRegionVariant
+    - SpliceAcceptorVariant
+    - SpliceDonorVariant
+    - SpliceRegionVariant
+    - StartLost
+    - StopGain
+    - StopLost
+    - StopRetainedVariant
+    - SynonymousVariant
+    - TFBindingSiteVariant
+    - TFBSAblation
+    - TFBSAmplification
+    - TranscriptAblation
+    - TranscriptAmplification
+    - UpstreamGeneVariant
+  Pathogenicity:
+    description: The text used to describe a variant's level of involvement in the
+      cause of the patient's disease according to the standards outlined by the American
+      College of Medical Genetics and Genomics (ACMG).
+    enum:
+    - Benign
+    - LikelyBenign
+    - LikelyPathogenic
+    - Pathogenic
+    - UncertainSignificance
+  Ploidy:
+    description: Text term used to describe the number of sets of homologous chromosomes.
+    enum:
+    - Aneuploid
+    - Diploid
+    - Hyperdiploid
+    - Hypodiploid
+    - NearDiploid
+    - Tetraploid
+    - Unknown
+    - NotReported
+  SecondExon:
+    type: string
+    description: The second exon number involved in molecular variation. If a specific
+      genetic variant is being reported, this property can be used to capture the
+      second exon where that variant is located. This property is typically used for
+      a translocation where two different locations are involved in the variation.
+  SecondGeneSymbol:
+    type: string
+    description: 'The text term used to describe a secondary gene targeted or included
+      in molecular analysis. For rearrangements, this is should represent the location
+      of the variant. Note: This node is meant to capture molecular tests that were
+      completed clinically for the participant and only includes data from diagnostic
+      array that was completed prior to research sequencing was done. Do not include
+      data related to research assay outputs here.'
+  SpecializedMolecularTest:
+    type: string
+    description: 'Text term used to describe a specific test that is not covered in
+      the list of molecular analysis methods. Note: This node is meant to capture
+      molecular tests that were completed clinically for the participant and only
+      includes data from diagnostic array that was completed prior to research sequencing
+      was done. Do not include data related to research assay outputs here.'
+  StartDaysfromIndex:
+    type: string
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: string
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TestAnalyteType:
+    description: 'The text term used to describe the type of analyte used for molecular
+      testing. Note: This node is meant to capture molecular tests that were completed
+      clinically for the participant and only includes data from diagnostic array
+      that was completed prior to research sequencing was done. Do not include data
+      related to research assay outputs here.'
+    enum:
+    - DNA
+    - MRNA
+    - MiRNA
+    - ProteinAnalyte
+    - TotalRNA
+    - Unknown
+    - NotReported
+  TestResult:
+    description: 'The text term used to describe the result of the molecular test.
+      If the test result was a numeric value see test_value. Note: This node is meant
+      to capture molecular tests that were completed clinically for the participant
+      and only includes data from diagnostic array that was completed prior to research
+      sequencing was done. Do not include data related to research assay outputs here.'
+    enum:
+    - AbnormalNOS
+    - CopyNumberReported
+    - Equivocal
+    - High
+    - Intermediate
+    - LossofExpression
+    - Low
+    - Negative
+    - Normal
+    - Overexpressed
+    - Positive
+    - TestValueReported
+    - Unknown
+    - NotReported
+    - NotApplicable
+  TestUnits:
+    type: string
+    description: 'The text term used to describe the units of the test value for a
+      molecular test. This property is used in conjunction with test_value. Note:
+      This node is meant to capture molecular tests that were completed clinically
+      for the participant and only includes data from diagnostic array that was completed
+      prior to research sequencing was done. Do not include data related to research
+      assay outputs here.'
+  TestValue:
+    type: string
+    description: 'The text term or numeric value used to describe a specific result
+      of a molecular test. Note: This node is meant to capture molecular tests that
+      were completed clinically for the participant and only includes data from diagnostic
+      array that was completed prior to research sequencing was done. Do not include
+      data related to research assay outputs here'
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  Transcript:
+    type: string
+    description: 'Alphanumeric value used to describe the transcript of a specific
+      genetic variant. Note: This node is meant to capture molecular tests that were
+      completed clinically for the participant and only includes data from diagnostic
+      array that was completed prior to research sequencing was done. Do not include
+      data related to research assay outputs here.'
+  VariantOrigin:
+    description: 'The text term used to describe the biological origin of a specific
+      genetic variant. Note: This node is meant to capture molecular tests that were
+      completed clinically for the participant and only includes data from diagnostic
+      array that was completed prior to research sequencing was done. Do not include
+      data related to research assay outputs here.'
+    enum:
+    - Germline
+    - Somatic
+    - Unknown
+  VariantType:
+    description: The text term used to describe the type of genetic variation.
+    enum:
+    - Alleles
+    - Amplification
+    - Chrimerism
+    - Conversion
+    - Deletion
+    - Deletion-Insertion
+    - Duplication
+    - Extension
+    - Gain
+    - Hypermethylation
+    - Insertion
+    - Inversion
+    - Loss
+    - Methylation
+    - Mosaicism
+    - Other
+    - PartialMethylation
+    - Rearrangement
+    - RepeatedSequences
+    - Splice
+    - Substitution
+    - Translocation
+    - Unknown
+    - NotReported
+  Zygosity:
+    description: The text term used to describe the zygosity of a specific genetic
+      variant.
+    enum:
+    - Heterozygous
+    - Hemizygous
+    - Homozygous
+    - Nullizygous
+    - Unknown
+    - NotReported
+  patients:
+    $ref: _definitions.yaml#/to_many

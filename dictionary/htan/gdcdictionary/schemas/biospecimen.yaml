@@ -1,0 +1,671 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: biospecimen
+title: Biospecimen
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: HTAN biological entity; this can be tissue, blood, analyte and subsamples
+  of those
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- submitter_id
+- type
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Biospecimen
+  subtype:
+    enum:
+    - AntigenRetrieval
+    - BiospecimenSlideLocation
+    - StainingMarkers
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # AntigenRetrieval
+  # BiospecimenSlideLocation
+  # StainingMarkers
+  patients:
+    $ref: _definitions.yaml#/to_many
+  # Biospecimen
+  AcquisitionMethodType:
+    description: Records the method of acquisition or source for the specimen under
+      consideration.
+    enum:
+    - Autopsy
+    - Biopsy
+    - FineNeedleAspirate
+    - SurgicalResection
+    - PunchBiopsy
+    - ShaveBiopsy
+    - Excision
+    - Re-excision
+    - SentinelNodeBiopsy
+    - Lymphadenectomy-RegionalNodes
+    - OtherAcquisitionMethod
+    - Notspecified
+  AdjacentBiospecimenIDs:
+    type: string
+    description: List of HTAN Identifiers (separated by commas) of adjacent biospecimens
+      cut from the same sample; for example HTA3_3000_3, HTA3_3000_4, ...
+  BiospecimenType:
+    description: Biospecimen Type
+    enum:
+    - TissueBiospecimenType
+    - BloodBiospecimenType
+    - AnalyteBiospecimenType
+    - MouthRinseBiospecimenType
+    - StoolBiospecimenType
+    - UrineBiospecimenType
+    - AscitesBiospecimenType
+    - SputumBiospecimenType
+    - FluidsBiospecimenType
+    - BoneMarrowBiospecimenType
+    - CellsBiospecimenType
+  CollectionDaysfromIndex:
+    type: string
+    description: Number of days from the research participant's index date that the
+      biospecimen was obtained.
+  CollectionMedia:
+    description: Material Specimen is collected into post procedure
+    enum:
+    - DMEM
+    - DMEM+Serum
+    - RPMI
+    - RPMI+Serum
+    - PBS
+    - PBS+Serum
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  DegreeofDysplasia:
+    description: Information related to the presence of cells that look abnormal under
+      a microscope but are not cancer. Records the degree of dysplasia for the cyst
+      or lesion under consideration.
+    enum:
+    - Normalorbasalcellhyperplasiaormetaplasia
+    - Milddysplasia
+    - Moderatedysplasia
+    - Severedysplasia
+    - CarcinomainSitu
+    - Unknown
+  DysplasiaFraction:
+    type: string
+    description: 'Resulting value to represent the number of pieces of dysplasia divided
+      by the total number of pieces. [Text: max length 5]'
+  FiducialMarker:
+    description: 'Imaging specific: fiducial markers for the alignment of images taken
+      across multiple rounds of imaging.'
+    enum:
+    - NuclearStain-DAPI
+    - FluorescentBeads
+    - GridSlides-Hemocytometer
+    - AdhesiveMarkers
+    - Other
+    - Unknown
+    - NotReported
+  FixativeType:
+    description: Text term to identify the type of fixative used to preserve a tissue
+      specimen
+    enum:
+    - Acetone
+    - Alcohol
+    - Formalin
+    - Glutaraldehyde
+    - OCTmedia
+    - RNAlater
+    - Saline
+    - 95%Ethanol
+    - Dimidoester
+    - Carbodiimide
+    - Dimethylacetamide
+    - Para-benzoquinone
+    - PAXgenetissue
+    - TCLlysisbuffer
+    - NP40lysisbuffer
+    - Methacarn
+    - Cryo-store
+    - Other
+    - None
+    - Unknown
+  HTANBiospecimenID:
+    type: string
+    description: HTAN ID associated with a biosample based on HTAN ID SOP (eg HTANx_yyy_zzz)
+  HTANParentID:
+    type: string
+    description: HTAN ID of parent from which the biospecimen was obtained. Parent
+      could be another biospecimen or a research participant.
+  HistologyAssessmentBy:
+    description: Text term describing who (in what role) made the histological assessments
+      of the sample
+    enum:
+    - Pathologist
+    - ResearchScientist
+    - Other
+    - Unknown
+  HistologyAssessmentMedium:
+    description: The method of assessment used to characterize histology
+    enum:
+    - Digital
+    - Microscopy
+    - Other
+    - Unknown
+  LysisBuffer:
+    type: string
+    description: 'scRNA-seq specific: Type of lysis buffer used'
+  MethodofNucleicAcidIsolation:
+    type: string
+    description: 'Bulk RNA & DNA-seq specific: method used for nucleic acid isolation.
+      E.g. Qiagen Allprep, Qiagen miRNAeasy. [Text - max length 100]'
+  MountingMedium:
+    description: The solution in which the specimen is embedded, generally under a
+      cover glass. It may be liquid, gum or resinous, soluble in water, alcohol or
+      other solvents and be sealed from the external atmosphere by non-soluble ringing
+      media
+    enum:
+    - Aqueouswaterbased
+    - Non-AqueousSolventbased
+    - Xylene
+    - Toluene
+    - AntifadewithDAPI
+    - AntifadewithoutDAPI
+    - PBS
+    - Unknown
+    - NotReported
+  NumberProliferatingCells:
+    type: string
+    description: Numeric value that represents the count of proliferating cells determined
+      during pathologic review of the sample slide(s).
+  PercentEosinophilInfiltration:
+    type: string
+    description: Numeric value to represent the percentage of infiltration by eosinophils
+      in a tumor sample or specimen.
+  PercentGranulocyteInfiltration:
+    type: string
+    description: Numeric value to represent the percentage of infiltration by granulocytes
+      in a tumor sample or specimen.
+  PercentInflamInfiltration:
+    type: string
+    description: Numeric value to represent local response to cellular injury, marked
+      by capillary dilatation, edema and leukocyte infiltration; clinically, inflammation
+      is manifest by redness, heat, pain, swelling and loss of function, with the
+      need to heal damaged tissue.
+  PercentLymphocyteInfiltration:
+    type: string
+    description: Numeric value to represent the percentage of infiltration by lymphocytes
+      in a solid tissue normal sample or specimen.
+  PercentMonocyteInfiltration:
+    type: string
+    description: Numeric value to represent the percentage of monocyte infiltration
+      in a sample or specimen.
+  PercentNecrosis:
+    type: string
+    description: Numeric value to represent the percentage of cell death in a malignant
+      tumor sample or specimen.
+  PercentNeutrophilInfiltration:
+    type: string
+    description: Numeric value to represent the percentage of infiltration by neutrophils
+      in a tumor sample or specimen.
+  PercentNormalCells:
+    type: string
+    description: Numeric value to represent the percentage of normal cell content
+      in a malignant tumor sample or specimen.
+  PercentStromalCells:
+    type: string
+    description: Numeric value to represent the percentage of reactive cells that
+      are present in a malignant tumor sample or specimen but are not malignant such
+      as fibroblasts, vascular structures, etc.
+  PercentTumorCells:
+    type: string
+    description: Numeric value that represents the percentage of infiltration by tumor
+      cells in a sample.
+  PercentTumorNuclei:
+    type: string
+    description: Numeric value to represent the percentage of tumor nuclei in a malignant
+      neoplasm sample or specimen.
+  PreinvasiveMorphology:
+    description: Histologic Morphology not included in ICD-O-3 morphology codes, for
+      preinvasive lesions included in the HTAN
+    enum:
+    - Melanocytichyperplasia
+    - Atypicalmelanocyticproliferation
+    - Melanomainsitu-superficialspreading
+    - Melanomainsitu-lentigomalignatype
+    - Melanomainsitu-acral-lentiginous
+    - Melanomainsitu-arisinginagiantcongenitalnevus
+    - Persistentmelanomainsitu
+    - Melanomainsitu-nototherwiseclassified
+    - Scar-noresidualmelanoma
+    - Invasivemelanoma-superficialspreading
+    - Invasivemelanoma-nodulartype
+    - Invasivemelanoma-lentigomaligna
+    - Invasivemelanoma-acrallentiginous
+    - Invasivemelanoma-desmoplastic
+    - Invasivemelanoma-nevoid
+    - Invasivemelanoma-other
+  ProcessingDaysfromIndex:
+    type: string
+    description: Number of days from the research participant's index date that the
+      biospecimen was processed
+  ProcessingLocation:
+    type: string
+    description: Site with an HTAN center where specimen processing occurs, if applicable.
+      Any identifier used within the center to identify processing location. No PHI/PII
+      is allowed.
+  ProtocolLink:
+    type: string
+    description: Protocols.io ID or DOI link to a free/open protocol resource describing
+      in detail the assay protocol (e.g. surface markers used in Smart-seq, dissociation
+      duration,  lot/batch numbers for key reagents such as primers, sequencing reagent
+      kits, etc.) or the protocol by which the sample was obtained or generated.
+  SiteDataSource:
+    type: string
+    description: Text to identify the data source for the specimen/sample from within
+      the HTAN center, if applicable. Any identifier used within the center to identify
+      data sources. No PHI/PII is allowed.
+  SiteofResectionorBiopsy:
+    description: The text term used to describe the anatomic site of origin, of the
+      patient's malignant disease, as described by the World Health Organization's
+      (WHO) International Classification of Diseases for Oncology (ICD-O).
+    enum:
+    - AbdomenNOS
+    - Abdominalesophagus
+    - AccessorysinusNOS
+    - Acousticnerve
+    - AdrenalglandNOS
+    - AmpullaofVater
+    - Analcanal
+    - Anterior2/3oftongueNOS
+    - Anteriorfloorofmouth
+    - Anteriormediastinum
+    - Anteriorsurfaceofepiglottis
+    - Anteriorwallofbladder
+    - Anteriorwallofnasopharynx
+    - AnusNOS
+    - Aorticbodyandotherparaganglia
+    - Appendix
+    - Ascendingcolon
+    - AutonomicnervoussystemNOS
+    - Axillarytailofbreast
+    - BaseoftongueNOS
+    - Bladderneck
+    - BladderNOS
+    - Blood
+    - Bodyofpancreas
+    - Bodyofpenis
+    - Bodyofstomach
+    - Bonemarrow
+    - BoneoflimbNOS
+    - BoneNOS
+    - Bonesofskullandfaceandassociatedjoints
+    - Borderoftongue
+    - Brainstem
+    - BrainNOS
+    - Branchialcleft
+    - BreastNOS
+    - Broadligament
+    - CardiaNOS
+    - Carotidbody
+    - Caudaequina
+    - Cecum
+    - Centralportionofbreast
+    - CerebellumNOS
+    - Cerebralmeninges
+    - Cerebrum
+    - Cervicalesophagus
+    - Cervixuteri
+    - Choroid
+    - Ciliarybody
+    - Cloacogeniczone
+    - ColonNOS
+    - Commissureoflip
+    - Conjunctiva
+    - Connectivesubcutaneousandothersofttissuesofabdomen
+    - Connectivesubcutaneousandothersofttissuesofheadfaceandneck
+    - Connectivesubcutaneousandothersofttissuesoflowerlimbandhip
+    - Connectivesubcutaneousandothersofttissuesofpelvis
+    - Connectivesubcutaneousandothersofttissuesofthorax
+    - ConnectivesubcutaneousandothersofttissuesoftrunkNOS
+    - Connectivesubcutaneousandothersofttissuesofupperlimbandshoulder
+    - ConnectivesubcutaneousandothersofttissuesNOS
+    - CorneaNOS
+    - Corpusuteri
+    - Cortexofadrenalgland
+    - CranialnerveNOS
+    - Craniopharyngealduct
+    - Descendedtestis
+    - Descendingcolon
+    - Domeofbladder
+    - DorsalsurfaceoftongueNOS
+    - Duodenum
+    - Endocervix
+    - EndocrineglandNOS
+    - Endometrium
+    - Epididymis
+    - EsophagusNOS
+    - Ethmoidsinus
+    - Exocervix
+    - Externalear
+    - ExternallipNOS
+    - Externallowerlip
+    - Externalupperlip
+    - Extrahepaticbileduct
+    - EyeNOS
+    - Eyelid
+    - Fallopiantube
+    - FemalegenitaltractNOS
+    - FloorofmouthNOS
+    - Frontallobe
+    - Frontalsinus
+    - Fundusofstomach
+    - Fundusuteri
+    - Gallbladder
+    - Gastricantrum
+    - GastrointestinaltractNOS
+    - Glanspenis
+    - Glottis
+    - GreatercurvatureofstomachNOS
+    - GumNOS
+    - Hardpalate
+    - Headofpancreas
+    - HeadfaceorneckNOS
+    - Heart
+    - HematopoieticsystemNOS
+    - Hepaticflexureofcolon
+    - Hypopharyngealaspectofaryepiglotticfold
+    - HypopharynxNOS
+    - Ileum
+    - Ill-definedsiteswithinrespiratorysystem
+    - IntestinaltractNOS
+    - Intra-abdominallymphnodes
+    - Intrahepaticbileduct
+    - Intrathoraciclymphnodes
+    - IsletsofLangerhans
+    - Isthmusuteri
+    - Jejunum
+    - KidneyNOS
+    - Labiummajus
+    - Labiumminus
+    - Lacrimalgland
+    - Laryngealcartilage
+    - LarynxNOS
+    - Lateralfloorofmouth
+    - Lateralwallofbladder
+    - Lateralwallofnasopharynx
+    - Lateralwalloforopharynx
+    - LessercurvatureofstomachNOS
+    - Lingualtonsil
+    - LipNOS
+    - Liver
+    - Longbonesoflowerlimbandassociatedjoints
+    - Longbonesofupperlimbscapulaandassociatedjoints
+    - Lowergum
+    - LowerlimbNOS
+    - Lowerlobelung
+    - Lowerthirdofesophagus
+    - Lower-innerquadrantofbreast
+    - Lower-outerquadrantofbreast
+    - LungNOS
+    - LymphnodeNOS
+    - Lymphnodesofaxillaorarm
+    - Lymphnodesofheadfaceandneck
+    - Lymphnodesofinguinalregionorleg
+    - Lymphnodesofmultipleregions
+    - Mainbronchus
+    - MajorsalivaryglandNOS
+    - MalegenitalorgansNOS
+    - Mandible
+    - Maxillarysinus
+    - Meckeldiverticulum
+    - MediastinumNOS
+    - Medullaofadrenalgland
+    - MeningesNOS
+    - Middleear
+    - Middlelobelung
+    - Middlethirdofesophagus
+    - MouthNOS
+    - MucosaoflipNOS
+    - Mucosaoflowerlip
+    - Mucosaofupperlip
+    - Myometrium
+    - Nasalcavity
+    - NasopharynxNOS
+    - NervoussystemNOS
+    - Nipple
+    - Occipitallobe
+    - Olfactorynerve
+    - Opticnerve
+    - OrbitNOS
+    - OropharynxNOS
+    - Otherill-definedsites
+    - Otherspecifiedpartsoffemalegenitalorgans
+    - Otherspecifiedpartsofmalegenitalorgans
+    - Otherspecifiedpartsofpancreas
+    - Ovary
+    - Overlappinglesionofaccessorysinuses
+    - Overlappinglesionofbladder
+    - Overlappinglesionofbonesjointsandarticularcartilage
+    - Overlappinglesionofbonesjointsandarticularcartilageoflimbs
+    - Overlappinglesionofbrain
+    - Overlappinglesionofbrainandcentralnervoussystem
+    - Overlappinglesionofbreast
+    - Overlappinglesionofcervixuteri
+    - Overlappinglesionofcolon
+    - Overlappinglesionofconnectivesubcutaneousandothersofttissues
+    - Overlappinglesionofcorpusuteri
+    - Overlappinglesionofdigestivesystem
+    - Overlappinglesionofendocrineglandsandrelatedstructures
+    - Overlappinglesionofesophagus
+    - Overlappinglesionofeyeandadnexa
+    - Overlappinglesionoffemalegenitalorgans
+    - Overlappinglesionoffloorofmouth
+    - Overlappinglesionofheartmediastinumandpleura
+    - Overlappinglesionofhypopharynx
+    - Overlappinglesionofill-definedsites
+    - Overlappinglesionoflarynx
+    - Overlappinglesionoflip
+    - Overlappinglesionofliporalcavityandpharynx
+    - Overlappinglesionoflung
+    - Overlappinglesionofmajorsalivaryglands
+    - Overlappinglesionofmalegenitalorgans
+    - Overlappinglesionofnasopharynx
+    - Overlappinglesionofotherandunspecifiedpartsofmouth
+    - Overlappinglesionofpalate
+    - Overlappinglesionofpancreas
+    - Overlappinglesionofpenis
+    - Overlappinglesionofperipheralnervesandautonomicnervoussystem
+    - Overlappinglesionofrectumanusandanalcanal
+    - Overlappinglesionofrespiratorysystemandintrathoracicorgans
+    - Overlappinglesionofretroperitoneumandperitoneum
+    - Overlappinglesionofskin
+    - Overlappinglesionofsmallintestine
+    - Overlappinglesionofstomach
+    - Overlappinglesionoftongue
+    - Overlappinglesionoftonsil
+    - Overlappinglesionofurinaryorgans
+    - Overlappinglesionofvulva
+    - Overlappinglesionsoforopharynx
+    - PalateNOS
+    - PancreasNOS
+    - Pancreaticduct
+    - Parametrium
+    - Parathyroidgland
+    - Paraurethralgland
+    - Parietallobe
+    - Parotidgland
+    - Pelvicbonessacrumcoccyxandassociatedjoints
+    - Pelviclymphnodes
+    - PelvisNOS
+    - PenisNOS
+    - Peripheralnervesandautonomicnervoussystemofabdomen
+    - Peripheralnervesandautonomicnervoussystemofheadfaceandneck
+    - Peripheralnervesandautonomicnervoussystemoflowerlimbandhip
+    - Peripheralnervesandautonomicnervoussystemofpelvis
+    - Peripheralnervesandautonomicnervoussystemofthorax
+    - PeripheralnervesandautonomicnervoussystemoftrunkNOS
+    - Peripheralnervesandautonomicnervoussystemofupperlimbandshoulder
+    - PeritoneumNOS
+    - PharynxNOS
+    - Pinealgland
+    - Pituitarygland
+    - Placenta
+    - PleuraNOS
+    - Postcricoidregion
+    - Posteriormediastinum
+    - Posteriorwallofbladder
+    - Posteriorwallofhypopharynx
+    - Posteriorwallofnasopharynx
+    - Posteriorwalloforopharynx
+    - Prepuce
+    - Prostategland
+    - Pylorus
+    - Pyriformsinus
+    - Rectosigmoidjunction
+    - RectumNOS
+    - Renalpelvis
+    - ReticuloendothelialsystemNOS
+    - Retina
+    - Retromolararea
+    - Retroperitoneum
+    - Ribsternumclavicleandassociatedjoints
+    - Roundligament
+    - ScrotumNOS
+    - Shortbonesoflowerlimbandassociatedjoints
+    - Shortbonesofupperlimbandassociatedjoints
+    - Sigmoidcolon
+    - SkinoflipNOS
+    - Skinoflowerlimbandhip
+    - Skinofotherandunspecifiedpartsofface
+    - Skinofscalpandneck
+    - Skinoftrunk
+    - Skinofupperlimbandshoulder
+    - SkinNOS
+    - SmallintestineNOS
+    - SoftpalateNOS
+    - Specifiedpartsofperitoneum
+    - Spermaticcord
+    - Sphenoidsinus
+    - Spinalcord
+    - Spinalmeninges
+    - Spleen
+    - Splenicflexureofcolon
+    - StomachNOS
+    - Subglottis
+    - Sublingualgland
+    - Submandibulargland
+    - Superiorwallofnasopharynx
+    - Supraglottis
+    - Tailofpancreas
+    - Temporallobe
+    - TestisNOS
+    - Thoracicesophagus
+    - ThoraxNOS
+    - Thymus
+    - Thyroidgland
+    - TongueNOS
+    - TonsilNOS
+    - Tonsillarfossa
+    - Tonsillarpillar
+    - Trachea
+    - Transversecolon
+    - Trigoneofbladder
+    - Undescendedtestis
+    - Unknownprimarysite
+    - Uppergum
+    - UpperlimbNOS
+    - Upperlobelung
+    - UpperrespiratorytractNOS
+    - Upperthirdofesophagus
+    - Upper-innerquadrantofbreast
+    - Upper-outerquadrantofbreast
+    - Urachus
+    - Ureter
+    - Uretericorifice
+    - Urethra
+    - UrinarysystemNOS
+    - Uterineadnexa
+    - UterusNOS
+    - Uvula
+    - VaginaNOS
+    - Vallecula
+    - VentralsurfaceoftongueNOS
+    - VentricleNOS
+    - Vertebralcolumn
+    - Vestibuleofmouth
+    - VulvaNOS
+    - Waldeyerring
+    - BiliarytractNOS
+    - Cheekmucosa
+    - Clitoris
+    - Overlappinglesionofbiliarytract
+    - Unknown
+    - NotReported
+  SlicingMethod:
+    description: 'Imaging specific: the method by which the tissue was sliced.'
+    enum:
+    - Vibratome
+    - Cryosectioning
+    - Tissuemolds
+    - Slidingmicrotome
+    - Sectioning
+    - Other
+    - Unknown
+    - NotReported
+  StorageMethod:
+    description: The method by which a biomaterial was stored after preservation or
+      before another protocol was used.
+    enum:
+    - Ambienttemperature
+    - Cutslide
+    - Fresh
+    - Frozenat-70C
+    - Frozenat-80C
+    - Frozenat-150C
+    - Frozeninliquidnitrogen
+    - Frozeninvaporphase
+    - Paraffinblock
+    - RNAlaterat4C
+    - RNAlaterat25C
+    - RNAlaterat-20C
+    - Refrigeratedat4degrees
+    - Refrigeratedvacuumchamber
+    - Unknown
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  TumorInfiltratingLymphocytes:
+    type: string
+    description: Measure of Tumor-Infiltrating Lymphocytes [Number]

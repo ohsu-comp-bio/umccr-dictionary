@@ -1,0 +1,21 @@
+# attrs==21.2.0
+# biothings-schema==0.0.1
+git+https://github.com/biothings/biothings_schema.py#egg=biothings_schema
+# certifi==2021.5.30
+# charset-normalizer==2.0.3
+click==8.0.1
+# decorator==5.0.9
+graphviz==0.17
+# idna==3.2
+# importlib-metadata==4.6.1
+inflection==0.5.1
+# jsonschema==3.2.0
+# networkx==2.3
+# pyrsistent==0.18.0
+PyYAML==5.4.1
+requests==2.26.0
+# six==1.16.0
+# strict-rfc3339==0.7
+# typing-extensions==3.10.0.0
+# urllib3==1.26.6
+zipp==3.5.0
