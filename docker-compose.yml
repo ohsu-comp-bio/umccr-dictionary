@@ -12,7 +12,7 @@ services:
     volumes:
       - ./schema:/usr/share/nginx/html/schema:ro
     ports:
-      - 8080:80
+      - 80:80
 
   g3po:
     image: quay.io/victorskl/g3po
