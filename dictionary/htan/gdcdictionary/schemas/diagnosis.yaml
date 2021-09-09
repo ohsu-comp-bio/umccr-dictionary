@@ -321,7 +321,7 @@ properties:
     - Unknown
     - NotReported
   AgeatDiagnosis:
-    type: string
+    type: number
     description: Age at the time of diagnosis expressed in number of days since birth.
   AnaplasiaPresent:
     description: 'Yes/no/unknown/Not Reported indicator used to describe whether anaplasia
@@ -378,7 +378,7 @@ properties:
     - TE-TooEarly
     - VGPR-VeryGoodPartialResponse
   BreslowThickness:
-    type: string
+    type: number
     description: The number that describes the distance, in millimeters, between the
       upper layer of the epidermis and the deepest point of tumor penetration.
   ClassificationofTumor:
@@ -416,15 +416,15 @@ properties:
     description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
       1, etc.); provide the same one for all items/rows.
   DaystoDiagnosis:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date the patient
       was diagnosed with the malignant disease.
   DaystoLastFollowup:
-    type: string
+    type: number
     description: Time interval from the date of last follow up to the date of initial
       pathologic diagnosis, represented as a calculated number of days.
   DaystoLastKnownDiseaseStatus:
-    type: string
+    type: number
     description: Time interval from the date of last follow up to the date of initial
       pathologic diagnosis, represented as a calculated number of days.
   FirstSymptomPriortoDiagnosis:
@@ -457,15 +457,15 @@ properties:
     - Pattern4
     - Pattern5
   GleasonPatternsPercent:
-    type: string
+    type: number
     description: Numeric value that represents the percentage of Patterns 4 and 5,
       which is used when the Gleason score is greater than 7 to predict prognosis.
   GreatestTumorDimension:
-    type: string
+    type: number
     description: Numeric value that represents the measurement of the widest portion
       of the tumor in centimeters.
   GrossTumorWeight:
-    type: string
+    type: number
     description: Numeric value used to describe the gross pathologic tumor weight,
       measured in grams.
   HTANParticipantID:
@@ -618,11 +618,11 @@ properties:
     - Unknown
     - NotReported
   LymphNodesPositive:
-    type: string
+    type: number
     description: The number of lymph nodes involved with disease as determined by
       pathologic examination.
   LymphNodesTested:
-    type: string
+    type: number
     description: The number of lymph nodes tested to determine whether lymph nodes
       were involved with disease as determined by a pathologic examination.
   LymphaticInvasionPresent:
@@ -634,7 +634,7 @@ properties:
     - Unknown
     - NotReported
   MarginDistance:
-    type: string
+    type: number
     description: Numeric value (in centimeters) that represents the distance between
       the tumor and the surgical margin.
   MarginsInvolvedSite:
@@ -755,13 +755,13 @@ properties:
     - Unknown
     - NotReported
   MitoticCount:
-    type: string
+    type: number
     description: The number of mitoses identified under the microscope in tumors.
       The method of counting varies, according to the specific tumor examined. Usually,
       the mitotic count is determined based on the number of mitoses per high power
       field (40X) or 10 high power fields.
   Morphology:
-    type: string
+    type: number
     description: The third edition of the International Classification of Diseases
       for Oncology, published in 2000 used principally in tumor and cancer registries
       for coding the site (topography) and the histology (morphology) of neoplasms.
@@ -807,7 +807,7 @@ properties:
     - Unknown
     - NotReported
   PercentTumorInvasion:
-    type: string
+    type: number
     description: The percentage of tumor cells spread locally in a malignant neoplasm
       through infiltration or destruction of adjacent tissue.
   PerineuralInvasionPresent:
@@ -2106,7 +2106,7 @@ properties:
     - Unknown
     - NotReported
   TumorDepth:
-    type: string
+    type: number
     description: Numeric value that represents the depth of tumor invasion, measured
       in millimeters (mm).
   TumorFocality:
@@ -2118,11 +2118,11 @@ properties:
     - Unknown
     - NotReported
   TumorGrade:
-    type: string
+    type: number
     description: Numeric value to express the degree of abnormality of cancer cells,
       a measure of differentiation and aggressiveness.
   TumorLargestDimensionDiameter:
-    type: string
+    type: number
     description: Numeric value used to describe the maximum diameter or dimension
       of the primary tumor, measured in centimeters.
   VascularInvasionPresent:
@@ -2164,7 +2164,7 @@ properties:
     - Unknown
     - NotReported
   YearofDiagnosis:
-    type: string
+    type: number
     description: Numeric value to represent the year of an individual's initial pathologic
       diagnosis of cancer.
   patients:

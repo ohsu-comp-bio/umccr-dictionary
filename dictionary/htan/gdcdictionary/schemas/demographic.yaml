@@ -305,7 +305,7 @@ properties:
     - Zambia
     - Zimbabwe
   DaystoBirth:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date from
       a person's date of birth represented as a calculated negative number of days.
   Ethnicity:
@@ -335,7 +335,7 @@ properties:
     description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
       )
   OccupationDurationYears:
-    type: string
+    type: number
     description: The number of years a patient worked in a specific occupation.
   PrematureAtBirth:
     description: The yes/no/unknown indicator used to describe whether the patient
@@ -368,12 +368,12 @@ properties:
     - Unknown
     - NotReported
   WeeksGestationatBirth:
-    type: string
+    type: number
     description: Numeric value used to describe the number of weeks starting from
       the approximate date of the biological mother's last menstrual period and ending
       with the birth of the patient.
   YearOfBirth:
-    type: string
+    type: number
     description: Numeric value to represent the calendar year in which an individual
       was born.
   patients:

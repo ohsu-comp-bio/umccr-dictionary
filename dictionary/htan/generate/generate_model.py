@@ -6,6 +6,11 @@ from pprint import pprint
 import re
 import inflection
 
+# see https://github.com/ncihtan/htan-portal/blob/f496b6173fc7e2553c02e79fe239fe879e0ac56f/lib/dataSchemaHelpers.ts#L139
+NUMERICAL_SCHEMA_DATA_LOOKUP = ['AgeAtDiagnosis', 'YearOfDiagnosis', 'DaysToLastFollowup', 'DaysToLastKnownDiseaseStatus', 'DaysToDiagnosis', 'PercentTumorInvasion', 'GrossTumorWeight', 'BreslowThickness', 'MitoticCount', 'MarginDistance', 'TumorDepth', 'DaysToBirth', 'CollectionDaysfromIndex', 'ProcessingDaysfromIndex', 'DysplasiaFraction',
+                      'NumberProliferatingCells', 'PercentEosinophilInfiltration', 'PercentGranulocyteInfiltration', 'PercentInflamInfiltration', 'PercentLymphocyteInfiltration', 'PercentMonocyteInfiltration', 'PercentNecrosis', 'PercentNeutrophilInfiltration', 'PercentNormalCells', 'PercentStromalCells', 'PercentTumorCells', 'PercentTumorNuclei', ]
+
+
 class HTANSchema(object):
 
     def __init__(self, path="HTAN.jsonld") -> None:
@@ -66,14 +71,14 @@ class HTANSchema(object):
                 include = n["schema:domainIncludes"]
                 if not isinstance(include, list):
                     include = [include]
-                for i in include:    
+                for i in include:
                     if id == i['@id']:
                         includes.append(n['@id'])
             if "rdfs:subClassOf" in n:
                 subclass = n["rdfs:subClassOf"]
                 if not isinstance(subclass, list):
                     subclass = [subclass]
-                for s in subclass:    
+                for s in subclass:
                     if id == s['@id']:
                         superClassOf.append(n['@id'])
 
@@ -84,8 +89,12 @@ class HTANSchema(object):
         subclasses = self._subclasses(id)
         subclasses = set(list(subclasses) + superClassOf) - self._rangeMembers - self._dependencies
         neighbors = neighbors - subclassOf
-        return {'@id':id,
-                'properties':sorted(list(dependencies) + list(includes)),
+        # special case for Patient
+        if id == 'bts:Patient':
+            subclasses = ['bts:AcuteLymphoblasticLeukemiaTier3', 'bts:BrainCancerTier3', 'bts:BreastCancerTier3', 'bts:ClinicalDataTier2', 'bts:ColorectalCancerTier3',
+                        'bts:LungCancerTier3', 'bts:MelanomaTier3', 'bts:OvarianCancerTier3', 'bts:PancreaticCancerTier3', 'bts:ProstateCancerTier3', 'bts:SarcomaTier3']
+        return {'@id': id,
+                'properties': sorted(list(dependencies) + list(includes)),
                 'subclasses': sorted(list(subclasses)),
                 'super': subclassOf,
                 'neighbors': sorted(list(neighbors)),
@@ -265,7 +274,25 @@ class Gen3Configuration(object):
     def links(self):
         return [self.link(l) for l in self.node['neighbors']]
 
-    def properties(self, template,node):
+    def property_type(self, property_name, schema_node):
+        """Determine type of simple properties."""
+        property_name = property_name.split(':')[-1]
+        if property_name in NUMERICAL_SCHEMA_DATA_LOOKUP:
+            return "number"
+        if 'Count' in property_name:
+            return "number"
+        if 'Percentage' in property_name:
+            return "number"
+        comment = schema_node['rdfs:comment'].lower()
+        if 'alphanumeric' in comment:
+            return "string"
+        if 'numeric' in comment:
+            return "number"
+        if 'number' in comment:
+            return "number"
+        return 'string'
+
+    def properties(self, template, node):
         """Render gen3 properties."""
         schema_node = self.schema.node(node['@id'])
         template["properties"][f"comment_{schema_node['rdfs:label']}"] = f'{schema_node["rdfs:label"]}'
@@ -273,7 +300,7 @@ class Gen3Configuration(object):
             schema_node = self.schema._nodes[p]
             if "schema:rangeIncludes" not in schema_node:
                 template["properties"][schema_node['rdfs:label']] = {
-                    'type': 'string',
+                    'type': self.property_type(p, schema_node),
                     'description': f'{schema_node["rdfs:comment"]}'
                 }
             else:

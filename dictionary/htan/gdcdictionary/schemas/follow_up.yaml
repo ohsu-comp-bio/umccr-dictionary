@@ -892,18 +892,18 @@ properties:
     - Grade4
     - Grade5
   BMI:
-    type: string
+    type: number
     description: A calculated numerical quantity that represents an individual's weight
       to height ratio.
   BarrettsEsophagusGobletCellsPresent:
     type: string
     description: TBD
   BodySurfaceArea:
-    type: string
+    type: number
     description: Numeric value used to represent the 2-dimensional extent of the body
       surface relating height to weight.
   CD4Count:
-    type: string
+    type: number
     description: The text term used to describe the outcome of the procedure to determine
       the amount of the CD4 expressing cells in a sample.
   CDCHIVRiskFactors:
@@ -1089,19 +1089,19 @@ properties:
     description: The value, as a percentage of predicted lung volume, measuring the
       amount of carbon monoxide detected in a patient's lungs.
   DaystoAdverseEvent:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date of the
       patient's adverse event.
   DaystoComorbidity:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date the patient
       was diagnosed with a comorbidity.
   DaystoFollowUp:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date of the
       patient's last follow-up appointment or contact.
   DaystoImaging:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date the imaging
       or scan was performed on the patient.
   DiabetesTreatmentType:
@@ -1199,7 +1199,7 @@ properties:
     - Unknown
     - NotReported
   HIVViralLoad:
-    type: string
+    type: number
     description: Numeric value that represents the concentration of an analyte or
       aliquot extracted from the sample or sample portion, measured in milligrams
       per milliliter.
@@ -1327,7 +1327,7 @@ properties:
     - Unknown
     - NotReported
   NadirCD4Count:
-    type: string
+    type: number
     description: Numeric value that represents the lowest point to which the CD4 count
       has dropped (nadir).
   PancreatitisOnsetYear:
@@ -1353,11 +1353,11 @@ properties:
     - Unknown
     - NotReported
   RecistTargetedRegionsNumber:
-    type: string
+    type: number
     description: Numeric value that represents the number of baseline target lesions,
       as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria
   RecistTargetedRegionsSum:
-    type: string
+    type: number
     description: Numeric value that represents the sum of baseline target lesions,
       as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria.
   RefluxTreatmentType:

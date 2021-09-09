@@ -69,11 +69,11 @@ properties:
     description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
       1, etc.); provide the same one for all items/rows.
   DaystoTreatmentEnd:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date the treatment
       ended.
   DaystoTreatmentStart:
-    type: string
+    type: number
     description: Number of days between the date used for index and the date the treatment
       started.
   HTANParticipantID:
@@ -91,7 +91,7 @@ properties:
     - Unknown
     - NotReported
   NumberofCycles:
-    type: string
+    type: number
     description: The numeric value used to describe the number of cycles of a specific
       treatment or regimen the patient received.
   ReasonTreatmentEnded:
@@ -455,7 +455,7 @@ properties:
     - E4512
     - EA5142
   TreatmentDose:
-    type: string
+    type: number
     description: The numeric value used to describe the dose of an agent the patient
       received.
   TreatmentDoseUnits:

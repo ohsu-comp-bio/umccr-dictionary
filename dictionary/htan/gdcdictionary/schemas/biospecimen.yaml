@@ -97,7 +97,7 @@ properties:
     - BoneMarrowBiospecimenType
     - CellsBiospecimenType
   CollectionDaysfromIndex:
-    type: string
+    type: number
     description: Number of days from the research participant's index date that the
       biospecimen was obtained.
   CollectionMedia:
@@ -125,7 +125,7 @@ properties:
     - CarcinomainSitu
     - Unknown
   DysplasiaFraction:
-    type: string
+    type: number
     description: 'Resulting value to represent the number of pieces of dysplasia divided
       by the total number of pieces. [Text: max length 5]'
   FiducialMarker:
@@ -208,54 +208,54 @@ properties:
     - Unknown
     - NotReported
   NumberProliferatingCells:
-    type: string
+    type: number
     description: Numeric value that represents the count of proliferating cells determined
       during pathologic review of the sample slide(s).
   PercentEosinophilInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by eosinophils
       in a tumor sample or specimen.
   PercentGranulocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by granulocytes
       in a tumor sample or specimen.
   PercentInflamInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent local response to cellular injury, marked
       by capillary dilatation, edema and leukocyte infiltration; clinically, inflammation
       is manifest by redness, heat, pain, swelling and loss of function, with the
       need to heal damaged tissue.
   PercentLymphocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by lymphocytes
       in a solid tissue normal sample or specimen.
   PercentMonocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of monocyte infiltration
       in a sample or specimen.
   PercentNecrosis:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of cell death in a malignant
       tumor sample or specimen.
   PercentNeutrophilInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by neutrophils
       in a tumor sample or specimen.
   PercentNormalCells:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of normal cell content
       in a malignant tumor sample or specimen.
   PercentStromalCells:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of reactive cells that
       are present in a malignant tumor sample or specimen but are not malignant such
       as fibroblasts, vascular structures, etc.
   PercentTumorCells:
-    type: string
+    type: number
     description: Numeric value that represents the percentage of infiltration by tumor
       cells in a sample.
   PercentTumorNuclei:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of tumor nuclei in a malignant
       neoplasm sample or specimen.
   PreinvasiveMorphology:
@@ -279,7 +279,7 @@ properties:
     - Invasivemelanoma-nevoid
     - Invasivemelanoma-other
   ProcessingDaysfromIndex:
-    type: string
+    type: number
     description: Number of days from the research participant's index date that the
       biospecimen was processed
   ProcessingLocation:
@@ -288,7 +288,7 @@ properties:
       Any identifier used within the center to identify processing location. No PHI/PII
       is allowed.
   ProtocolLink:
-    type: string
+    type: number
     description: Protocols.io ID or DOI link to a free/open protocol resource describing
       in detail the assay protocol (e.g. surface markers used in Smart-seq, dissociation
       duration,  lot/batch numbers for key reagents such as primers, sequencing reagent
@@ -671,7 +671,7 @@ properties:
       was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
       PHI/PII INFORMATION IS ALLOWED.
   TumorInfiltratingLymphocytes:
-    type: string
+    type: number
     description: Measure of Tumor-Infiltrating Lymphocytes [Number]
   patient:
     $ref: _definitions.yaml#/to_one

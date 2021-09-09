@@ -108,7 +108,7 @@ properties:
     type: string
     description: Index of FOV (as it pertains to its sequence order). Integer >= 1
   FrameAveraging:
-    type: string
+    type: number
     description: Number of frames averaged together (if no averaging, set to 1). Integer
       >= 1
   HTANDataFileID:
@@ -149,7 +149,7 @@ properties:
     - Oil
     - Other
   LensNA:
-    type: string
+    type: number
     description: The numerical aperture of the lens. Floating point value > 0.
   Microscope:
     type: string
@@ -211,11 +211,11 @@ properties:
     - 'True'
     - 'False'
   PlaneCount:
-    type: string
+    type: number
     description: Number of Z-planes (not to be confused with downsampled "pyramid").
       Integer >=1
   ProtocolLink:
-    type: string
+    type: number
     description: Protocols.io ID or DOI link to a free/open protocol resource describing
       in detail the assay protocol (e.g. surface markers used in Smart-seq, dissociation
       duration,  lot/batch numbers for key reagents such as primers, sequencing reagent
@@ -226,10 +226,10 @@ properties:
     - 'Yes'
     - 'No'
   SizeC:
-    type: string
+    type: number
     description: Number of channels. Integer >= 1
   SizeT:
-    type: string
+    type: number
     description: Number of time points. Integer >= 1
   SizeX:
     type: string
@@ -255,7 +255,7 @@ properties:
     type: string
     description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
   WorkingDistance:
-    type: string
+    type: number
     description: The working distance of the lens, expressed as a floating point number.
       Floating point > 0.
   WorkingDistanceUnit:

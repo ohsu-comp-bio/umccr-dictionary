@@ -119,7 +119,7 @@ properties:
     - No-SmokingExposure
     - NotReported
   StartDaysfromIndex:
-    type: string
+    type: number
     description: Number of days from the date of birth (index date) to the date of
       an event (e.g. exposure to environmental factor, treatment start, etc.). If
       not applicable please enter 'Not Applicable'
