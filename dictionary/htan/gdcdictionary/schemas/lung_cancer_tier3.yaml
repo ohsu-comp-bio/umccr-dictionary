@@ -1,0 +1,327 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: lung_cancer_tier3
+title: LungCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Lung cancer specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: lung_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - LungCancerTier3
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # LungCancerTier3
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  CurrentLungCancerSymptoms:
+    description: Reported lung cancer related symptoms person is currently experiencing
+    enum:
+    - Asbestosis
+    - Productivecough
+    - Non-productivecough
+    - Wheezing
+    - Rhonci
+    - Crackles
+    - Hemoptysis
+    - Dyspnea
+    - Unexplainedweightloss
+    - Unexplainedlossofenergy/fatigue
+    - Chestpainordiscomfort
+    - Dysphagia
+    - Pneumonia
+    - Hoarseness/laryngitis/vocalcordinflammation
+    - Airentrydecreased/fair/poor/diminished
+    - Fair/pooraeration
+    - Shallowinspiration
+    - Breathsoundscoarse/diminished
+    - Dullnesstopercussion
+    - Abnormalbreathsounds
+    - Clearlungstoauscultationorpercussion
+    - Unlabored/normalbreathing
+    - Coldsymptoms/flu/sinus/nasalcongestion
+    - Sinuspain/infection
+    - Fingerclubbing
+    - Noevidenceoflungcancerrecurrence
+    - PatientisNED
+    - Oxygensupplemental-portableO2atnightorcontinuous
+    - Prolongedexpiration-long/forcedexpiratoryphase
+    - Other
+    - Unknown
+    - NotReported
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  LungAdjacentHistologyType:
+    description: The type of morphologic characteristics observed by microscope in
+      the tissue next to a benign or malignant tissue growth
+    enum:
+    - Lungadenocarcinoma
+    - Adenosquamouscarcinoma
+    - Carcinoidtumorandlungatypicalcarcinoidtumor
+    - Lungadenocarcinomainsitu
+    - Largecelllungcarcinoma
+    - Largecellneuroendocrinecarcinoma
+    - Lunglymphoepithelioma-likecarcinoma
+    - Bronchioalveolarcarcinoma
+    - ThoracicNUTcarcinoma
+    - Sarcomatoidcarcinoma
+    - Smallcelllungcarcinoma
+    - Squamouscelllungcarcinoma
+    - Lungsquamouscellcarcinomainsitu
+    - Other
+    - Unknown
+    - NotReported
+  LungCancerDetectionMethodType:
+    description: The means, manner of procedure, or systematic course of actions performed
+      in order to discover or identify lung cancer
+    enum:
+    - LowDoseComputedTomography(LDCT)
+    - ChestX-ray
+    - ChestCT
+    - Unknown
+    - Datanotavailable
+    - Other
+  LungCancerHarboringGenomicAberrations:
+    description: Genomic aberrations in participants with lung cancer (specific lung
+      cancer associated gene mutations not covered in Tiers 1 and 2)
+    enum:
+    - G12AKRASmutation
+    - G12CKRASmutation
+    - G12DKRASmutation
+    - G12RKRASmutation
+    - G12SKRASmutation
+    - G12VKRASmutation
+    - G13DKRASmutation
+    - G13RKRASmutation
+    - G13CKRASmutation
+    - G13AKRASmutation
+    - G13VKRASmutation
+    - Q61LKRASmutation
+    - Q61HKRASmutation
+    - A146TKRASmutation
+    - G719XEGFRmutation
+    - T790MEGFRmutation
+    - C797SEGFRmutation
+    - L858REGFRmutation
+    - L861QEGFRmutation
+    - Exon19deletion
+    - Exon20insertion
+    - EML4-ALKtranslocation-variant1
+    - EML4-ALKtranslocation-variant2
+    - EML4-ALKtranslocation-variant3
+    - EML4-ALKtranslocation-variant4
+    - EML4-ALKtranslocation-variant5
+    - V600EBRAFmutation
+    - V600DBRAFmutation
+    - V600KBRAFmutation
+    - V600RBRAFmutation
+    - K601EBRAFmutation
+    - D963spliceMETmutation
+    - D1010NMETmutation
+    - D1010spliceMETmutation
+    - Intron13mutation
+    - Intron14mutation
+    - Exon14mutation
+    - Exon14deletion
+    - Other
+    - Unknown
+    - NotReported
+  LungCancerParticipantProcedureHistory:
+    description: Text name of a surgical or operative procedure used in a natural
+      history protocol of a lung cancer participant.
+    enum:
+    - LobectomyBilateral
+    - LobectomyLeft
+    - LobectomyRight
+    - LungWedgeResectionBilateral
+    - LungWedgeResectionLeft
+    - LungWedgeResectionMultiple
+    - LungWedgeResectionRight
+    - PneumonectomyLeft
+    - PneumonectomyRight
+    - Endobronchialbiopsy
+    - Mediastinoscopy
+    - VATSSclerosis
+    - Brainresection
+    - Segmentectomy
+    - Unknown
+    - Other
+    - NotReported
+  LungTopography:
+    description: Lung PCA specific topography (not covered in previous tiers)
+    enum:
+    - MC-Carinabetweenrightandleftlungs(maincarina)
+    - TR-Trachea(airwaywallbetweentracheo-esophagealbifurcationandmaincarina)
+    - CarinaNOS(Carinanototherwisespecified)
+    - LUDB-Carinabetweenthelingulaandupperdivisionleftupperlobe
+    - CarinabetweenLUDBorificeandlingulaorifice
+    - LUDB-orificeairwaywallbetweenLUDBandLB3(LB1+2carinae)
+    - LingulaorificeairwaywallbetweenLUDBandLB4/5carinae
+    - RMB-Rightmainstembronchus(airwaywallbetweenMC&RULcarina)
+    - LMB-Leftmainstembronchus(airwaywallbetweenMC&LULcarina)
+    - RLNOS(Rightlungnototherwisespecified)
+    - RB1/2-Carinabetweenapicalandposteriorsegmentsrightupperlobe(CarinabetweenRB1orificeandRB2orifice)
+    - RB6A/B-CarinabetweenapicalandlateralsubsegmentssuperiorsegmentRLL
+    - RB6A/C-CarinabetweenapicalandmedialsubsegmentssuperiorsegmentRLL
+    - RB6B/C-CarinabetweenmedialandlateralsubsegmentssuperiorsegmentRLL
+    - RB7A/B-CarinabetweenmedialandlateralsubsegmentsmedialbasalsegmentRLL
+    - RB8/9-CarinabetweenanteriorandlateralsegmentsRLL(CarinabetweenRB8orificeandRB9orifice)
+    - RB8A/B-CarinabetweenmedialandlateralsubsegmentsanteriorsegmentRLL
+    - RB9/10-CarinabetweenlateralandposteriorsegmentsRLL
+    - RB9A/B-CarinabetweenmedialandlateralsubsegmentslateralsegmentRLL
+    - RB10A/B-CarinabetweenmedialandlateralsubsegmentsposteriorsegmentRLL
+    - RB10A/C-CarinabetweenmedialandapicalsubsegmentsposteriorsegmentRLL
+    - RB1A/B-CarinabetweenmedialandlateralsubsegmentsapicalsegmentRUL
+    - RB10B/C-CarinabetweenmedialandlateralsubsegmentsposteriorsegmentRLL
+    - RB6-CarinaofsuperiorsegmentRLL(CarinabetweenRB6orificeandlowerportionofRLLorifice)
+    - RB6orificeAirwaywallbetweenRB6andRB6A/B/Ccarinae
+    - BronchusIntermediusBronchus(airwaywall)betweenrightupperandrightmiddlelobes
+    - RB1/3-CarinabetweenapicalandanteriorsegmentsRUL(CarinabetweenRB1orificeandRB3orifice)
+    - RB2/3-CarinabetweenanteriorandposteriorsegmentsRUL(CarinabetweenRB2orificeandRB3orifice)
+    - RB2A/B-Carinabetweenthemedialandlateralsubsegmentsoftheposteriorsegment(RUL)
+    - RB3A/B-CarinabetweenthemedialandlateralsubsegmentsoftheanteriorsegmentRUL
+    - RB4/5-Carinabetweenthelateralandmedialsegmentsrightmiddlelobe(CarinabetweenRB4orificeandRB5orifice)
+    - RB4A/B-Carinabetweenthemedialandlateralsubsegmentsofthelateralsegmentoftherightmiddlelobe
+    - RB5A/B-Carinabetweenthemedialandlateralsubsegmentsofthemedialsegmentoftherightmiddlelobe
+    - RULCarinaebetweenRULorificeandbronchusintermedius
+    - RULorificeAirwaywallbetweenRULandRB1/RB2/RB3
+    - RB1orificeApicalsegment-rightupperlobe(airwaywallbetweenRB1andRB1A/Bcarinae)
+    - RB2orificePosteriorsegment-rightupperlobe(airwaywallbetweenRB2andRB2A/Bcarinae)
+    - RB3orificeAnteriorsegment-rightupperlobe(airwaywallbetweenRB3andRB3A/Bcarinae)
+    - RML-CarinabetweenRMLorificeandRLLorifice
+    - RMLorificeAirwaywallbetweenRMLandRB4/5
+    - RB4orificeLateralsegmentrightmiddlelobe(airwaywallbetweenRB4andRB4A/Bcarinae)
+    - RB5orificeMedialsegmentrightmiddlelobe(airwaywallbetweenRB5andRB5A/Bcarinae)
+    - RLLorificeAirwaywallbetweenRMLandRB6-10carinae
+    - RB7Medialbasalsegmentrightlowerlobe(CarinaatRB7orificetakeofffromRLLorifice)
+    - RB7orificeAirwaywallbetweenRB7andRB7A/Bcarinae
+    - RB8orificeAnteriorsegmentrightlowerlobe(airwaywallbetweenRB8andRB8A/Bcarinae)
+    - RB9orificeLateralsegmentrightlowerlobe(airwaywallbetweenRB9andRB9A/Bcarinae)
+    - RB10Posteriorsegmentrightlowerlobe(CarinaatRB10orificetakeofffromRLLorifice)
+    - RB10orificeAirwaywallbetweenRB10andRB10A/Bcarinae
+    - LLNOS(Leftlungnototherwisespecified)
+    - LB1/2Carinabetweenapicalandposteriorsegmentleftupperlobe(CarinabetweenLB1orificeandLB2orifice)
+    - LB4/5Carinabetweensuperiorandinferiorsegmentlingula(CarinabetweenLB4orificeandLB5orifice)
+    - LB4A/BCarinabetweenmedialandlateralsubsegmentssuperiorsegmentlingula
+    - LB5A/BCarinabetweenthemedialandlateralsubsegmentsinferiorsegmentlingula
+    - LB6A/BCarinabetweenthesuperiorandlateralsubsegmentssuperiorsegmentLLL
+    - LB6A/CCarinabetweenthesuperiorandmedialsubsegmentsofsuperiorsegmentLLL
+    - LB6B/CCarinabetweenthemedialandlateralsubsegmentsofthesuperiorsegmentLLL
+    - LB8/9CarinabetweentheanteriorandlateralsegmentsLLL(CarinabetweenLB8orificeandLB9orifice)
+    - LB8A/BCarinabetweenthemedialandlateralsubsegmentsoftheanteriorsegmentLLL
+    - LB9/10CarinabetweenthelateralandposteriorsegmentsLLL(CarinabetweenLB9orificeandLB10orifice)
+    - LB9A/BCarinabetweenthemedialandlateralsubsegmentsofthelateralsegmentLLL
+    - LB1A/BCarinabetweenthelateralandmedialsubsegmentsoftheapicalsegmentoftheLUL
+    - LB10A/BCarinabetweentheapicalandlateralsubsegmentsoftheposteriorsegmentoftheLLL
+    - LB10A/CCarinabetweentheapicalandmedialsegmentsoftheposteriorsegmentoftheLLL
+    - LB10B/CCarinabetweenthemedialandlateralsubsegmentsoftheposteriorsegmentoftheLLL
+    - LB1+2orificeTheapico-posteriorsegmentoftheleftupperlobe(airwaywallbetweenLB1+2/3carinaandLB1orLB2)
+    - LB6Thesuperiorsegmentoftheleftlowerlobe(CarinabetweenLB6orificeandlowerportionofLLLorifice)
+    - LB6orificeAirwaywallbetweenLB6andLB6A/Bcarinae
+    - LB1A/CCarinabetweentheapicalandlateralsubsegmentsoftheapicalsegmentleftupperlobe
+    - LB1B/CCarinabetweenthemedialandlateralsubsegmentsoftheapicalsegmentoftheleftupperlobe
+    - LB2A/BCarinabetweentheapicalandlateralsubsegmentsoftheposteriorsegmentoftheleftupperlobe
+    - LB2A/CCarinabetweentheapicalandmedialsubsegmentsoftheposteriorsegmentoftheleftupperlobe
+    - LB2B/CCarinabetweenthemedialandlateralsubsegmentsoftheposteriorsegmentleftupperlobe
+    - LB1+2/3Carinabetweentheapico-posteriorandanteriorsegmentsoftheleftupperlobe(CarinabetweenLB1+2orificeandLB3orifice)
+    - LB3A/BCarinabetweentheapicalandlateralsubsegmentsoftheanteriorsegmentoftheleftupperlobe
+    - LULCarinabetweentheLULorificeandLLLorifice(airways)
+    - LULorificeAirwaywallbetweenLULandLUDB
+    - LB3orificeAnteriorsegmentleftupperlobe(airwaywallbetweenLB3andLB3A/Bcarinae)
+    - LB4orificeSuperiorsegmentlingula(airwaywallbetweenLB4andLB4A/Bcarinae)
+    - LB5orificeInferiorsegmentlingula(airwaywallbetweenLB5andLB5A/Bcarinae)
+    - LLLorificeAirwaywallbetweenLULcarinaandLB6-10carinae
+    - LB9orificeLateralsegmentleftlowerlobe(airwaywallbetweenLB9andLB9A/Bcarinae)
+    - LB8orificeAnteriorsegmentleftlowerlobe(airwaywallbetweenLB8andLB8A/Bcarinae)
+    - LB10orificePosteriorsegmentleftlowerlobe(airwaywallbetweenLB10andLB10A/Bcarinae)
+    - Other
+    - Unknown
+    - NotReported
+  LungTumorLobeBronchialLocation:
+    description: Anatomic lobe and bronchial location of the tumor inside the lung
+    enum:
+    - Upperlobe
+    - Middlelobe
+    - Lowerlobe
+    - Stump
+    - Bronchus
+    - Unknown
+    - NotReported
+  LungTumorLocationAnatomicSite:
+    description: Anatomic location of the tumor inside the lung
+    enum:
+    - Maincarina
+    - Left
+    - Right
+    - Unknown
+    - NotReported
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

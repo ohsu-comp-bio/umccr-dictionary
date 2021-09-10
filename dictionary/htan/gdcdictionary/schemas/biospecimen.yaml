@@ -37,10 +37,7 @@ properties:
     enum:
     - Biospecimen
   subtype:
-    enum:
-    - AntigenRetrieval
-    - BiospecimenSlideLocation
-    - StainingMarkers
+    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -58,9 +55,6 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  # AntigenRetrieval
-  # BiospecimenSlideLocation
-  # StainingMarkers
   # Biospecimen
   AcquisitionMethodType:
     description: Records the method of acquisition or source for the specimen under
@@ -82,6 +76,17 @@ properties:
     type: string
     description: List of HTAN Identifiers (separated by commas) of adjacent biospecimens
       cut from the same sample; for example HTA3_3000_3, HTA3_3000_4, ...
+  AntigenRetrieval:
+    type: string
+    description: 'Imaging specific: information on antigen retrieval when it is used
+      for a pathology specimen. E.g. pH 6 (Citric Acid), pH 8 (tris), or pH 10. [Text
+      - max length 100] '
+  BiospecimenSlideLocation:
+    type: string
+    description: 'Imaging specific: text term to capture the relative position and
+      orientation of the core location within a piece of tissue on the slide relative
+      to the region of interest slide coordinates. use https://docs.openmicroscopy.org/ome-model/6.0.1/developers/roi.html#shape-concrete-implementations
+      if applciable'
   BiospecimenType:
     description: Biospecimen Type
     enum:
@@ -646,6 +651,10 @@ properties:
     - Other
     - Unknown
     - NotReported
+  StainingMarkers:
+    type: string
+    description: 'Imaging specific: text to identify proteins/ antibodies selected
+      for staining'
   StorageMethod:
     description: The method by which a biomaterial was stored after preservation or
       before another protocol was used.

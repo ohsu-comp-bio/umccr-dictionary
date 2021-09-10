@@ -1,0 +1,372 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: breast_cancer_tier3
+title: BreastCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Breast cancer specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: breast_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - BreastCancerTier3
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # BreastCancerTier3
+  BIRADSMammographyBreastDensityCategory:
+    description: The category that describes the relative amount of different tissues
+      present in the breast on a mammogram based on the updated 2015 edition of the
+      American College of Radiology's Breast Imaging Reporting and Data System (BI-RADS)
+      reporting guidelines.
+    enum:
+    - Predominantlyfatty
+    - Scatteredfibroglandulardensities
+    - Heterogeneouslydense
+    - Extremelydense
+    - Unknown
+    - Datanotavailable
+  BreastBiopsyProcedureFindingType:
+    description: Text term to describe the result of the examination of the breast
+      tissue specimen or fluid as related to the presence and nature of disease.
+    enum:
+    - Atypicalhyperplasia
+    - DCIS
+    - LCIS
+    - Cancer
+    - Nocancer
+    - Other
+  BreastCancerAllredEstrogenReceptorScore:
+    description: The numeric Allred score, that is cell staining percentage plus intensity,
+      to determine estrogen receptor status.
+    enum:
+    - '0'
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - '8'
+    - '10'
+    - Unknown
+  BreastCancerAssessmentTests:
+    description: Text term to identify assessment tests done in participants during
+      diagnosis
+    enum:
+    - EstrogenreceptorIHC
+    - ProgesteronereceptorIHC
+    - HER2IHC
+    - HER2FISH-CISH
+    - HER2FISH
+    - Other
+    - Unknown
+    - Datanotavailable
+  BreastCancerGenomicTestPerformed:
+    description: Text term that represents the name of the genomic test performed
+      for breast cancer.
+    enum:
+    - Oncotype
+    - MammaPrint
+    - Other
+    - Datanotavailable
+    - Unknown
+    - Notperformed
+  BreastCarcinomaCentromere17CopyNumber:
+    type: string
+    description: Result of Centromere 17 testing in a sample or specimen of metastatic
+      breast carcinoma, expressed as a range of values.
+  BreastCarcinomaDetectionMethodType:
+    description: The means, manner of procedure, or systematic course of actions performed
+      in order to discover or identify breast cancer.
+    enum:
+    - ClinicalExam
+    - Datanotavailable
+    - NippleDischarge
+    - Other
+    - ScreeningMammography
+    - ScreeningMRI
+    - Selfexam
+    - Unknown
+  BreastCarcinomaERStainingIntensity:
+    description: Text term to indicate the ER staining intensity on pathology assessment
+      in a participant with breast cancer
+    enum:
+    - Strong
+    - Moderate
+    - Weak
+    - Weak-Moderate
+    - Moderate-Strong
+    - Weak-Strong
+    - Other
+    - Unknown
+  BreastCarcinomaERStatusPercentageValue:
+    type: number
+    description: A numerical quantity measured or assigned or computed which captures
+      the estrogen receptor level measured in a participant with breast cancer
+  BreastCarcinomaEstrogenReceptorStatus:
+    description: Text term to represent the overall result of Estrogen Receptor (ER)
+      testing in a participant with breast cancer
+    enum:
+    - Borderline
+    - Equivocal
+    - Indeterminate
+    - Negative
+    - NotPerformed
+    - PerformedbutNotAvailable
+    - Positive
+    - Unknown
+  BreastCarcinomaHER2Centromere17CopynumberTotal:
+    type: number
+    description: Number of Cells Counted for HER2 & Centromere 17 Copy Numbers in
+      a participant with breast cancer
+  BreastCarcinomaHER2Chromosome17Ratio:
+    type: string
+    description: HER2 chromosome 17 ratio in participants with breast cancer
+  BreastCarcinomaHER2RatioDiagnosis:
+    type: string
+    description: HER2 ratio of the participant at diagnosis
+  BreastCarcinomaHER2Status:
+    description: Text term to signify the result of the medical procedure that involves
+      testing a sample of blood or tissue for HER2 in a participant with breast cancer
+    enum:
+    - Positive
+    - Negative
+    - Amplified
+    - Non-amplified
+    - Equivocal
+    - Indeterminate
+    - NotPerformed
+    - Unknown
+  BreastCarcinomaHistologyCategory:
+    description: Classification of the type of invasive breast carcinoma diagnosed
+      based on histologic attributes.
+    enum:
+    - Infiltratingductalcarcinoma
+    - Infiltratinglobularcarcinoma
+    - InvasivemammarycarcinomaNOS
+    - Invasivemixedductalandlobularcarcinoma
+    - Other
+  BreastCarcinomaPRStainingIntensity:
+    description: Text term to indicate the PR staining intensity on pathology assessment
+      in a participant with breast cancer
+    enum:
+    - Strong
+    - Moderate
+    - Weak
+    - Weak-Moderate
+    - Moderate-Strong
+    - Weak-Strong
+    - Other
+    - Unknown
+  BreastCarcinomaPRStatusPercentageValue:
+    type: number
+    description: A numerical quantity measured or assigned or computed which captures
+      the progesterone receptor level measured in a participant with breast cancer
+  BreastCarcinomaProgesteronerReceptorStatus:
+    description: Text term to represent the overall result of Progresterone Receptor
+      (PR) testing in a participant with breast cancer
+    enum:
+    - Borderline
+    - Equivocal
+    - Indeterminate
+    - Negative
+    - NotPerformed
+    - PerformedbutNotAvailable
+    - Positive
+    - Unknown
+  BreastCarcinomaSurgicalProcedureName:
+    description: Text name of a surgical procedure performed for a person with a diagnosis
+      of breast cancer
+    enum:
+    - Lumpectomy
+    - Radicalmastectomy
+    - Modifiedradicalmastectomy
+    - Other
+    - Partialmastectomy
+    - Re-excision
+    - Simplemastectomy
+    - Surgerynotperformed
+    - Unknown
+  BreastImagingPerformedType:
+    description: The kind of technology or method performed for screening, diagnosis,
+      surgical procedures or therapy that aids in the visualization of the breast(s).
+    enum:
+    - Mammogram
+    - Ultrasound
+    - MRI
+    - PET/CT
+    - CT
+    - Multipleimagingmodalities
+    - Unknown
+    - Datanotavailable
+  BreastQuadrantSite:
+    description: The breast quadrant or structure from which the breast tissue specimen
+      was removed for microscopic examination.
+    enum:
+    - Upperouterquadrant
+    - Lowerouterquadrant
+    - Upperinnerquadrant
+    - Lowerinnerquadrant
+    - Central
+    - Nipple
+    - Unknown
+    - Datanotavailable
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HER2BreastCarcinomaCopyNumberTotal:
+    type: number
+    description: Result of HER2 Copy Number testing (in a participant with breast
+      cancer), expressed as a range of values.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  HormoneTherapyBreastCancerPreventionIndicator:
+    description: Did the patient receive hormonal therapy for prevention of breast
+      cancer?
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  InvasiveDuctalBreastCarcinomaHistologicCategory:
+    description: The histologic subtype for the most common type of invasive breast
+      carcinoma.
+    enum:
+    - Classicaltype
+    - Invasivecarcinoma-typecannotbedetermined
+    - Invasivecribriformcarcinoma
+    - Invasivemicropapillarycarcinoma
+    - Invasivepapillarycarcinoma
+    - Invasivetubularcarcinoma
+    - Medullarycarcinoma
+    - Mucinouscarcinoma
+    - Tubulolobularcarcinoma
+    - Other
+    - Unknown
+    - Datanotavailable
+  InvasiveLobularBreastCarcinomaHistologicCategory:
+    description: The histologic subtype for an infiltrating lobular carcinoma of the
+      breast.
+    enum:
+    - Alveolartype
+    - Classicaltype
+    - Datanotavailable
+    - Pleomorphictype
+    - Unknown
+  MammaprintRiskGroup:
+    description: Text term that represents the risk group for breast cancer as determined
+      by assessment of the MammaPrint test.
+    enum:
+    - Highrisk
+    - Intermediaterisk
+    - Lowrisk
+    - Datanotavailable
+    - Unknown
+  MulticentricBreastCarcinomaPresentIndicator:
+    description: A response to indicate if there is breast cancer characterized by
+      the presence of multiple cancerous tumors that originate from different clones
+      and usually located in different quadrants of the breast.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - Datanotavailable
+  MultifocalBreastCarcinomaPresentIndicator:
+    description: A response to indicate if there is breast cancer characterized by
+      the presence of multiple cancerous tumors that originate from the same clone
+      and usually located in the same quadrant of the breast.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - Datanotavailable
+  OncotypeRiskGroup:
+    description: Text term that represents the risk group for breast cancer as determined
+      by assessment of the Oncotype recurrence score.
+    enum:
+    - Highrisk
+    - Intermediaterisk
+    - Lowrisk
+    - Datanotavailable
+    - Unknown
+  OncotypeScore:
+    type: string
+    description: OncotypeDX recurrence score
+  PriorInvasiveBreastDisease:
+    description: Text term to indicate prior invasive breast condition in the participant
+    enum:
+    - DCIS
+    - LCIS
+    - Invasivebreastcancer(unrelatedtothecurrentcancer)
+    - Other
+    - Unknown
+    - Datanotavailable
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

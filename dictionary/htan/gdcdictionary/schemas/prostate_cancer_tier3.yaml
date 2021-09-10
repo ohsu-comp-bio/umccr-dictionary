@@ -1,0 +1,197 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: prostate_cancer_tier3
+title: ProstateCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Prostate cancer specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: prostate_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ProstateCancerTier3
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # ProstateCancerTier3
+  AdditonalFindingsUninvolvedProstate:
+    description: Additional findings, uninvolved prostate
+    enum:
+    - High-gradeprostaticintraepithelialneoplasia(PIN)
+    - Inflammation
+    - Benignprostatichyperplasia(BPH)
+    - ProstaticIntraductaladenocarcinoma
+    - Other
+    - Unknown
+    - NotReported
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  LocationExtentExtraprostaticExtension:
+    description: Location and extent of extraprostatic extension
+    enum:
+    - LeftAnterior
+    - LeftLateral
+    - LeftPosterolateral
+    - LeftPosterior
+    - LeftApex
+    - LeftMid
+    - LeftBase
+    - LeftFocal
+    - LeftNon-focal(established)
+    - RightAnterior
+    - RightLateral
+    - RightPosterolateral
+    - RightPosterior
+    - RightApex
+    - RightMid
+    - RightBase
+    - RightFocal
+    - RightNon-focal(established)
+    - Unknown
+    - NotReported
+  LocationNaturePositiveMargins:
+    description: Location and nature of positive margins
+    enum:
+    - LeftAnterior
+    - LeftLateral
+    - LeftPosterolateral
+    - LeftPosterior
+    - LeftApex
+    - LeftMid
+    - LeftBase
+    - LeftFocal
+    - LeftExtensive
+    - LeftPositiveinanareaofextraprostaticextension(EPE)
+    - LeftPositiveinanareaofintraprostaticincision(II)
+    - LeftPositivewhereitisdifficulttodistinguishEPEvsII
+    - RightAnterior
+    - RightLateral
+    - RightPosterolateral
+    - RightPosterior
+    - RightApex
+    - RightMid
+    - RightBase
+    - RightFocal
+    - RightExtensive
+    - RightPositiveinanareaofextraprostaticextension(EPE)
+    - RightPositiveinanareaofintraprostaticincision(II)
+    - RightPositivewhereitisdifficulttodistinguishEPEvsII
+    - Bladderneck(blockPUM)
+    - Vasdeferens
+    - Apicalmargin(blockDUM)
+    - Unknown
+    - NotReported
+  ProstateCancerCytologicMorphologicSubtypes:
+    description: Text term that describes various morphological and cytological subtypes
+      in protate tumors.
+    enum:
+    - Prostaticbasalcellhyperplasia
+    - Prostaticclearcellcribiformhyperplasia
+    - Prostaticatypicaladenomatoushyperplasia(adenosisorAAH)
+    - Lowgradeprostaticintraepithelialneoplasia(PIN)/(PINI)
+    - Highgradeprostaticintraepithelialneoplasia(HGPIN)/(PINII&PINIII)
+    - Other
+    - Unknown
+    - NotReported
+  ProstateCancerLocalExtent:
+    description: The response used to categorize the local extent of disease for prostate
+      cancer.
+    enum:
+    - OrganConfined
+    - Extraprostaticextension
+    - Unknown
+    - NotReported
+  ProstateCarcinomaHistologicType:
+    description: The diagnostic subclassification of an invasive prostate carcinoma.
+    enum:
+    - Prostaticadenocarcinoma(conventionalNOS)
+    - Prostaticductadenocarcinoma
+    - Acinarprostatemucinous(colloid)adenocarcinoma
+    - Acinarprostateadenocarcinoma-signet-ringvariant
+    - Prostaticadenosquamouscarcinoma
+    - Acinarprostatemucinousadenocarcinoma
+    - Prostaticsmallcellcarcinoma
+    - Acinarprostateadenocarcinoma-sarcomatoidvariant
+    - UndifferentiatedcarcinomaNOS
+    - Other
+  SeminalVesicleInvasion:
+    description: An anatomic position identifying a side of the body where local spread
+      of malignant neoplasm is found to infiltrate tissue in the saclike glandular
+      diverticulum on the ductus deferens in a male.
+    enum:
+    - None
+    - Left
+    - Right
+    - Bothsides
+    - Unknown
+    - NotReported
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

@@ -1,0 +1,126 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: pancreatic_cancer_tier3
+title: PancreaticCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Pancreatic cancer specific attributes in Clinical Tier Data 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: pancreatic_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - PancreaticCancerTier3
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # PancreaticCancerTier3
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  PancreasPrecancerHistopathologicGrade:
+    description: The grade of precancerous pancreatic tissue based on microscopic
+      study of characteristic tissue abnormalities by employing various cytochemical
+      and immunocytochemical stains.
+    enum:
+    - IPMN-Adenoma
+    - IPMN-Borderline
+    - IPMN-Carcinomainsitu
+    - IPMN-Invasivecarcinoma
+    - PanIN1
+    - PanIN1A
+    - PanIN1B
+    - PanIN2
+    - PanIN3
+    - Unknown
+    - NotReported
+  PancreaticDuctFinalPathologyType:
+    description: The final pathology result of the pancreatic duct communication type.
+    enum:
+    - Side-Branch
+    - MainDuct
+    - Mixed
+    - NotSpecified
+    - None
+    - NotReported
+  PancreaticIPMNPathologyEpithelialSubtype:
+    description: The Intraductal Papillary Mucinous Neoplasm (IPMN) epithelial cell
+      subtype based on the gross and microscopic examination of a pancreatic neoplasm
+      specimen
+    enum:
+    - GastricFoveolar
+    - Intestinal
+    - IntraductalTubopapillary
+    - Pancreatobiliary
+    - Oncocytic
+    - Other
+    - Unknown
+    - NotReported
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

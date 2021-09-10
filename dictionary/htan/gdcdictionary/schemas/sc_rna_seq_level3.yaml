@@ -1,0 +1,244 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: sc_rna_seq_level3
+title: ScRNA-seqLevel3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Gene and Isoform expression files
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: assays
+  backref: sc_rna_seq_level3s
+  label: refers_to
+  target_type: assay
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- assays
+- CellMedianNumberGenes
+- CellMedianNumberReads
+- CellTotal
+- Component
+- DataCategory
+- HTANDataFileID
+- HTANParentDataFileID
+- MatrixType
+- ScRNAseqWorkflowParametersDescription
+- ScRNAseqWorkflowType
+- WorkflowLink
+- WorkflowVersion
+- fileFormat
+- filename
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ScRNA-seqLevel3
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  sc_rna_seq_level2s:
+    $ref: _definitions.yaml#/to_many
+  # ScRNA-seqLevel3
+  CellMedianNumberGenes:
+    type: number
+    description: Median number of genes detected per cell. Number
+  CellMedianNumberReads:
+    type: number
+    description: Median number of reads per cell. Number
+  CellTotal:
+    type: number
+    description: Number of sequenced  cells. Applies to raw counts matrix only.
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  DataCategory:
+    description: Specific content type of the data file.
+    enum:
+    - GeneExpression
+    - TranscriptExpression
+    - ExonExpressionQuantification
+    - GeneExpressionQuantification
+    - IsoformExpressionQuantification
+    - SpliceJunctionQuantification
+    - Other
+  HTANDataFileID:
+    type: string
+    description: Self-identifier for this data file - HTAN ID of this file HTAN ID
+      SOP (eg HTANx_yyy_zzz)
+  HTANParentDataFileID:
+    type: string
+    description: HTAN Data File Identifier indicating the file(s) from which these
+      files were derived
+  LinkedMatrices:
+    type: string
+    description: All matrices associated with every part of a SingleCellExperiment
+      object. Comma-delimited list of filenames
+  MatrixType:
+    description: Type of data stored in matrix.
+    enum:
+    - RawCounts
+    - NormalizedCounts
+    - ScaledCounts
+    - BatchCorrectedCounts
+  ScRNAseqWorkflowParametersDescription:
+    type: string
+    description: 'Parameters used to run the workflow. scRNA-seq level 3: e.g. Normalization
+      and log transformation, ran empty drops or doublet detection, used filter on
+      # genes/cell, etc. scRNA-seq Level 4: dimensionality reduction with PCA and
+      50 components, nearest-neighbor graph with k = 20 and Leiden clustering with
+      resolution = 1, UMAP visualization using 50 PCA components, marker genes used
+      to annotate cell types, information about droplet matrix (all barcodes) to cell
+      matrix (only informative barcodes representing real cells) conversion'
+  ScRNAseqWorkflowType:
+    description: Generic name for the workflow used to analyze a data set.
+    enum:
+    - CellRanger
+    - STARsolo
+    - HCAOptimus
+    - DropEST
+    - SEQC
+    - Cufflinks
+    - DEXSeq
+    - HTSeq-FPKM
+    - Cellannotation
+    - Differentiationtrajectoryanalysis
+    - Other
+  WorkflowEndDatetime:
+    type: string
+    description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
+  WorkflowLink:
+    type: string
+    description: Link to workflow or command. DockStore.org recommended. URL
+  WorkflowStartDatetime:
+    type: string
+    description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
+  WorkflowVersion:
+    type: string
+    description: Major version of the workflow (e.g. Cell Ranger v3.1)
+  fileFormat:
+    description: Format of a file (e.g. txt, csv, fastq, bam, etc.)
+    enum:
+    - Hdf5
+    - Bedgraph
+    - Idx
+    - Idat
+    - Bam
+    - Bai
+    - Excel
+    - Powerpoint
+    - Tif
+    - Tiff
+    - OME-TIFF
+    - Png
+    - Doc
+    - Pdf
+    - Fasta
+    - Fastq
+    - Sam
+    - Vcf
+    - Bcf
+    - Maf
+    - Bed
+    - Chp
+    - Cel
+    - Sif
+    - Tsv
+    - Csv
+    - Txt
+    - Plink
+    - Bigwig
+    - Wiggle
+    - Gct
+    - Bgzip
+    - Zip
+    - Seg
+    - Html
+    - Mov
+    - Hyperlink
+    - Svs
+    - Md
+    - Flagstat
+    - Gtf
+    - Raw
+    - Msf
+    - Rmd
+    - BednarrowPeak
+    - BedbroadPeak
+    - BedgappedPeak
+    - Avi
+    - Pzfx
+    - Fig
+    - Xml
+    - Tar
+    - Rscript
+    - Abf
+    - Bpm
+    - Dat
+    - Jpg
+    - Locs
+    - Sentrixdescriptorfile
+    - Pythonscript
+    - Sav
+    - Gzip
+    - Sdf
+    - RData
+    - Hic
+    - Ab1
+    - 7z
+    - Gff3
+    - Json
+    - Sqlite
+    - Svg
+    - Sra
+    - Recal
+    - Tranches
+    - Mtx
+    - TagAlign
+    - Dup
+    - DICOM
+    - Czi
+    - Mex
+    - Cloupe
+    - Am
+    - Cellam
+    - Mpg
+    - M
+  filename:
+    type: string
+    description: 'Name of a file '
+  assays:
+    $ref: _definitions.yaml#/to_many

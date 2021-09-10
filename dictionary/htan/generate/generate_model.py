@@ -89,10 +89,22 @@ class HTANSchema(object):
         subclasses = self._subclasses(id)
         subclasses = set(list(subclasses) + superClassOf) - self._rangeMembers - self._dependencies
         neighbors = neighbors - subclassOf
-        # special case for Patient
+        # special cases
+        if id == 'bts:Biospecimen':            
+            dependencies = dependencies | set(subclasses)
+            subclasses = []
+
+        # special cases
         if id == 'bts:Patient':
-            subclasses = ['bts:AcuteLymphoblasticLeukemiaTier3', 'bts:BrainCancerTier3', 'bts:BreastCancerTier3', 'bts:ClinicalDataTier2', 'bts:ColorectalCancerTier3',
-                        'bts:LungCancerTier3', 'bts:MelanomaTier3', 'bts:OvarianCancerTier3', 'bts:PancreaticCancerTier3', 'bts:ProstateCancerTier3', 'bts:SarcomaTier3']
+            neighbors = ['bts:AcuteLymphoblasticLeukemiaTier3', 'bts:BrainCancerTier3', 'bts:BreastCancerTier3', 'bts:ClinicalDataTier2', 'bts:ColorectalCancerTier3',
+                         'bts:LungCancerTier3', 'bts:MelanomaTier3', 'bts:OvarianCancerTier3', 'bts:PancreaticCancerTier3', 'bts:ProstateCancerTier3', 'bts:SarcomaTier3']
+            subclasses = []
+        if id == 'bts:Sequencing':
+            neighbors = subclasses
+            subclasses = []
+        if id == 'bts:Assay':
+            neighbors = ['bts:BulkRNA-seqLevel3', 'bts:BulkWESLevel2', 'bts:BulkWESLevel1', 'bts:BulkWESLevel3', 'bts:ScRNA-seqLevel1', 'bts:WorkflowType', 'bts:BulkRNA-seqLevel1', 'bts:ScRNA-seqLevel2', 'bts:ScRNA-seqLevel3', 'bts:ScRNA-seqLevel4', 'bts:BulkRNA-seqLevel2', 'bts:WorkflowParametersDescription', 'bts:ScATAC-seqLevel1']
+            subclasses = []
         return {'@id': id,
                 'properties': sorted(list(dependencies) + list(includes)),
                 'subclasses': sorted(list(subclasses)),
@@ -149,8 +161,6 @@ class HTANSchemaFigure(object):
         label = node['@id'].split(':')[-1]
         graphviz.Source(dot).view(filename=label)
 
-
- 
 
 class Gen3Configuration(object):
     def __init__(self, schema, node, parent=None) -> None:
@@ -270,7 +280,6 @@ class Gen3Configuration(object):
             'required': True,
         }
 
-
     def links(self):
         return [self.link(l) for l in self.node['neighbors']]
 
@@ -291,6 +300,16 @@ class Gen3Configuration(object):
         if 'number' in comment:
             return "number"
         return 'string'
+
+    def is_required(self, property_name, schema_node):
+        """Determine if simple property mandatory."""
+        # property_name = property_name.split(':')[-1]
+        if schema_node['sms:required'].lower() == 'sms:true':
+            # print(property_name, schema_node, schema_node.keys())
+            return True
+        return False
+
+
 
     def properties(self, template, node):
         """Render gen3 properties."""
@@ -317,7 +336,6 @@ class Gen3Configuration(object):
             return 'data_file'
         return 'clinical'
 
-
     def save(self):
         node = self.node
         template = self.template
@@ -332,7 +350,7 @@ class Gen3Configuration(object):
             schema_node = self.schema._nodes[st]
             template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
             st_node = self.schema.properties(id=st)
-            self.properties(template,st_node)
+            self.properties(template, st_node)
         for neighbor_id in self.node['neighbors']:
             _neighbor = self.schema.node(neighbor_id)
             _backref = inflection.pluralize(self._name(_neighbor))
@@ -354,6 +372,10 @@ class Gen3Configuration(object):
                 template['required'].append(parent_link['name'])
                 template["properties"][parent_link['name']] = {
                     "$ref": "_definitions.yaml#/to_many"}
+                for p in node['properties']:
+                    schema_node = self.schema._nodes[p]
+                    if self.is_required(p, schema_node):
+                        template['required'].append(p.split(':')[-1])
 
         # special case for patient, link back to project
         if template['id'] == 'patient':
@@ -395,7 +417,7 @@ class Gen3Configuration(object):
             template["properties"]["core_metadata_collections"] = {
                 "$ref": "_definitions.yaml#/to_many"
             }
-            template["properties"]["$ref"] =  "_definitions.yaml#/data_file_properties"
+            template["properties"]["$ref"] = "_definitions.yaml#/data_file_properties"
             template["properties"]["data_format"] = {
                 "term": {
                     "$ref": "_terms.yaml#/data_format"
