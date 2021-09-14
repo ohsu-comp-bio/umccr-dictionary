@@ -471,7 +471,7 @@ class Gen3Configuration(object):
             template["links"].append(
                 {
                     "name": "biospecimen",
-                    "backref": "files",
+                    "backref": "assays",
                     "label": "reference_to",
                     "target_type": "biospecimen",
                     "multiplicity": "many_to_many",
