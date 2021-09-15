@@ -1,0 +1,162 @@
+[
+    {
+        "Component": "b528ebe25a",
+        "HTANParticipantID": "1b244cd84e",
+        "PancreasPrecancerHistopathologicGrade": "PanIN2",
+        "PancreaticDuctFinalPathologyType": "Side-Branch",
+        "PancreaticIPMNPathologyEpithelialSubtype": "Pancreatobiliary",
+        "StartDaysfromIndex": 50.31374595962035,
+        "StopDaysfromIndex": 47.93246806440936,
+        "TimepointLabel": "4a656d702b",
+        "patients": {
+            "submitter_id": "patient_5b151e9219"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_d669eaeb54",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "9395b617db",
+        "HTANParticipantID": "d5a3ab7715",
+        "PancreasPrecancerHistopathologicGrade": "PanIN2",
+        "PancreaticDuctFinalPathologyType": "NotSpecified",
+        "PancreaticIPMNPathologyEpithelialSubtype": "Other",
+        "StartDaysfromIndex": 12.101777262707492,
+        "StopDaysfromIndex": 3.656820998624355,
+        "TimepointLabel": "b1cb1e08ea",
+        "patients": {
+            "submitter_id": "patient_e9f09738a9"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_8366922911",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "0e0f29b1f8",
+        "HTANParticipantID": "8e3fd4c1a4",
+        "PancreasPrecancerHistopathologicGrade": "IPMN-Borderline",
+        "PancreaticDuctFinalPathologyType": "NotSpecified",
+        "PancreaticIPMNPathologyEpithelialSubtype": null,
+        "StartDaysfromIndex": 63.98660033406615,
+        "StopDaysfromIndex": 79.62248900177195,
+        "TimepointLabel": "cbf20cbd76",
+        "patients": {
+            "submitter_id": "patient_b67e32207c"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_62efc3a490",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "e5be7517bb",
+        "HTANParticipantID": "a03ea53e75",
+        "PancreasPrecancerHistopathologicGrade": "IPMN-Invasivecarcinoma",
+        "PancreaticDuctFinalPathologyType": "None",
+        "PancreaticIPMNPathologyEpithelialSubtype": null,
+        "StartDaysfromIndex": 71.16648497965488,
+        "StopDaysfromIndex": 36.2695182193215,
+        "TimepointLabel": "ea22b24743",
+        "patients": {
+            "submitter_id": "patient_fb44edbd04"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_2451305f86",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "c21a42f54c",
+        "HTANParticipantID": "782af13e4b",
+        "PancreasPrecancerHistopathologicGrade": "PanIN1B",
+        "PancreaticDuctFinalPathologyType": "Mixed",
+        "PancreaticIPMNPathologyEpithelialSubtype": "Other",
+        "StartDaysfromIndex": 11.282090027492753,
+        "StopDaysfromIndex": 24.682795833894033,
+        "TimepointLabel": "075ce328d1",
+        "patients": {
+            "submitter_id": "patient_013a3eb5cf"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_f99ffa4d0a",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "bb3885b1d2",
+        "HTANParticipantID": "bd2fef5c48",
+        "PancreasPrecancerHistopathologicGrade": "PanIN3",
+        "PancreaticDuctFinalPathologyType": "None",
+        "PancreaticIPMNPathologyEpithelialSubtype": "Other",
+        "StartDaysfromIndex": 60.73272936692242,
+        "StopDaysfromIndex": 84.55626556379444,
+        "TimepointLabel": "c37276185e",
+        "patients": {
+            "submitter_id": "patient_0dd820d172"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_922bc43d21",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "88ea60dc6c",
+        "HTANParticipantID": "5c4614388b",
+        "PancreasPrecancerHistopathologicGrade": "IPMN-Invasivecarcinoma",
+        "PancreaticDuctFinalPathologyType": "None",
+        "PancreaticIPMNPathologyEpithelialSubtype": "GastricFoveolar",
+        "StartDaysfromIndex": 29.661328973370605,
+        "StopDaysfromIndex": 49.48940200929543,
+        "TimepointLabel": "68aa505109",
+        "patients": {
+            "submitter_id": "patient_de2bce081d"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_092a4b5c57",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "4dd1362597",
+        "HTANParticipantID": "d2a881a95f",
+        "PancreasPrecancerHistopathologicGrade": "NotReported",
+        "PancreaticDuctFinalPathologyType": "Mixed",
+        "PancreaticIPMNPathologyEpithelialSubtype": "NotReported",
+        "StartDaysfromIndex": 81.11142662310331,
+        "StopDaysfromIndex": 64.53595996487827,
+        "TimepointLabel": "e32cfb3a41",
+        "patients": {
+            "submitter_id": "patient_6a8716a438"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_5335254d7d",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "f7e5090e3b",
+        "HTANParticipantID": "c80c90b8fc",
+        "PancreasPrecancerHistopathologicGrade": null,
+        "PancreaticDuctFinalPathologyType": "Side-Branch",
+        "PancreaticIPMNPathologyEpithelialSubtype": null,
+        "StartDaysfromIndex": 16.02257851201081,
+        "StopDaysfromIndex": 66.17474469171137,
+        "TimepointLabel": "a3a651803d",
+        "patients": {
+            "submitter_id": "patient_f51d789d0d"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_72c7ee586f",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    },
+    {
+        "Component": "f0660ca4b4",
+        "HTANParticipantID": "821eef4c1e",
+        "PancreasPrecancerHistopathologicGrade": "PanIN1A",
+        "PancreaticDuctFinalPathologyType": "Mixed",
+        "PancreaticIPMNPathologyEpithelialSubtype": "GastricFoveolar",
+        "StartDaysfromIndex": 63.47720060948874,
+        "StopDaysfromIndex": 54.579229976559354,
+        "TimepointLabel": "5bd70e12c3",
+        "patients": {
+            "submitter_id": "patient_a27048f526"
+        },
+        "submitter_id": "pancreatic_cancer_tier3_66cd739566",
+        "subtype": null,
+        "type": "pancreatic_cancer_tier3"
+    }
+]

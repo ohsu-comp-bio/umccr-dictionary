@@ -1,0 +1,192 @@
+[
+    {
+        "Component": "8d0de00976",
+        "DataCategory": "GeneExpression",
+        "ExpressionUnits": "TPM",
+        "FusionGeneDetected": null,
+        "FusionGeneIdentity": "OtherFusionGene",
+        "HTANDataFileID": "789d4ec59e",
+        "HTANParentDataFileID": "4a503af0ec",
+        "MatrixType": "ScaledCounts",
+        "PseudoAlignmentUsed": "Yes-PseudoAlignmentUsed",
+        "assays": {
+            "submitter_id": "assay_c48be96216"
+        },
+        "fileFormat": "Flagstat",
+        "filename": "93eff84f45",
+        "submitter_id": "bulk_rna_seq_level3_656f24dcec",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "81b5db55b7",
+        "DataCategory": "Other",
+        "ExpressionUnits": "TPM",
+        "FusionGeneDetected": null,
+        "FusionGeneIdentity": "EWS-WT1",
+        "HTANDataFileID": "2784845b6e",
+        "HTANParentDataFileID": "c7b6a5ff17",
+        "MatrixType": "ScaledCounts",
+        "PseudoAlignmentUsed": "Yes-PseudoAlignmentUsed",
+        "assays": {
+            "submitter_id": "assay_6a855f5b78"
+        },
+        "fileFormat": "Jpg",
+        "filename": "ec498f1b0c",
+        "submitter_id": "bulk_rna_seq_level3_161d56d80c",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "c07937955d",
+        "DataCategory": "SpliceJunctionQuantification",
+        "ExpressionUnits": "Other",
+        "FusionGeneDetected": null,
+        "FusionGeneIdentity": "OtherFusionGene",
+        "HTANDataFileID": "962b8837a0",
+        "HTANParentDataFileID": "c6fe7eb1d6",
+        "MatrixType": "NormalizedCounts",
+        "PseudoAlignmentUsed": "Yes-PseudoAlignmentUsed",
+        "assays": {
+            "submitter_id": "assay_5f8ef48bf3"
+        },
+        "fileFormat": "Md",
+        "filename": "29d8c5e784",
+        "submitter_id": "bulk_rna_seq_level3_03ec7b0aaa",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "ecb5db6af1",
+        "DataCategory": "IsoformExpressionQuantification",
+        "ExpressionUnits": "Other",
+        "FusionGeneDetected": "Yes-FusionGeneDetected",
+        "FusionGeneIdentity": null,
+        "HTANDataFileID": "6019f81be0",
+        "HTANParentDataFileID": "8c1fde6ef7",
+        "MatrixType": "RawCounts",
+        "PseudoAlignmentUsed": "No",
+        "assays": {
+            "submitter_id": "assay_520eac452d"
+        },
+        "fileFormat": "Html",
+        "filename": "5b7c354658",
+        "submitter_id": "bulk_rna_seq_level3_db7b51a7a0",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "ab5c9e418b",
+        "DataCategory": "GeneExpression",
+        "ExpressionUnits": "FPKM",
+        "FusionGeneDetected": "No",
+        "FusionGeneIdentity": "SYT-SSX2",
+        "HTANDataFileID": "1082e070ad",
+        "HTANParentDataFileID": "b7b5300dd8",
+        "MatrixType": "RawCounts",
+        "PseudoAlignmentUsed": "No",
+        "assays": {
+            "submitter_id": "assay_99350005ae"
+        },
+        "fileFormat": "Bcf",
+        "filename": "90660f5d2c",
+        "submitter_id": "bulk_rna_seq_level3_848449ec5c",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "18389fd710",
+        "DataCategory": "GeneExpressionQuantification",
+        "ExpressionUnits": "Counts",
+        "FusionGeneDetected": "No",
+        "FusionGeneIdentity": "EWS-ERG",
+        "HTANDataFileID": "08345a3156",
+        "HTANParentDataFileID": "c765cb6aa9",
+        "MatrixType": "NormalizedCounts",
+        "PseudoAlignmentUsed": "Yes-PseudoAlignmentUsed",
+        "assays": {
+            "submitter_id": "assay_2487e2a24b"
+        },
+        "fileFormat": "Fig",
+        "filename": "9875a4e967",
+        "submitter_id": "bulk_rna_seq_level3_3ac49f83ae",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "89ca0ec1eb",
+        "DataCategory": "SpliceJunctionQuantification",
+        "ExpressionUnits": "NA",
+        "FusionGeneDetected": "Yes-FusionGeneDetected",
+        "FusionGeneIdentity": "EWS-FLI",
+        "HTANDataFileID": "9e7f745f59",
+        "HTANParentDataFileID": "6c4b21199f",
+        "MatrixType": "RawCounts",
+        "PseudoAlignmentUsed": "No",
+        "assays": {
+            "submitter_id": "assay_500b08635a"
+        },
+        "fileFormat": "Abf",
+        "filename": "105ad5cc1f",
+        "submitter_id": "bulk_rna_seq_level3_9e92d9e590",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "1f2179a36f",
+        "DataCategory": "GeneExpressionQuantification",
+        "ExpressionUnits": "FPKM",
+        "FusionGeneDetected": "No",
+        "FusionGeneIdentity": "EWS-WT1",
+        "HTANDataFileID": "56dda09526",
+        "HTANParentDataFileID": "61e949273b",
+        "MatrixType": "BatchCorrectedCounts",
+        "PseudoAlignmentUsed": "No",
+        "assays": {
+            "submitter_id": "assay_aef5751c06"
+        },
+        "fileFormat": "Tiff",
+        "filename": "29b4990222",
+        "submitter_id": "bulk_rna_seq_level3_9745ef7f88",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "09ef08e984",
+        "DataCategory": "GeneExpressionQuantification",
+        "ExpressionUnits": "FPKM",
+        "FusionGeneDetected": "No",
+        "FusionGeneIdentity": "EWS-FLI",
+        "HTANDataFileID": "02419f99d6",
+        "HTANParentDataFileID": "b52c43e171",
+        "MatrixType": "NormalizedCounts",
+        "PseudoAlignmentUsed": "Yes-PseudoAlignmentUsed",
+        "assays": {
+            "submitter_id": "assay_721fff77a0"
+        },
+        "fileFormat": "Bedgraph",
+        "filename": "2c2bff50fd",
+        "submitter_id": "bulk_rna_seq_level3_2906222a59",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    },
+    {
+        "Component": "bb167ca371",
+        "DataCategory": "TranscriptExpression",
+        "ExpressionUnits": "RPKM",
+        "FusionGeneDetected": "No",
+        "FusionGeneIdentity": null,
+        "HTANDataFileID": "9f3082ed10",
+        "HTANParentDataFileID": "ac7d8f0464",
+        "MatrixType": "RawCounts",
+        "PseudoAlignmentUsed": "No",
+        "assays": {
+            "submitter_id": "assay_6660f04351"
+        },
+        "fileFormat": "Tif",
+        "filename": "0ed53b8069",
+        "submitter_id": "bulk_rna_seq_level3_ca9a1f9be7",
+        "subtype": null,
+        "type": "bulk_rna_seq_level3"
+    }
+]

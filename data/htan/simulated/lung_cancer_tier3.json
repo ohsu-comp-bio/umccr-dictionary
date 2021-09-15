@@ -1,0 +1,212 @@
+[
+    {
+        "Component": "522593ae15",
+        "CurrentLungCancerSymptoms": "Chestpainordiscomfort",
+        "HTANParticipantID": "0caac1e013",
+        "LungAdjacentHistologyType": "Squamouscelllungcarcinoma",
+        "LungCancerDetectionMethodType": "Unknown",
+        "LungCancerHarboringGenomicAberrations": "L861QEGFRmutation",
+        "LungCancerParticipantProcedureHistory": "Endobronchialbiopsy",
+        "LungTopography": "RB6B/C-CarinabetweenmedialandlateralsubsegmentssuperiorsegmentRLL",
+        "LungTumorLobeBronchialLocation": null,
+        "LungTumorLocationAnatomicSite": "Left",
+        "StartDaysfromIndex": 52.734813131053485,
+        "StopDaysfromIndex": 54.43068426334911,
+        "TimepointLabel": "9559c5d812",
+        "patients": {
+            "submitter_id": "patient_5b151e9219"
+        },
+        "submitter_id": "lung_cancer_tier3_0458185c06",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "2e9b090a51",
+        "CurrentLungCancerSymptoms": "Dyspnea",
+        "HTANParticipantID": "1dd0531aaf",
+        "LungAdjacentHistologyType": "Smallcelllungcarcinoma",
+        "LungCancerDetectionMethodType": "ChestX-ray",
+        "LungCancerHarboringGenomicAberrations": "G13RKRASmutation",
+        "LungCancerParticipantProcedureHistory": "PneumonectomyRight",
+        "LungTopography": "RB6B/C-CarinabetweenmedialandlateralsubsegmentssuperiorsegmentRLL",
+        "LungTumorLobeBronchialLocation": "Unknown",
+        "LungTumorLocationAnatomicSite": "NotReported",
+        "StartDaysfromIndex": 34.12690593390523,
+        "StopDaysfromIndex": 22.514935730676346,
+        "TimepointLabel": "6a6d6c3ce2",
+        "patients": {
+            "submitter_id": "patient_e9f09738a9"
+        },
+        "submitter_id": "lung_cancer_tier3_4f203b6327",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "788e26d63c",
+        "CurrentLungCancerSymptoms": "Unexplainedweightloss",
+        "HTANParticipantID": "24fb3d3d69",
+        "LungAdjacentHistologyType": "Lungadenocarcinomainsitu",
+        "LungCancerDetectionMethodType": "Other",
+        "LungCancerHarboringGenomicAberrations": "D1010spliceMETmutation",
+        "LungCancerParticipantProcedureHistory": "LobectomyBilateral",
+        "LungTopography": "LB3orificeAnteriorsegmentleftupperlobe(airwaywallbetweenLB3andLB3A/Bcarinae)",
+        "LungTumorLobeBronchialLocation": "NotReported",
+        "LungTumorLocationAnatomicSite": "Unknown",
+        "StartDaysfromIndex": 19.261030174347095,
+        "StopDaysfromIndex": 6.455878793393255,
+        "TimepointLabel": "3336395326",
+        "patients": {
+            "submitter_id": "patient_b67e32207c"
+        },
+        "submitter_id": "lung_cancer_tier3_e8abb2063c",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "e6f0004352",
+        "CurrentLungCancerSymptoms": "Crackles",
+        "HTANParticipantID": "96f4beba76",
+        "LungAdjacentHistologyType": "Lungadenocarcinomainsitu",
+        "LungCancerDetectionMethodType": null,
+        "LungCancerHarboringGenomicAberrations": "Exon20insertion",
+        "LungCancerParticipantProcedureHistory": "LungWedgeResectionLeft",
+        "LungTopography": "RB7A/B-CarinabetweenmedialandlateralsubsegmentsmedialbasalsegmentRLL",
+        "LungTumorLobeBronchialLocation": "Unknown",
+        "LungTumorLocationAnatomicSite": "NotReported",
+        "StartDaysfromIndex": 26.151204353644708,
+        "StopDaysfromIndex": 58.36768341354765,
+        "TimepointLabel": "2a88f4c05b",
+        "patients": {
+            "submitter_id": "patient_fb44edbd04"
+        },
+        "submitter_id": "lung_cancer_tier3_9236361856",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "d946534df2",
+        "CurrentLungCancerSymptoms": "Fair/pooraeration",
+        "HTANParticipantID": "1bb54d1b68",
+        "LungAdjacentHistologyType": null,
+        "LungCancerDetectionMethodType": "ChestCT",
+        "LungCancerHarboringGenomicAberrations": "L858REGFRmutation",
+        "LungCancerParticipantProcedureHistory": "NotReported",
+        "LungTopography": "RLNOS(Rightlungnototherwisespecified)",
+        "LungTumorLobeBronchialLocation": "Unknown",
+        "LungTumorLocationAnatomicSite": "Maincarina",
+        "StartDaysfromIndex": 37.35125761470298,
+        "StopDaysfromIndex": 33.185065295959234,
+        "TimepointLabel": "218fc74a2d",
+        "patients": {
+            "submitter_id": "patient_013a3eb5cf"
+        },
+        "submitter_id": "lung_cancer_tier3_507ca5a3e4",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "7de62045d2",
+        "CurrentLungCancerSymptoms": "Coldsymptoms/flu/sinus/nasalcongestion",
+        "HTANParticipantID": "47cb1b54e5",
+        "LungAdjacentHistologyType": "Largecellneuroendocrinecarcinoma",
+        "LungCancerDetectionMethodType": "ChestCT",
+        "LungCancerHarboringGenomicAberrations": "Exon20insertion",
+        "LungCancerParticipantProcedureHistory": "Segmentectomy",
+        "LungTopography": "RB10A/B-CarinabetweenmedialandlateralsubsegmentsposteriorsegmentRLL",
+        "LungTumorLobeBronchialLocation": null,
+        "LungTumorLocationAnatomicSite": "NotReported",
+        "StartDaysfromIndex": 52.9385217054134,
+        "StopDaysfromIndex": 0.9041571443656471,
+        "TimepointLabel": "ee2ea9fe94",
+        "patients": {
+            "submitter_id": "patient_0dd820d172"
+        },
+        "submitter_id": "lung_cancer_tier3_43a2ed8bdc",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "c1df0c863e",
+        "CurrentLungCancerSymptoms": "Non-productivecough",
+        "HTANParticipantID": "4b3f08a654",
+        "LungAdjacentHistologyType": "Bronchioalveolarcarcinoma",
+        "LungCancerDetectionMethodType": "Unknown",
+        "LungCancerHarboringGenomicAberrations": "L861QEGFRmutation",
+        "LungCancerParticipantProcedureHistory": "LungWedgeResectionMultiple",
+        "LungTopography": "LB10A/BCarinabetweentheapicalandlateralsubsegmentsoftheposteriorsegmentoftheLLL",
+        "LungTumorLobeBronchialLocation": "NotReported",
+        "LungTumorLocationAnatomicSite": "Right",
+        "StartDaysfromIndex": 7.547280972018145,
+        "StopDaysfromIndex": 5.265336995683256,
+        "TimepointLabel": "aeaefe3e87",
+        "patients": {
+            "submitter_id": "patient_de2bce081d"
+        },
+        "submitter_id": "lung_cancer_tier3_d1e0111704",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "5640a5ba9b",
+        "CurrentLungCancerSymptoms": "Unlabored/normalbreathing",
+        "HTANParticipantID": "ced0f3caf1",
+        "LungAdjacentHistologyType": "Bronchioalveolarcarcinoma",
+        "LungCancerDetectionMethodType": "ChestCT",
+        "LungCancerHarboringGenomicAberrations": "G12RKRASmutation",
+        "LungCancerParticipantProcedureHistory": "LungWedgeResectionLeft",
+        "LungTopography": "LB9A/BCarinabetweenthemedialandlateralsubsegmentsofthelateralsegmentLLL",
+        "LungTumorLobeBronchialLocation": "Upperlobe",
+        "LungTumorLocationAnatomicSite": "Unknown",
+        "StartDaysfromIndex": 71.75699558749703,
+        "StopDaysfromIndex": 35.262976161550185,
+        "TimepointLabel": "d3c1991325",
+        "patients": {
+            "submitter_id": "patient_6a8716a438"
+        },
+        "submitter_id": "lung_cancer_tier3_d8c99fa8e8",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "a67d126137",
+        "CurrentLungCancerSymptoms": "Fingerclubbing",
+        "HTANParticipantID": "33e036b9f8",
+        "LungAdjacentHistologyType": "Other",
+        "LungCancerDetectionMethodType": "ChestX-ray",
+        "LungCancerHarboringGenomicAberrations": "G13DKRASmutation",
+        "LungCancerParticipantProcedureHistory": "LobectomyRight",
+        "LungTopography": "CarinaNOS(Carinanototherwisespecified)",
+        "LungTumorLobeBronchialLocation": "Upperlobe",
+        "LungTumorLocationAnatomicSite": "Right",
+        "StartDaysfromIndex": 87.8580340293482,
+        "StopDaysfromIndex": 6.253327826548139,
+        "TimepointLabel": "09a1262f2a",
+        "patients": {
+            "submitter_id": "patient_f51d789d0d"
+        },
+        "submitter_id": "lung_cancer_tier3_96067ef2c3",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    },
+    {
+        "Component": "ca9abeca70",
+        "CurrentLungCancerSymptoms": "Unknown",
+        "HTANParticipantID": "14fb8302e1",
+        "LungAdjacentHistologyType": "Adenosquamouscarcinoma",
+        "LungCancerDetectionMethodType": "ChestX-ray",
+        "LungCancerHarboringGenomicAberrations": "G12DKRASmutation",
+        "LungCancerParticipantProcedureHistory": "PneumonectomyLeft",
+        "LungTopography": "RB10B/C-CarinabetweenmedialandlateralsubsegmentsposteriorsegmentRLL",
+        "LungTumorLobeBronchialLocation": "Upperlobe",
+        "LungTumorLocationAnatomicSite": "Unknown",
+        "StartDaysfromIndex": 76.7503964805659,
+        "StopDaysfromIndex": 44.495092346297916,
+        "TimepointLabel": "545fed5076",
+        "patients": {
+            "submitter_id": "patient_a27048f526"
+        },
+        "submitter_id": "lung_cancer_tier3_c99b7a8d2d",
+        "subtype": null,
+        "type": "lung_cancer_tier3"
+    }
+]

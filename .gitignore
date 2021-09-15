@@ -20,5 +20,5 @@ output/**/*.tsv
 
 .env
 
-!data/htan/simulated
+!data/htan/simulated/*.*
 

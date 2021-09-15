@@ -1,0 +1,162 @@
+[
+    {
+        "Component": "04abf87c61",
+        "HTANParticipantID": "342daa5154",
+        "SarcomaDiagnosisClassificationCategory": "BoneSarcoma",
+        "SarcomaSubtype": "Unknown",
+        "SarcomaTumorExtensionType": "Parameningeal",
+        "StartDaysfromIndex": 91.59058785460284,
+        "StopDaysfromIndex": 61.046208381013415,
+        "TimepointLabel": "4b4f713bdd",
+        "patients": {
+            "submitter_id": "patient_5b151e9219"
+        },
+        "submitter_id": "sarcoma_tier3_2d66d3db26",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "9e42fa716e",
+        "HTANParticipantID": "855ad3c09a",
+        "SarcomaDiagnosisClassificationCategory": "Unknown",
+        "SarcomaSubtype": "OtherSynovialSarcomaOrMalignantPeripheralNerveSheathTumorSarcoma",
+        "SarcomaTumorExtensionType": "Thoraciccavity",
+        "StartDaysfromIndex": 5.648464900740868,
+        "StopDaysfromIndex": 10.110320756867718,
+        "TimepointLabel": "5247565f56",
+        "patients": {
+            "submitter_id": "patient_e9f09738a9"
+        },
+        "submitter_id": "sarcoma_tier3_36301f6414",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "0b79a4e8c2",
+        "HTANParticipantID": "9504c8bd76",
+        "SarcomaDiagnosisClassificationCategory": "NotReported",
+        "SarcomaSubtype": "Leiomyosarcoma(uterineorextra-uterine)",
+        "SarcomaTumorExtensionType": "Intracranial",
+        "StartDaysfromIndex": 71.2606767751938,
+        "StopDaysfromIndex": 2.839996072190587,
+        "TimepointLabel": "1cc6a6230e",
+        "patients": {
+            "submitter_id": "patient_b67e32207c"
+        },
+        "submitter_id": "sarcoma_tier3_086f326d95",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "1467964972",
+        "HTANParticipantID": "aba0a0f837",
+        "SarcomaDiagnosisClassificationCategory": null,
+        "SarcomaSubtype": "Leiomyosarcoma(uterineorextra-uterine)",
+        "SarcomaTumorExtensionType": "NotReported",
+        "StartDaysfromIndex": 22.10343542306483,
+        "StopDaysfromIndex": 77.94908719456373,
+        "TimepointLabel": "c61a997499",
+        "patients": {
+            "submitter_id": "patient_fb44edbd04"
+        },
+        "submitter_id": "sarcoma_tier3_9fdc2bae73",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "09c02050fa",
+        "HTANParticipantID": "79bad5ee07",
+        "SarcomaDiagnosisClassificationCategory": "Unknown",
+        "SarcomaSubtype": "NotReported",
+        "SarcomaTumorExtensionType": "Extraosseous",
+        "StartDaysfromIndex": 68.12360355853083,
+        "StopDaysfromIndex": 46.26077849595437,
+        "TimepointLabel": "1a553dd864",
+        "patients": {
+            "submitter_id": "patient_013a3eb5cf"
+        },
+        "submitter_id": "sarcoma_tier3_a319bb6766",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "3090a57bb3",
+        "HTANParticipantID": "39632d0e7b",
+        "SarcomaDiagnosisClassificationCategory": "Unknown",
+        "SarcomaSubtype": "Leiomyosarcoma(uterineorextra-uterine)",
+        "SarcomaTumorExtensionType": "Unknown",
+        "StartDaysfromIndex": 94.6204094294655,
+        "StopDaysfromIndex": 83.64363094054697,
+        "TimepointLabel": "423de3e03b",
+        "patients": {
+            "submitter_id": "patient_0dd820d172"
+        },
+        "submitter_id": "sarcoma_tier3_35570bc353",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "d521b53122",
+        "HTANParticipantID": "33f4dbb7e4",
+        "SarcomaDiagnosisClassificationCategory": "MusculoskeletalSarcoma",
+        "SarcomaSubtype": "Leiomyosarcoma(uterineorextra-uterine)",
+        "SarcomaTumorExtensionType": "Extraosseous",
+        "StartDaysfromIndex": 17.237382808021817,
+        "StopDaysfromIndex": 50.764428776446266,
+        "TimepointLabel": "e2b991cd8c",
+        "patients": {
+            "submitter_id": "patient_de2bce081d"
+        },
+        "submitter_id": "sarcoma_tier3_fb7cb47d79",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "cbbdbcd427",
+        "HTANParticipantID": "8b716aee8b",
+        "SarcomaDiagnosisClassificationCategory": "MusculoskeletalSarcoma",
+        "SarcomaSubtype": "Liposarcoma",
+        "SarcomaTumorExtensionType": "Intracranial",
+        "StartDaysfromIndex": 10.869825745803496,
+        "StopDaysfromIndex": 6.650123833078004,
+        "TimepointLabel": "29d017cff4",
+        "patients": {
+            "submitter_id": "patient_6a8716a438"
+        },
+        "submitter_id": "sarcoma_tier3_9f1471e848",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "aa93deaa7f",
+        "HTANParticipantID": "6ad0caefba",
+        "SarcomaDiagnosisClassificationCategory": "NotReported",
+        "SarcomaSubtype": "Other",
+        "SarcomaTumorExtensionType": "Unknown",
+        "StartDaysfromIndex": 23.82468876396552,
+        "StopDaysfromIndex": 52.234761513869366,
+        "TimepointLabel": "5fade3ab9c",
+        "patients": {
+            "submitter_id": "patient_f51d789d0d"
+        },
+        "submitter_id": "sarcoma_tier3_a462c47dda",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "318bf21e46",
+        "HTANParticipantID": "b659a17c91",
+        "SarcomaDiagnosisClassificationCategory": "SoftTissueSarcoma",
+        "SarcomaSubtype": "Leiomyosarcoma(uterineorextra-uterine)",
+        "SarcomaTumorExtensionType": "Other",
+        "StartDaysfromIndex": 0.014417603925498401,
+        "StopDaysfromIndex": 82.95261912585093,
+        "TimepointLabel": "1adbc4c87f",
+        "patients": {
+            "submitter_id": "patient_a27048f526"
+        },
+        "submitter_id": "sarcoma_tier3_4eee5283b6",
+        "subtype": null,
+        "type": "sarcoma_tier3"
+    }
+]

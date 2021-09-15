@@ -1,0 +1,24 @@
+{
+    "authz": [
+        "0400492403"
+    ],
+    "availability_mechanism": "38c8d8a0e2",
+    "availability_type": "Open",
+    "code": "simulated",
+    "date_collected": "f900f16293",
+    "dbgap_accession_number": "phs-simulated",
+    "dbgap_consent": "8e2f406c02",
+    "dbgap_consent_text": "49afd7195a",
+    "dbgap_participant_set": "6448092860",
+    "dbgap_phs": "9354492569",
+    "dbgap_version": "874dd01779",
+    "full_name": "83e33db118",
+    "name": "50f4d23f6a",
+    "short_name": "a199c70474",
+    "study_description": "2bbe85c706",
+    "study_id": "a716865503",
+    "study_registration": "c995db0a75",
+    "support_id": "e1e0eda2c4",
+    "support_source": "2f30b24365",
+    "type": "project"
+}
