@@ -19,10 +19,10 @@ systemProperties:
 - updated_datetime
 links:
 - name: biospecimen
-  backref: files
+  backref: assays
   label: reference_to
   target_type: biospecimen
-  multiplicity: many_to_many
+  multiplicity: one_to_many
   required: true
 required:
 - submitter_id
@@ -36,8 +36,6 @@ properties:
   type:
     enum:
     - Assay
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

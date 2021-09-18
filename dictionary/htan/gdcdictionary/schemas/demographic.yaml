@@ -19,15 +19,14 @@ systemProperties:
 links:
 - name: patients
   backref: demographics
-  label: refers_to
+  label: reference_to
   target_type: patient
-  multiplicity: many_to_many
+  multiplicity: many_to_one
   required: true
 required:
 - submitter_id
 - type
 - projects
-- patients
 uniqueKeys:
 - - id
 - - project_id
@@ -36,9 +35,6 @@ properties:
   type:
     enum:
     - Demographics
-  subtype:
-    enum:
-    - AgeatIndex
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -376,5 +372,5 @@ properties:
     type: number
     description: Numeric value to represent the calendar year in which an individual
       was born.
-  patients:
-    $ref: _definitions.yaml#/to_many
+  patient:
+    $ref: _definitions.yaml#/to_one

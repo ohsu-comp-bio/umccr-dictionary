@@ -21,7 +21,7 @@ links:
   backref: melanoma_tier3s
   label: refers_to
   target_type: patient
-  multiplicity: many_to_many
+  multiplicity: one_to_many
   required: true
 required:
 - submitter_id
@@ -40,8 +40,6 @@ properties:
   type:
     enum:
     - MelanomaTier3
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -221,4 +219,4 @@ properties:
       was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
       PHI/PII INFORMATION IS ALLOWED.
   patients:
-    $ref: _definitions.yaml#/to_many
+    $ref: _definitions.yaml#/to_one

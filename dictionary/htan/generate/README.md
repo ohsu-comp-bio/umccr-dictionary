@@ -25,6 +25,7 @@ cd dictionary/htan/generate/ ;\
     python3  generate_model.py --id bts:Biospecimen ;\
     python3  generate_model.py --id bts:Assay ;\
     python3  generate_model.py --id bts:File ;\
+    python3  generate_model.py --id bts:Demographics ;\
     cd ../../.. ;
 ```
 

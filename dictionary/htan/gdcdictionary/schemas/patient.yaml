@@ -35,8 +35,6 @@ properties:
   type:
     enum:
     - Patient
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

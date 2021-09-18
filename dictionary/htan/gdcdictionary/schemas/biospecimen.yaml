@@ -36,8 +36,6 @@ properties:
   type:
     enum:
     - Biospecimen
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

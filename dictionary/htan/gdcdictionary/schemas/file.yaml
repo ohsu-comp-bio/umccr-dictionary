@@ -44,8 +44,6 @@ properties:
   type:
     enum:
     - File
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

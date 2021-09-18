@@ -21,7 +21,7 @@ links:
   backref: sc_rna_seq_level1s
   label: refers_to
   target_type: assay
-  multiplicity: many_to_many
+  multiplicity: one_to_many
   required: true
 required:
 - submitter_id
@@ -59,8 +59,6 @@ properties:
   type:
     enum:
     - ScRNA-seqLevel1
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -336,4 +334,4 @@ properties:
     type: string
     description: 'Name of a file '
   assays:
-    $ref: _definitions.yaml#/to_many
+    $ref: _definitions.yaml#/to_one

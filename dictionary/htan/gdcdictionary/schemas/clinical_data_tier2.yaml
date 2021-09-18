@@ -21,7 +21,7 @@ links:
   backref: clinical_data_tier2s
   label: refers_to
   target_type: patient
-  multiplicity: many_to_many
+  multiplicity: one_to_many
   required: true
 required:
 - submitter_id
@@ -40,8 +40,6 @@ properties:
   type:
     enum:
     - ClinicalDataTier2
-  subtype:
-    enum: []
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -837,4 +835,4 @@ properties:
     description: The number of cumulative years of the patient's specific type of
       smoke exposure
   patients:
-    $ref: _definitions.yaml#/to_many
+    $ref: _definitions.yaml#/to_one

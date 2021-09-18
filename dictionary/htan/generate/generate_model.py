@@ -207,9 +207,6 @@ class Gen3Configuration(object):
                 "type": {
                     "enum": []
                 },
-                "subtype": {
-                    "enum": []
-                },
                 "id": {
                     "$ref": "_definitions.yaml#/UUID",
                     "systemAlias": "node_id"
@@ -255,7 +252,7 @@ class Gen3Configuration(object):
             'backref': backref,
             'label': 'refers_to',
             'target_type': target_type,
-            'multiplicity': 'many_to_many',
+            'multiplicity': 'one_to_many',
             'required': True,
         }
 
@@ -276,7 +273,7 @@ class Gen3Configuration(object):
             'backref': backref,
             'label': 'refers_to',
             'target_type': target_type,
-            'multiplicity': 'many_to_many',
+            'multiplicity': 'one_to_many',
             'required': True,
         }
 
@@ -348,7 +345,7 @@ class Gen3Configuration(object):
         template["properties"]["type"]["enum"].append(schema_node['rdfs:label'])
         for st in node['subclasses']:
             schema_node = self.schema._nodes[st]
-            template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
+            # template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
             st_node = self.schema.properties(id=st)
             self.properties(template, st_node)
         for neighbor_id in self.node['neighbors']:
@@ -357,6 +354,7 @@ class Gen3Configuration(object):
             if _backref == 'patients':
                 print(f"Skipping link {template['id']}->{_backref}")
                 continue
+            # to parent
             template["properties"][_backref] = {
                 "$ref": "_definitions.yaml#/to_many"}
 
@@ -371,12 +369,27 @@ class Gen3Configuration(object):
                 template['links'].append(parent_link)
                 template['required'].append(parent_link['name'])
                 template["properties"][parent_link['name']] = {
-                    "$ref": "_definitions.yaml#/to_many"}
+                    "$ref": "_definitions.yaml#/to_one"}
                 for p in node['properties']:
                     schema_node = self.schema._nodes[p]
                     if self.is_required(p, schema_node):
                         template['required'].append(p.split(':')[-1])
 
+        # special case for demographic, link back to patient
+        if template['id'] == 'demographic':
+            template["links"].append(
+                {
+                    "name": "patients",
+                    "backref": "demographics",
+                    "label": "reference_to",
+                    "target_type": "patient",
+                    "multiplicity": "many_to_one",
+                    "required": True
+                }
+            )
+            template["properties"]["patient"] = {
+                "$ref": "_definitions.yaml#/to_one"
+            }
         # special case for patient, link back to project
         if template['id'] == 'patient':
             template["links"].append(
@@ -474,8 +487,8 @@ class Gen3Configuration(object):
                     "backref": "assays",
                     "label": "reference_to",
                     "target_type": "biospecimen",
-                    "multiplicity": "many_to_many",
-                    "required": True
+                    "multiplicity": "one_to_many",
+                    "required": True                
                 }
             )
             template["properties"]["biospecimen"] = {
