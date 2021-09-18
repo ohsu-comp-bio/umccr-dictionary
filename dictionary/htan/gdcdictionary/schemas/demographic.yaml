@@ -17,7 +17,7 @@ systemProperties:
 - created_datetime
 - updated_datetime
 links:
-- name: patients
+- name: patient
   backref: demographics
   label: reference_to
   target_type: patient

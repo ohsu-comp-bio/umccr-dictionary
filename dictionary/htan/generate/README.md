@@ -37,3 +37,11 @@ make test dd=htan ;  make compile dd=htan ;  make load dd=htan
 ## View datamodel
 
 Navigate to `http://localhost:8080/#schema/htan.json`
+
+## cp to s3 for deployment
+
+```
+gsutil  cp schema/htan.json s3://htan-testing/schema.json
+gsutil acl ch -u AllUsers:R 
+
+```

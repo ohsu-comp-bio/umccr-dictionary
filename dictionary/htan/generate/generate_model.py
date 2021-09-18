@@ -379,7 +379,7 @@ class Gen3Configuration(object):
         if template['id'] == 'demographic':
             template["links"].append(
                 {
-                    "name": "patients",
+                    "name": "patient",
                     "backref": "demographics",
                     "label": "reference_to",
                     "target_type": "patient",
