@@ -12,7 +12,7 @@ services:
     volumes:
       - ./schema:/usr/share/nginx/html/schema:ro
     ports:
-      - 80:80
+      - 8080:80
 
   g3po:
     image: quay.io/victorskl/g3po
@@ -22,21 +22,21 @@ services:
       - ./schema:/schema:rw
       - ./dictionary:/dictionary:rw
 
-  postgres:
-    image: postgres:9.6
-    container_name: ddpostgres
-    ports:
-      - 5432:5432
-    volumes:
-      - ./sql/init.sh:/docker-entrypoint-initdb.d/init.sh
-      - ./sql:/sql
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PG_HOST: ${PG_HOST}
-      PG_USER: ${PG_USER}
-      PG_PASS: ${PG_PASS}
-      PG_NAME: ${PG_NAME}
+        #  postgres:
+        #    image: postgres:9.6
+        #    container_name: ddpostgres
+        #    ports:
+        #      - 5432:5432
+        #    volumes:
+        #      - ./sql/init.sh:/docker-entrypoint-initdb.d/init.sh
+        #      - ./sql:/sql
+        #    environment:
+        #      POSTGRES_USER: ${POSTGRES_USER}
+        #      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        #      PG_HOST: ${PG_HOST}
+        #      PG_USER: ${PG_USER}
+        #      PG_PASS: ${PG_PASS}
+        #      PG_NAME: ${PG_NAME}
 
   dmutils:
     image: quay.io/victorskl/datamodelutils

@@ -13,14 +13,20 @@ PROJECT_ID = None
 PROGRAM_ID = None
 
 
+
 def write_edge(link, line, project_id):
     """Writes edge file ready for sql import. Strips edge from submission node."""
     edges = line.get(link['src_edge_property'], None)
+    if not edges and line['type'] == 'project':
+        print('echo type is project, edge is program')
+        edges = ['program']
     if not edges:
+        print('echo No edges')
         return line
 
     if not isinstance(edges, (list,)):
         edges = [edges]
+    print(f"echo edges {edges}")
     src_id = get_node_id(line)
 
     for edge in edges:
@@ -32,7 +38,8 @@ def write_edge(link, line, project_id):
             dst_id = get_uuid(edge.get('submitter_id', edge.get('code')))
         link['handle'].write('{}\t{}\t{}\t{}\t{}\n'.format(
             src_id, dst_id, '{}', '{}', '{}'))
-    del line[link['src_edge_property']]
+        if link['src_edge_property'] in line:
+            del line[link['src_edge_property']]
     return line
 
 

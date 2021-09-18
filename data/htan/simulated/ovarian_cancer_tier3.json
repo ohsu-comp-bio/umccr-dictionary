@@ -1,0 +1,162 @@
+[
+    {
+        "Component": "857eeeffe0",
+        "HTANParticipantID": "28bf5b300a",
+        "OvarianCancerHistologicSubtype": "Other",
+        "OvarianCancerPlatinumStatus": "Unknown",
+        "OvarianCancerSurgicalOutcome": "Optimalcytoreduction",
+        "StartDaysfromIndex": 41.00290452260853,
+        "StopDaysfromIndex": 0.8993750855420313,
+        "TimepointLabel": "e1364bc1ba",
+        "patients": {
+            "submitter_id": "patient_5b151e9219"
+        },
+        "submitter_id": "ovarian_cancer_tier3_43ada13a8f",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "8ec80dd839",
+        "HTANParticipantID": "5f48ecef60",
+        "OvarianCancerHistologicSubtype": "Unknown",
+        "OvarianCancerPlatinumStatus": null,
+        "OvarianCancerSurgicalOutcome": "R0resection",
+        "StartDaysfromIndex": 28.912064088741076,
+        "StopDaysfromIndex": 13.853891574798316,
+        "TimepointLabel": "b4f21dfc2c",
+        "patients": {
+            "submitter_id": "patient_e9f09738a9"
+        },
+        "submitter_id": "ovarian_cancer_tier3_87998b826d",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "7e354f17b7",
+        "HTANParticipantID": "14bedd5290",
+        "OvarianCancerHistologicSubtype": "Unknown",
+        "OvarianCancerPlatinumStatus": "Datanotavailable",
+        "OvarianCancerSurgicalOutcome": "Other",
+        "StartDaysfromIndex": 60.676056960059235,
+        "StopDaysfromIndex": 97.22594713704108,
+        "TimepointLabel": "7802adbb05",
+        "patients": {
+            "submitter_id": "patient_b67e32207c"
+        },
+        "submitter_id": "ovarian_cancer_tier3_2c0e48dc22",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "1faeebf41f",
+        "HTANParticipantID": "866bc69d4a",
+        "OvarianCancerHistologicSubtype": "Low-gradeendometrioid",
+        "OvarianCancerPlatinumStatus": "Platinum-refractory",
+        "OvarianCancerSurgicalOutcome": "R0resection",
+        "StartDaysfromIndex": 88.2756836334622,
+        "StopDaysfromIndex": 51.50209187816655,
+        "TimepointLabel": "90316ca994",
+        "patients": {
+            "submitter_id": "patient_fb44edbd04"
+        },
+        "submitter_id": "ovarian_cancer_tier3_2971bdbb25",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "2f1fdf0478",
+        "HTANParticipantID": "9cde304b3c",
+        "OvarianCancerHistologicSubtype": "Unknown",
+        "OvarianCancerPlatinumStatus": "Unknown",
+        "OvarianCancerSurgicalOutcome": null,
+        "StartDaysfromIndex": 48.310007136184474,
+        "StopDaysfromIndex": 28.05592578017313,
+        "TimepointLabel": "60a10bb6a0",
+        "patients": {
+            "submitter_id": "patient_013a3eb5cf"
+        },
+        "submitter_id": "ovarian_cancer_tier3_f9953aaaf8",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "0c39f255f3",
+        "HTANParticipantID": "be78e4e34a",
+        "OvarianCancerHistologicSubtype": "Germcell",
+        "OvarianCancerPlatinumStatus": null,
+        "OvarianCancerSurgicalOutcome": "Datanotavailable",
+        "StartDaysfromIndex": 38.04032799169034,
+        "StopDaysfromIndex": 28.479179198521997,
+        "TimepointLabel": "5c1364404f",
+        "patients": {
+            "submitter_id": "patient_0dd820d172"
+        },
+        "submitter_id": "ovarian_cancer_tier3_f2e41cd72e",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "76f7bdff70",
+        "HTANParticipantID": "12932b5a04",
+        "OvarianCancerHistologicSubtype": "Unknown",
+        "OvarianCancerPlatinumStatus": "Platinum-resistant",
+        "OvarianCancerSurgicalOutcome": "R0resection",
+        "StartDaysfromIndex": 38.646021991979616,
+        "StopDaysfromIndex": 48.3898833378464,
+        "TimepointLabel": "4c11f3f481",
+        "patients": {
+            "submitter_id": "patient_de2bce081d"
+        },
+        "submitter_id": "ovarian_cancer_tier3_5716a32abc",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "e917d97d44",
+        "HTANParticipantID": "c0b04c5454",
+        "OvarianCancerHistologicSubtype": "Other",
+        "OvarianCancerPlatinumStatus": "Datanotavailable",
+        "OvarianCancerSurgicalOutcome": null,
+        "StartDaysfromIndex": 49.54746441766902,
+        "StopDaysfromIndex": 46.3607636548205,
+        "TimepointLabel": "9414c0bf76",
+        "patients": {
+            "submitter_id": "patient_6a8716a438"
+        },
+        "submitter_id": "ovarian_cancer_tier3_932a22c3a2",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "1f8ed08e44",
+        "HTANParticipantID": "db99812491",
+        "OvarianCancerHistologicSubtype": "Other",
+        "OvarianCancerPlatinumStatus": null,
+        "OvarianCancerSurgicalOutcome": "Optimalcytoreduction",
+        "StartDaysfromIndex": 92.14622673795007,
+        "StopDaysfromIndex": 64.37538353257253,
+        "TimepointLabel": "cbf50626a4",
+        "patients": {
+            "submitter_id": "patient_f51d789d0d"
+        },
+        "submitter_id": "ovarian_cancer_tier3_ac78b7db35",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    },
+    {
+        "Component": "84fde661b0",
+        "HTANParticipantID": "5e396ce57c",
+        "OvarianCancerHistologicSubtype": "Clearcell",
+        "OvarianCancerPlatinumStatus": "Platinum-resistant",
+        "OvarianCancerSurgicalOutcome": "Other",
+        "StartDaysfromIndex": 98.58716036797736,
+        "StopDaysfromIndex": 55.901042054643646,
+        "TimepointLabel": "f3b92a644f",
+        "patients": {
+            "submitter_id": "patient_a27048f526"
+        },
+        "submitter_id": "ovarian_cancer_tier3_855d956b14",
+        "subtype": null,
+        "type": "ovarian_cancer_tier3"
+    }
+]

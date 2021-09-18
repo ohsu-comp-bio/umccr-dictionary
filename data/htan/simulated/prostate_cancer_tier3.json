@@ -1,0 +1,202 @@
+[
+    {
+        "AdditonalFindingsUninvolvedProstate": "Benignprostatichyperplasia(BPH)",
+        "Component": "d5a0cf4e31",
+        "HTANParticipantID": "c35b013d0d",
+        "LocationExtentExtraprostaticExtension": "RightAnterior",
+        "LocationNaturePositiveMargins": "RightAnterior",
+        "ProstateCancerCytologicMorphologicSubtypes": null,
+        "ProstateCancerLocalExtent": "Extraprostaticextension",
+        "ProstateCarcinomaHistologicType": "Prostaticductadenocarcinoma",
+        "SeminalVesicleInvasion": "NotReported",
+        "StartDaysfromIndex": 58.96028625761688,
+        "StopDaysfromIndex": 18.345970938158384,
+        "TimepointLabel": "eeae281391",
+        "patients": {
+            "submitter_id": "patient_5b151e9219"
+        },
+        "submitter_id": "prostate_cancer_tier3_fba901a734",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "NotReported",
+        "Component": "c4d073df7f",
+        "HTANParticipantID": "aed41baa5f",
+        "LocationExtentExtraprostaticExtension": "Unknown",
+        "LocationNaturePositiveMargins": "LeftPositiveinanareaofintraprostaticincision(II)",
+        "ProstateCancerCytologicMorphologicSubtypes": "Prostaticbasalcellhyperplasia",
+        "ProstateCancerLocalExtent": "Unknown",
+        "ProstateCarcinomaHistologicType": "UndifferentiatedcarcinomaNOS",
+        "SeminalVesicleInvasion": null,
+        "StartDaysfromIndex": 21.56651158267585,
+        "StopDaysfromIndex": 41.359815166583424,
+        "TimepointLabel": "47097f0fba",
+        "patients": {
+            "submitter_id": "patient_e9f09738a9"
+        },
+        "submitter_id": "prostate_cancer_tier3_7b47dcda66",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "Other",
+        "Component": "3c7dc7bfe7",
+        "HTANParticipantID": "5db1e80bfd",
+        "LocationExtentExtraprostaticExtension": "RightLateral",
+        "LocationNaturePositiveMargins": "RightBase",
+        "ProstateCancerCytologicMorphologicSubtypes": "Other",
+        "ProstateCancerLocalExtent": "Unknown",
+        "ProstateCarcinomaHistologicType": "Acinarprostatemucinous(colloid)adenocarcinoma",
+        "SeminalVesicleInvasion": "NotReported",
+        "StartDaysfromIndex": 65.66004563988294,
+        "StopDaysfromIndex": 14.2062045317776,
+        "TimepointLabel": "0a43cb6886",
+        "patients": {
+            "submitter_id": "patient_b67e32207c"
+        },
+        "submitter_id": "prostate_cancer_tier3_ca197006fc",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "High-gradeprostaticintraepithelialneoplasia(PIN)",
+        "Component": "64ee7c5d33",
+        "HTANParticipantID": "ef19cf0b63",
+        "LocationExtentExtraprostaticExtension": "RightAnterior",
+        "LocationNaturePositiveMargins": null,
+        "ProstateCancerCytologicMorphologicSubtypes": "Unknown",
+        "ProstateCancerLocalExtent": "Unknown",
+        "ProstateCarcinomaHistologicType": "UndifferentiatedcarcinomaNOS",
+        "SeminalVesicleInvasion": "Bothsides",
+        "StartDaysfromIndex": 5.739915350650049,
+        "StopDaysfromIndex": 40.35251925470512,
+        "TimepointLabel": "d968407443",
+        "patients": {
+            "submitter_id": "patient_fb44edbd04"
+        },
+        "submitter_id": "prostate_cancer_tier3_e561d62bc1",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "High-gradeprostaticintraepithelialneoplasia(PIN)",
+        "Component": "86dd5aa89b",
+        "HTANParticipantID": "3871e01e8d",
+        "LocationExtentExtraprostaticExtension": "RightPosterolateral",
+        "LocationNaturePositiveMargins": "LeftFocal",
+        "ProstateCancerCytologicMorphologicSubtypes": null,
+        "ProstateCancerLocalExtent": "Extraprostaticextension",
+        "ProstateCarcinomaHistologicType": "Prostaticadenocarcinoma(conventionalNOS)",
+        "SeminalVesicleInvasion": "None",
+        "StartDaysfromIndex": 56.47925883063021,
+        "StopDaysfromIndex": 46.022576107099766,
+        "TimepointLabel": "2890d61138",
+        "patients": {
+            "submitter_id": "patient_013a3eb5cf"
+        },
+        "submitter_id": "prostate_cancer_tier3_7c0f7dfd19",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": null,
+        "Component": "6bf1eb0693",
+        "HTANParticipantID": "abecd7734e",
+        "LocationExtentExtraprostaticExtension": "RightAnterior",
+        "LocationNaturePositiveMargins": "Apicalmargin(blockDUM)",
+        "ProstateCancerCytologicMorphologicSubtypes": "Prostaticatypicaladenomatoushyperplasia(adenosisorAAH)",
+        "ProstateCancerLocalExtent": "Unknown",
+        "ProstateCarcinomaHistologicType": "Prostaticsmallcellcarcinoma",
+        "SeminalVesicleInvasion": "Left",
+        "StartDaysfromIndex": 56.81784343034224,
+        "StopDaysfromIndex": 54.57785246327356,
+        "TimepointLabel": "017c2fea88",
+        "patients": {
+            "submitter_id": "patient_0dd820d172"
+        },
+        "submitter_id": "prostate_cancer_tier3_784a45b950",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "Inflammation",
+        "Component": "b87631afc0",
+        "HTANParticipantID": "471984ccf8",
+        "LocationExtentExtraprostaticExtension": "LeftMid",
+        "LocationNaturePositiveMargins": "RightBase",
+        "ProstateCancerCytologicMorphologicSubtypes": "Prostaticatypicaladenomatoushyperplasia(adenosisorAAH)",
+        "ProstateCancerLocalExtent": "NotReported",
+        "ProstateCarcinomaHistologicType": "Acinarprostatemucinous(colloid)adenocarcinoma",
+        "SeminalVesicleInvasion": "Left",
+        "StartDaysfromIndex": 85.85342588611866,
+        "StopDaysfromIndex": 18.184084877806185,
+        "TimepointLabel": "ad8d0efbe7",
+        "patients": {
+            "submitter_id": "patient_de2bce081d"
+        },
+        "submitter_id": "prostate_cancer_tier3_8f12ee4dc9",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "NotReported",
+        "Component": "b7aae4bf8c",
+        "HTANParticipantID": "c3f75027cf",
+        "LocationExtentExtraprostaticExtension": "RightNon-focal(established)",
+        "LocationNaturePositiveMargins": "LeftPosterior",
+        "ProstateCancerCytologicMorphologicSubtypes": "Prostaticatypicaladenomatoushyperplasia(adenosisorAAH)",
+        "ProstateCancerLocalExtent": "Extraprostaticextension",
+        "ProstateCarcinomaHistologicType": "Prostaticadenosquamouscarcinoma",
+        "SeminalVesicleInvasion": "Right",
+        "StartDaysfromIndex": 91.09845440151597,
+        "StopDaysfromIndex": 10.403226942395438,
+        "TimepointLabel": "645f14a2ab",
+        "patients": {
+            "submitter_id": "patient_6a8716a438"
+        },
+        "submitter_id": "prostate_cancer_tier3_bf578f636c",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": null,
+        "Component": "bc2bc91793",
+        "HTANParticipantID": "c4b9cfe0db",
+        "LocationExtentExtraprostaticExtension": "Unknown",
+        "LocationNaturePositiveMargins": "LeftBase",
+        "ProstateCancerCytologicMorphologicSubtypes": "Lowgradeprostaticintraepithelialneoplasia(PIN)/(PINI)",
+        "ProstateCancerLocalExtent": "NotReported",
+        "ProstateCarcinomaHistologicType": "Prostaticadenosquamouscarcinoma",
+        "SeminalVesicleInvasion": null,
+        "StartDaysfromIndex": 57.248126967113635,
+        "StopDaysfromIndex": 79.42091981561774,
+        "TimepointLabel": "6f3d3734d7",
+        "patients": {
+            "submitter_id": "patient_f51d789d0d"
+        },
+        "submitter_id": "prostate_cancer_tier3_08e841a794",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    },
+    {
+        "AdditonalFindingsUninvolvedProstate": "Unknown",
+        "Component": "bc22da288b",
+        "HTANParticipantID": "94e3dc396a",
+        "LocationExtentExtraprostaticExtension": "RightPosterolateral",
+        "LocationNaturePositiveMargins": "Unknown",
+        "ProstateCancerCytologicMorphologicSubtypes": "Highgradeprostaticintraepithelialneoplasia(HGPIN)/(PINII&PINIII)",
+        "ProstateCancerLocalExtent": "Extraprostaticextension",
+        "ProstateCarcinomaHistologicType": "Acinarprostatemucinousadenocarcinoma",
+        "SeminalVesicleInvasion": "Left",
+        "StartDaysfromIndex": 39.97381959336437,
+        "StopDaysfromIndex": 19.326128413167766,
+        "TimepointLabel": "ed59637fe3",
+        "patients": {
+            "submitter_id": "patient_a27048f526"
+        },
+        "submitter_id": "prostate_cancer_tier3_c7f52314af",
+        "subtype": null,
+        "type": "prostate_cancer_tier3"
+    }
+]

@@ -19,3 +19,6 @@ data/**/*.txt
 output/**/*.tsv
 
 .env
+
+!data/htan/simulated/*.*
+

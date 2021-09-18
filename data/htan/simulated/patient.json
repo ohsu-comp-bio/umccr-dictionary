@@ -1,0 +1,102 @@
+[
+    {
+        "Component": "da1e46bc30",
+        "HTANParticipantID": "07e8704485",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_5b151e9219",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "df92c9a39b",
+        "HTANParticipantID": "7ffb72ac93",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_e9f09738a9",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "c4eed17560",
+        "HTANParticipantID": "df2f7342dd",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_b67e32207c",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "1828c2fb27",
+        "HTANParticipantID": "0352a1b7b1",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_fb44edbd04",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "1d249121d3",
+        "HTANParticipantID": "e842debfc7",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_013a3eb5cf",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "fb6a531edc",
+        "HTANParticipantID": "b7ae9383ff",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_0dd820d172",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "c3468b6ed3",
+        "HTANParticipantID": "7c73668f0b",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_de2bce081d",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "ec79cfedf1",
+        "HTANParticipantID": "ae596b34e5",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_6a8716a438",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "3d9e528d6d",
+        "HTANParticipantID": "0acafda37a",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_f51d789d0d",
+        "subtype": null,
+        "type": "patient"
+    },
+    {
+        "Component": "3970ec73f0",
+        "HTANParticipantID": "2a979fdcdc",
+        "projects": {
+            "code": "simulated"
+        },
+        "submitter_id": "patient_a27048f526",
+        "subtype": null,
+        "type": "patient"
+    }
+]
