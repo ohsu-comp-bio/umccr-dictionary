@@ -1,102 +1,92 @@
 [
     {
-        "Component": "da1e46bc30",
-        "HTANParticipantID": "07e8704485",
+        "Component": "9a4be7eb0f",
+        "HTANParticipantID": "de13eeba19",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_5b151e9219",
-        "subtype": null,
+        "submitter_id": "patient_5236da4db0",
         "type": "patient"
     },
     {
-        "Component": "df92c9a39b",
-        "HTANParticipantID": "7ffb72ac93",
+        "Component": "b3fbded4d2",
+        "HTANParticipantID": "279b5918c1",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_e9f09738a9",
-        "subtype": null,
+        "submitter_id": "patient_399fade713",
         "type": "patient"
     },
     {
-        "Component": "c4eed17560",
-        "HTANParticipantID": "df2f7342dd",
+        "Component": "c75c414a41",
+        "HTANParticipantID": "3b6ef4be7e",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_b67e32207c",
-        "subtype": null,
+        "submitter_id": "patient_944516011c",
         "type": "patient"
     },
     {
-        "Component": "1828c2fb27",
-        "HTANParticipantID": "0352a1b7b1",
+        "Component": "fd665d7d6e",
+        "HTANParticipantID": "372ba60e5d",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_fb44edbd04",
-        "subtype": null,
+        "submitter_id": "patient_b12facdb50",
         "type": "patient"
     },
     {
-        "Component": "1d249121d3",
-        "HTANParticipantID": "e842debfc7",
+        "Component": "4ca77d9773",
+        "HTANParticipantID": "a43e11aafa",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_013a3eb5cf",
-        "subtype": null,
+        "submitter_id": "patient_850b47c767",
         "type": "patient"
     },
     {
-        "Component": "fb6a531edc",
-        "HTANParticipantID": "b7ae9383ff",
+        "Component": "302b74bd27",
+        "HTANParticipantID": "61b598d570",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_0dd820d172",
-        "subtype": null,
+        "submitter_id": "patient_e325abb768",
         "type": "patient"
     },
     {
-        "Component": "c3468b6ed3",
-        "HTANParticipantID": "7c73668f0b",
+        "Component": "8807bc53f9",
+        "HTANParticipantID": "4088606b8e",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_de2bce081d",
-        "subtype": null,
+        "submitter_id": "patient_9f7dbdfe76",
         "type": "patient"
     },
     {
-        "Component": "ec79cfedf1",
-        "HTANParticipantID": "ae596b34e5",
+        "Component": "92add6954d",
+        "HTANParticipantID": "ec83907833",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_6a8716a438",
-        "subtype": null,
+        "submitter_id": "patient_46582a1fa9",
         "type": "patient"
     },
     {
-        "Component": "3d9e528d6d",
-        "HTANParticipantID": "0acafda37a",
+        "Component": "b9049fa400",
+        "HTANParticipantID": "4dfb33cbe8",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_f51d789d0d",
-        "subtype": null,
+        "submitter_id": "patient_3dfb62c1f6",
         "type": "patient"
     },
     {
-        "Component": "3970ec73f0",
-        "HTANParticipantID": "2a979fdcdc",
+        "Component": "637593da3a",
+        "HTANParticipantID": "78d4cbec5a",
         "projects": {
             "code": "simulated"
         },
-        "submitter_id": "patient_a27048f526",
-        "subtype": null,
+        "submitter_id": "patient_e5caea354c",
         "type": "patient"
     }
 ]

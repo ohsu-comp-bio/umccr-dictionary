@@ -1,82 +1,72 @@
 [
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_f88b67fc88"
+            "submitter_id": "biospecimen_e9191ac8f0"
         },
-        "submitter_id": "assay_c48be96216",
-        "subtype": null,
+        "submitter_id": "assay_9bbcbd83cf",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_e86dc4d9cd"
+            "submitter_id": "biospecimen_43253e9a68"
         },
-        "submitter_id": "assay_6a855f5b78",
-        "subtype": null,
+        "submitter_id": "assay_d043ad4eeb",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_949570cbf6"
+            "submitter_id": "biospecimen_a69e31d334"
         },
-        "submitter_id": "assay_5f8ef48bf3",
-        "subtype": null,
+        "submitter_id": "assay_49fb47aa19",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_dd9badd970"
+            "submitter_id": "biospecimen_ebd22a7915"
         },
-        "submitter_id": "assay_520eac452d",
-        "subtype": null,
+        "submitter_id": "assay_c9f8e51611",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_9b51e03234"
+            "submitter_id": "biospecimen_8a7c7214a4"
         },
-        "submitter_id": "assay_99350005ae",
-        "subtype": null,
+        "submitter_id": "assay_3ae906b281",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_3036e19f42"
+            "submitter_id": "biospecimen_e5dc7f3cb5"
         },
-        "submitter_id": "assay_2487e2a24b",
-        "subtype": null,
+        "submitter_id": "assay_02f3828bd0",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_9a17bc146d"
+            "submitter_id": "biospecimen_fb942a51bc"
         },
-        "submitter_id": "assay_500b08635a",
-        "subtype": null,
+        "submitter_id": "assay_9db8f50685",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_ceaf7e18c4"
+            "submitter_id": "biospecimen_4d0d9a5c02"
         },
-        "submitter_id": "assay_aef5751c06",
-        "subtype": null,
+        "submitter_id": "assay_23f47b3d93",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_ec41f4ac01"
+            "submitter_id": "biospecimen_75f73d3e3b"
         },
-        "submitter_id": "assay_721fff77a0",
-        "subtype": null,
+        "submitter_id": "assay_e6b70f4847",
         "type": "assay"
     },
     {
         "biospecimen": {
-            "submitter_id": "biospecimen_15bf3201d6"
+            "submitter_id": "biospecimen_217c377cf4"
         },
-        "submitter_id": "assay_6660f04351",
-        "subtype": null,
+        "submitter_id": "assay_a6298a60e7",
         "type": "assay"
     }
 ]

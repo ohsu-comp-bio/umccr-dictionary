@@ -1,172 +1,162 @@
 [
     {
         "assay": {
-            "submitter_id": "assay_c48be96216"
+            "submitter_id": "assay_9bbcbd83cf"
         },
         "data_category": "Imaging",
-        "data_format": "fastq",
-        "data_type": "Bpm",
-        "file_format": "de1849c852",
-        "file_name": "b82d6b572c",
-        "file_size": 8,
-        "filename": "4c49862ce0",
-        "ga4gh_drs_uri": "bf3376f38c",
-        "md5sum": "03be22db96e6ef52c4f8b323fc030b0e",
-        "submitter_id": "file_daa346442d",
-        "subtype": null,
+        "data_format": "bigWig",
+        "data_type": "Png",
+        "file_format": "bf45572ece",
+        "file_name": "e2154a42c9",
+        "file_size": 89,
+        "filename": "15741e956e",
+        "ga4gh_drs_uri": "aba8e82549",
+        "md5sum": "16521eaf01d8cf6d1f6dbc62ef44d324",
+        "submitter_id": "file_0db0449cfb",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_6a855f5b78"
+            "submitter_id": "assay_d043ad4eeb"
         },
         "data_category": "Imaging",
-        "data_format": "svs",
-        "data_type": "Bgzip",
-        "file_format": "762f629f25",
-        "file_name": "8f9641691d",
+        "data_format": "bam",
+        "data_type": "Dup",
+        "file_format": "b87ab91f47",
+        "file_name": "32bf601131",
         "file_size": 87,
-        "filename": "5ee8e1fc5e",
-        "ga4gh_drs_uri": "c11e2a8aa1",
-        "md5sum": "3e9ef0faa14a1a7818b8b6e80cb80a1c",
-        "submitter_id": "file_45ee4a45ad",
-        "subtype": null,
+        "filename": "a1a095b286",
+        "ga4gh_drs_uri": "aa3883e853",
+        "md5sum": "a32f1aac2e2625396cfd681e05038d8a",
+        "submitter_id": "file_5a32319689",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_5f8ef48bf3"
+            "submitter_id": "assay_49fb47aa19"
         },
-        "data_category": "Imaging",
-        "data_format": "VCF",
-        "data_type": "Bpm",
-        "file_format": "39f45abd2d",
-        "file_name": "aecfa9b1da",
-        "file_size": 64,
-        "filename": "7ae1a1eb0e",
-        "ga4gh_drs_uri": "7174017718",
-        "md5sum": "731bf83fcd5afaad88f825b810e458a0",
-        "submitter_id": "file_909d8394e0",
-        "subtype": null,
+        "data_category": "Single Nucleotide Variation",
+        "data_format": "bim",
+        "data_type": "Gff3",
+        "file_format": "a1ee91e143",
+        "file_name": "2319775749",
+        "file_size": 78,
+        "filename": "c9230f2370",
+        "ga4gh_drs_uri": "768245b3e3",
+        "md5sum": "285bea4350b9104ea756be08c2830ba3",
+        "submitter_id": "file_d48eacbb79",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_520eac452d"
+            "submitter_id": "assay_c9f8e51611"
         },
         "data_category": "Transcriptome Profiling",
-        "data_format": "bed",
-        "data_type": "Raw",
-        "file_format": "a599a307f9",
-        "file_name": "a916cc6db2",
-        "file_size": 74,
-        "filename": "957889e365",
-        "ga4gh_drs_uri": "00b935c309",
-        "md5sum": "e391ff271380fd2072f3202174a13674",
-        "submitter_id": "file_5a01616666",
-        "subtype": null,
-        "type": "file"
-    },
-    {
-        "assay": {
-            "submitter_id": "assay_99350005ae"
-        },
-        "data_category": "Clinical",
         "data_format": "txt",
-        "data_type": "Cellam",
-        "file_format": "99cb2c9120",
-        "file_name": "e72ef80a44",
-        "file_size": 25,
-        "filename": "7c8312c0af",
-        "ga4gh_drs_uri": "cd3666901f",
-        "md5sum": "e37ac43f59f500fd440c94a0d0191ef2",
-        "submitter_id": "file_5083676bf7",
-        "subtype": null,
+        "data_type": "DICOM",
+        "file_format": "25666be8f4",
+        "file_name": "d1fb3f2b80",
+        "file_size": 39,
+        "filename": "d7e581da08",
+        "ga4gh_drs_uri": "37d5e46100",
+        "md5sum": "7c16ada631483810bcecd82f722e9342",
+        "submitter_id": "file_93e1dee6b8",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_2487e2a24b"
+            "submitter_id": "assay_3ae906b281"
         },
-        "data_category": "Clinical",
+        "data_category": "Sequencing Reads",
         "data_format": "pdf",
-        "data_type": "Msf",
-        "file_format": "339af03d8f",
-        "file_name": "89299ac9e1",
-        "file_size": 58,
-        "filename": "8e4562b801",
-        "ga4gh_drs_uri": "e4677dc58c",
-        "md5sum": "b933f3906df82a9e568e394e23326d87",
-        "submitter_id": "file_c296ec8bcf",
-        "subtype": null,
+        "data_type": "Mtx",
+        "file_format": "84680736dc",
+        "file_name": "b2a955d8cf",
+        "file_size": 0,
+        "filename": "bb49697fcc",
+        "ga4gh_drs_uri": "c021969c4e",
+        "md5sum": "4a81af2f11731760da9fb03a3e01c898",
+        "submitter_id": "file_0644a66d5f",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_500b08635a"
+            "submitter_id": "assay_02f3828bd0"
+        },
+        "data_category": "Supplemental",
+        "data_format": "txt",
+        "data_type": "Sra",
+        "file_format": "fd3d7a59dd",
+        "file_name": "2866047b39",
+        "file_size": 11,
+        "filename": "0b8964c432",
+        "ga4gh_drs_uri": "1209838a16",
+        "md5sum": "e2e015a85cc5eb85fa021162984bd566",
+        "submitter_id": "file_cafd11095e",
+        "type": "file"
+    },
+    {
+        "assay": {
+            "submitter_id": "assay_9db8f50685"
+        },
+        "data_category": "Transcriptome Profiling",
+        "data_format": "fastq",
+        "data_type": "BednarrowPeak",
+        "file_format": "239de92f4c",
+        "file_name": "5b72b990e0",
+        "file_size": 91,
+        "filename": "148c4a2359",
+        "ga4gh_drs_uri": "ea062644c2",
+        "md5sum": "656ed4f75cb240b1da569e743465e2ea",
+        "submitter_id": "file_243f3e89f6",
+        "type": "file"
+    },
+    {
+        "assay": {
+            "submitter_id": "assay_23f47b3d93"
         },
         "data_category": "Simple Nucleotide Variation",
         "data_format": "tab",
-        "data_type": "Msf",
-        "file_format": "b70dad03eb",
-        "file_name": "ecdaa311eb",
-        "file_size": 71,
-        "filename": "82bf7126de",
-        "ga4gh_drs_uri": "a6bec9ac80",
-        "md5sum": "df88823213f4008f478188e6fa0553da",
-        "submitter_id": "file_0ae614f032",
-        "subtype": null,
+        "data_type": "Doc",
+        "file_format": "3debe7a22e",
+        "file_name": "6b015a7837",
+        "file_size": 36,
+        "filename": "970904cbc8",
+        "ga4gh_drs_uri": "4f13057df4",
+        "md5sum": "ec54d813ac68b7b05eb53739b1fba86f",
+        "submitter_id": "file_6447904b25",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_aef5751c06"
+            "submitter_id": "assay_e6b70f4847"
         },
-        "data_category": "Clinical",
-        "data_format": "gds",
-        "data_type": "Maf",
-        "file_format": "d7d4eba0fa",
-        "file_name": "97669c2c9c",
+        "data_category": "Imaging",
+        "data_format": "fam",
+        "data_type": "Gff3",
+        "file_format": "7e79869eb8",
+        "file_name": "415f7e8a29",
         "file_size": 79,
-        "filename": "c81a363e0f",
-        "ga4gh_drs_uri": "79765fabc6",
-        "md5sum": "5b73ade7b26bf98a07ec22f443c5ef77",
-        "submitter_id": "file_b77dd1fc38",
-        "subtype": null,
+        "filename": "3a5673def1",
+        "ga4gh_drs_uri": "28983ea661",
+        "md5sum": "d125c5e9c05c36d7d420d3db6ae8b858",
+        "submitter_id": "file_7c5b9e6493",
         "type": "file"
     },
     {
         "assay": {
-            "submitter_id": "assay_721fff77a0"
+            "submitter_id": "assay_a6298a60e7"
         },
         "data_category": "Single Nucleotide Variation",
-        "data_format": "tsv",
-        "data_type": "Avi",
-        "file_format": "5f9685bcaa",
-        "file_name": "f1cb728d6f",
-        "file_size": 0,
-        "filename": "baaae81372",
-        "ga4gh_drs_uri": "6dba15d106",
-        "md5sum": "ad61245be224d6c863786c6932616bc9",
-        "submitter_id": "file_dcac91e581",
-        "subtype": null,
-        "type": "file"
-    },
-    {
-        "assay": {
-            "submitter_id": "assay_6660f04351"
-        },
-        "data_category": "Supplemental",
         "data_format": "junc",
-        "data_type": "Svs",
-        "file_format": "d24462554d",
-        "file_name": "cd2d539a38",
-        "file_size": 52,
-        "filename": "71849447d7",
-        "ga4gh_drs_uri": "b31898c3c1",
-        "md5sum": "785e4e7857fa0421eedd98fb2d48e9e4",
-        "submitter_id": "file_e266509177",
-        "subtype": null,
+        "data_type": "Idx",
+        "file_format": "251817903d",
+        "file_name": "38f852308b",
+        "file_size": 68,
+        "filename": "eb76633a1e",
+        "ga4gh_drs_uri": "ea744f02c7",
+        "md5sum": "07a0cd665579cfc2ca3bc3a8ce21061e",
+        "submitter_id": "file_4542f60c18",
         "type": "file"
     }
 ]

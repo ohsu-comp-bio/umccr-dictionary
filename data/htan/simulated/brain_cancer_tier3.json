@@ -1,192 +1,182 @@
 [
     {
-        "CNSTumorPrimaryAnatomicSite": "Cerebellar/Posteriorfossa",
-        "Component": "cfc8d6b990",
-        "GliomaSpecificMetastasisSites": "Leptomeningeal",
-        "GliomaSpecificRadiationField": "Craniospinal",
-        "HTANParticipantID": "4a99945219",
+        "CNSTumorPrimaryAnatomicSite": null,
+        "Component": "283c717524",
+        "GliomaSpecificMetastasisSites": "Spine",
+        "GliomaSpecificRadiationField": "Unknown",
+        "HTANParticipantID": "8f99a7a802",
         "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-A",
         "NeuroblastomaMYCNGeneAmplificationStatus": "Notamplified",
-        "StartDaysfromIndex": 66.82372354536466,
-        "StopDaysfromIndex": 83.16540405624828,
+        "StartDaysfromIndex": 30.28052048765688,
+        "StopDaysfromIndex": 72.11299325316372,
         "SupraTentorialEpendymomaMolecularSubgroup": null,
-        "TimepointLabel": "46cffbf6a3",
+        "TimepointLabel": "e7885afbb2",
         "patients": {
-            "submitter_id": "patient_5b151e9219"
+            "submitter_id": "patient_5236da4db0"
         },
-        "submitter_id": "brain_cancer_tier3_92d0848a85",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Basalganglia",
-        "Component": "af9c348b40",
-        "GliomaSpecificMetastasisSites": null,
-        "GliomaSpecificRadiationField": "Craniospinal",
-        "HTANParticipantID": "8835fe6b1b",
-        "InfraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Unknown",
-        "StartDaysfromIndex": 42.78936203643469,
-        "StopDaysfromIndex": 28.388096392223073,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "5fd57304a6",
-        "patients": {
-            "submitter_id": "patient_e9f09738a9"
-        },
-        "submitter_id": "brain_cancer_tier3_3ed521c033",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Basalganglia",
-        "Component": "dba48823d3",
-        "GliomaSpecificMetastasisSites": "Other",
-        "GliomaSpecificRadiationField": null,
-        "HTANParticipantID": "f9035d8f15",
-        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-B",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Amplified",
-        "StartDaysfromIndex": 76.84918844959778,
-        "StopDaysfromIndex": 91.97296130297974,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "7fc7fee4bc",
-        "patients": {
-            "submitter_id": "patient_b67e32207c"
-        },
-        "submitter_id": "brain_cancer_tier3_08e45c279c",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Spinalcord-Lumbar",
-        "Component": "82bda368a0",
-        "GliomaSpecificMetastasisSites": "Bonemarrow",
-        "GliomaSpecificRadiationField": "Craniospinal",
-        "HTANParticipantID": "039393f3fc",
-        "InfraTentorialEpendymomaMolecularSubgroup": "Unknown",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Amplified",
-        "StartDaysfromIndex": 48.95463385549036,
-        "StopDaysfromIndex": 23.87365545771275,
-        "SupraTentorialEpendymomaMolecularSubgroup": "Unknown",
-        "TimepointLabel": "9cf4408370",
-        "patients": {
-            "submitter_id": "patient_fb44edbd04"
-        },
-        "submitter_id": "brain_cancer_tier3_9476b3cce1",
-        "subtype": null,
+        "submitter_id": "brain_cancer_tier3_080de4449a",
         "type": "brain_cancer_tier3"
     },
     {
         "CNSTumorPrimaryAnatomicSite": "Cerebellar/Posteriorfossa",
-        "Component": "d2127fd309",
-        "GliomaSpecificMetastasisSites": "Other",
-        "GliomaSpecificRadiationField": "Unknown",
-        "HTANParticipantID": "7e013cc8dc",
-        "InfraTentorialEpendymomaMolecularSubgroup": "Unknown",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Notamplified",
-        "StartDaysfromIndex": 22.078496099465596,
-        "StopDaysfromIndex": 91.45066354814871,
-        "SupraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
-        "TimepointLabel": "db8f3e53ef",
+        "Component": "83bca4812e",
+        "GliomaSpecificMetastasisSites": "Brain",
+        "GliomaSpecificRadiationField": null,
+        "HTANParticipantID": "22ff907448",
+        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-B",
+        "NeuroblastomaMYCNGeneAmplificationStatus": null,
+        "StartDaysfromIndex": 7.111507949775664,
+        "StopDaysfromIndex": 31.84106402910839,
+        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-YAP1",
+        "TimepointLabel": "89fed93897",
         "patients": {
-            "submitter_id": "patient_013a3eb5cf"
+            "submitter_id": "patient_399fade713"
         },
-        "submitter_id": "brain_cancer_tier3_919ac5e8ec",
-        "subtype": null,
+        "submitter_id": "brain_cancer_tier3_e05fbb669b",
         "type": "brain_cancer_tier3"
     },
     {
-        "CNSTumorPrimaryAnatomicSite": "Spinalcord-Cervical",
-        "Component": "cdc15a7e46",
+        "CNSTumorPrimaryAnatomicSite": "Brainstem-Pons",
+        "Component": "5dd4b1d101",
+        "GliomaSpecificMetastasisSites": "CSF",
+        "GliomaSpecificRadiationField": null,
+        "HTANParticipantID": "c78fffaa39",
+        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-A",
+        "NeuroblastomaMYCNGeneAmplificationStatus": "Unknown",
+        "StartDaysfromIndex": 48.16991074841213,
+        "StopDaysfromIndex": 49.264382918996674,
+        "SupraTentorialEpendymomaMolecularSubgroup": "Unknown",
+        "TimepointLabel": "96a8c6d896",
+        "patients": {
+            "submitter_id": "patient_944516011c"
+        },
+        "submitter_id": "brain_cancer_tier3_3b729db252",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Brainstem-Pons",
+        "Component": "abcc042086",
+        "GliomaSpecificMetastasisSites": "Leptomeningeal",
+        "GliomaSpecificRadiationField": "Unknown",
+        "HTANParticipantID": "4bc4d76070",
+        "InfraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "NeuroblastomaMYCNGeneAmplificationStatus": null,
+        "StartDaysfromIndex": 93.5727450678759,
+        "StopDaysfromIndex": 83.36249904624769,
+        "SupraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "TimepointLabel": "12ffbee7ec",
+        "patients": {
+            "submitter_id": "patient_b12facdb50"
+        },
+        "submitter_id": "brain_cancer_tier3_da4bef280c",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Paraspinalganglion",
+        "Component": "b973cbc3cb",
+        "GliomaSpecificMetastasisSites": "Other",
+        "GliomaSpecificRadiationField": "NotApplicable",
+        "HTANParticipantID": "dff0fd3a4c",
+        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-B",
+        "NeuroblastomaMYCNGeneAmplificationStatus": null,
+        "StartDaysfromIndex": 57.95971626486508,
+        "StopDaysfromIndex": 49.189032270217496,
+        "SupraTentorialEpendymomaMolecularSubgroup": "Unknown",
+        "TimepointLabel": "7a283d500d",
+        "patients": {
+            "submitter_id": "patient_850b47c767"
+        },
+        "submitter_id": "brain_cancer_tier3_8f8a8b9200",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Cerebellar/Posteriorfossa",
+        "Component": "deac2b1174",
+        "GliomaSpecificMetastasisSites": null,
+        "GliomaSpecificRadiationField": "NotApplicable",
+        "HTANParticipantID": "eba154f834",
+        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-A",
+        "NeuroblastomaMYCNGeneAmplificationStatus": "Notdone",
+        "StartDaysfromIndex": 58.93372987010713,
+        "StopDaysfromIndex": 73.82179291131528,
+        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-YAP1",
+        "TimepointLabel": "55d73ced98",
+        "patients": {
+            "submitter_id": "patient_e325abb768"
+        },
+        "submitter_id": "brain_cancer_tier3_d57f5b2aef",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Brainstem-Pons",
+        "Component": "8a19c866f3",
+        "GliomaSpecificMetastasisSites": "Spine",
+        "GliomaSpecificRadiationField": null,
+        "HTANParticipantID": "0d438571b9",
+        "InfraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "NeuroblastomaMYCNGeneAmplificationStatus": "Amplified",
+        "StartDaysfromIndex": 38.21881596982494,
+        "StopDaysfromIndex": 41.084389482034766,
+        "SupraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "TimepointLabel": "1ef7f0598a",
+        "patients": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "brain_cancer_tier3_841d8964de",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Thalamus",
+        "Component": "d7f22b5b70",
         "GliomaSpecificMetastasisSites": "CSF",
         "GliomaSpecificRadiationField": "Craniospinal",
-        "HTANParticipantID": "50517d7b72",
+        "HTANParticipantID": "656911c736",
         "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-B",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Amplified",
-        "StartDaysfromIndex": 36.23521528060767,
-        "StopDaysfromIndex": 61.6412860785361,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "6ea5c68c39",
-        "patients": {
-            "submitter_id": "patient_0dd820d172"
-        },
-        "submitter_id": "brain_cancer_tier3_42db8f78e3",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Meninges/Dura",
-        "Component": "d5576f85db",
-        "GliomaSpecificMetastasisSites": "NotApplicable",
-        "GliomaSpecificRadiationField": "NotApplicable",
-        "HTANParticipantID": "3f951714f8",
-        "InfraTentorialEpendymomaMolecularSubgroup": "PF-EPN-B",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Amplified",
-        "StartDaysfromIndex": 6.82549107617646,
-        "StopDaysfromIndex": 4.819824913482417,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "28b26322a0",
-        "patients": {
-            "submitter_id": "patient_de2bce081d"
-        },
-        "submitter_id": "brain_cancer_tier3_a47aaeb568",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Brainstem-Medulla",
-        "Component": "3af79ebc28",
-        "GliomaSpecificMetastasisSites": "Bonemarrow",
-        "GliomaSpecificRadiationField": "NotApplicable",
-        "HTANParticipantID": "11f7a53b45",
-        "InfraTentorialEpendymomaMolecularSubgroup": "Unknown",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Notamplified",
-        "StartDaysfromIndex": 41.76653436518908,
-        "StopDaysfromIndex": 12.387376014693396,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "23bc07c5a6",
-        "patients": {
-            "submitter_id": "patient_6a8716a438"
-        },
-        "submitter_id": "brain_cancer_tier3_60bfc0049e",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Spinalcord-Cervical",
-        "Component": "2b390e937e",
-        "GliomaSpecificMetastasisSites": "Spine",
-        "GliomaSpecificRadiationField": "Focal-tumorbed",
-        "HTANParticipantID": "49942eec3b",
-        "InfraTentorialEpendymomaMolecularSubgroup": "Unknown",
-        "NeuroblastomaMYCNGeneAmplificationStatus": "Notamplified",
-        "StartDaysfromIndex": 28.99642126805273,
-        "StopDaysfromIndex": 21.186031763567915,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-RELA",
-        "TimepointLabel": "c62dad3684",
-        "patients": {
-            "submitter_id": "patient_f51d789d0d"
-        },
-        "submitter_id": "brain_cancer_tier3_6e56e47a43",
-        "subtype": null,
-        "type": "brain_cancer_tier3"
-    },
-    {
-        "CNSTumorPrimaryAnatomicSite": "Brainstem-Medulla",
-        "Component": "a2b5c32ffb",
-        "GliomaSpecificMetastasisSites": "Brain",
-        "GliomaSpecificRadiationField": "NotApplicable",
-        "HTANParticipantID": "2d8df321e9",
-        "InfraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
         "NeuroblastomaMYCNGeneAmplificationStatus": "Notdone",
-        "StartDaysfromIndex": 44.20185992900407,
-        "StopDaysfromIndex": 62.83276973478845,
-        "SupraTentorialEpendymomaMolecularSubgroup": "ST-EPN-YAP1",
-        "TimepointLabel": "119379d883",
+        "StartDaysfromIndex": 81.2860134564739,
+        "StopDaysfromIndex": 23.87192649369857,
+        "SupraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "TimepointLabel": "0227d8162d",
         "patients": {
-            "submitter_id": "patient_a27048f526"
+            "submitter_id": "patient_46582a1fa9"
         },
-        "submitter_id": "brain_cancer_tier3_60b270d328",
-        "subtype": null,
+        "submitter_id": "brain_cancer_tier3_b911c6c49e",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Suprasellar/Hypothalamic/Pituitary",
+        "Component": "f64cd96781",
+        "GliomaSpecificMetastasisSites": "Brain",
+        "GliomaSpecificRadiationField": "Craniospinal",
+        "HTANParticipantID": "74134bc906",
+        "InfraTentorialEpendymomaMolecularSubgroup": "Unknown",
+        "NeuroblastomaMYCNGeneAmplificationStatus": "Notamplified",
+        "StartDaysfromIndex": 28.856665980704776,
+        "StopDaysfromIndex": 36.31469868012138,
+        "SupraTentorialEpendymomaMolecularSubgroup": null,
+        "TimepointLabel": "7d46fbc02e",
+        "patients": {
+            "submitter_id": "patient_3dfb62c1f6"
+        },
+        "submitter_id": "brain_cancer_tier3_336b7a102e",
+        "type": "brain_cancer_tier3"
+    },
+    {
+        "CNSTumorPrimaryAnatomicSite": "Thalamus",
+        "Component": "1e0dba5ad5",
+        "GliomaSpecificMetastasisSites": "Other",
+        "GliomaSpecificRadiationField": "Craniospinal",
+        "HTANParticipantID": "919db0dc74",
+        "InfraTentorialEpendymomaMolecularSubgroup": "NotApplicable",
+        "NeuroblastomaMYCNGeneAmplificationStatus": "Unknown",
+        "StartDaysfromIndex": 44.03909606640387,
+        "StopDaysfromIndex": 49.56063415708806,
+        "SupraTentorialEpendymomaMolecularSubgroup": "Unknown",
+        "TimepointLabel": "45eba6a405",
+        "patients": {
+            "submitter_id": "patient_e5caea354c"
+        },
+        "submitter_id": "brain_cancer_tier3_03f69d5b0c",
         "type": "brain_cancer_tier3"
     }
 ]

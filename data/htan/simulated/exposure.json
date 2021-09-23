@@ -2,108 +2,90 @@
     {
         "AlcoholExposure": "Yes-AlcoholExposure",
         "AsbestosExposure": "Yes",
-        "CoalDustExposure": "Unknown",
-        "Component": "ccc41a8c26",
-        "EnvironmentalTobaccoSmokeExposure": null,
-        "HTANParticipantID": "7986a8e8f6",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": null,
-        "SmokingExposure": "No-SmokingExposure",
-        "StartDaysfromIndex": 73.46551405540555,
+        "CoalDustExposure": "Yes",
+        "Component": "4725bc6bba",
+        "EnvironmentalTobaccoSmokeExposure": "Unknown",
+        "HTANParticipantID": "ae05ebb661",
+        "RadonExposure": "Yes",
+        "RespirableCrystallineSilicaExposure": "No",
+        "SmokingExposure": "Yes-SmokingExposure",
+        "StartDaysfromIndex": 98.60379357778555,
         "patients": {
-            "submitter_id": "patient_5b151e9219"
+            "submitter_id": "patient_5236da4db0"
         },
-        "submitter_id": "exposure_0e41cbed10",
+        "submitter_id": "exposure_c6f45bb247",
+        "subtype": null,
+        "type": "exposure"
+    },
+    {
+        "AlcoholExposure": null,
+        "AsbestosExposure": "NotReported",
+        "CoalDustExposure": "Unknown",
+        "Component": "7f29939cf4",
+        "EnvironmentalTobaccoSmokeExposure": "Yes",
+        "HTANParticipantID": "9ad81559a3",
+        "RadonExposure": "No",
+        "RespirableCrystallineSilicaExposure": "Unknown",
+        "SmokingExposure": "No-SmokingExposure",
+        "StartDaysfromIndex": 52.983447263610714,
+        "patients": {
+            "submitter_id": "patient_399fade713"
+        },
+        "submitter_id": "exposure_9e22925db7",
         "subtype": null,
         "type": "exposure"
     },
     {
         "AlcoholExposure": "No-AlcoholExposure",
         "AsbestosExposure": "No",
-        "CoalDustExposure": "No",
-        "Component": "e73cd6687b",
+        "CoalDustExposure": "Unknown",
+        "Component": "394cf2f15b",
         "EnvironmentalTobaccoSmokeExposure": "Yes",
-        "HTANParticipantID": "d1759261fd",
-        "RadonExposure": "Yes",
-        "RespirableCrystallineSilicaExposure": null,
-        "SmokingExposure": "NotReported",
-        "StartDaysfromIndex": 81.82967055816177,
-        "patients": {
-            "submitter_id": "patient_e9f09738a9"
-        },
-        "submitter_id": "exposure_4093e9bcad",
-        "subtype": null,
-        "type": "exposure"
-    },
-    {
-        "AlcoholExposure": "Yes-AlcoholExposure",
-        "AsbestosExposure": "No",
-        "CoalDustExposure": "No",
-        "Component": "91b0a04914",
-        "EnvironmentalTobaccoSmokeExposure": "Yes",
-        "HTANParticipantID": "99206c7885",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": null,
+        "HTANParticipantID": "0622a67beb",
+        "RadonExposure": "Unknown",
+        "RespirableCrystallineSilicaExposure": "Unknown",
         "SmokingExposure": "No-SmokingExposure",
-        "StartDaysfromIndex": 11.452704320735997,
+        "StartDaysfromIndex": 6.446513856340119,
         "patients": {
-            "submitter_id": "patient_b67e32207c"
+            "submitter_id": "patient_944516011c"
         },
-        "submitter_id": "exposure_1839188c62",
-        "subtype": null,
-        "type": "exposure"
-    },
-    {
-        "AlcoholExposure": "Yes-AlcoholExposure",
-        "AsbestosExposure": null,
-        "CoalDustExposure": "No",
-        "Component": "e67f78309a",
-        "EnvironmentalTobaccoSmokeExposure": "Unknown",
-        "HTANParticipantID": "c640f412a4",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": "No",
-        "SmokingExposure": "NotReported",
-        "StartDaysfromIndex": 52.50080629924254,
-        "patients": {
-            "submitter_id": "patient_fb44edbd04"
-        },
-        "submitter_id": "exposure_769be8e815",
+        "submitter_id": "exposure_9dc14b9648",
         "subtype": null,
         "type": "exposure"
     },
     {
         "AlcoholExposure": "NotReported",
         "AsbestosExposure": "No",
-        "CoalDustExposure": "Yes",
-        "Component": "72e04f90f4",
-        "EnvironmentalTobaccoSmokeExposure": "No",
-        "HTANParticipantID": "1572bc2c7e",
-        "RadonExposure": "No",
+        "CoalDustExposure": null,
+        "Component": "f13f9013c4",
+        "EnvironmentalTobaccoSmokeExposure": "Unknown",
+        "HTANParticipantID": "4dc355be97",
+        "RadonExposure": "Yes",
         "RespirableCrystallineSilicaExposure": "Unknown",
-        "SmokingExposure": "No-SmokingExposure",
-        "StartDaysfromIndex": 43.98494679226853,
+        "SmokingExposure": null,
+        "StartDaysfromIndex": 12.307358160778502,
         "patients": {
-            "submitter_id": "patient_013a3eb5cf"
+            "submitter_id": "patient_b12facdb50"
         },
-        "submitter_id": "exposure_f52f1ff0ad",
-        "subtype": null,
+        "submitter_id": "exposure_2c52ab71a4",
+        "subtype": "TimeBetweenWakingandFirstSmoke",
         "type": "exposure"
     },
     {
         "AlcoholExposure": "Yes-AlcoholExposure",
-        "AsbestosExposure": "Yes",
+        "AsbestosExposure": null,
         "CoalDustExposure": null,
-        "Component": "3dfcfa697b",
-        "EnvironmentalTobaccoSmokeExposure": "No",
-        "HTANParticipantID": "14f43dd306",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": "Yes",
+        "Component": "3404a5bda3",
+        "EnvironmentalTobaccoSmokeExposure": "Yes",
+        "HTANParticipantID": "177dbf465b",
+        "RadonExposure": "Yes",
+        "RespirableCrystallineSilicaExposure": null,
         "SmokingExposure": "Yes-SmokingExposure",
-        "StartDaysfromIndex": 41.752822214634875,
+        "StartDaysfromIndex": 78.28862062554414,
         "patients": {
-            "submitter_id": "patient_0dd820d172"
+            "submitter_id": "patient_850b47c767"
         },
-        "submitter_id": "exposure_0e0c6c9d21",
+        "submitter_id": "exposure_2a0992a2cc",
         "subtype": null,
         "type": "exposure"
     },
@@ -111,71 +93,89 @@
         "AlcoholExposure": null,
         "AsbestosExposure": "Yes",
         "CoalDustExposure": null,
-        "Component": "2d802d60e6",
-        "EnvironmentalTobaccoSmokeExposure": "Unknown",
-        "HTANParticipantID": "0345faefee",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": "Yes",
-        "SmokingExposure": "Yes-SmokingExposure",
-        "StartDaysfromIndex": 47.26885748420554,
-        "patients": {
-            "submitter_id": "patient_de2bce081d"
-        },
-        "submitter_id": "exposure_b668720324",
-        "subtype": null,
-        "type": "exposure"
-    },
-    {
-        "AlcoholExposure": "NotReported",
-        "AsbestosExposure": "Unknown",
-        "CoalDustExposure": "Yes",
-        "Component": "0386847d60",
+        "Component": "3421cab9ab",
         "EnvironmentalTobaccoSmokeExposure": null,
-        "HTANParticipantID": "e988bbf560",
-        "RadonExposure": "Yes",
+        "HTANParticipantID": "1398a87ab2",
+        "RadonExposure": null,
         "RespirableCrystallineSilicaExposure": "Unknown",
-        "SmokingExposure": "NotReported",
-        "StartDaysfromIndex": 1.804043733747962,
+        "SmokingExposure": "Yes-SmokingExposure",
+        "StartDaysfromIndex": 34.85735526892788,
         "patients": {
-            "submitter_id": "patient_6a8716a438"
+            "submitter_id": "patient_e325abb768"
         },
-        "submitter_id": "exposure_e793b554d4",
+        "submitter_id": "exposure_069fa17be6",
+        "subtype": null,
+        "type": "exposure"
+    },
+    {
+        "AlcoholExposure": "No-AlcoholExposure",
+        "AsbestosExposure": null,
+        "CoalDustExposure": "Unknown",
+        "Component": "c5d8617cf4",
+        "EnvironmentalTobaccoSmokeExposure": "Yes",
+        "HTANParticipantID": "ecbcb25b52",
+        "RadonExposure": "Unknown",
+        "RespirableCrystallineSilicaExposure": null,
+        "SmokingExposure": "Yes-SmokingExposure",
+        "StartDaysfromIndex": 66.72409406296626,
+        "patients": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "exposure_264dd3719f",
+        "subtype": null,
+        "type": "exposure"
+    },
+    {
+        "AlcoholExposure": "No-AlcoholExposure",
+        "AsbestosExposure": "Yes",
+        "CoalDustExposure": "Yes",
+        "Component": "fe2fc252da",
+        "EnvironmentalTobaccoSmokeExposure": "Yes",
+        "HTANParticipantID": "2a93606982",
+        "RadonExposure": null,
+        "RespirableCrystallineSilicaExposure": "Unknown",
+        "SmokingExposure": "Yes-SmokingExposure",
+        "StartDaysfromIndex": 1.6245098114010537,
+        "patients": {
+            "submitter_id": "patient_46582a1fa9"
+        },
+        "submitter_id": "exposure_e4ce37b804",
         "subtype": null,
         "type": "exposure"
     },
     {
         "AlcoholExposure": "NotReported",
-        "AsbestosExposure": "NotReported",
-        "CoalDustExposure": "Yes",
-        "Component": "4a11ec3f3a",
-        "EnvironmentalTobaccoSmokeExposure": null,
-        "HTANParticipantID": "c4591ff372",
-        "RadonExposure": "NotReported",
-        "RespirableCrystallineSilicaExposure": "Yes",
-        "SmokingExposure": "NotReported",
-        "StartDaysfromIndex": 53.22999978157299,
+        "AsbestosExposure": "No",
+        "CoalDustExposure": "No",
+        "Component": "d113858d3b",
+        "EnvironmentalTobaccoSmokeExposure": "Unknown",
+        "HTANParticipantID": "fc93267ac4",
+        "RadonExposure": "Unknown",
+        "RespirableCrystallineSilicaExposure": "Unknown",
+        "SmokingExposure": null,
+        "StartDaysfromIndex": 91.54142006393371,
         "patients": {
-            "submitter_id": "patient_f51d789d0d"
+            "submitter_id": "patient_3dfb62c1f6"
         },
-        "submitter_id": "exposure_b452b849ef",
+        "submitter_id": "exposure_1ae7ae6661",
         "subtype": "TimeBetweenWakingandFirstSmoke",
         "type": "exposure"
     },
     {
-        "AlcoholExposure": "NotReported",
-        "AsbestosExposure": "Unknown",
+        "AlcoholExposure": null,
+        "AsbestosExposure": null,
         "CoalDustExposure": "No",
-        "Component": "58b13ca785",
-        "EnvironmentalTobaccoSmokeExposure": null,
-        "HTANParticipantID": "1b6f726d16",
-        "RadonExposure": "No",
-        "RespirableCrystallineSilicaExposure": null,
+        "Component": "dd39c03485",
+        "EnvironmentalTobaccoSmokeExposure": "Unknown",
+        "HTANParticipantID": "ff2534f98c",
+        "RadonExposure": "NotReported",
+        "RespirableCrystallineSilicaExposure": "Yes",
         "SmokingExposure": null,
-        "StartDaysfromIndex": 91.94936050934162,
+        "StartDaysfromIndex": 34.436044923012346,
         "patients": {
-            "submitter_id": "patient_a27048f526"
+            "submitter_id": "patient_e5caea354c"
         },
-        "submitter_id": "exposure_318451c9fe",
+        "submitter_id": "exposure_dbaeb72c8a",
         "subtype": "TimeBetweenWakingandFirstSmoke",
         "type": "exposure"
     }

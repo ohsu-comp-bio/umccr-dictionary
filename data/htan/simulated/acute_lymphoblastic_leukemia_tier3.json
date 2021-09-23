@@ -1,172 +1,162 @@
 [
     {
-        "CNSLeukemiaStatus": "CNS3a",
-        "Component": "a22de8a8bf",
-        "HTANParticipantID": "fc684f7cee",
-        "MRDALLDiagnosticSensitivity": null,
-        "NCIALLRiskGroup": null,
-        "SpecimenBlastCountPercentageValue": 6.66299431041767,
-        "StartDaysfromIndex": 1.8703052841071544,
-        "StopDaysfromIndex": 52.34276850761781,
-        "TimepointLabel": "c5778226dc",
+        "CNSLeukemiaStatus": "CNS1",
+        "Component": "4090ca7ef7",
+        "HTANParticipantID": "b9358c0603",
+        "MRDALLDiagnosticSensitivity": "Optimal",
+        "NCIALLRiskGroup": "Unknown",
+        "SpecimenBlastCountPercentageValue": 75.79266677991647,
+        "StartDaysfromIndex": 69.89631689076084,
+        "StopDaysfromIndex": 63.534810069939255,
+        "TimepointLabel": "22e8f8322f",
         "patients": {
-            "submitter_id": "patient_5b151e9219"
+            "submitter_id": "patient_5236da4db0"
         },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_587f8f1760",
-        "subtype": null,
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_0ed1207a51",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": "CNS3c",
+        "Component": "f004f16111",
+        "HTANParticipantID": "c915b38791",
+        "MRDALLDiagnosticSensitivity": null,
+        "NCIALLRiskGroup": "NCIHighRisk",
+        "SpecimenBlastCountPercentageValue": 28.501944012106406,
+        "StartDaysfromIndex": 2.060374793068598,
+        "StopDaysfromIndex": 5.294820113415122,
+        "TimepointLabel": "bb38c87d02",
+        "patients": {
+            "submitter_id": "patient_399fade713"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_334ed4db05",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": "CNS2",
+        "Component": "5ff32b1549",
+        "HTANParticipantID": "6f8264efda",
+        "MRDALLDiagnosticSensitivity": "Suboptimal",
+        "NCIALLRiskGroup": "Unknown",
+        "SpecimenBlastCountPercentageValue": 79.08218775882136,
+        "StartDaysfromIndex": 49.50998753850939,
+        "StopDaysfromIndex": 96.34554397406862,
+        "TimepointLabel": "0fa7ddf694",
+        "patients": {
+            "submitter_id": "patient_944516011c"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_2ab4a9b971",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": "CNS2c",
+        "Component": "f0cfbd5cfa",
+        "HTANParticipantID": "87dadf8525",
+        "MRDALLDiagnosticSensitivity": "Optimal",
+        "NCIALLRiskGroup": "NCIHighRisk",
+        "SpecimenBlastCountPercentageValue": 72.63290942998827,
+        "StartDaysfromIndex": 77.43444944393134,
+        "StopDaysfromIndex": 21.228537967477344,
+        "TimepointLabel": "3103703ec7",
+        "patients": {
+            "submitter_id": "patient_b12facdb50"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_28f1a98ff5",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": "CNS1",
+        "Component": "ef89a1a898",
+        "HTANParticipantID": "e73c53c003",
+        "MRDALLDiagnosticSensitivity": "Unknown",
+        "NCIALLRiskGroup": "NCIHighRisk",
+        "SpecimenBlastCountPercentageValue": 48.43388009694093,
+        "StartDaysfromIndex": 67.50442250153796,
+        "StopDaysfromIndex": 10.373392911586443,
+        "TimepointLabel": "b907e3e4b4",
+        "patients": {
+            "submitter_id": "patient_850b47c767"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_238611a04e",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": "CNS2a",
+        "Component": "b12b6fd0fa",
+        "HTANParticipantID": "30c7b6920b",
+        "MRDALLDiagnosticSensitivity": "Optimal",
+        "NCIALLRiskGroup": null,
+        "SpecimenBlastCountPercentageValue": 65.7539946049031,
+        "StartDaysfromIndex": 40.99886845105123,
+        "StopDaysfromIndex": 44.729333728793186,
+        "TimepointLabel": "4df5ab0bdf",
+        "patients": {
+            "submitter_id": "patient_e325abb768"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_f887b564cc",
+        "type": "acute_lymphoblastic_leukemia_tier3"
+    },
+    {
+        "CNSLeukemiaStatus": null,
+        "Component": "f0e3a951b2",
+        "HTANParticipantID": "8f28ba2100",
+        "MRDALLDiagnosticSensitivity": "Indeterminate",
+        "NCIALLRiskGroup": "NCIStandardRisk",
+        "SpecimenBlastCountPercentageValue": 61.05504700464658,
+        "StartDaysfromIndex": 84.7347351594915,
+        "StopDaysfromIndex": 18.24089615115838,
+        "TimepointLabel": "dbd23584dd",
+        "patients": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_c4df9d644c",
         "type": "acute_lymphoblastic_leukemia_tier3"
     },
     {
         "CNSLeukemiaStatus": "Unknown",
-        "Component": "2000807363",
-        "HTANParticipantID": "e3fb85166d",
-        "MRDALLDiagnosticSensitivity": "Unknown",
-        "NCIALLRiskGroup": "NCIHighRisk",
-        "SpecimenBlastCountPercentageValue": 19.6378208236203,
-        "StartDaysfromIndex": 10.328643017557859,
-        "StopDaysfromIndex": 20.144483334515517,
-        "TimepointLabel": "22286abdcf",
-        "patients": {
-            "submitter_id": "patient_e9f09738a9"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_d9b2101c86",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": null,
-        "Component": "c41d17b7e8",
-        "HTANParticipantID": "1f56c63271",
-        "MRDALLDiagnosticSensitivity": "Unknown",
-        "NCIALLRiskGroup": null,
-        "SpecimenBlastCountPercentageValue": 20.640515240641687,
-        "StartDaysfromIndex": 85.46280848193817,
-        "StopDaysfromIndex": 45.09756823955519,
-        "TimepointLabel": "562f16666e",
-        "patients": {
-            "submitter_id": "patient_b67e32207c"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_dd6b69378a",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": "CNS2b",
-        "Component": "7d913167fa",
-        "HTANParticipantID": "ebf8948949",
+        "Component": "4deb4e6f32",
+        "HTANParticipantID": "bf2ef05c5d",
         "MRDALLDiagnosticSensitivity": "Optimal",
-        "NCIALLRiskGroup": null,
-        "SpecimenBlastCountPercentageValue": 24.196881891343036,
-        "StartDaysfromIndex": 34.3899513194838,
-        "StopDaysfromIndex": 52.34585655882946,
-        "TimepointLabel": "a5f3fcbd33",
-        "patients": {
-            "submitter_id": "patient_fb44edbd04"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_30931e753d",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": "CNS3a",
-        "Component": "76b54971fd",
-        "HTANParticipantID": "6df8e300c6",
-        "MRDALLDiagnosticSensitivity": "Indeterminate",
-        "NCIALLRiskGroup": null,
-        "SpecimenBlastCountPercentageValue": 1.5466186795504155,
-        "StartDaysfromIndex": 99.77240330134968,
-        "StopDaysfromIndex": 38.65022535084367,
-        "TimepointLabel": "6b2800daf2",
-        "patients": {
-            "submitter_id": "patient_013a3eb5cf"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_f3ba979d3a",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": null,
-        "Component": "1d339b34ad",
-        "HTANParticipantID": "04d92f3cdb",
-        "MRDALLDiagnosticSensitivity": "Indeterminate",
-        "NCIALLRiskGroup": "NCIStandardRisk",
-        "SpecimenBlastCountPercentageValue": 11.701463589249794,
-        "StartDaysfromIndex": 8.975528604428174,
-        "StopDaysfromIndex": 33.24543235914659,
-        "TimepointLabel": "6180fa63ca",
-        "patients": {
-            "submitter_id": "patient_0dd820d172"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_a5b240ba9c",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": "CNS3",
-        "Component": "24d5ab39c2",
-        "HTANParticipantID": "7461a4adbc",
-        "MRDALLDiagnosticSensitivity": null,
         "NCIALLRiskGroup": "Unknown",
-        "SpecimenBlastCountPercentageValue": 37.50888283168753,
-        "StartDaysfromIndex": 0.7876995369858308,
-        "StopDaysfromIndex": 81.26869194558445,
-        "TimepointLabel": "6536de8a93",
+        "SpecimenBlastCountPercentageValue": 13.110256896826078,
+        "StartDaysfromIndex": 34.924752703445506,
+        "StopDaysfromIndex": 49.5236766292133,
+        "TimepointLabel": "2682fd2946",
         "patients": {
-            "submitter_id": "patient_de2bce081d"
+            "submitter_id": "patient_46582a1fa9"
         },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_4b4bc8654b",
-        "subtype": null,
-        "type": "acute_lymphoblastic_leukemia_tier3"
-    },
-    {
-        "CNSLeukemiaStatus": "Notevaluated",
-        "Component": "26e367c204",
-        "HTANParticipantID": "bbc542bf78",
-        "MRDALLDiagnosticSensitivity": "Indeterminate",
-        "NCIALLRiskGroup": "NCIHighRisk",
-        "SpecimenBlastCountPercentageValue": 4.9158315368313605,
-        "StartDaysfromIndex": 69.32982995550778,
-        "StopDaysfromIndex": 13.213851966575252,
-        "TimepointLabel": "c2e25e440c",
-        "patients": {
-            "submitter_id": "patient_6a8716a438"
-        },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_872bc8e17c",
-        "subtype": null,
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_c365c4b411",
         "type": "acute_lymphoblastic_leukemia_tier3"
     },
     {
         "CNSLeukemiaStatus": "CNS3b",
-        "Component": "ce0dc0f931",
-        "HTANParticipantID": "ac54401683",
-        "MRDALLDiagnosticSensitivity": "Optimal",
-        "NCIALLRiskGroup": null,
-        "SpecimenBlastCountPercentageValue": 36.44310660626733,
-        "StartDaysfromIndex": 95.8476146342942,
-        "StopDaysfromIndex": 71.62991093941457,
-        "TimepointLabel": "359208c84d",
+        "Component": "29f49e75ea",
+        "HTANParticipantID": "044a95e4de",
+        "MRDALLDiagnosticSensitivity": "Unknown",
+        "NCIALLRiskGroup": "Unknown",
+        "SpecimenBlastCountPercentageValue": 77.88754295043488,
+        "StartDaysfromIndex": 81.36439449242927,
+        "StopDaysfromIndex": 98.12913045435127,
+        "TimepointLabel": "e0e5abfb7d",
         "patients": {
-            "submitter_id": "patient_f51d789d0d"
+            "submitter_id": "patient_3dfb62c1f6"
         },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_438e921af3",
-        "subtype": null,
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_b99fe4dc58",
         "type": "acute_lymphoblastic_leukemia_tier3"
     },
     {
-        "CNSLeukemiaStatus": "CNS2b",
-        "Component": "86876c4524",
-        "HTANParticipantID": "4ef12503ae",
+        "CNSLeukemiaStatus": "CNS3a",
+        "Component": "01c7477521",
+        "HTANParticipantID": "68eb439656",
         "MRDALLDiagnosticSensitivity": "Unknown",
-        "NCIALLRiskGroup": "Unknown",
-        "SpecimenBlastCountPercentageValue": 85.42278597991313,
-        "StartDaysfromIndex": 28.729869924160965,
-        "StopDaysfromIndex": 25.18981431521571,
-        "TimepointLabel": "dcd157a6da",
+        "NCIALLRiskGroup": null,
+        "SpecimenBlastCountPercentageValue": 89.11389436531468,
+        "StartDaysfromIndex": 84.21483510295582,
+        "StopDaysfromIndex": 9.799664847440837,
+        "TimepointLabel": "5b0d78b58c",
         "patients": {
-            "submitter_id": "patient_a27048f526"
+            "submitter_id": "patient_e5caea354c"
         },
-        "submitter_id": "acute_lymphoblastic_leukemia_tier3_8cfb7312c9",
-        "subtype": null,
+        "submitter_id": "acute_lymphoblastic_leukemia_tier3_bd2eb2ef93",
         "type": "acute_lymphoblastic_leukemia_tier3"
     }
 ]
