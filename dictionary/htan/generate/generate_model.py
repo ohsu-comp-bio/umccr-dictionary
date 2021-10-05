@@ -342,7 +342,7 @@ class Gen3Configuration(object):
         # template['description'] = schema_node['rdfs:comment']
         template['category'] = self.category(template['id'])
         # template['links'] = self.links()
-        template["properties"]["type"]["enum"].append(schema_node['rdfs:label'])
+        template["properties"]["type"]["enum"].append(self._name(schema_node))
         for st in node['subclasses']:
             schema_node = self.schema._nodes[st]
             # template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
@@ -383,7 +383,7 @@ class Gen3Configuration(object):
                     "backref": "demographics",
                     "label": "reference_to",
                     "target_type": "patient",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "one_to_many",
                     "required": True
                 }
             )
