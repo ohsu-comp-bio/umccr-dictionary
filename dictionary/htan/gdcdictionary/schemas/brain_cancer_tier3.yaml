@@ -39,7 +39,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - BrainCancerTier3
+    - brain_cancer_tier3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

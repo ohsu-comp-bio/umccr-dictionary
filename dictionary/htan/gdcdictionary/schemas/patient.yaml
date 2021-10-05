@@ -34,7 +34,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Patient
+    - patient
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

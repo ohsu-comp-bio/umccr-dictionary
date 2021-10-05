@@ -44,7 +44,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - BulkRNA-seqLevel3
+    - bulk_rna_seq_level3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

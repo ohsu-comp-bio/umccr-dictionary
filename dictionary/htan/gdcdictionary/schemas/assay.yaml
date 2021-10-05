@@ -35,7 +35,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Assay
+    - assay
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

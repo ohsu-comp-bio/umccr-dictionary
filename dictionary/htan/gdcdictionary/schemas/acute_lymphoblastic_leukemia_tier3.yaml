@@ -39,7 +39,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - AcuteLymphoblasticLeukemiaTier3
+    - acute_lymphoblastic_leukemia_tier3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

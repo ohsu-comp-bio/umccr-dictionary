@@ -49,7 +49,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - BulkWESLevel3
+    - bulk_wes_level3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

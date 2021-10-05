@@ -52,7 +52,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - ScRNA-seqLevel2
+    - sc_rna_seq_level2
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

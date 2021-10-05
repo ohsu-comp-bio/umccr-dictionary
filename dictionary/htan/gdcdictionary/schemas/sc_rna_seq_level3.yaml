@@ -49,7 +49,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - ScRNA-seqLevel3
+    - sc_rna_seq_level3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

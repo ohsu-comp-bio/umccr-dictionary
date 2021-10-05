@@ -39,7 +39,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - ClinicalDataTier2
+    - clinical_data_tier2
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

@@ -43,7 +43,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - File
+    - file
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

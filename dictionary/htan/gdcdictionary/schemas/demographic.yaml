@@ -21,7 +21,7 @@ links:
   backref: demographics
   label: reference_to
   target_type: patient
-  multiplicity: many_to_one
+  multiplicity: one_to_many
   required: true
 required:
 - submitter_id
@@ -34,7 +34,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Demographics
+    - demographic
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

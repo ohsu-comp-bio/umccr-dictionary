@@ -35,7 +35,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Biospecimen
+    - biospecimen
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

@@ -39,7 +39,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - SarcomaTier3
+    - sarcoma_tier3
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id

@@ -61,7 +61,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - ScATAC-seqLevel1
+    - sc_atac_seq_level1
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
