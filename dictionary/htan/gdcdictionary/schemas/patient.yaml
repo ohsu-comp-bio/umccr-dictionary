@@ -21,7 +21,7 @@ links:
   backref: patients
   label: reference_to
   target_type: project
-  multiplicity: many_to_one
+  multiplicity: many_to_many
   required: true
 required:
 - submitter_id

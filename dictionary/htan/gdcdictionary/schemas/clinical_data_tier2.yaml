@@ -21,7 +21,7 @@ links:
   backref: clinical_data_tier2s
   label: refers_to
   target_type: patient
-  multiplicity: one_to_many
+  multiplicity: many_to_many
   required: true
 required:
 - submitter_id

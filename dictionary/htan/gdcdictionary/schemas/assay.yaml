@@ -22,7 +22,7 @@ links:
   backref: assays
   label: reference_to
   target_type: biospecimen
-  multiplicity: one_to_many
+  multiplicity: many_to_many
   required: true
 required:
 - submitter_id

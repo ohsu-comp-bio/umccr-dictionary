@@ -21,7 +21,7 @@ links:
   backref: bulk_wes_level1s
   label: refers_to
   target_type: assay
-  multiplicity: one_to_many
+  multiplicity: many_to_many
   required: true
 required:
 - submitter_id

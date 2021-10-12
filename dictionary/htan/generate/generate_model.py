@@ -2,7 +2,6 @@ import graphviz
 import json
 from yaml import dump
 import click
-from pprint import pprint
 import re
 import inflection
 
@@ -35,7 +34,6 @@ class HTANSchema(object):
 
         self._rangeMembers = set(self._rangeMembers)                    
         self._dependencies = set(self._dependencies)                    
-        
 
     @property
     def nodes(self):
@@ -252,7 +250,7 @@ class Gen3Configuration(object):
             'backref': backref,
             'label': 'refers_to',
             'target_type': target_type,
-            'multiplicity': 'one_to_many',
+            'multiplicity': 'many_to_many',
             'required': True,
         }
 
@@ -273,7 +271,7 @@ class Gen3Configuration(object):
             'backref': backref,
             'label': 'refers_to',
             'target_type': target_type,
-            'multiplicity': 'one_to_many',
+            'multiplicity': 'many_to_many',
             'required': True,
         }
 
@@ -383,7 +381,7 @@ class Gen3Configuration(object):
                     "backref": "demographics",
                     "label": "reference_to",
                     "target_type": "patient",
-                    "multiplicity": "one_to_many",
+                    "multiplicity": "many_to_many",
                     "required": True
                 }
             )
@@ -398,7 +396,7 @@ class Gen3Configuration(object):
                     "backref": "patients",
                     "label": "reference_to",
                     "target_type": "project",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "many_to_many",
                     "required": True
                 }
             )
@@ -410,7 +408,7 @@ class Gen3Configuration(object):
                     "backref": "files",
                     "label": "reference_to",
                     "target_type": "assay",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "many_to_many",
                     "required": True
                 }
             )
@@ -420,7 +418,7 @@ class Gen3Configuration(object):
                     "backref": "files",
                     "label": "data_from",
                     "target_type": "core_metadata_collection",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "many_to_many",
                     "required": False
                 }
             )
@@ -487,7 +485,7 @@ class Gen3Configuration(object):
                     "backref": "assays",
                     "label": "reference_to",
                     "target_type": "biospecimen",
-                    "multiplicity": "one_to_many",
+                    "multiplicity": "many_to_many",
                     "required": True                
                 }
             )
@@ -502,7 +500,7 @@ class Gen3Configuration(object):
                     "backref": "biospecimens",
                     "label": "reference_to",
                     "target_type": "patient",
-                    "multiplicity": "one_to_many",
+                    "multiplicity": "many_to_many",
                     "required": True
                 }
             )

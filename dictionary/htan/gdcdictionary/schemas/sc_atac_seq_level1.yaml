@@ -22,7 +22,7 @@ links:
   backref: sc_atac_seq_level1s
   label: refers_to
   target_type: assay
-  multiplicity: one_to_many
+  multiplicity: many_to_many
   required: true
 required:
 - submitter_id
