@@ -835,4 +835,4 @@ properties:
     description: The number of cumulative years of the patient's specific type of
       smoke exposure
   patients:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many

@@ -192,4 +192,4 @@ properties:
       was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
       PHI/PII INFORMATION IS ALLOWED.
   patients:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many

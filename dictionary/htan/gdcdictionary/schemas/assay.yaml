@@ -80,4 +80,4 @@ properties:
   workflow_types:
     $ref: _definitions.yaml#/to_many
   biospecimen:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many

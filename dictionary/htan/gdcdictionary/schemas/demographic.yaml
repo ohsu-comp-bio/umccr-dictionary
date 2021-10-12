@@ -373,4 +373,4 @@ properties:
     description: Numeric value to represent the calendar year in which an individual
       was born.
   patient:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many

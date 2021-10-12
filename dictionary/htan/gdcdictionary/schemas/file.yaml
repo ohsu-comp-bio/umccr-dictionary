@@ -66,7 +66,7 @@ properties:
     type: string
     description: 'Name of a file '
   assay:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many
   core_metadata_collections:
     $ref: _definitions.yaml#/to_many
   $ref: _definitions.yaml#/data_file_properties

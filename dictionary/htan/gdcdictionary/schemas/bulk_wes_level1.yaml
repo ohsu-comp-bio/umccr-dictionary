@@ -341,4 +341,4 @@ properties:
     type: string
     description: 'Name of a file '
   assays:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many

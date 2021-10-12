@@ -369,7 +369,7 @@ class Gen3Configuration(object):
                 template['links'].append(parent_link)
                 template['required'].append(parent_link['name'])
                 template["properties"][parent_link['name']] = {
-                    "$ref": "_definitions.yaml#/to_one"}
+                    "$ref": "_definitions.yaml#/to_many"}
                 for p in node['properties']:
                     schema_node = self.schema._nodes[p]
                     if self.is_required(p, schema_node):
@@ -388,7 +388,7 @@ class Gen3Configuration(object):
                 }
             )
             template["properties"]["patient"] = {
-                "$ref": "_definitions.yaml#/to_one"
+                "$ref": "_definitions.yaml#/to_many"
             }
         # special case for patient, link back to project
         if template['id'] == 'patient':
@@ -425,7 +425,7 @@ class Gen3Configuration(object):
                 }
             )
             template["properties"]["assay"] = {
-                "$ref": "_definitions.yaml#/to_one"
+                "$ref": "_definitions.yaml#/to_many"
             }
             template["properties"]["core_metadata_collections"] = {
                 "$ref": "_definitions.yaml#/to_many"
@@ -492,7 +492,7 @@ class Gen3Configuration(object):
                 }
             )
             template["properties"]["biospecimen"] = {
-                "$ref": "_definitions.yaml#/to_one"
+                "$ref": "_definitions.yaml#/to_many"
             }
         # special case for biospecimen, link back to patient
         if template['id'] == 'biospecimen':
@@ -507,7 +507,7 @@ class Gen3Configuration(object):
                 }
             )
             template["properties"]["patient"] = {
-                "$ref": "_definitions.yaml#/to_one"
+                "$ref": "_definitions.yaml#/to_many"
             }
 
 

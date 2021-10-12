@@ -681,4 +681,4 @@ properties:
     type: number
     description: Measure of Tumor-Infiltrating Lymphocytes [Number]
   patient:
-    $ref: _definitions.yaml#/to_one
+    $ref: _definitions.yaml#/to_many
