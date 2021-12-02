@@ -47,6 +47,15 @@ properties:
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+  name:
+    type: string
+    description: The common name referring to this assay, e.g. IHC
+  panel:
+    type: string
+    description: The common name referring to this panel, e.g. MYLOID
+  lab:
+    type: string
+    description: The university and data producing lab, ORGANIZATION-LAB e.g. OHSU-CHIN
   project_id:
     type: string
   created_datetime:
