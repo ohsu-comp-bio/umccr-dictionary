@@ -1,0 +1,7 @@
+graphviz
+PyYAML
+click
+inflection
+requests
+yq
+xq

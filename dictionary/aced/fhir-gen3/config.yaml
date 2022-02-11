@@ -1,0 +1,196 @@
+ResearchStudy:
+  category: Administrative
+  links:
+    ResearchStudy.partOf:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+    # ResearchStudy.principalInvestigator:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
+    #   required: true
+    # ResearchStudy.sponsor:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    #   required: true
+    ResearchStudy.project:
+      # link to "native" gen3 project
+      targetProfile: project
+      required: true
+  properties:
+    include:
+    - title
+    - primaryPurposeType.coding.code
+    - text.div.value
+    - focus.coding.code
+    - focus.coding.system
+  enums:
+    focus.coding.code: http://hl7.org/fhir/ValueSet/condition-code
+
+
+ResearchSubject:
+  category: Administrative
+  links:
+    ResearchSubject.study:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+      required: true
+    # ResearchSubject.individual:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+    #   required: true
+  properties:
+    include:
+    - status.value
+    - assignedArm
+    - actualArm
+
+
+Patient:
+  category: Administrative
+  links:
+    # Patient.managingOrganization:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    #   required: true
+    Patient.ResearchSubject:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchSubject
+      required: true
+  properties:
+    include:
+    - active
+    - name.text
+    - gender
+    - birthDate.value
+    - deceased
+
+
+DRSDocumentReference:
+  category: data_file
+  links:
+    # DocumentReference.custodian:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    #   required: true
+    DocumentReference.subject:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+      required: true
+  properties:
+    include:
+    - status
+    - date.value
+    - description
+    - content.attachment.url.value
+  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-drs-document-reference.json
+
+
+SpecimenTask:
+  category: Analysis
+  links:
+    # Task.focus:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
+    #   required: true
+    # Task.for:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+    #   required: true
+    # Task.owner:
+    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    Task.input:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
+      required: true
+    Task.output:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/DRSDocumentReference
+      required: true
+  properties:
+    include:
+    - status.value
+    - intent.value
+    - code.coding.code.value
+  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-specimen-task.json
+
+
+Specimen:
+  category: Biospecimen
+  links:
+    Specimen.subject:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+      required: true
+  properties:
+    include:
+    - status
+    - type.coding.code.value
+    - collection.bodySite.coding.code
+    - collection.method.coding.code
+
+Observation:
+  category: Clinical
+  links:
+    Observation.subject:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+      required: true
+    Observation.specimen:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
+  properties:
+    include:
+    - status.value
+    - value    
+    - code.coding.code.value
+    - dataAbsentReason.coding.code
+    - interpretation.coding.code
+  enums:
+    valueQuantity.code: http://hl7.org/fhir/ValueSet/ucum-common
+
+
+Organization:
+  category: Administrative
+  links:
+    Organization.partOf:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    Organization.researchStudy:
+      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+      required: true
+  properties:
+    include:
+    - name.text
+
+Practitioner:
+  category: Administrative
+  links:
+    Practitioner.organization:
+      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+      required: true
+  properties:
+    include:
+    - name.text
+    - telecom.system.value
+    - text.div.value
+
+
+Questionnaire:
+  category: Clinical
+  links:
+    Questionnaire.project:
+      # link to "native" gen3 project
+      targetProfile: project
+      required: true
+  properties:
+    include:
+    - name
+    - status.value
+
+
+QuestionnaireResponse:
+  category: Clinical
+  links:
+    QuestionnaireResponse.subject:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+      required: true
+    QuestionnaireResponse.questionnaire:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Questionnaire
+      required: true
+  properties:
+    include:
+    - questionnaire.id
+    - status.value
+    - item.answer.value
+    - item.text
+    exclude:
+    - item.answer.valueAttachment
+    - item.answer.valueReference
+    - item.answer.valueCoding.version
+    - item.answer.valueCoding.display
+    - item.answer.valueCoding.userSelected
