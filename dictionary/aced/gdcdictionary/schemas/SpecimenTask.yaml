@@ -1,0 +1,105 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: SpecimenTask
+title: Research Task
+type: object
+namespace: http://aced-idp.org
+category: Analysis
+program: '*'
+project: '*'
+description: A FHIR analysis task that takes at least one specimen as input and produces
+  at least one document.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # input
+  name: Specimen
+  backref: SpecimenTasks
+  label: input
+  target_type: Specimen
+  multiplicity: many_to_many
+  required: true
+- # output
+  name: DRSDocumentReferences
+  backref: SpecimenTasks
+  label: output
+  target_type: DRSDocumentReference
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- status
+- submitter_id
+- intent
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - SpecimenTask
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    description: The current status of the task. The current status of the task.  Vocabulary
+      from http://hl7.org/fhir/ValueSet/task-status|4.0.1
+    enum:
+    - draft
+    - requested
+    - received
+    - accepted
+    - rejected
+    - ready
+    - cancelled
+    - in-progress
+    - on-hold
+    - failed
+    - completed
+    - entered-in-error
+  intent:
+    description: Indicates the "level" of actionability associated with the Task,
+      i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.
+      Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs
+      this a proposed task, a planned task, an actionable task, etc.  Vocabulary from
+      http://hl7.org/fhir/ValueSet/task-intent|4.0.1
+    enum:
+    - unknown
+  code_coding_code:
+    description: A name or code (or both) briefly describing what the task involves.
+      A reference to a code defined by a terminology system. A symbol in syntax defined
+      by the system. The symbol may be a predefined code or an expression in a syntax
+      defined by the coding system (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/task-code
+    enum:
+    - approve
+    - fulfill
+    - abort
+    - replace
+    - change
+    - suspend
+    - resume

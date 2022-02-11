@@ -1,0 +1,84 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: DRSDocumentReference
+title: DRS Document Reference
+type: object
+namespace: http://aced-idp.org
+category: data_file
+program: '*'
+project: '*'
+description: A FHIR Document Reference with an embedded DRS URI. See https://github.com/ga4gh/data-repository-service-schemas.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # subject
+  name: Patients
+  backref: DRSDocumentReferences
+  label: subject
+  target_type: Patient
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- status
+- submitter_id
+- content_attachment_url
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - DRSDocumentReference
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    description: The status of this document reference. The status of this document
+      reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
+    enum:
+    - current
+    - superseded
+    - entered-in-error
+  date:
+    description: When the document reference was created. When the document reference
+      was created. The actual value
+    oneOf:
+    - type: string
+      format: date-time
+    - type: 'null'
+    term:
+      $ref: _terms.yaml#/datetime
+  description:
+    description: Human-readable description of the source document. Human-readable
+      description of the source document.
+    type: string
+  content_attachment_url:
+    description: For referring to data content defined in other formats. A location
+      where the data can be accessed. Primitive value for url
+    type: string

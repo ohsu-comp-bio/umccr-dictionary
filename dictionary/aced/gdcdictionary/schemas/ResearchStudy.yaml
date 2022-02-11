@@ -1,0 +1,121 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: ResearchStudy
+title: ResearchStudy
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A process where a researcher or organization plans and then executes
+  a series of steps intended to increase the field of healthcare-related knowledge.  This
+  includes studies of safety, efficacy, comparative effectiveness and other information
+  about medications, devices, therapies and other interventional and investigative
+  techniques.  A ResearchStudy involves the gathering of information about human or
+  animal subjects.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # partOf
+  name: ResearchStudies
+  backref: ResearchStudies
+  label: partOf
+  target_type: ResearchStudy
+  multiplicity: many_to_many
+  required: false
+- # type
+  name: projects
+  backref: ResearchStudies
+  label: type
+  target_type: project
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ResearchStudy
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  text_div:
+    description: A human-readable narrative that contains a summary of the resource
+      and can be used to represent the content of the resource to a human. The narrative
+      need not encode all the structured data, but is required to contain sufficient
+      detail to make it "clinically safe" for a human to just read the narrative.
+      Resource definitions may define what content should be represented in the narrative
+      to ensure clinical safety. The actual narrative content, a stripped down version
+      of XHTML. Actual xhtml
+    type: string
+  title:
+    description: A short, descriptive user-friendly label for the study. A short,
+      descriptive user-friendly label for the study.
+    type: string
+  primaryPurposeType_coding_system:
+    description: The type of study based upon the intent of the study's activities.
+      A classification of the intent of the study. A reference to a code defined by
+      a terminology system. The identification of the code system that defines the
+      meaning of the symbol in the code.
+    type: string
+    format: uri
+  primaryPurposeType_coding_code:
+    description: The type of study based upon the intent of the study's activities.
+      A classification of the intent of the study. A reference to a code defined by
+      a terminology system. A symbol in syntax defined by the system. The symbol may
+      be a predefined code or an expression in a syntax defined by the coding system
+      (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/research-study-prim-purp-type
+    enum:
+    - treatment
+    - prevention
+    - diagnostic
+    - supportive-care
+    - screening
+    - health-services-research
+    - basic-science
+    - device-feasibility
+  focus_coding_system:
+    description: The medication(s), food(s), therapy(ies), device(s) or other concerns
+      or interventions that the study is seeking to gain more information about. A
+      reference to a code defined by a terminology system. The identification of the
+      code system that defines the meaning of the symbol in the code.
+    type: string
+    format: uri
+  focus_coding_code:
+    description: The medication(s), food(s), therapy(ies), device(s) or other concerns
+      or interventions that the study is seeking to gain more information about. A
+      reference to a code defined by a terminology system. A symbol in syntax defined
+      by the system. The symbol may be a predefined code or an expression in a syntax
+      defined by the coding system (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/condition-code
+    type: string
+    format: code
+    # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/condition-code|codeset-http://hl7.org/fhir/CodeSystem/snomedct

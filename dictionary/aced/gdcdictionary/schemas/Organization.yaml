@@ -1,0 +1,72 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: Organization
+title: Organization
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A formally or informally recognized grouping of people or organizations
+  formed for the purpose of achieving some form of collective action.  Includes companies,
+  institutions, corporations, departments, community groups, healthcare practice groups,
+  payer/insurer, etc.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # partOf
+  name: Organizations
+  backref: Organizations
+  label: partOf
+  target_type: Organization
+  multiplicity: many_to_many
+  required: false
+- # endpoint
+  name: ResearchStudies
+  backref: Organizations
+  label: endpoint
+  target_type: ResearchStudy
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Organization
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  name:
+    description: A name associated with the organization. A name associated with the
+      organization.
+    type: string

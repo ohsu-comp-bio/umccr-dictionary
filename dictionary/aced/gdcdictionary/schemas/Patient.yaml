@@ -1,0 +1,109 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: Patient
+title: Patient
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: Demographics and other administrative information about an individual
+  or animal receiving care or other health-related services.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # type
+  name: ResearchSubjects
+  backref: Patients
+  label: type
+  target_type: ResearchSubject
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Patient
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  active:
+    description: "Whether this patient record is in active use. \nMany systems use\
+      \ this property to mark as non-current patients, such as those that have not\
+      \ been seen for a period of time based on an organization's business rules.\n\
+      \nIt is often used to filter patient lists to exclude inactive patients\n\n\
+      Deceased patients may also be marked as inactive for the same reasons, but may\
+      \ be active for some time after death. Whether this patient record is in active\
+      \ use. \nMany systems use this property to mark as non-current patients, such\
+      \ as those that have not been seen for a period of time based on an organization's\
+      \ business rules.\n\nIt is often used to filter patient lists to exclude inactive\
+      \ patients\n\nDeceased patients may also be marked as inactive for the same\
+      \ reasons, but may be active for some time after death."
+    type: boolean
+  name_text:
+    description: A name associated with the individual. A name associated with the
+      individual. Specifies the entire name as it should be displayed e.g. on an application
+      UI. This may be provided instead of or as well as the specific parts.
+    type: string
+  gender:
+    description: Administrative Gender - the gender that the patient is considered
+      to have for administration and record keeping purposes. Administrative Gender
+      - the gender that the patient is considered to have for administration and record
+      keeping purposes.  Vocabulary from http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
+    enum:
+    - male
+    - female
+    - other
+    - unknown
+  birthDate:
+    description: The date of birth for the individual. The date of birth for the individual.
+      The actual value
+    oneOf:
+    - type: string
+      format: date
+    - type: 'null'
+  deceasedBoolean:
+    description: Indicates if the individual is deceased or not. Indicates if the
+      individual is deceased or not. Indicates if the individual is deceased or not.
+      The actual value
+    type: boolean
+  deceasedDatetime:
+    description: Indicates if the individual is deceased or not. Indicates if the
+      individual is deceased or not. Indicates if the individual is deceased or not.
+      The actual value
+    oneOf:
+    - type: string
+      format: date-time
+    - type: 'null'
+    term:
+      $ref: _terms.yaml#/datetime

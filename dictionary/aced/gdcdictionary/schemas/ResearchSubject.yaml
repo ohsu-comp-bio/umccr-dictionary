@@ -1,0 +1,80 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: ResearchSubject
+title: ResearchSubject
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A physical entity which is the primary unit of operational and/or administrative
+  interest in a study.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # study
+  name: ResearchStudies
+  backref: ResearchSubjects
+  label: study
+  target_type: ResearchStudy
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- status
+- projects
+- submitter_id
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ResearchSubject
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    description: The current state of the subject. The current state of the subject.  Vocabulary
+      from http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
+    enum:
+    - candidate
+    - enrolled
+    - active
+    - suspended
+    - withdrawn
+    - completed
+  assignedArm:
+    description: The name of the arm in the study the subject is expected to follow
+      as part of this study. The name of the arm in the study the subject is expected
+      to follow as part of this study.
+    type: string
+  actualArm:
+    description: The name of the arm in the study the subject actually followed as
+      part of this study. The name of the arm in the study the subject actually followed
+      as part of this study.
+    type: string

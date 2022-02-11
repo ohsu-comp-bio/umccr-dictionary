@@ -1,0 +1,96 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: Specimen
+title: Specimen
+type: object
+namespace: http://aced-idp.org
+category: Biospecimen
+program: '*'
+project: '*'
+description: A sample to be used for analysis.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # subject
+  name: Patients
+  backref: Specimen
+  label: subject
+  target_type: Patient
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Specimen
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    description: The availability of the specimen. The availability of the specimen.  Vocabulary
+      from http://hl7.org/fhir/ValueSet/specimen-status|4.0.1
+    enum:
+    - available
+    - unavailable
+    - unsatisfactory
+    - entered-in-error
+  collection_method_coding_code:
+    description: A coded value specifying the technique that is used to perform the
+      procedure. A reference to a code defined by a terminology system. A symbol in
+      syntax defined by the system. The symbol may be a predefined code or an expression
+      in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
+      from http://hl7.org/fhir/ValueSet/specimen-collection-method
+    enum:
+    - '119295008'
+    - '413651001'
+    - '360020006'
+    - '430823004'
+    - '16404004'
+    - '67889009'
+    - '29240004'
+    - '45710003'
+    - '7800008'
+    - '258431006'
+    - '20255002'
+    - '386147002'
+    - '278450005'
+  collection_bodySite_coding_code:
+    description: Anatomical location from which the specimen was collected (if subject
+      is a patient). This is the target site.  This element is not used for environmental
+      specimens. A reference to a code defined by a terminology system. A symbol in
+      syntax defined by the system. The symbol may be a predefined code or an expression
+      in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
+      from http://hl7.org/fhir/ValueSet/body-site
+    type: string
+    format: code
+    # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/body-site|codeset-http://hl7.org/fhir/CodeSystem/snomedct

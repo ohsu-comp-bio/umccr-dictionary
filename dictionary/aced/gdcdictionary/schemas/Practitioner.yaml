@@ -1,0 +1,87 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: Practitioner
+title: Practitioner
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A person who is directly or indirectly involved in the provisioning of
+  healthcare.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- # communication
+  name: Organizations
+  backref: Practitioners
+  label: communication
+  target_type: Organization
+  multiplicity: many_to_many
+  required: true
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - Practitioner
+  subtype:
+    enum: []
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Alias for FHIR Resource's identifier.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  text_div:
+    description: A human-readable narrative that contains a summary of the resource
+      and can be used to represent the content of the resource to a human. The narrative
+      need not encode all the structured data, but is required to contain sufficient
+      detail to make it "clinically safe" for a human to just read the narrative.
+      Resource definitions may define what content should be represented in the narrative
+      to ensure clinical safety. The actual narrative content, a stripped down version
+      of XHTML. Actual xhtml
+    type: string
+  name_text:
+    description: The name(s) associated with the practitioner. The name(s) associated
+      with the practitioner. Specifies the entire name as it should be displayed e.g.
+      on an application UI. This may be provided instead of or as well as the specific
+      parts.
+    type: string
+  telecom_system:
+    description: A contact detail for the practitioner, e.g. a telephone number or
+      an email address. A contact detail for the practitioner, e.g. a telephone number
+      or an email address. Telecommunications form for contact point - what communications
+      system is required to make use of the contact.  Vocabulary from http://hl7.org/fhir/ValueSet/contact-point-system|4.0.1
+    enum:
+    - phone
+    - fax
+    - email
+    - pager
+    - url
+    - sms
+    - other
