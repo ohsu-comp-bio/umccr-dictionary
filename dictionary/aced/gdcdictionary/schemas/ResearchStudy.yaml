@@ -48,20 +48,22 @@ properties:
   type:
     enum:
     - ResearchStudy
-  subtype:
-    enum: []
+    description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
-    description: Alias for FHIR Resource's identifier.
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
     type:
     - string
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
   project_id:
     type: string
   created_datetime:
@@ -103,6 +105,18 @@ properties:
     - health-services-research
     - basic-science
     - device-feasibility
+    term:
+      description: The type of study based upon the intent of the study's activities.
+        A classification of the intent of the study. A reference to a code defined
+        by a terminology system. A symbol in syntax defined by the system. The symbol
+        may be a predefined code or an expression in a syntax defined by the coding
+        system (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/research-study-prim-purp-type
+      termDef:
+        term: primaryPurposeType_coding_code
+        source: fhir
+        cde_id: primaryPurposeType_coding_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/research-study-prim-purp-type
   focus_coding_system:
     description: The medication(s), food(s), therapy(ies), device(s) or other concerns
       or interventions that the study is seeking to gain more information about. A
@@ -119,3 +133,16 @@ properties:
     type: string
     format: code
     # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/condition-code|codeset-http://hl7.org/fhir/CodeSystem/snomedct
+    term:
+      description: The medication(s), food(s), therapy(ies), device(s) or other concerns
+        or interventions that the study is seeking to gain more information about.
+        A reference to a code defined by a terminology system. A symbol in syntax
+        defined by the system. The symbol may be a predefined code or an expression
+        in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
+        from http://hl7.org/fhir/ValueSet/condition-code
+      termDef:
+        term: focus_coding_code
+        source: fhir
+        cde_id: focus_coding_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/condition-code

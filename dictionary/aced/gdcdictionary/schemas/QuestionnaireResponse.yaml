@@ -46,8 +46,7 @@ properties:
   type:
     enum:
     - QuestionnaireResponse
-  subtype:
-    enum: []
+    description: Gen3's type field.
   id:
     description: The logical id of the resource, as used in the URL for the resource.
       Once assigned, this value never changes. The logical id of the resource, as
@@ -56,12 +55,15 @@ properties:
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
-    description: Alias for FHIR Resource's identifier.
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
     type:
     - string
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
   project_id:
     type: string
   created_datetime:
@@ -84,6 +86,16 @@ properties:
     - amended
     - entered-in-error
     - stopped
+    term:
+      description: The position of the questionnaire response within its overall lifecycle.
+        The position of the questionnaire response within its overall lifecycle.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
   item_text:
     description: Text that is displayed above the contents of the group or as the
       text of the question being answered. Text that is displayed above the contents
@@ -166,6 +178,19 @@ properties:
     type: string
     format: code
     # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/questionnaire-answers|codeset-http://hl7.org/fhir/CodeSystem/snomedct
+    term:
+      description: The answer (or one of the answers) provided by the respondent to
+        the question. The answer (or one of the answers) provided by the respondent
+        to the question. The answer (or one of the answers) provided by the respondent
+        to the question. A symbol in syntax defined by the system. The symbol may
+        be a predefined code or an expression in a syntax defined by the coding system
+        (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
+      termDef:
+        term: item_answerCoding_code
+        source: fhir
+        cde_id: item_answerCoding_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers
   item_answerQuantity:
     description: The answer (or one of the answers) provided by the respondent to
       the question. The value of the measured amount. The value includes an implicit
@@ -184,6 +209,20 @@ properties:
     - <=
     - '>='
     - '>'
+    term:
+      description: The answer (or one of the answers) provided by the respondent to
+        the question. The answer (or one of the answers) provided by the respondent
+        to the question. The answer (or one of the answers) provided by the respondent
+        to the question. How the value should be understood and represented - whether
+        the actual value is greater or less than the stated value due to measurement
+        issues; e.g. if the comparator is "<" , then the real value is < stated value.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/quantity-comparator|4.0.1
+      termDef:
+        term: item_answerQuantity_comparator
+        source: fhir
+        cde_id: item_answerQuantity_comparator
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/quantity-comparator|4.0.1
   item_answerQuantity_unit:
     description: The answer (or one of the answers) provided by the respondent to
       the question. The answer (or one of the answers) provided by the respondent
@@ -207,3 +246,15 @@ properties:
     type: string
     format: code
     # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/questionnaire-answers|codeset-http://hl7.org/fhir/CodeSystem/snomedct
+    term:
+      description: The answer (or one of the answers) provided by the respondent to
+        the question. The answer (or one of the answers) provided by the respondent
+        to the question. The answer (or one of the answers) provided by the respondent
+        to the question. A computer processable form of the unit in some unit representation
+        system.  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
+      termDef:
+        term: item_answerQuantity_code
+        source: fhir
+        cde_id: item_answerQuantity_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers

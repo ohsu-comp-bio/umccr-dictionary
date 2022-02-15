@@ -36,20 +36,22 @@ properties:
   type:
     enum:
     - Specimen
-  subtype:
-    enum: []
+    description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
-    description: Alias for FHIR Resource's identifier.
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
     type:
     - string
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
   project_id:
     type: string
   created_datetime:
@@ -64,6 +66,15 @@ properties:
     - unavailable
     - unsatisfactory
     - entered-in-error
+    term:
+      description: The availability of the specimen. The availability of the specimen.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/specimen-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/specimen-status|4.0.1
   collection_method_coding_code:
     description: A coded value specifying the technique that is used to perform the
       procedure. A reference to a code defined by a terminology system. A symbol in
@@ -84,6 +95,18 @@ properties:
     - '20255002'
     - '386147002'
     - '278450005'
+    term:
+      description: A coded value specifying the technique that is used to perform
+        the procedure. A reference to a code defined by a terminology system. A symbol
+        in syntax defined by the system. The symbol may be a predefined code or an
+        expression in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
+        from http://hl7.org/fhir/ValueSet/specimen-collection-method
+      termDef:
+        term: collection_method_coding_code
+        source: fhir
+        cde_id: collection_method_coding_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/specimen-collection-method
   collection_bodySite_coding_code:
     description: Anatomical location from which the specimen was collected (if subject
       is a patient). This is the target site.  This element is not used for environmental
@@ -94,3 +117,16 @@ properties:
     type: string
     format: code
     # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/body-site|codeset-http://hl7.org/fhir/CodeSystem/snomedct
+    term:
+      description: Anatomical location from which the specimen was collected (if subject
+        is a patient). This is the target site.  This element is not used for environmental
+        specimens. A reference to a code defined by a terminology system. A symbol
+        in syntax defined by the system. The symbol may be a predefined code or an
+        expression in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
+        from http://hl7.org/fhir/ValueSet/body-site
+      termDef:
+        term: collection_bodySite_coding_code
+        source: fhir
+        cde_id: collection_bodySite_coding_code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/body-site

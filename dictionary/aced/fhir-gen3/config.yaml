@@ -163,9 +163,9 @@ Practitioner:
 Questionnaire:
   category: Clinical
   links:
-    Questionnaire.project:
-      # link to "native" gen3 project
-      targetProfile: project
+    Questionnaire.researchStudy:
+      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
       required: true
   properties:
     include:

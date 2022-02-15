@@ -46,20 +46,22 @@ properties:
   type:
     enum:
     - Organization
-  subtype:
-    enum: []
+    description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
-    description: Alias for FHIR Resource's identifier.
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
     type:
     - string
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
   project_id:
     type: string
   created_datetime:

@@ -144,10 +144,8 @@ class Gen3Configuration(object):
             ],
             "properties": {
                 "type": {
-                    "enum": []
-                },
-                "subtype": {
-                    "enum": []
+                    "enum": [],
+                    "description": "Gen3's type field."
                 },
                 "id": {
                     "$ref": "_definitions.yaml#/UUID",
@@ -157,14 +155,15 @@ class Gen3Configuration(object):
                     "$ref": "_definitions.yaml#/state"
                 },
                 "submitter_id": {
-                    "description": "Alias for FHIR Resource's identifier.",
+                    "description": "Each record in every node will have a \"submitter_id\", which is a unique alphanumeric identifier for that record and is specified by the data submitter, and a \"type\", which is simply the node name.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
                 "projects": {
-                    "$ref": "_definitions.yaml#/to_many_project"
+                    "$ref": "_definitions.yaml#/to_many_project",
+                    "description": "Link to Gen3's project."
                 },
                 "project_id": {
                     "type": "string"
@@ -537,6 +536,8 @@ class Gen3Configuration(object):
             docstring = template['properties'][p]['enum']
             template['properties'][p]['description'] = f"{template['properties'][p]['description']}  Vocabulary from {docstring}"
             codeset = value_sets.resource(template['properties'][p]['enum'].split('|')[0])
+            source = template['properties'][p]['enum']
+
             if not codeset:
                 logger.error(f"No codeset found for {template['properties'][p]['enum']}")
                 template['properties'][p]['comment_enum'] = f"No-codeset-found-for-{template['properties'][p]['enum']}"
@@ -548,8 +549,25 @@ class Gen3Configuration(object):
                     template['properties'][p]['comment_enum'] = f"No-concepts-found-in-codeset-{template['properties'][p]['enum']}|codeset-{codeset['fullUrl']}"
                     del template['properties'][p]['enum']
                     template['properties'][p]['type'] = 'string'
-                else:    
-                    template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']]
+                else:
+                    if len(codeset['resource']['concept']) > 1000:
+                        logger.error(f"More than 1000 concepts in codeset {template['properties'][p]['enum']}")
+                        template['properties'][p]['comment_enum'] = f"More-than-1000-concepts-{template['properties'][p]['enum']}"
+                        del template['properties'][p]['enum']
+                        template['properties'][p]['type'] = 'string'
+                    else:    
+                        template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']]
+
+            template['properties'][p]['term'] = {
+                'description': template['properties'][p]['description'],
+                'termDef': {
+                    'term': p,
+                    'source': 'fhir',
+                    'cde_id': p,
+                    'cde_version': None,                
+                    'term_url': source,
+                }
+            }
 
         # clean up type
         for p in template['properties']:
