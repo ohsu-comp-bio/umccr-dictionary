@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from hashlib import new
-import graphviz
 import yaml
 import click
 import re
@@ -10,67 +9,33 @@ import requests
 from pprint import pprint
 import logging
 from data.valuesets import ValueSets
+from pprint import pprint
+import pydash
+import json
+import flatdict
 
+
+PRIMITIVE_TYPES = [
+    'integer', 'uri', 'boolean', 'string', 'time', 'dateTime', 'instant', 'http://hl7.org/fhirpath/System.String',
+    'http://hl7.org/fhirpath/System.Integer', 'http://hl7.org/fhirpath/System.Decimal', 'http://hl7.org/fhirpath/System.Boolean',
+     'http://hl7.org/fhirpath/System.Date'
+]
+
+DONT_FOLLOW_TYPES = [ 'Extension', 'Identifier']
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.WARNING)
 logger = logging.getLogger("model")
 logger.setLevel(logging.DEBUG)
 
 
-class FHIRSchemaFigure(object):
 
-    def __init__(self, schema, node) -> None:
-        super().__init__()
-        self.schema = schema
-        self.node = node
-        self.dot = None
-
-    def view(self):
-
-        node = self.node
-        schema = self.schema
-
-        def graph_node(node):    
-            id = node['@id']
-            def prop(p):
-                return f'''<TR><TD>{p}</TD></TR>'''
-            props = ''.join([prop(p)for p in node['properties']])
-            return f'''"{id}" [label=< <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"> <TR><TD PORT="id"><B>{id}</B></TD></TR> {props} </TABLE>>];'''
-
-        def subclass_edge(_from, _to):
-            return f'''"{_from}" -> "{_to}" [ arrowhead=onormal];'''
-
-        def neighbor_edge(_from, _to):
-            return f'''"{_from}" -> "{_to}" [ style=dashed ];'''
-
-        graph_nodes = "\n".join([graph_node(node)] 
-                                + [graph_node(schema.properties(schema, id=sc)) for sc in node['subclasses']]
-                                + [graph_node(schema.properties(schema, id=n)) for n in node['neighbors']]
-                                )
-        edges = "\n".join([subclass_edge(sc, node['@id']) for sc in node['subclasses']]
-                        + [neighbor_edge(node['@id'], n) for n in node['neighbors']]
-                        )
-
-        dot = f'''
-        digraph g {{
-            graph [ rankdir = "BT" ];    
-            node [ fontsize = "12" shape = "plaintext"  ];    
-            edge [ ];
-            {graph_nodes}
-            {edges}
-        }}
-        '''
-        self.dot = dot
-        label = node['@id'].split(':')[-1]
-        graphviz.Source(dot).view(filename=label)
-
- 
 class FHIRSchema(object):
 
     def __init__(self, profile_name, url=None) -> None:
         """Load schema."""
         self.profiles = {}
         self.primitives = []
+        self.profile_name = profile_name
         self._schema = self.add_profile(profile_name, url)
 
     def add_profile(self, profile_name, url=None):
@@ -88,21 +53,24 @@ class FHIRSchema(object):
             url = url.replace('StructureDefinition/ncpi', 'StructureDefinition-ncpi')
         if not url.endswith('json'):
             url = url + '.json'
-        logger.debug(f"fetching {url}")    
+        logger.debug(f"fetching {url}")
         response = requests.get(url)
         if response.status_code != 200:
             self.primitives.append(profile_name)
+            logger.debug(f"fetching {url} got {response.status_code}")
             return None
         self.profiles[profile_name] = response.json()
         return self.profiles[profile_name]
 
 
 class Gen3Configuration(object):
+
     def __init__(self, fhir_schema, resource_name, config) -> None:
         super().__init__()        
         self.fhir_schema = fhir_schema
         self._schema = fhir_schema._schema
-        self._config = {resource_name: config}
+        self._config = config
+        self._resource_name = resource_name
         self._recursion_guard = []
         self._parent_element = None
 
@@ -215,205 +183,82 @@ class Gen3Configuration(object):
 
         return links
 
-    def properties(self, template, schema, parent=None, black_list=None, white_list=[], parent_description=None, type_offset=0, is_root=False):
-        """Render gen3 properties."""
-        base = schema['name']
-        id = schema['snapshot']['element'][0]['id']
-        if not black_list:
-            black_list = self._config.get(base, {}).get('properties', {}).get('exclude', None)
-        if not white_list:    
-            white_list = self._config.get(base, {}).get('properties', {}).get('include', None)
-        # print("====", id, base, white_list)
+
+    def properties(self, schema, property_graph={}, paths={}):
+        """Recurse through properties."""
+        base = schema['type']
+        property_graph['_name'] = base
+
+        # break apart dot notation element ids
+        parent_set = False
+
         for el in schema['snapshot']['element']:
-            # skip base extension (not really a path)
-            if '.' not in el['id']:
+            if el['id'] == base:
+                # logger.debug(f"skipping {el['id']}")
                 continue
-            name = '.'.join(el['id'].split('.')[1:])
-            if name in ['type']:
+            if 'contentReference' in el:
+                logger.debug(f"contentReference ??? {el['id']} {el['contentReference']}")
                 continue
+            assert 'type' in el, el
+            name = el['id'].replace(f"{base}.", '')
+            type = el['type'][0]['code'] 
 
-            if '[x]' in name:
-                # logger.debug(f"multivalued field {name}")
-                name = name.replace('[x]', '')
+            parent_node = property_graph
 
-            # check property name against black_list
-            name_base = name.split('.')[0]
-            if black_list and (name_base in black_list or name in black_list or f"{parent}.{name}" in black_list):
-                continue
-
-            if is_root:
-                self._parent_element = el
-
-            full_name = name
-            if parent:
-                full_name = f"{parent}.{name}"
-
-            # logger.debug(f"??? white_list check full_name:{full_name}")
-            if white_list:
-                skip = True
-                for white_list_name in white_list:
-                    if full_name == white_list_name:
-                        skip = False
-                    if full_name in white_list_name:
-                        skip = False
-                    for white_list_name_part in white_list_name.split('.'):
-                        if full_name == white_list_name_part:
-                            skip = False
-                        if parent == white_list_name_part \
-                            and full_name == parent:
-                                skip = False
-                if skip:
-                    # print(f">>> white_list parent:{parent} name_base:{name_base} name:{name} full_name:{full_name}")
+            # deal with dot notation
+            if '.' in name:
+                if len(name.split('.')) != 2:
+                    logger.warning(f"Deeply nested backbone element not supported (yet) {name} skipping")
                     continue
-            
-            description = el['definition']
-            if self._parent_element:
-                description = f"{self._parent_element['definition']} {el['definition']}"
-            if parent_description:
-                description = f"{self._parent_element['definition']} {parent_description} {el['definition']}"
+                parent_name = name.split('.')[0]
+                new_name = name.split('.')[1]
+                logger.debug(f"{name} has dot notation? is a {type}. Assume that {parent_name} is a BackboneElement new_name: {new_name}")
+                assert name.split('.')[0] in property_graph, property_graph.keys()                
+                name = new_name 
+                parent_node = property_graph[parent_name]
+                if not parent_set:
+                    paths[parent_name] = {}
+                    paths = paths[parent_name]
+                    parent_set = True
 
+            # deal with multi value types
+            if '[x]' in name:
+                multi_value_type_codes = [t['code'] for t in el['type']]
+                logger.debug(f"{name} is multi-valued {multi_value_type_codes}")
 
-            template["properties"][name] = {
-                'description': description
-            }
-            
-
-            property_attributes = template["properties"][name]            
-
-            # logger.debug(f">>> white_list pass parent:{parent} name_base:{name_base} name:{name} full_name:{full_name}")        
-
-            if 'type' in el:
-                property_attributes['type'] = el['type'][type_offset]['code']
-                if len(el['type']) > 1:
-                    # logger.debug(f"length of type {len(el['type'])} casting to string.")
-                    property_attributes['type'] = 'string'
-                    property_attributes['multiple_types'] = [t['code'] for t in el['type']]
-                    
-                if el['type'][type_offset]['code'] in ['code', 'CodeableConcept']:
-                    # logger.debug(f"+++ {el.get('binding', '*no binding*')}")
-                    if 'binding' in el:
-                        # if 'valueSet' not in el['binding']:
-                            # logger.debug(f"code missing valueSet {el.get('binding', '*no binding*')}")
-                        property_attributes['enum'] = el['binding'].get('valueSet', 'WARNING_MISSING_ENUM_IN_ELEMENT')
-                        # logger.debug(f"{property_attributes['type']} {name} set enum from el {property_attributes['enum']}")
-                    else:
-                        if 'binding' in self._parent_element:
-                            property_attributes['enum'] = self._parent_element['binding'].get('valueSet', 'WARNING_MISSING_ENUM_IN_PARENT')
-                            # logger.debug(f"{property_attributes['type']} {name} set enum from parent {property_attributes['enum']}")
-                    if 'WARNING' in property_attributes.get('enum', ''):
-                        logger.debug(f"Find in config??? {base} {name} {self._config.get('enums', {})}")
-                        if template['properties'][name].get('enum', None) == 'WARNING_MISSING_ENUM':
-                            if 'enums' in self._config[base] and name in self._config[base]['enums']:
-                                template['properties'][name]['enum'] = self._config[base]['enums'][name]
-                            else:
-                                logger.warning(f"WARNING_MISSING_ENUM  {base} {type} {name}")
-
-                if el['type'][type_offset]['code'] not in ['code', 'CodeableConcept', 'Reference']:
-                    property_attributes['is_embedded'] = True
-                if 'profile' in el['type'][type_offset]:
-                    property_attributes['profile'] = el['type'][type_offset]['profile'][0]
-
-            if 'type' not in property_attributes:
-                logger.debug(f"{el['id']} missing type")
-                del template["properties"][name]
+            if type in PRIMITIVE_TYPES or type in DONT_FOLLOW_TYPES:
+                property_graph[name] = {'_code': type}
+                property_graph[name]['element'] = el
+                property_graph[name]['_name'] = name
+                paths[name] = {}
                 continue
+            
+            type_schema = self.fhir_schema.add_profile(type)
+            assert type_schema, el['type']
+            # recurse down the graph
+            paths[name] = {}
+            type_properties = self.properties(type_schema, property_graph={},  paths=paths[name])
 
-            if el['max'] == '*' or int(el['max']) > 1:
-                property_attributes['is_array'] = True
-            if int(el['min']) > 0:
-                property_attributes['is_required'] = True                
-            if self._parent_element and int(self._parent_element['min']) > 0:
-                property_attributes['is_required'] = True
-            else:
-                property_attributes['is_required'] = False
+            parent_node[name] = type_properties
+            parent_node[name]['element'] = el
+            parent_node[name]['_name'] = name
+            parent_node[name]['_code'] = type
+            assert parent_node[name]['_code'], el
+            if type == 'BackboneElement':
+                logger.debug(f"recurse adding {type_schema['type']} {type_schema.keys()} {type_properties.keys()} to {name}")
 
-            def expand_types(type):
-                if type == 'Reference':
-                    property_attributes['is_resource'] = True
-                if type == 'Extension':
-                    # print(f"??? skipping Extension {name}")
-                    del template['properties'][name]
-                    return
-                if type in ['String', "http://hl7.org/fhirpath/System.String", "uri", "string",  "boolean", "http://hl7.org/fhirpath/System.DateTime", "http://hl7.org/fhirpath/System.Date", "code"]:
-                    # print(f"**** {parent} {name} {type} {el['id']} is_primitive")
-                    property_attributes['is_primitive'] = True
-                    if type == 'code':
-                        if 'binding' in el:
-                            property_attributes['enum'] = el['binding'].get('valueSet', 'WARNING_MISSING_ENUM_IN_ELEMENT')
-                            # logger.debug(f"{type} {name} set enum from binding {property_attributes['enum']}")
-                        else:
-                            if self._parent_element and 'binding' in self._parent_element:
-                                property_attributes['enum'] = self._parent_element['binding'].get('valueSet', 'WARNING_MISSING_ENUM_IN_PARENT')
-                                # logger.debug(f"{type} {name} set enum from parent {property_attributes['enum']}")
-                        if 'WARNING' in property_attributes.get('enum', ''):
-                            _base = base
-                            if _base not in self._config:
-                                _base = self._parent_element['id'].split('.')[0]
-                            if 'enums' in self._config[_base]:
-                                _full_name = full_name
-                                if _full_name not in self._config[_base]['enums']:
-                                    _full_name = f"{self._parent_element['id'].split('.')[1]}.{_full_name}"
-                                if _full_name in self._config[_base]['enums']:
-                                    property_attributes['enum'] = self._config[_base]['enums'][_full_name]
-                                else:
-                                    logger.warning(f"WARNING_MISSING_ENUM normalize {_base} {type} {_full_name}")
+            # if type == 'Attachment':
+            #     logger.debug(f"recurse adding {type_schema['type']} {type_schema.keys()} {type_properties.keys()} to {name}")
+            #     node = pydash.get(property_graph, 'content.attachment')
+            #     assert node, f"could not find path {list(property_graph.keys())}"
+            #     logger.debug(list(node.keys()))
 
-                    return
-                profile_schema = self.fhir_schema.add_profile(type, property_attributes.get('profile', None))
-                if not profile_schema:
-                    logger.debug(f'profile_schema missing for {type}')
-                    return
-                # if type == profile_schema['id']:
-                if f"{parent}::{parent}::{name}::{type}" in self._recursion_guard:
-                    # logger.debug(f">>> prevent recursion {parent}::{name}::{type}")                    
-                    return
 
-                self._recursion_guard.append(f"{parent}::{parent}::{name}::{type}")
-                property_attributes['is_profile'] = True
-                profile_template = {'properties': {}}
-                # logger.debug(f"recursing {name} {type} {self._parent_element}")
-                self.properties(profile_template, profile_schema, name, black_list, white_list, el['definition'])
-                for k in list(profile_template['properties'].keys()):
-                    new_key = f"{name}.{k}"
-                    template['properties'][new_key] = profile_template['properties'][k]
-                if name in template['properties']:    
-                    # delete the name we recursed on    
-                    del template['properties'][name]
-
-            if 'type' in property_attributes:
-                expand_types(property_attributes['type'])
-
-            if 'multiple_types' in property_attributes:                
-                for type in property_attributes['multiple_types']:
-                    # logger.debug(f"multiple_types {name}{type.capitalize()} {template['properties'][name]['description']}")    
-                    profile_template = {'properties': {}}
-                    profile_schema = self.fhir_schema.add_profile(type, None)
-                    self.properties(profile_template, profile_schema, name, [], [], template['properties'][name]['description'])
-                    for k in list(profile_template['properties'].keys()):
-                        if k.endswith('id'):
-                            continue
-                        new_key = f"{name}{type.capitalize()}.{k}"
-                        # logger.debug(f"new_key {new_key}")
-                        include = True
-                        if black_list:
-                            for black_list_item in black_list:
-                                if black_list_item in new_key:
-                                    # logger.debug(f"<<< black_list {new_key} {black_list_item}")
-                                    include = False
-                        if include:
-                            template['properties'][new_key] = profile_template['properties'][k]
-                del template['properties'][name]
-
-        return base
-
-    def normalize(self, template, base):
+        return property_graph
+    
+    def normalize(self, template, properties):
         """Clean up, strict gen3 conformance, remove temporary attributes."""
-        for p in template['properties']:
-            if template['properties'][p].get('is_required', False):
-                template['required'].append(p)
-            for k in ['is_embedded', 'is_primitive', 'is_required']:
-                if k in template['properties'][p]:                
-                    del template['properties'][p][k]
+
 
         # xlate types to gen3 types
         simple_mapping = {
@@ -433,7 +278,8 @@ class Gen3Configuration(object):
 
         def update_enum(d):
             # todo add `code` to _terms [^\s]+(\s[^\s]+)*
-            d.update({'enum': d.get('enum', 'WARNING_MISSING_ENUM'), 'format': 'code'})
+            # 'enum': d.get('enum', 'WARNING_MISSING_ENUM')
+            d.update({'format': 'code'})
             return d
 
         def update_datetime_ref(d):
@@ -443,7 +289,6 @@ class Gen3Configuration(object):
                     'term': {'$ref': '_terms.yaml#/datetime'}
                 }
             )
-            del d['type']
             return d
 
         def update_date_ref(d):
@@ -454,7 +299,6 @@ class Gen3Configuration(object):
                     # 'term': {'$ref': '_terms.yaml#/date'}
                 }
             )
-            del d['type']
             return d
 
         def update_time_ref(d):
@@ -465,39 +309,82 @@ class Gen3Configuration(object):
                     # 'term': {'$ref': '_terms.yaml#/time'}
                 }
             )
-            del d['type']
             return d
 
         # xlate types to gen3 types with formatting
         special_mapping = {
             'uri': update_uri,
+            'url': update_uri,
             'code': update_enum,
             'http://hl7.org/fhirpath/System.DateTime': update_datetime_ref,
             'http://hl7.org/fhirpath/System.Time': update_time_ref,
-            'http://hl7.org/fhirpath/System.Date': update_date_ref
+            'http://hl7.org/fhirpath/System.Date': update_date_ref,
+            'instant': update_datetime_ref
         }
 
-        for p in template['properties']:
-            if 'type' not in template['properties'][p]:
+
+        for name, property in properties.items():
+
+            if name not in self._config['properties']['include']:
+                logger.debug(f"{name} not in include.")
                 continue
-            type = template['properties'][p]['type']
-            if isinstance(type, list):
-                continue
-            # logger.debug(type)
-            mapped = simple_mapping.get(type, None)
+
+            is_array = False
+            is_required = False
+            for max in property.get('max',[]):
+                if max == '*' or int(max) > 1:
+                    is_array = True
+            for min in property.get('min',[]):
+                if min > 0:
+                    is_required = True
+            
+            if is_required:
+               template['required'].append(name)
+
+            assert '_code' in property, f"{name} {property}"
+            assert property['_code'], f"{name} {property}"
+            
+            if property['_code'] in PRIMITIVE_TYPES:
+                logger.debug(f"PRIMITIVE_TYPES {name} {property['_code']}")
+
+
+            template['properties'][name] = {'_code': property['_code']}
+
+            mapped = simple_mapping.get(property['_code'], None)
             if mapped:
-                template['properties'][p]['type'] = mapped
+                template['properties'][name]['type'] = mapped
             else:
-                mapped = special_mapping.get(type, None)
+                mapped = special_mapping.get(property['_code'], None)
                 if not mapped:
-                    logger.error(f"No mapping for type {type}")
+                    logger.error(f"No mapping for type {property['_code']}")
                 else:
-                    template['properties'][p] = mapped(template['properties'][p])
-            if template['properties'][p].get('enum', None) == 'WARNING_MISSING_ENUM':
-                if 'enums' in self._config[base] and p in self._config[base]['enums']:
-                    template['properties'][p]['enum'] = self._config[base]['enums'][p]
-                else:
-                    logger.warning(f"WARNING_MISSING_ENUM normalize {base} {type} {p}")
+                    template['properties'][name] = mapped(template['properties'][name])
+            
+            system = None
+            for b in property.get('binding', []):
+                if b:
+                    # for e in b.get('extension', []):
+                    #     valueSet = e.get('valueSet', None)
+                    system = b.get('valueSet', None)
+                    # logger.debug(f"{name} valueSet {system}")
+            code = None
+            if 'patternCodeableConcept' in property:
+                for patternCodeableConcept in property['patternCodeableConcept']:
+                    if patternCodeableConcept:
+                        assert isinstance(patternCodeableConcept, dict), f"patternCodeableConcept={patternCodeableConcept} {name} {property}"
+                        for coding in patternCodeableConcept['coding']:
+                            logger.debug(f"{name} patternCodeableConcept {coding}")
+                            system = coding['system']
+                            code = coding['code']
+                            logger.debug(f"{name} patternCodeableConcept {system} {code}")
+
+            if system:
+                template['properties'][name]['system'] = system
+            if code:
+                template['properties'][name]['code'] = code
+
+            if 'definition' in property:
+                template['properties'][name]['description'] = ' '.join([d for d in property['definition'] if d])
 
 
         # xlate . notation to _ underscore 
@@ -528,35 +415,40 @@ class Gen3Configuration(object):
             return concept_code['@value']
 
         for p in template['properties']:
+
             if p in ['type', 'subtype']:
                 continue
-            if 'enum' not in template['properties'][p]:
+            if 'system' not in template['properties'][p]:
                 continue
-            # logger.debug(f"??? {p} {template['properties'][p]['enum']}")
-            docstring = template['properties'][p]['enum']
-            template['properties'][p]['description'] = f"{template['properties'][p]['description']}  Vocabulary from {docstring}"
-            codeset = value_sets.resource(template['properties'][p]['enum'].split('|')[0])
-            source = template['properties'][p]['enum']
 
-            if not codeset:
-                logger.error(f"No codeset found for {template['properties'][p]['enum']}")
-                template['properties'][p]['comment_enum'] = f"No-codeset-found-for-{template['properties'][p]['enum']}"
-                del template['properties'][p]['enum']
-                template['properties'][p]['type'] = 'string'
+            # logger.debug(f"{p} {template['properties'][p]}")
+            system = template['properties'][p]['system']
+            template['properties'][p]['description'] = f"{template['properties'][p]['description']}  Vocabulary from {system}"
+
+            if 'code' in template['properties'][p]:
+                template['properties'][p]['enum'] = [template['properties'][p]['code']]
+                del template['properties'][p]['code']
             else:
-                if 'concept' not in codeset['resource']:
-                    logger.error(f"No concepts found in codeset {codeset['fullUrl']}")
-                    template['properties'][p]['comment_enum'] = f"No-concepts-found-in-codeset-{template['properties'][p]['enum']}|codeset-{codeset['fullUrl']}"
-                    del template['properties'][p]['enum']
-                    template['properties'][p]['type'] = 'string'
-                else:
-                    if len(codeset['resource']['concept']) > 1000:
-                        logger.error(f"More than 1000 concepts in codeset {template['properties'][p]['enum']}")
-                        template['properties'][p]['comment_enum'] = f"More-than-1000-concepts-{template['properties'][p]['enum']}"
-                        del template['properties'][p]['enum']
+
+                if template['properties'][p]['_code'] == 'code':
+                    codeset = value_sets.resource(template['properties'][p]['system'].split('|')[0])
+
+                    if not codeset:
+                        logger.error(f"No codeset found for {template['properties'][p]['system']}")
+                        template['properties'][p]['comment_enum'] = f"No-codeset-found-for-{template['properties'][p]['system']}"                        
                         template['properties'][p]['type'] = 'string'
-                    else:    
-                        template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']]
+                    else:
+                        if 'concept' not in codeset['resource']:
+                            logger.error(f"No concepts found in codeset {codeset['fullUrl']}")
+                            template['properties'][p]['comment_enum'] = f"No-concepts-found-in-codeset-{template['properties'][p]['system']}|codeset-{codeset['fullUrl']}"
+                            template['properties'][p]['type'] = 'string'
+                        else:
+                            if len(codeset['resource']['concept']) > 1000:
+                                logger.error(f"More than 1000 concepts in codeset {template['properties'][p]['system']}")
+                                template['properties'][p]['comment_enum'] = f"More-than-1000-concepts-{template['properties'][p]['system']}"
+                                template['properties'][p]['type'] = 'string'
+                            else:    
+                                template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']]
 
             template['properties'][p]['term'] = {
                 'description': template['properties'][p]['description'],
@@ -565,9 +457,10 @@ class Gen3Configuration(object):
                     'source': 'fhir',
                     'cde_id': p,
                     'cde_version': None,                
-                    'term_url': source,
+                    'term_url': system,
                 }
             }
+            del template['properties'][p]['description']
 
         # clean up type
         for p in template['properties']:
@@ -579,25 +472,124 @@ class Gen3Configuration(object):
                 del template['properties'][p]['type']
                 del template['properties'][p]['format']
 
+        for p in template['properties']:
+            keys_to_delete = []
+            for k in template['properties'][p]:
+                if k not in ['description', 'type', 'format', '$ref', 'term', 'enum', 'oneOf']:
+                    if k.startswith('comment'):
+                        continue
+                    keys_to_delete.append(k)
+            for k in keys_to_delete:
+                logger.debug(f"keys_to_delete deleting {p}.{k}")
+                del template['properties'][p][k]
+
         return template
 
     def transform(self):
         """Generate schema for all properties in config."""
-        template = self.template
         schema = self._schema
-        template['title'] = schema.get('title', schema['id'])
-        template['description'] = schema.get('description', f"//TODO {schema['id']} description goes here.")
-          
-        template["properties"]["type"]["enum"].append(schema['name'])
-        base =  self.properties(template,schema, is_root=True)
-        template['id'] = base
-        template['category'] =  self._config.get(base, {}).get('category', '//TODO')
-        template['links'] = self.links(schema, base)
         
-        template = self.normalize(template, base)
+        def get_nodes(property_graph, path):
+            """Grab all parts of the path in the property_graph."""
+            properties = {}
+            path_parts = []
+            for path_part in path.split('.'):
+                path_parts.append(path_part)
+                partial_path = '.'.join(path_parts)
+                node = pydash.get(property_graph, partial_path)
+                if node:
+                    assert 'id' in node['element'], node
+                    properties[partial_path] =  {
+                        'id': node['element']['id'],
+                        'definition': node['element'].get('definition', 'no-definition?'), 
+                        'keys': list(node['element'].keys()),
+                        '_code': node['_code']
+                    }
+                else:
+                    logger.warning(f"partial_path missing: {self._resource_name}.{partial_path}")
+            return properties
+
+        def get_node_values(property_graph, path, key):
+            """Grab values from all parts of the path in the property_graph."""
+            path_parts = []
+            path_values = []
+            for path_part in path.split('.'):
+                path_parts.append(path_part)
+                partial_path = '.'.join(path_parts)
+                node = pydash.get(property_graph, partial_path)
+                if node:
+                    path_values.append(node['element'].get(key, None))
+                else:
+                    logger.warning(f"partial_path missing: {self._resource_name}.{partial_path}")
+            return {path: {key: path_values}}
+
+        def get_node_value(property_graph, path, key):
+            """Grab values from the path in the property_graph."""
+            node = pydash.get(property_graph, path)
+            return {path: {key: pydash.get(node, key)}}
+
+        def get_node(property_graph, path):
+            """Grab values from the path in the property_graph."""
+            return pydash.get(property_graph, path) 
+
+        paths = {}
+        property_graph = self.properties(schema, paths=paths)
+
+        with open("property_graph.json", "w") as output_stream:
+            yaml_string = json.dumps(property_graph,sort_keys=False, indent=2)
+            output_stream.write(yaml_string)            
 
 
-        return template
+        properties = {}
+        for include_path in self._config['properties']['include']:
+            properties.update(get_nodes(property_graph, include_path, ))
+        yaml_string = yaml.dump(properties, sort_keys=False)
+        # print(yaml_string)
+
+
+        for include_path in self._config['properties']['include']:
+            node = get_node(property_graph, include_path)
+            if not node:
+                logger.warning(f"include_path={include_path} {list(property_graph['content'].keys())}")
+                continue
+            logger.debug(f"include_path={include_path} {node.keys()}")
+            _code = node['_code']
+            pydash.objects.merge(properties, {include_path: {'_code': _code}})
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'id' ))
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'definition' ))
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'min' ))
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'max' ))
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'binding' ))
+            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'patternCodeableConcept' ))
+
+        yaml_string = yaml.dump(properties, sort_keys=False)
+        with open("properties.yaml", "w") as output_stream:
+            yaml_string = yaml.dump(properties, sort_keys=False)
+            output_stream.write(yaml_string)            
+
+
+        for include_path in self._config['properties']['include']:
+            if include_path not in properties:
+                logger.warning(f"include_path={include_path}")
+                continue
+            assert properties[include_path]
+            assert properties[include_path]['_code'], include_path
+
+
+        template = self.template
+        template['title'] = schema.get('title', schema['id'])
+        template['description'] = schema.get('description', f"//TODO {schema['id']} description goes here.")          
+        template["properties"]["type"]["enum"].append(schema['name'])
+
+        base = property_graph['_name']
+        template['id'] = base
+        template['category'] =  self._config.get('category', '//TODO')
+
+        
+        template = self.normalize(template, properties)
+        template['links'] = self.links(schema, base)
+
+        return template, paths
 
         
 
@@ -613,14 +605,20 @@ def transform(path):
         # Read the schema
         schema = FHIRSchema(resource, config[resource].get('source', None))
         # Export to gen3
-        gen3_schema = Gen3Configuration(schema, resource, config[resource]).transform()
+        gen3_schema, paths = Gen3Configuration(schema, resource, config[resource]).transform()
         file_name = f"./output/{resource}.yaml"
         if 'alias' in config[resource]:
             file_name = f"./output/{config[resource]['alias']}.yaml"
+
         with open(file_name, "w") as output_stream:
             yaml_string = yaml.dump(gen3_schema, sort_keys=False)
             yaml_string = re.sub(r'comment_.* ', '# ', yaml_string)
             output_stream.write(yaml_string)
+
+        file_name = f"./output/paths/{resource}.txt"
+        with open(file_name, "w") as output_stream:
+            d = flatdict.FlatDict(paths, delimiter='.')
+            output_stream.write('\n'.join([k for k in d.keys()]))            
 
 
 if __name__ == '__main__':

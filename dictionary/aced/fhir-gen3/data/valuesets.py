@@ -51,6 +51,11 @@ _curated_valuesets = [
         'fullUrl': 'http://terminology.hl7.org/ValueSet/v2-0487',
         'valueset': 'https://terminology.hl7.org/3.0.0/ValueSet-v2-0487.json',
         'codesystem': 'https://terminology.hl7.org/3.0.0/CodeSystem-v2-0487.json'
+    },
+    {
+        'fullUrl': 'http://terminology.hl7.org/ValueSet/v3-FamilyMember',
+        'valueset': 'https://terminology.hl7.org/3.0.0/ValueSet-v3-FamilyMember.json',
+        'codesystem': 'https://terminology.hl7.org/3.0.0/CodeSystem-v3-RoleCode.json'
     }
 ]
 
@@ -116,7 +121,10 @@ def _load_curated(database_path):
         codesystem_fullUrl = valueset['compose']['include']
         if isinstance(codesystem_fullUrl, list):
             codesystem_fullUrl = codesystem_fullUrl[0]['system']
-        valueset['compose']['include'] = {'system': {'@value': codesystem_fullUrl}}
+        logger.debug(f"Replacing old include: {valueset['compose']['include']}")
+        new_include = {k:valueset['compose']['include'][0][k] for k in valueset['compose']['include'][0]}
+        new_include['system'] =  {'@value': codesystem_fullUrl}
+        valueset['compose']['include'] = [new_include]
         
         logger.debug(f"{type}, {id}, {fullUrl}, {url} {codesystem_fullUrl}")
         c.execute("replace into valuesets values (?, ?, ?, ?, ?)", [fullUrl, type, id, url, json.dumps(valueset)])
@@ -193,12 +201,47 @@ class ValueSets(object):
             includes = [includes]
         for include in includes:            
             if 'concept' not in include:
-                codesystem_url = include['system']['@value']
+                # logger.debug(f"include {list(include.keys())}")
+                if 'system' in include:
+                    codesystem_url = include['system']['@value']
+                else:
+                    codesystem_url = include['valueSet']['@value']
+                filter = None
+                if 'filter' in include:
+                    # logger.debug(f"Need to apply filter {include['filter']}")
+                    filter = include['filter']
+                    if not isinstance(filter, list):
+                        filter = [filter]
                 logger.debug(f"Found {fullUrl} linking to {codesystem_url}")
                 c.execute("SELECT * FROM valuesets WHERE url=?;", [codesystem_url])
                 codesystem_data = c.fetchone()
                 if codesystem_data:
                     codesystem_data['resource'] = json.loads(codesystem_data['resource'])
+                    if filter:
+                        # logger.debug(codesystem_data['resource'].keys())
+                        # logger.debug(filter)
+                        if isinstance(filter[0]['value'], dict):
+                            filter_value = filter[0]['value']['@value']
+                        else:
+                            filter_value = filter[0]['value']
+                        filter_values = set([filter_value])
+                        new_concepts = []
+                        if 'concept' not in codesystem_data['resource']:
+                            logger.warning(f"No concepts found for filter in {codesystem_url}")
+                            return None
+                        for concept in codesystem_data['resource']['concept']:
+                            value_codes = set([p.get('valueCode', None) for p in concept['property']])
+                            if len(filter_values.intersection(value_codes)) > 0 :
+                                # logger.debug(f"filter included {concept['code']}")
+                                filter_values.add(concept['code'])
+
+                        for concept in codesystem_data['resource']['concept']:
+                            value_codes = set([p.get('valueCode', None) for p in concept['property']])
+                            if len(filter_values.intersection(value_codes)) > 0 :
+                                # logger.debug(f"filter included {concept['code']}")
+                                new_concepts.append(concept)
+                                filter_values.add(concept['code'])
+                        codesystem_data['resource']['concept'] = new_concepts
                     return codesystem_data
                 logger.warning(f"did not find codesystem for {codesystem_url}")
             else:
