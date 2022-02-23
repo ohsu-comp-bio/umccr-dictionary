@@ -40,7 +40,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -60,28 +59,20 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   active:
+    type: boolean
     description: "Whether this patient record is in active use. \nMany systems use\
       \ this property to mark as non-current patients, such as those that have not\
       \ been seen for a period of time based on an organization's business rules.\n\
       \nIt is often used to filter patient lists to exclude inactive patients\n\n\
       Deceased patients may also be marked as inactive for the same reasons, but may\
-      \ be active for some time after death. Whether this patient record is in active\
-      \ use. \nMany systems use this property to mark as non-current patients, such\
-      \ as those that have not been seen for a period of time based on an organization's\
-      \ business rules.\n\nIt is often used to filter patient lists to exclude inactive\
-      \ patients\n\nDeceased patients may also be marked as inactive for the same\
-      \ reasons, but may be active for some time after death."
-    type: boolean
+      \ be active for some time after death."
   name_text:
-    description: A name associated with the individual. A name associated with the
-      individual. Specifies the entire name as it should be displayed e.g. on an application
-      UI. This may be provided instead of or as well as the specific parts.
     type: string
+    description: A name associated with the individual. Specifies the entire name
+      as it should be displayed e.g. on an application UI. This may be provided instead
+      of or as well as the specific parts.
   gender:
-    description: Administrative Gender - the gender that the patient is considered
-      to have for administration and record keeping purposes. Administrative Gender
-      - the gender that the patient is considered to have for administration and record
-      keeping purposes.  Vocabulary from http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
+    format: code
     enum:
     - male
     - female
@@ -89,34 +80,10 @@ properties:
     - unknown
     term:
       description: Administrative Gender - the gender that the patient is considered
-        to have for administration and record keeping purposes. Administrative Gender
-        - the gender that the patient is considered to have for administration and
-        record keeping purposes.  Vocabulary from http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
+        to have for administration and record keeping purposes.  Vocabulary from http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
       termDef:
         term: gender
         source: fhir
         cde_id: gender
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
-  birthDate:
-    description: The date of birth for the individual. The date of birth for the individual.
-      The actual value
-    oneOf:
-    - type: string
-      format: date
-    - type: 'null'
-  deceasedBoolean:
-    description: Indicates if the individual is deceased or not. Indicates if the
-      individual is deceased or not. Indicates if the individual is deceased or not.
-      The actual value
-    type: boolean
-  deceasedDatetime:
-    description: Indicates if the individual is deceased or not. Indicates if the
-      individual is deceased or not. Indicates if the individual is deceased or not.
-      The actual value
-    oneOf:
-    - type: string
-      format: date-time
-    - type: 'null'
-    term:
-      $ref: _terms.yaml#/datetime

@@ -1,118 +1,118 @@
-ResearchStudy:
-  category: Administrative
-  links:
-    ResearchStudy.partOf:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-    # ResearchStudy.principalInvestigator:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
-    #   required: true
-    # ResearchStudy.sponsor:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    #   required: true
-    ResearchStudy.project:
-      # link to "native" gen3 project
-      targetProfile: project
-      required: true
-  properties:
-    include:
-    - title
-    - primaryPurposeType.coding.code
-    - text.div.value
-    - focus.coding.code
-    - focus.coding.system
-  enums:
-    focus.coding.code: http://hl7.org/fhir/ValueSet/condition-code
+# ResearchStudy:
+#   category: Administrative
+#   links:
+#     ResearchStudy.partOf:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+#     # ResearchStudy.principalInvestigator:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
+#     #   required: true
+#     # ResearchStudy.sponsor:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+#     #   required: true
+#     ResearchStudy.project:
+#       # link to "native" gen3 project
+#       targetProfile: project
+#       required: true
+#   properties:
+#     include:
+#     - title
+#     - primaryPurposeType.coding.code
+#     - text.div.value
+#     - focus.coding.code
+#     - focus.coding.system
+#   enums:
+#     focus.coding.code: http://hl7.org/fhir/ValueSet/condition-code
 
 
-ResearchSubject:
-  category: Administrative
-  links:
-    ResearchSubject.study:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-      required: true
-    # ResearchSubject.individual:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-    #   required: true
-  properties:
-    include:
-    - status.value
-    - assignedArm
-    - actualArm
+# ResearchSubject:
+#   category: Administrative
+#   links:
+#     ResearchSubject.study:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+#       required: true
+#     # ResearchSubject.individual:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+#     #   required: true
+#   properties:
+#     include:
+#     - status.value
+#     - assignedArm
+#     - actualArm
 
 
-Patient:
-  category: Administrative
-  links:
-    # Patient.managingOrganization:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    #   required: true
-    Patient.ResearchSubject:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchSubject
-      required: true
-  properties:
-    include:
-    - active
-    - name.text
-    - gender
-    # - birthDate.date.value
-    # - deceased[x]
+# Patient:
+#   category: Administrative
+#   links:
+#     # Patient.managingOrganization:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+#     #   required: true
+#     Patient.ResearchSubject:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchSubject
+#       required: true
+#   properties:
+#     include:
+#     - active
+#     - name.text
+#     - gender
+#     # - birthDate.date.value
+#     # - deceased[x]
 
 
-DRSDocumentReference:
-  category: data_file
-  links:
-    # DocumentReference.custodian:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    #   required: true
-    DocumentReference.subject:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-      required: true
-  properties:
-    include:
-    - status
-    - date
-    - description
-    - content.attachment.url
-  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-drs-document-reference.json
+# DocumentReference:
+#   category: data_file
+#   links:
+#     # DocumentReference.custodian:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+#     #   required: true
+#     DocumentReference.subject:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+#       required: true
+#   properties:
+#     include:
+#     - status
+#     - date
+#     - description
+#     - content.attachment.url
+#   source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-drs-document-reference.json
 
 
-SpecimenTask:
-  category: Analysis
-  links:
-    # Task.focus:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
-    #   required: true
-    # Task.for:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-    #   required: true
-    # Task.owner:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    Task.input:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
-      required: true
-    Task.output:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/DRSDocumentReference
-      required: true
-  properties:
-    include:
-    - status.value
-    - intent.value
-    - code.coding.code.value
-  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-specimen-task.json
+# Task:
+#   category: Analysis
+#   links:
+#     # Task.focus:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
+#     #   required: true
+#     # Task.for:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+#     #   required: true
+#     # Task.owner:
+#     #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+#     Task.input:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
+#       required: true
+#     Task.output:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/DocumentReference
+#       required: true
+#   properties:
+#     include:
+#     - status.value
+#     - intent.value
+#     - code.coding.code.value
+#   source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-specimen-task.json
 
 
-Specimen:
-  category: Biospecimen
-  links:
-    Specimen.subject:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-      required: true
-  properties:
-    include:
-    - status
-    - type.coding.code.value
-    - collection.bodySite.coding.code
-    - collection.method.coding.code
+# Specimen:
+#   category: Biospecimen
+#   links:
+#     Specimen.subject:
+#       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+#       required: true
+#   properties:
+#     include:
+#     - status
+#     - type.coding.code.value
+#     - collection.bodySite.coding.code
+#     - collection.method.coding.code
 
 Observation:
   category: Clinical
@@ -133,88 +133,86 @@ Observation:
     valueQuantity.code: http://hl7.org/fhir/ValueSet/ucum-common
 
 
-Organization:
-  category: Administrative
-  links:
-    Organization.partOf:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    Organization.researchStudy:
-      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-      required: true
-  properties:
-    include:
-    - name
+# # Organization:
+# #   category: Administrative
+# #   links:
+# #     Organization.partOf:
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+# #     Organization.researchStudy:
+# #       # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+# #       required: true
+# #   properties:
+# #     include:
+# #     - name
 
-Practitioner:
-  category: Administrative
-  links:
-    Practitioner.organization:
-      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-      required: true
-  properties:
-    include:
-    - name
-    - telecom.system.value
-
-
-Questionnaire:
-  category: Clinical
-  links:
-    Questionnaire.researchStudy:
-      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-      required: true
-  properties:
-    include:
-    - name
-    - status.value
+# # Practitioner:
+# #   category: Administrative
+# #   links:
+# #     Practitioner.organization:
+# #       # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+# #       required: true
+# #   properties:
+# #     include:
+# #     - name
+# #     - telecom.system.value
 
 
-QuestionnaireResponse:
-  category: Clinical
-  links:
-    QuestionnaireResponse.subject:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-      required: true
-    QuestionnaireResponse.questionnaire:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Questionnaire
-      required: true
-  properties:
-    include:
-    - questionnaire.id
-    - status.value
-    - item.answer
-    - item.linkId
-    - item.text
-    exclude:
-    - item.answer.valueAttachment
-    - item.answer.valueReference
-    - item.answer.valueCoding.version
-    - item.answer.valueCoding.display
-    - item.answer.valueCoding.userSelected
+# # Questionnaire:
+# #   category: Clinical
+# #   links:
+# #     Questionnaire.researchStudy:
+# #       # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+# #       required: true
+# #   properties:
+# #     include:
+# #     - name
+# #     - status.value
 
 
-FamilyRelationship:
-  category: AdministrativevalueCodeableConcept_coding_display
-  properties:
-    include:
-    - status.value
-    - code.coding.code.value
-    # - code.coding.system
-    # - code.coding.display
-    - subject.reference
-    - focus.reference
-    - value[x]:valueCodeableConcept.coding.code
-    - value[x]:valueCodeableConcept.coding.system
-    # - valueCodeableConcept.coding.code.value
-    # # - valueCodeableConcept.coding.system
-    # - valueCodeableConcept.coding.display
+# # QuestionnaireResponse:
+# #   category: Clinical
+# #   links:
+# #     QuestionnaireResponse.subject:
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+# #       required: true
+# #     QuestionnaireResponse.questionnaire:
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/Questionnaire
+# #       required: true
+# #   properties:
+# #     include:
+# #     - questionnaire.id
+# #     - status.value
+# #     - item.answer
+# #     - item.linkId
+# #     - item.text
+# #     exclude:
+# #     - item.answer.valueAttachment
+# #     - item.answer.valueReference
+# #     - item.answer.valueCoding.version
+# #     - item.answer.valueCoding.display
+# #     - item.answer.valueCoding.userSelected
 
-  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-family-relationship.json
-  enums:
-    code.coding.code: http://terminology.hl7.org/ValueSet/v3-FamilyMember
-  constants:
-    code.coding.code.value:
-    - FAMMEMB
+
+# # FamilyRelationship:
+# #   category: Administrative
+# #   links:
+# #     FamilyRelationship.subject:
+# #       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+# #       required: true  
+# #   properties:
+# #     include:
+# #     - status
+# #     - code.coding.code
+# #     - subject.reference
+# #     - focus.reference
+# #     - value[x]:valueCodeableConcept.coding.code
+# #     - value[x]:valueCodeableConcept.coding.system
+# #   source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-family-relationship.json
+# #   enums:
+# #     code.coding.code: http://terminology.hl7.org/ValueSet/v3-FamilyMember
+# #   constants:
+# #     code.coding.code.value:
+# #     - FAMMEMB

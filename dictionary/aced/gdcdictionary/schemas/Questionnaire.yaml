@@ -28,7 +28,7 @@ links:
   required: true
 required:
 - type
-- status
+- status.value
 - projects
 - submitter_id
 uniqueKeys:
@@ -42,7 +42,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -62,25 +61,15 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   name:
+    type: string
     description: A natural language name identifying the questionnaire. This name
       should be usable as an identifier for the module by machine processing applications
-      such as code generation. A natural language name identifying the questionnaire.
-      This name should be usable as an identifier for the module by machine processing
-      applications such as code generation.
-    type: string
+      such as code generation.
   status:
-    description: The status of this questionnaire. Enables tracking the life-cycle
-      of the content. The status of this questionnaire. Enables tracking the life-cycle
-      of the content.  Vocabulary from http://hl7.org/fhir/ValueSet/publication-status|4.0.1
-    enum:
-    - draft
-    - active
-    - retired
-    - unknown
+    type: string
     term:
       description: The status of this questionnaire. Enables tracking the life-cycle
-        of the content. The status of this questionnaire. Enables tracking the life-cycle
-        of the content.  Vocabulary from http://hl7.org/fhir/ValueSet/publication-status|4.0.1
+        of the content. Primitive value for code  Vocabulary from http://hl7.org/fhir/ValueSet/publication-status|4.0.1
       termDef:
         term: status
         source: fhir

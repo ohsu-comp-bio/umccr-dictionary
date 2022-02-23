@@ -49,7 +49,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -69,6 +68,5 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   name:
-    description: A name associated with the organization. A name associated with the
-      organization.
     type: string
+    description: A name associated with the organization.

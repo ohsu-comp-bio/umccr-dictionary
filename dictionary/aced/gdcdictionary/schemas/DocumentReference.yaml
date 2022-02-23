@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: DRSDocumentReference
+id: DocumentReference
 title: DRS Document Reference
 type: object
 namespace: http://aced-idp.org
@@ -19,7 +19,7 @@ systemProperties:
 links:
 - # subject
   name: Patients
-  backref: DRSDocumentReferences
+  backref: DocumentReferences
   label: subject
   target_type: Patient
   multiplicity: many_to_many
@@ -41,7 +41,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -61,15 +60,13 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   status:
-    description: The status of this document reference. The status of this document
-      reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
+    format: code
     enum:
     - current
     - superseded
     - entered-in-error
     term:
-      description: The status of this document reference. The status of this document
-        reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
+      description: The status of this document reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
       termDef:
         term: status
         source: fhir
@@ -77,19 +74,18 @@ properties:
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
   date:
-    description: When the document reference was created. When the document reference
-      was created. The actual value
     oneOf:
     - type: string
       format: date-time
     - type: 'null'
     term:
       $ref: _terms.yaml#/datetime
+    description: When the document reference was created.
   description:
-    description: Human-readable description of the source document. Human-readable
-      description of the source document.
     type: string
+    description: Human-readable description of the source document.
   content_attachment_url:
-    description: For referring to data content defined in other formats. A location
-      where the data can be accessed. Primitive value for url
-    type: string
+    format: uri
+    description: The document and format referenced. There may be multiple content
+      element repetitions, each with a different format. For referring to data content
+      defined in other formats. A location where the data can be accessed.

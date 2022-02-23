@@ -13,7 +13,7 @@ from pprint import pprint
 import pydash
 import json
 import flatdict
-
+import copy
 
 PRIMITIVE_TYPES = [
     'integer', 'uri', 'boolean', 'string', 'time', 'dateTime', 'instant', 'http://hl7.org/fhirpath/System.String',
@@ -172,38 +172,71 @@ class Gen3Configuration(object):
     def links(self, schema, base):
         """Generate links from config.links."""
         links = []
-        white_list = self._config.get(base, {}).get('links', [])
+        white_list = self._config.get('links', [])        
         for el in schema['snapshot']['element']:
-            # logger.debug(f"{el['id']} {white_list}")
             if el['id'] in white_list:
                 links.append(self.link(el, base, white_list[el['id']]))
                 white_list.pop(el['id'])
         for name in white_list:
             links.append(self.link(el, base, white_list[name]))
 
+        logger.debug(f"links: {base} {links}")
         return links
 
 
-    def properties(self, schema, property_graph={}, paths={}):
+    def properties(self, schema, property_graph={}, paths={}, base=None, parent_node_name=None):
         """Recurse through properties."""
-        base = schema['type']
+        if not base:
+            base = schema['type']
         property_graph['_name'] = base
 
         # break apart dot notation element ids
         parent_set = False
 
-        for el in schema['snapshot']['element']:
+        # deal with multi value types
+        elements = schema['snapshot']['element']
+        elements_to_delete = []
+        elements_to_add = []
+        for el in elements:
+            name = el['id'].replace(f"{schema['type']}.", '')
+            if '[x]' in name:
+                multi_value_type_codes = [t['code'] for t in el['type']]
+                logger.debug(f"{name} is multi-valued {multi_value_type_codes}")
+                elements_to_delete.append(el['id'])
+                for multi_value_type_code in multi_value_type_codes:
+                    value_definition = copy.deepcopy(el)
+                    name = name.replace('[x]', '') 
+                    # new_id = f"{schema['type']}.{name}_{multi_value_type_code}"
+                    new_id = f"{name}_{multi_value_type_code}"
+                    logger.debug(f"multi-valued: {el['id']} --> {new_id}")
+                    value_definition['id'] = new_id
+                    value_definition['type'] = [{'code': multi_value_type_code}] 
+                    elements_to_add.append(value_definition)
+        if len(elements_to_add) > 0:
+            logger.debug(f"adding multi-valued {[el['id'] for el in elements_to_add]}")       
+            elements.extend(elements_to_add)
+        if len(elements_to_delete) > 0:
+            logger.debug(f"delete multi-valued {[el['id'] for el in elements if el['id']  in elements_to_delete]}")
+            elements = [el for el in elements if el['id'] not in elements_to_delete]
+
+
+        logger.debug(f"start loop base:{base} parent_node_name:{parent_node_name} first:{elements[0]['id']} last:{elements[-1]['id']}")
+        for el in elements:
+            logger.debug(f"\nloop current: {el['id']} parent_node_name:{parent_node_name} {property_graph.keys()}")
             if el['id'] == base:
-                # logger.debug(f"skipping {el['id']}")
+                logger.debug(f"skipping {el['id']}")
                 continue
             if 'contentReference' in el:
                 logger.debug(f"contentReference ??? {el['id']} {el['contentReference']}")
                 continue
-            assert 'type' in el, el
-            name = el['id'].replace(f"{base}.", '')
+            if 'type' not in el:
+                logger.warning(f"'type' not found. skipping {el}")
+                continue
+            name = el['id'].replace(f"{schema['type']}.", '')
             type = el['type'][0]['code'] 
 
             parent_node = property_graph
+            parent_paths = paths
 
             # deal with dot notation
             if '.' in name:
@@ -212,47 +245,39 @@ class Gen3Configuration(object):
                     continue
                 parent_name = name.split('.')[0]
                 new_name = name.split('.')[1]
-                logger.debug(f"{name} has dot notation? is a {type}. Assume that {parent_name} is a BackboneElement new_name: {new_name}")
+                logger.debug(f"loop {name} has dot notation? is a {type}. Assume that {parent_name} is a BackboneElement new_name: {new_name}")
                 assert name.split('.')[0] in property_graph, property_graph.keys()                
                 name = new_name 
                 parent_node = property_graph[parent_name]
                 if not parent_set:
-                    paths[parent_name] = {}
-                    paths = paths[parent_name]
+                    parent_paths[parent_name] = {}
+                    parent_paths = parent_paths[parent_name]
+                    logger.debug(f"loop  dot notation base:{base} parent_node:{parent_node_name} {parent_name}")
                     parent_set = True
-
-            # deal with multi value types
-            if '[x]' in name:
-                multi_value_type_codes = [t['code'] for t in el['type']]
-                logger.debug(f"{name} is multi-valued {multi_value_type_codes}")
-
+        
+            logger.debug(f"working on {name} {type}")
             if type in PRIMITIVE_TYPES or type in DONT_FOLLOW_TYPES:
-                property_graph[name] = {'_code': type}
-                property_graph[name]['element'] = el
-                property_graph[name]['_name'] = name
-                paths[name] = {}
+                parent_node[name] = {'_code': type}
+                parent_node[name]['element'] = el
+                parent_node[name]['_name'] = name
+                parent_paths[name] = {}
+                logger.debug(f"loop  leaf node  base:{base} parent_node:{parent_node_name}  {name} {type}")
                 continue
             
             type_schema = self.fhir_schema.add_profile(type)
             assert type_schema, el['type']
             # recurse down the graph
-            paths[name] = {}
-            type_properties = self.properties(type_schema, property_graph={},  paths=paths[name])
-
+            parent_paths[name] = {}
+            logger.debug(f"loop  parent node  base:{base} parent_node:{parent_node_name} {name} {type}")
+            type_properties = self.properties(type_schema, property_graph={},  paths=paths[name], parent_node_name=name)
             parent_node[name] = type_properties
+            parent_node[name] = {}
             parent_node[name]['element'] = el
             parent_node[name]['_name'] = name
             parent_node[name]['_code'] = type
             assert parent_node[name]['_code'], el
             if type == 'BackboneElement':
                 logger.debug(f"recurse adding {type_schema['type']} {type_schema.keys()} {type_properties.keys()} to {name}")
-
-            # if type == 'Attachment':
-            #     logger.debug(f"recurse adding {type_schema['type']} {type_schema.keys()} {type_properties.keys()} to {name}")
-            #     node = pydash.get(property_graph, 'content.attachment')
-            #     assert node, f"could not find path {list(property_graph.keys())}"
-            #     logger.debug(list(node.keys()))
-
 
         return property_graph
     
@@ -533,7 +558,7 @@ class Gen3Configuration(object):
             return pydash.get(property_graph, path) 
 
         paths = {}
-        property_graph = self.properties(schema, paths=paths)
+        property_graph = self.properties(schema, paths=paths, base=self._resource_name)
 
         with open("property_graph.json", "w") as output_stream:
             yaml_string = json.dumps(property_graph,sort_keys=False, indent=2)
@@ -550,7 +575,7 @@ class Gen3Configuration(object):
         for include_path in self._config['properties']['include']:
             node = get_node(property_graph, include_path)
             if not node:
-                logger.warning(f"include_path={include_path} {list(property_graph['content'].keys())}")
+                logger.warning(f"include_path={include_path}")
                 continue
             logger.debug(f"include_path={include_path} {node.keys()}")
             _code = node['_code']
@@ -614,11 +639,14 @@ def transform(path):
             yaml_string = yaml.dump(gen3_schema, sort_keys=False)
             yaml_string = re.sub(r'comment_.* ', '# ', yaml_string)
             output_stream.write(yaml_string)
+            logger.info(f"Wrote gen3 config to {file_name}")
 
         file_name = f"./output/paths/{resource}.txt"
         with open(file_name, "w") as output_stream:
             d = flatdict.FlatDict(paths, delimiter='.')
-            output_stream.write('\n'.join([k for k in d.keys()]))            
+            output_stream.write('\n'.join([k for k in d.keys()]))    
+            # json.dump(paths, output_stream, sort_keys=False)        
+            logger.info(f"Wrote nested property names to {file_name}")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: SpecimenTask
+id: Task
 title: Research Task
 type: object
 namespace: http://aced-idp.org
@@ -20,21 +20,21 @@ systemProperties:
 links:
 - # input
   name: Specimen
-  backref: SpecimenTasks
+  backref: Tasks
   label: input
   target_type: Specimen
   multiplicity: many_to_many
   required: true
 - # output
-  name: DRSDocumentReferences
-  backref: SpecimenTasks
+  name: DocumentReferences
+  backref: Tasks
   label: output
-  target_type: DRSDocumentReference
+  target_type: DocumentReference
   multiplicity: many_to_many
   required: true
 required:
 - type
-- status
+- status.value
 - submitter_id
 - intent
 - projects
@@ -49,7 +49,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -69,23 +68,9 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   status:
-    description: The current status of the task. The current status of the task.  Vocabulary
-      from http://hl7.org/fhir/ValueSet/task-status|4.0.1
-    enum:
-    - draft
-    - requested
-    - received
-    - accepted
-    - rejected
-    - ready
-    - cancelled
-    - in-progress
-    - on-hold
-    - failed
-    - completed
-    - entered-in-error
+    type: string
     term:
-      description: The current status of the task. The current status of the task.  Vocabulary
+      description: The current status of the task. Primitive value for code  Vocabulary
         from http://hl7.org/fhir/ValueSet/task-status|4.0.1
       termDef:
         term: status
@@ -94,19 +79,11 @@ properties:
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/task-status|4.0.1
   intent:
-    description: Indicates the "level" of actionability associated with the Task,
-      i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.
-      Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs
-      this a proposed task, a planned task, an actionable task, etc.  Vocabulary from
-      http://hl7.org/fhir/ValueSet/task-intent|4.0.1
-    enum:
-    - unknown
+    type: string
     term:
       description: Indicates the "level" of actionability associated with the Task,
         i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.
-        Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs
-        this a proposed task, a planned task, an actionable task, etc.  Vocabulary
-        from http://hl7.org/fhir/ValueSet/task-intent|4.0.1
+        Primitive value for code  Vocabulary from http://hl7.org/fhir/ValueSet/task-intent|4.0.1
       termDef:
         term: intent
         source: fhir
@@ -114,24 +91,13 @@ properties:
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/task-intent|4.0.1
   code_coding_code:
-    description: A name or code (or both) briefly describing what the task involves.
-      A reference to a code defined by a terminology system. A symbol in syntax defined
-      by the system. The symbol may be a predefined code or an expression in a syntax
-      defined by the coding system (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/task-code
-    enum:
-    - approve
-    - fulfill
-    - abort
-    - replace
-    - change
-    - suspend
-    - resume
+    type: string
     term:
       description: A name or code (or both) briefly describing what the task involves.
         A reference to a code defined by a terminology system. A symbol in syntax
         defined by the system. The symbol may be a predefined code or an expression
-        in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
-        from http://hl7.org/fhir/ValueSet/task-code
+        in a syntax defined by the coding system (e.g. post-coordination). Primitive
+        value for code  Vocabulary from http://hl7.org/fhir/ValueSet/task-code
       termDef:
         term: code_coding_code
         source: fhir

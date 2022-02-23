@@ -27,7 +27,7 @@ links:
   required: true
 required:
 - type
-- status
+- status.value
 - projects
 - submitter_id
 uniqueKeys:
@@ -41,7 +41,6 @@ properties:
     description: Gen3's type field.
   id:
     $ref: _definitions.yaml#/UUID
-    systemAlias: node_id
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -61,17 +60,9 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   status:
-    description: The current state of the subject. The current state of the subject.  Vocabulary
-      from http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
-    enum:
-    - candidate
-    - enrolled
-    - active
-    - suspended
-    - withdrawn
-    - completed
+    type: string
     term:
-      description: The current state of the subject. The current state of the subject.  Vocabulary
+      description: The current state of the subject. Primitive value for code  Vocabulary
         from http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
       termDef:
         term: status
@@ -80,12 +71,10 @@ properties:
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
   assignedArm:
+    type: string
     description: The name of the arm in the study the subject is expected to follow
-      as part of this study. The name of the arm in the study the subject is expected
-      to follow as part of this study.
-    type: string
-  actualArm:
-    description: The name of the arm in the study the subject actually followed as
-      part of this study. The name of the arm in the study the subject actually followed
       as part of this study.
+  actualArm:
     type: string
+    description: The name of the arm in the study the subject actually followed as
+      part of this study.

@@ -35,7 +35,7 @@ links:
   required: true
 required:
 - type
-- status
+- status.value
 - projects
 - submitter_id
 uniqueKeys:
@@ -48,10 +48,7 @@ properties:
     - QuestionnaireResponse
     description: Gen3's type field.
   id:
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes. The logical id of the resource, as
-      used in the URL for the resource. Once assigned, this value never changes.
-    type: string
+    $ref: _definitions.yaml#/UUID
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -71,190 +68,21 @@ properties:
   updated_datetime:
     $ref: _definitions.yaml#/datetime
   questionnaire_id:
-    description: The Questionnaire that defines and organizes the questions for which
-      answers are being provided. The Questionnaire that defines and organizes the
-      questions for which answers are being provided. unique id for the element within
-      a resource (for internal references)
     type: string
+    description: The Questionnaire that defines and organizes the questions for which
+      answers are being provided. unique id for the element within a resource (for
+      internal references)
   status:
-    description: The position of the questionnaire response within its overall lifecycle.
-      The position of the questionnaire response within its overall lifecycle.  Vocabulary
-      from http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
-    enum:
-    - in-progress
-    - completed
-    - amended
-    - entered-in-error
-    - stopped
+    type: string
     term:
       description: The position of the questionnaire response within its overall lifecycle.
-        The position of the questionnaire response within its overall lifecycle.  Vocabulary
-        from http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
+        Primitive value for code  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
       termDef:
         term: status
         source: fhir
         cde_id: status
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
-  item_text:
-    description: Text that is displayed above the contents of the group or as the
-      text of the question being answered. Text that is displayed above the contents
-      of the group or as the text of the question being answered.
-    type: string
-  item_answerBoolean:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    type: boolean
-  item_answerDecimal:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    type: float
-  item_answerInteger:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    type: integer
-  item_answerDate:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    oneOf:
-    - type: string
-      format: date
-    - type: 'null'
-  item_answerDatetime:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    oneOf:
-    - type: string
-      format: date-time
-    - type: 'null'
-    term:
-      $ref: _terms.yaml#/datetime
-  item_answerTime:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    oneOf:
-    - type: string
-      format: time
-    - type: 'null'
-  item_answerString:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    type: string
-  item_answerUri:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The actual value
-    type: string
-  item_answerCoding_system:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The identification of the code system that defines the meaning
-      of the symbol in the code.
-    type: string
-    format: uri
-  item_answerCoding_code:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. A symbol in syntax defined by the system. The symbol may be
-      a predefined code or an expression in a syntax defined by the coding system
-      (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
-    type: string
-    format: code
-    # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/questionnaire-answers|codeset-http://hl7.org/fhir/CodeSystem/snomedct
-    term:
-      description: The answer (or one of the answers) provided by the respondent to
-        the question. The answer (or one of the answers) provided by the respondent
-        to the question. The answer (or one of the answers) provided by the respondent
-        to the question. A symbol in syntax defined by the system. The symbol may
-        be a predefined code or an expression in a syntax defined by the coding system
-        (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
-      termDef:
-        term: item_answerCoding_code
-        source: fhir
-        cde_id: item_answerCoding_code
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers
-  item_answerQuantity:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The value of the measured amount. The value includes an implicit
-      precision in the presentation of the value. The actual value
-    type: float
-  item_answerQuantity_comparator:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. How the value should be understood and represented - whether
-      the actual value is greater or less than the stated value due to measurement
-      issues; e.g. if the comparator is "<" , then the real value is < stated value.  Vocabulary
-      from http://hl7.org/fhir/ValueSet/quantity-comparator|4.0.1
-    enum:
-    - <
-    - <=
-    - '>='
-    - '>'
-    term:
-      description: The answer (or one of the answers) provided by the respondent to
-        the question. The answer (or one of the answers) provided by the respondent
-        to the question. The answer (or one of the answers) provided by the respondent
-        to the question. How the value should be understood and represented - whether
-        the actual value is greater or less than the stated value due to measurement
-        issues; e.g. if the comparator is "<" , then the real value is < stated value.  Vocabulary
-        from http://hl7.org/fhir/ValueSet/quantity-comparator|4.0.1
-      termDef:
-        term: item_answerQuantity_comparator
-        source: fhir
-        cde_id: item_answerQuantity_comparator
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/quantity-comparator|4.0.1
-  item_answerQuantity_unit:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. A human-readable form of the unit.
-    type: string
-  item_answerQuantity_system:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. The identification of the system that provides the coded form
-      of the unit.
-    type: string
-    format: uri
-  item_answerQuantity_code:
-    description: The answer (or one of the answers) provided by the respondent to
-      the question. The answer (or one of the answers) provided by the respondent
-      to the question. The answer (or one of the answers) provided by the respondent
-      to the question. A computer processable form of the unit in some unit representation
-      system.  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
-    type: string
-    format: code
-    # No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/questionnaire-answers|codeset-http://hl7.org/fhir/CodeSystem/snomedct
-    term:
-      description: The answer (or one of the answers) provided by the respondent to
-        the question. The answer (or one of the answers) provided by the respondent
-        to the question. The answer (or one of the answers) provided by the respondent
-        to the question. A computer processable form of the unit in some unit representation
-        system.  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
-      termDef:
-        term: item_answerQuantity_code
-        source: fhir
-        cde_id: item_answerQuantity_code
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers
+  item_answer:
+    description: A group or question item from the original questionnaire for which
+      answers are provided. The respondent's answer(s) to the question.
