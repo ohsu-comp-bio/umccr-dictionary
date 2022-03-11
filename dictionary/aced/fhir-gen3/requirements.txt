@@ -5,3 +5,5 @@ inflection
 requests
 yq
 xq
+flatten_json
+pypfb[gen3]

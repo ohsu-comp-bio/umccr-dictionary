@@ -8,7 +8,7 @@ import click
 import requests
 
 logger = logging.getLogger("valuesets")
-logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.INFO)
 
 DEFAULT_DATABASE_PATH = "./valuesets.sqlite"
 DEFAULT_JSON_PATH = "./valuesets.json"

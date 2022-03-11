@@ -1,48 +1,75 @@
-#!/usr/bin/env python3
 
-from hashlib import new
+import os
+import logging
+import requests
+import json
+import inspect
+import importlib
+from copy import deepcopy
+from data.valuesets import ValueSets
+# for distinct, separate Resources
+from fhirclient.models.domainresource import DomainResource 
+from fhirclient.models.element import Element
+# for embedded types
+from fhirclient.models.backboneelement  import BackboneElement
+
+from dictionaryutils import dump_schemas_from_dir
+import flatdict
 import yaml
 import click
-import re
-import inflection
-import requests
-from pprint import pprint
-import logging
-from data.valuesets import ValueSets
-from pprint import pprint
 import pydash
-import json
-import flatdict
-import copy
 
-PRIMITIVE_TYPES = [
-    'integer', 'uri', 'boolean', 'string', 'time', 'dateTime', 'instant', 'http://hl7.org/fhirpath/System.String',
-    'http://hl7.org/fhirpath/System.Integer', 'http://hl7.org/fhirpath/System.Decimal', 'http://hl7.org/fhirpath/System.Boolean',
-     'http://hl7.org/fhirpath/System.Date'
-]
-
-DONT_FOLLOW_TYPES = [ 'Extension', 'Identifier']
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.WARNING)
 logger = logging.getLogger("model")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
+
+# see https://github.com/smart-on-fhir/fhir-parser/blob/master/Default/mappings.py
+
+# Properties that need to be renamed because of language keyword conflicts
+reservedmap = {
+    'for': 'for_fhir',
+    'from': 'from_fhir',
+    'class': 'class_fhir',
+    'import': 'import_fhir',
+    'global': 'global_fhir',
+    'assert': 'assert_fhir',
+    'except': 'except_fhir',
+}
+reservedmap_inverted = {v:k for (k,v)in reservedmap.items()}
+
+
+class MissingProfile(Exception):
+    """We can't find a profile for the element or resource."""
+    pass
+
+
+def class_for_name(module_name, class_name):
+    """Load the module, will catch and log ModuleNotFoundError if module cannot be loaded."""
+    try:
+        m = importlib.import_module(module_name)
+        # get the class, will raise AttributeError if class cannot be found
+        c = getattr(m, class_name)
+        return c
+    except ModuleNotFoundError as e:
+        logger.warning(f"{module_name}, {class_name}, {e}")
 
 
 class FHIRSchema(object):
+    """Fetch and cache schemas."""
 
-    def __init__(self, profile_name, url=None) -> None:
+
+    def __init__(self) -> None:
         """Load schema."""
-        self.profiles = {}
         self.primitives = []
-        self.profile_name = profile_name
-        self._schema = self.add_profile(profile_name, url)
 
-    def add_profile(self, profile_name, url=None):
-        if profile_name in self.profiles:
-            return self.profiles[profile_name]
+    def get_profile(self, profile_name, url=None):
+        """Retrieve schema."""
         if profile_name in self.primitives:
             return None
+        if profile_name == 'FHIRReference':
+            profile_name = 'reference'
         if not url:    
             url = f"https://www.hl7.org/fhir/{profile_name}.profile.json"
         if 'ncpi-fhir.github.io' in url:
@@ -53,28 +80,64 @@ class FHIRSchema(object):
             url = url.replace('StructureDefinition/ncpi', 'StructureDefinition-ncpi')
         if not url.endswith('json'):
             url = url + '.json'
+
+        file_name = f'cache/{profile_name}.profile.json'    
+        if os.path.isfile(file_name):
+            with open(file_name, 'r') as input:
+                logger.debug(f'found in cache {file_name}')
+                return json.load(input)
+
         logger.debug(f"fetching {url}")
         response = requests.get(url)
         if response.status_code != 200:
             self.primitives.append(profile_name)
             logger.debug(f"fetching {url} got {response.status_code}")
             return None
-        self.profiles[profile_name] = response.json()
-        return self.profiles[profile_name]
+
+        profile =  response.json()
+        file_name = f"cache/{profile['name']}.profile.json"
+        with open(file_name, 'w') as output:
+            logger.debug(f'wrote to cache {file_name}')
+            json.dump(profile, output)
+
+        return profile
+
+
+# from anvil.clients.fhir_client import DispatchingFHIRClient
+# from anvil.clients.smart_auth import GoogleFHIRAuth
+
+
+# token = None
+
+# settings = {
+#     'app_id': __name__,
+#     'api_bases': [
+#         'https://healthcare.googleapis.com/v1beta1/projects/fhir-test-16-342800/locations/us-west2/datasets/anvil-test/fhirStores/public/fhir',
+#     ]
+# }
+# client =  DispatchingFHIRClient(settings=settings, auth=GoogleFHIRAuth(access_token=token))
+
+# document_references = DocumentReference.where(struct={}).perform_resources(client.server)
+# document_reference = document_references[0]
+
+# for name, jsname, typ, is_list, of_many, not_optional in document_reference.elementProperties():
+#     if not_optional:
+#         print(name,typ,  issubclass(typ, FHIRAbstractBase))
+
+# elementProperties
+# ("name", "json_name", type, is_list, "of_many", not_optional)
+
+
+
+
 
 
 class Gen3Configuration(object):
 
-    def __init__(self, fhir_schema, resource_name, config) -> None:
+    def __init__(self, config) -> None:
         super().__init__()        
-        self.fhir_schema = fhir_schema
-        self._schema = fhir_schema._schema
+        self._schema = FHIRSchema()
         self._config = config
-        self._resource_name = resource_name
-        self._recursion_guard = []
-        self._parent_element = None
-
-        schema = self._schema
         self.template = {
             "$schema": "http://json-schema.org/draft-04/schema#",
             "id": None,
@@ -84,7 +147,7 @@ class Gen3Configuration(object):
             "category": "administrative",
             "program": "*",
             "project": "*",
-            "description": f'> {schema["description"]}',
+            "description": 'description goes here',
             "additionalProperties": False,
             "submittable": True,
             "validators": None,
@@ -145,145 +208,243 @@ class Gen3Configuration(object):
             }
         }
 
-    def _name(self, valid_reference):
-        """Get name from url."""
-        return valid_reference.split('/')[-1]
+    def _get_type_from_source(self, source):
+        """Get structure definition and class from source"""
+        structure_definition = self._schema.get_profile(None, url=source)
+        assert structure_definition
+        resource = structure_definition['type']
+        clazz = class_for_name(f"fhirclient.models.{resource.lower()}", resource)
+        assert clazz
+        logger.info(f"Extension detected. Based {structure_definition['name']} on {resource} found in from {source}")
+        return (clazz, structure_definition)
 
-    def link(self, el, base, config):
-        """Generate individual link."""
-        name = '.'.join(el['id'].split('.')[1:])
-        ## Read target profile from config
-        _neighbor = config['targetProfile']
 
-        assert _neighbor, 'Please configure links'
-        target_type = self._name(_neighbor)
-        backref = inflection.pluralize(base)
-        name = inflection.pluralize(target_type)
+    def _get_property_definition_resource(self, name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition):
+        """FHIR definition for DomainResource, Element."""
+        assert parent_structure_definition, "MUST have parent_structure_definition"
+        sd = parent_structure_definition
+        parent_name = sd['id']
+        if 'type' in sd:
+            parent_name = sd['type']
+
+        my_definition = None
+        for el in sd['snapshot']['element']:
+            # logger.debug(f"simple match {sd['id']} {el['id']} {name}")
+            if el['id'] == f"{parent_name}.{name}":
+                my_definition = el 
+                break
+        if of_many:
+            # logger.debug(f"multivalued {name} {of_many}")
+            for el in sd['snapshot']['element']:
+                # logger.warning(f"of many {sd['id']} {el['id']} {of_many}")
+                if el['id'] == f"{parent_name}.{of_many}[x]":
+                    my_definition = el
+                    break
+        if name in reservedmap_inverted:
+            # logger.debug(f"reserved map {name} {reservedmap_inverted[name]}")
+            for el in sd['snapshot']['element']:
+                # logger.debug(f"reserved map {sd['id']} {el['id']} {reservedmap_inverted[name]}")
+                if el['id'] == f"{parent_name}.{reservedmap_inverted[name]}":
+                    my_definition = el
+                    break
+
+        if not my_definition:
+            logger.error(f"SHOULD ? find a definition for {typ.__name__}.{name}, did not find it {parent_name} .")
+            raise Exception("?")
+
+        return my_definition
+
+    def _get_property_definition_backbone_element(self, name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition):
+        """FHIR definition for BackboneElement."""
+        return {'description': f'TODO _get_property_definition_backbone_element {name} {parent_structure_definition}'}
+
+    def _get_property_definition_primitive(self, name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition):
+        """FHIR definition for scalar."""
+        try:
+            definition = self._get_property_definition_resource(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition)
+        except:
+            definition = self._get_property_definition_backbone_element(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition)
+        return definition
+
+    def _get_property_definition(self, name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition):        
+        """FHIR definition for each type."""
+        if issubclass(typ, DomainResource) or issubclass(typ, Element) and typ.__name__ not in  ['Identifier', 'Extension', 'Meta']:
+            definition = self._get_property_definition_resource(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition)
+        elif issubclass(typ, BackboneElement):
+            definition = self._get_property_definition_backbone_element(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition)
+        else:
+            definition = self._get_property_definition_primitive(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition)    
+
         return {
-            f'comment_link{name}': el['id'].split('.')[-1],
-            'name': inflection.pluralize(name),
-            'backref': backref,
-            'label': el['id'].split('.')[-1],
-            'target_type': target_type,
-            'multiplicity': 'many_to_many',
-            'required': config.get('required', False),
+            'name': name,
+            'jsname': jsname,
+            'type': typ,
+            'is_list': is_list,
+            'of_many': of_many,
+            'not_optional': not_optional,
+            'definition': definition
+        }        
+
+    def _show_paths_element(self, parent_type, parent_name, parent_structure_definition, parent_path):
+        """Get the StructureDefinition, and it's properties so we can get property types, docs, enum etc."""
+
+        # seems to be some inconsistency on 'type'
+        root_name = parent_structure_definition.get('type', parent_structure_definition['id'])
+
+        # instantiate it so we can use smart-on-fhir's parser
+        obj = parent_type()
+
+        # construct a mock structure_definition        
+        # logger.debug(f"_show_paths_element {parent_type.__name__} {parent_structure_definition['id']}")
+        sd = parent_structure_definition
+        root = None
+        for el in sd['snapshot']['element']:
+            # logger.debug(f"simple match {sd['id']} {el['id']} {root_name}.{parent_name}")
+            if el['id'] == f"{root_name}.{parent_name}":
+                root = el
+            if el['id'] == f"{root_name}.{parent_path['of_many']}[x]":
+                root = el
+
+        assert root, f"Could not find root for {root_name}.{parent_name} in {parent_structure_definition['id']} {parent_path}"
+        my_definition = {
+            'id': root['id'],
+            'definition': root['definition'],
+            'snapshot': {
+                'element': []
+            },
         }
 
-    def links(self, schema, base):
-        """Generate links from config.links."""
-        links = []
-        white_list = self._config.get('links', [])        
-        for el in schema['snapshot']['element']:
-            if el['id'] in white_list:
-                links.append(self.link(el, base, white_list[el['id']]))
-                white_list.pop(el['id'])
-        for name in white_list:
-            links.append(self.link(el, base, white_list[name]))
+        # See if there are any children
 
-        logger.debug(f"links: {base} {links}")
-        return links
-
-
-    def properties(self, schema, property_graph={}, paths={}, base=None, parent_node_name=None):
-        """Recurse through properties."""
-        if not base:
-            base = schema['type']
-        property_graph['_name'] = base
-
-        # break apart dot notation element ids
-        parent_set = False
-
-        # deal with multi value types
-        elements = schema['snapshot']['element']
-        elements_to_delete = []
-        elements_to_add = []
-        for el in elements:
-            name = el['id'].replace(f"{schema['type']}.", '')
-            if '[x]' in name:
-                multi_value_type_codes = [t['code'] for t in el['type']]
-                logger.debug(f"{name} is multi-valued {multi_value_type_codes}")
-                elements_to_delete.append(el['id'])
-                for multi_value_type_code in multi_value_type_codes:
-                    value_definition = copy.deepcopy(el)
-                    name = name.replace('[x]', '') 
-                    # new_id = f"{schema['type']}.{name}_{multi_value_type_code}"
-                    new_id = f"{name}_{multi_value_type_code}"
-                    logger.debug(f"multi-valued: {el['id']} --> {new_id}")
-                    value_definition['id'] = new_id
-                    value_definition['type'] = [{'code': multi_value_type_code}] 
-                    elements_to_add.append(value_definition)
-        if len(elements_to_add) > 0:
-            logger.debug(f"adding multi-valued {[el['id'] for el in elements_to_add]}")       
-            elements.extend(elements_to_add)
-        if len(elements_to_delete) > 0:
-            logger.debug(f"delete multi-valued {[el['id'] for el in elements if el['id']  in elements_to_delete]}")
-            elements = [el for el in elements if el['id'] not in elements_to_delete]
-
-
-        logger.debug(f"start loop base:{base} parent_node_name:{parent_node_name} first:{elements[0]['id']} last:{elements[-1]['id']}")
-        for el in elements:
-            logger.debug(f"\nloop current: {el['id']} parent_node_name:{parent_node_name} {property_graph.keys()}")
-            if el['id'] == base:
-                logger.debug(f"skipping {el['id']}")
-                continue
-            if 'contentReference' in el:
-                logger.debug(f"contentReference ??? {el['id']} {el['contentReference']}")
-                continue
-            if 'type' not in el:
-                logger.warning(f"'type' not found. skipping {el}")
-                continue
-            name = el['id'].replace(f"{schema['type']}.", '')
-            type = el['type'][0]['code'] 
-
-            parent_node = property_graph
-            parent_paths = paths
-
-            # deal with dot notation
-            if '.' in name:
-                if len(name.split('.')) != 2:
-                    logger.warning(f"Deeply nested backbone element not supported (yet) {name} skipping")
-                    continue
-                parent_name = name.split('.')[0]
-                new_name = name.split('.')[1]
-                logger.debug(f"loop {name} has dot notation? is a {type}. Assume that {parent_name} is a BackboneElement new_name: {new_name}")
-                assert name.split('.')[0] in property_graph, property_graph.keys()                
-                name = new_name 
-                parent_node = property_graph[parent_name]
-                if not parent_set:
-                    parent_paths[parent_name] = {}
-                    parent_paths = parent_paths[parent_name]
-                    logger.debug(f"loop  dot notation base:{base} parent_node:{parent_node_name} {parent_name}")
-                    parent_set = True
+        for el in sd['snapshot']['element']:
+            # logger.debug(f"simple match {sd['id']} {el['id']} {root_name}.{parent_name}")
+            if el['id'].startswith(f"{root_name}.{parent_name}"):
+                my_definition['snapshot']['element'].append(el)
         
-            logger.debug(f"working on {name} {type}")
-            if type in PRIMITIVE_TYPES or type in DONT_FOLLOW_TYPES:
-                parent_node[name] = {'_code': type}
-                parent_node[name]['element'] = el
-                parent_node[name]['_name'] = name
-                parent_paths[name] = {}
-                logger.debug(f"loop  leaf node  base:{base} parent_node:{parent_node_name}  {name} {type}")
+        # no children? empty path
+        if len(my_definition['snapshot']['element']) == 0:
+            return {}
+
+        # recurse through children if they exist        
+        assert len(my_definition['snapshot']['element']) > 0, f"Could not find child definitions of {root_name}.{parent_name} in {parent_structure_definition['id']}"
+
+        # De-reference #contentReference
+        if 'snapshot' in my_definition:
+            contentReference = my_definition['snapshot']['element'][0].get('contentReference', None)
+            if contentReference:
+                contentReference = contentReference[contentReference.find('#') + 1:]
+                # contentReference = contentReference.replace('#', '')
+                if contentReference in root_name:
+                    logger.warning(f"Recursion detected: {root_name}.{parent_name}")
+                    return {}
+                
+                my_definition['snapshot']['element'] = []
+                # re-fetch the base
+                base_definition = self._schema.get_profile(root_name.split('.')[0], url=None)
+                for el in base_definition['snapshot']['element']:
+                    # logger.debug(f"startswith {el['id']} {contentReference}")
+                    if el['id'].startswith(contentReference):
+                        my_definition['snapshot']['element'].append(el)
+                assert len(my_definition['snapshot']['element']) > 0, my_definition
+                # rename "our" path to the de-referenced one
+                my_definition['id'] = contentReference
+                logger.debug(f"{root_name}.{parent_name} contentReference {contentReference} de-reference, fetched {len(my_definition['snapshot']['element'])} children")
+
+
+        # initialize paths with minimal information about resource
+        paths = {'_root': {}}
+        paths['_root']['description'] = my_definition['definition']
+        paths['_root']['id'] = my_definition['id']
+        paths['_root']['type'] = my_definition.get('name', my_definition['id'])
+
+        for name, jsname, typ, is_list, of_many, not_optional in obj.elementProperties():
+
+            # don't follow
+            if typ.__name__ in  ['Extension', 'Meta']:
+                continue
+           
+            paths[name] = self._get_property_definition(name, jsname, typ, is_list, of_many, not_optional, None, parent_structure_definition=my_definition)
+
+            # recurse if necessary
+            child_names = self._show_paths(name, paths[name], parent_structure_definition=my_definition)
+            # assert child_names, f"MUST have, even if empty {child_names} {paths[name]}"
+            for child_name, child_property_definition in child_names.items():
+                paths[f"{name}.{child_name}"] = child_property_definition
+
+        return paths
+
+    def _show_paths(self, name, path, parent_structure_definition):
+        """Dispatch based on path['type']."""
+        typ = path['type']
+        assert isinstance(typ, type), path
+
+        if issubclass(typ, BackboneElement):
+            return self._show_paths_element(typ, name, parent_structure_definition=parent_structure_definition, parent_path=path)
+
+        elif issubclass(typ, DomainResource) or issubclass(typ, Element) and typ.__name__ not in  ['Identifier', 'Extension', 'Meta']:
+            try:
+                return self.show_paths_resource(typ, parent_structure_definition=parent_structure_definition, parent_path=path)
+            except MissingProfile as e:
+                logger.debug(f"MissingProfile for {name} {e}, treating as BackboneElement parent_structure_definition: {parent_structure_definition['id']} {parent_structure_definition['type']}")
+                return self._show_paths_element(typ, name, parent_structure_definition=parent_structure_definition, parent_path=path)    
+
+        # don't need to recurse for primitive types
+        # logger.debug(f"_show_paths No recursion for {name}<{typ.__name__}>")
+        return {}
+
+    def show_paths_resource(self, parent_type, source=None, parent_structure_definition=None, parent_path=None):
+        """Get the StructureDefinition, and it's properties so we can get property types, docs, enum etc."""
+        logger.debug(f"show_paths_resource")
+        if not parent_type and not source:
+            raise Exception("Missing both parent_type and source")
+
+        structure_definition = None
+        if not parent_type:
+            clazz, structure_definition = self._get_type_from_source(source)
+            parent_type = clazz
+            assert structure_definition
+        
+        assert issubclass(parent_type, DomainResource) or issubclass(parent_type, Element), help(parent_type)
+
+        # instantiate it so we can use smart-on-fhir's parser
+        obj = parent_type()
+
+        # loop through all properties
+        if not structure_definition:
+            logger.debug(f"fetching {parent_type.__name__}")
+            structure_definition = self._schema.get_profile(parent_type.__name__, url=source)
+
+        # We really should have a structure_definition here.
+        # However, at least `DataRequirementCodeFilter`
+        # is an Element, but there is no fetchable resource
+        if not structure_definition:
+            raise MissingProfile(parent_type.__name__)
+
+        # intialize paths with minimal information about resource
+        paths = {'_root': {}}
+        for p in ['id', 'description', 'type', 'name']:
+            paths['_root'][p] = structure_definition[p]
+        # logger.error(f"show_paths_resource {paths['_root']['name']}")
+
+        for name, jsname, typ, is_list, of_many, not_optional in obj.elementProperties():
+
+            # don't follow
+            if typ.__name__ in  ['Extension', 'Meta']:
                 continue
             
-            type_schema = self.fhir_schema.add_profile(type)
-            assert type_schema, el['type']
-            # recurse down the graph
-            parent_paths[name] = {}
-            logger.debug(f"loop  parent node  base:{base} parent_node:{parent_node_name} {name} {type}")
-            type_properties = self.properties(type_schema, property_graph={},  paths=paths[name], parent_node_name=name)
-            parent_node[name] = type_properties
-            parent_node[name] = {}
-            parent_node[name]['element'] = el
-            parent_node[name]['_name'] = name
-            parent_node[name]['_code'] = type
-            assert parent_node[name]['_code'], el
-            if type == 'BackboneElement':
-                logger.debug(f"recurse adding {type_schema['type']} {type_schema.keys()} {type_properties.keys()} to {name}")
+            paths[name] = self._get_property_definition(name, jsname, typ, is_list, of_many, not_optional, source, parent_structure_definition=structure_definition)
 
-        return property_graph
-    
-    def normalize(self, template, properties):
+            # recurse if necessary
+            child_names = self._show_paths(name, paths[name], parent_structure_definition=structure_definition)
+            # assert child_names, f"MUST have, even if empty {child_names} {paths[name]}"
+            for child_name, child_property_definition in child_names.items():
+                paths[f"{name}.{child_name}"] = child_property_definition
+
+        return paths
+
+
+    def normalize(self, template, properties, paths):
         """Clean up, strict gen3 conformance, remove temporary attributes."""
-
 
         # xlate types to gen3 types
         simple_mapping = {
@@ -292,7 +453,10 @@ class Gen3Configuration(object):
             'http://hl7.org/fhirpath/System.Boolean': 'boolean',
             'boolean': 'boolean',
             'string': 'string',
+            'str': 'string',
             'http://hl7.org/fhirpath/System.String': 'string',
+            'bool': 'boolean',
+            'float': 'float'
         }
         
         def update_uri(d):
@@ -314,6 +478,7 @@ class Gen3Configuration(object):
                     'term': {'$ref': '_terms.yaml#/datetime'}
                 }
             )
+            del d['type']
             return d
 
         def update_date_ref(d):
@@ -324,6 +489,7 @@ class Gen3Configuration(object):
                     # 'term': {'$ref': '_terms.yaml#/date'}
                 }
             )
+            del d['type']
             return d
 
         def update_time_ref(d):
@@ -334,6 +500,7 @@ class Gen3Configuration(object):
                     # 'term': {'$ref': '_terms.yaml#/time'}
                 }
             )
+            del d['type']
             return d
 
         # xlate types to gen3 types with formatting
@@ -344,56 +511,54 @@ class Gen3Configuration(object):
             'http://hl7.org/fhirpath/System.DateTime': update_datetime_ref,
             'http://hl7.org/fhirpath/System.Time': update_time_ref,
             'http://hl7.org/fhirpath/System.Date': update_date_ref,
-            'instant': update_datetime_ref
+            'instant': update_datetime_ref,
+            'FHIRDate': update_datetime_ref,
         }
 
-
+        # map types to json types, find system and code for codesets, apply description 
         for name, property in properties.items():
-
-            if name not in self._config['properties']['include']:
-                logger.debug(f"{name} not in include.")
-                continue
-
-            is_array = False
-            is_required = False
-            for max in property.get('max',[]):
-                if max == '*' or int(max) > 1:
-                    is_array = True
-            for min in property.get('min',[]):
-                if min > 0:
-                    is_required = True
+            _definition = property['_definition']
             
-            if is_required:
+            if _definition['not_optional']:
                template['required'].append(name)
 
-            assert '_code' in property, f"{name} {property}"
-            assert property['_code'], f"{name} {property}"
-            
-            if property['_code'] in PRIMITIVE_TYPES:
-                logger.debug(f"PRIMITIVE_TYPES {name} {property['_code']}")
+            _type = _definition['type'].__name__
+            template['properties'][name] = {
+                'type': _type,
+                'description': _definition['definition']['definition'],                
+            }
 
+            if '.' in name and "_root" in property: 
+                # Include description for root of this item
+                description = pydash.objects.get(property['_root'], 'description')
+                if description:
+                    template['properties'][name]['description'] = f"{description} {template['properties'][name]['description']}"
+                else:
+                    possible_choices = [k for k in paths.keys() if k.startswith(name.split('.')[0])]
+                    logger.warning(f"dot notation name without _root.description {name}. Is it here? {possible_choices}")
 
-            template['properties'][name] = {'_code': property['_code']}
-
-            mapped = simple_mapping.get(property['_code'], None)
+            mapped = simple_mapping.get(_type, None)
             if mapped:
                 template['properties'][name]['type'] = mapped
             else:
-                mapped = special_mapping.get(property['_code'], None)
+                mapped = special_mapping.get(_type, None)
                 if not mapped:
-                    logger.error(f"No mapping for type {property['_code']}")
+                    possible_choices = [k for k in paths.keys() if k.startswith(name) and len(k.split('.')) > 1 and '_root' not in k]
+                    logger.info(f"No mapping for {name}<{_type}> - will map to string. Consider including child fields in your config: {possible_choices}")
                 else:
                     template['properties'][name] = mapped(template['properties'][name])
             
             system = None
-            for b in property.get('binding', []):
-                if b:
-                    # for e in b.get('extension', []):
-                    #     valueSet = e.get('valueSet', None)
-                    system = b.get('valueSet', None)
-                    # logger.debug(f"{name} valueSet {system}")
+            
+            bindings = _definition['definition'].get('binding', [])
+            if not isinstance(bindings, list):
+                bindings = [bindings]
+            for b in bindings:
+                system = b.get('valueSet', None)
+                logger.debug(f"{name} valueSet {system}")
+
             code = None
-            if 'patternCodeableConcept' in property:
+            if 'patternCodeableConcept' in _definition['definition']:
                 for patternCodeableConcept in property['patternCodeableConcept']:
                     if patternCodeableConcept:
                         assert isinstance(patternCodeableConcept, dict), f"patternCodeableConcept={patternCodeableConcept} {name} {property}"
@@ -408,29 +573,7 @@ class Gen3Configuration(object):
             if code:
                 template['properties'][name]['code'] = code
 
-            if 'definition' in property:
-                template['properties'][name]['description'] = ' '.join([d for d in property['definition'] if d])
-
-
-        # xlate . notation to _ underscore 
-        # remove extraneous _value postscript
-        old_keys = []
-        updated_keys = {}
-        for p in template['properties']:
-            new_key = p.replace('.', '_')
-            new_key = new_key.replace('_value','')
-            updated_keys[new_key] = template['properties'][p]
-            old_keys.append(p)
-        for p in old_keys:
-            del template['properties'][p]
-        template['properties'].update(updated_keys)
-
-        for required in template['required']:
-            new_key = required.replace('.', '_')
-            new_key = new_key.replace('_value','')
-            template['required'].remove(required)
-            template['required'].append(new_key)
-
+    
         # add in enums
         value_sets = ValueSets(database_path="data/valuesets.sqlite", json_path="data/valuesets.json")
 
@@ -441,25 +584,35 @@ class Gen3Configuration(object):
 
         for p in template['properties']:
 
+            # look up ontology in config's overide enums field
+            logger.debug(f"getting enums for ... {p} {template['properties'][p]}")
+            
+            assert paths['_root']['name'] in self._config, f"{paths['_root']} {p}"
+
+            config_enum_overrides = self._config[paths['_root']['name']].get('enums', {}) 
+            enum_overrides = config_enum_overrides.get(p, None)
+            if enum_overrides:
+                logger.info(f"Using configured enums for {p} from {enum_overrides}")
+                template['properties'][p]['system'] = enum_overrides
+
             if p in ['type', 'subtype']:
                 continue
+            
             if 'system' not in template['properties'][p]:
                 continue
 
-            # logger.debug(f"{p} {template['properties'][p]}")
             system = template['properties'][p]['system']
             template['properties'][p]['description'] = f"{template['properties'][p]['description']}  Vocabulary from {system}"
 
             if 'code' in template['properties'][p]:
+                logger.debug(f"set enums for {p} from 'code'")
                 template['properties'][p]['enum'] = [template['properties'][p]['code']]
                 del template['properties'][p]['code']
             else:
-
-                if template['properties'][p]['_code'] == 'code':
+                if 'system' in  template['properties'][p]:                            
                     codeset = value_sets.resource(template['properties'][p]['system'].split('|')[0])
-
                     if not codeset:
-                        logger.error(f"No codeset found for {template['properties'][p]['system']}")
+                        logger.warning(f"No codeset found for {template['properties'][p]['system']}")
                         template['properties'][p]['comment_enum'] = f"No-codeset-found-for-{template['properties'][p]['system']}"                        
                         template['properties'][p]['type'] = 'string'
                     else:
@@ -469,11 +622,14 @@ class Gen3Configuration(object):
                             template['properties'][p]['type'] = 'string'
                         else:
                             if len(codeset['resource']['concept']) > 1000:
-                                logger.error(f"More than 1000 concepts in codeset {template['properties'][p]['system']}")
+                                logger.warning(f"More than 1000 concepts in codeset {template['properties'][p]['system']}")
                                 template['properties'][p]['comment_enum'] = f"More-than-1000-concepts-{template['properties'][p]['system']}"
-                                template['properties'][p]['type'] = 'string'
+                                template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']][:1000] 
+
                             else:    
                                 template['properties'][p]['enum'] = [code_value(concept['code']) for concept in codeset['resource']['concept']]
+                else:
+                    logger.error(f"couldn't set enums for {p}, no 'system'")
 
             template['properties'][p]['term'] = {
                 'description': template['properties'][p]['description'],
@@ -487,6 +643,26 @@ class Gen3Configuration(object):
             }
             del template['properties'][p]['description']
 
+        # xlate . notation to _ underscore 
+        old_keys = []
+        updated_keys = {}
+        for p in template['properties']:
+            new_key = p.replace('.', '_')
+            # remove extraneous _value postscript
+            # new_key = new_key.replace('_value','')
+            updated_keys[new_key] = template['properties'][p]
+            old_keys.append(p)
+        for p in old_keys:
+            del template['properties'][p]
+        template['properties'].update(updated_keys)
+
+
+        for required in template['required']:
+            new_key = required.replace('.', '_')
+            new_key = new_key.replace('_value','')
+            template['required'].remove(required)
+            template['required'].append(new_key)
+
         # clean up type
         for p in template['properties']:
             if 'type' not in template['properties'][p]:
@@ -497,6 +673,7 @@ class Gen3Configuration(object):
                 del template['properties'][p]['type']
                 del template['properties'][p]['format']
 
+        # remove temporary keys
         for p in template['properties']:
             keys_to_delete = []
             for k in template['properties'][p]:
@@ -505,149 +682,96 @@ class Gen3Configuration(object):
                         continue
                     keys_to_delete.append(k)
             for k in keys_to_delete:
-                logger.debug(f"keys_to_delete deleting {p}.{k}")
+                # logger.debug(f"keys_to_delete deleting {p}.{k}")
                 del template['properties'][p][k]
 
         return template
 
-    def transform(self):
-        """Generate schema for all properties in config."""
-        schema = self._schema
-        
-        def get_nodes(property_graph, path):
-            """Grab all parts of the path in the property_graph."""
-            properties = {}
-            path_parts = []
-            for path_part in path.split('.'):
-                path_parts.append(path_part)
-                partial_path = '.'.join(path_parts)
-                node = pydash.get(property_graph, partial_path)
-                if node:
-                    assert 'id' in node['element'], node
-                    properties[partial_path] =  {
-                        'id': node['element']['id'],
-                        'definition': node['element'].get('definition', 'no-definition?'), 
-                        'keys': list(node['element'].keys()),
-                        '_code': node['_code']
-                    }
-                else:
-                    logger.warning(f"partial_path missing: {self._resource_name}.{partial_path}")
-            return properties
+    def transform(self, parent_type, source, resource):
+        """Render a gen3 schema."""
 
-        def get_node_values(property_graph, path, key):
-            """Grab values from all parts of the path in the property_graph."""
-            path_parts = []
-            path_values = []
-            for path_part in path.split('.'):
-                path_parts.append(path_part)
-                partial_path = '.'.join(path_parts)
-                node = pydash.get(property_graph, partial_path)
-                if node:
-                    path_values.append(node['element'].get(key, None))
-                else:
-                    logger.warning(f"partial_path missing: {self._resource_name}.{partial_path}")
-            return {path: {key: path_values}}
+        if not parent_type and not source:
+            raise Exception("Missing both parent_type and source")
 
-        def get_node_value(property_graph, path, key):
-            """Grab values from the path in the property_graph."""
-            node = pydash.get(property_graph, path)
-            return {path: {key: pydash.get(node, key)}}
+        structure_definition = None
 
-        def get_node(property_graph, path):
-            """Grab values from the path in the property_graph."""
-            return pydash.get(property_graph, path) 
+        config = self._config[resource]
+        logger.debug(f"working on {resource} {config}")
 
-        paths = {}
-        property_graph = self.properties(schema, paths=paths, base=self._resource_name)
+        # flatten the schema
+        paths = self.show_paths_resource(parent_type, source, parent_structure_definition=structure_definition)
 
-        with open("property_graph.json", "w") as output_stream:
-            yaml_string = json.dumps(property_graph,sort_keys=False, indent=2)
-            output_stream.write(yaml_string)            
-
-
+        # filter only those properties in config
         properties = {}
-        for include_path in self._config['properties']['include']:
-            properties.update(get_nodes(property_graph, include_path, ))
-        yaml_string = yaml.dump(properties, sort_keys=False)
-        # print(yaml_string)
+        for include_property in config['properties']['include']:
+            assert include_property in paths, f"The path you requested: {include_property} was not found in {resource}\n{paths.keys()}"
+            properties[include_property] = paths[include_property]
+
+        template = deepcopy(self.template)
+        template['title'] = resource
+
+        # setup property root for embedded types
+        _root = paths['_root']
+        template['description'] = _root.get('description', f"//TODO {_root['id']} description goes here.")          
+        template["properties"]["type"]["enum"].append(resource)
+        template["category"] = config.get("category", "//TODO")
+
+        # add structure definition to template
+        template_properties = {}
+        for property in properties:            
+            _root = None
+            if '.' in property:
+                root_name = property.split('.')[0] + '._root'
+                if root_name in paths:
+                    _root = paths[root_name]
+            template_properties[property] = {
+                '_definition': properties[property],
+                '_root': _root,
+            }
+        # formalize template    
+        template = self.normalize(template, template_properties, paths)
 
 
-        for include_path in self._config['properties']['include']:
-            node = get_node(property_graph, include_path)
-            if not node:
-                logger.warning(f"include_path={include_path}")
-                continue
-            logger.debug(f"include_path={include_path} {node.keys()}")
-            _code = node['_code']
-            pydash.objects.merge(properties, {include_path: {'_code': _code}})
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'id' ))
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'definition' ))
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'min' ))
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'max' ))
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'binding' ))
-            pydash.objects.merge(properties, get_node_values(property_graph, include_path,'patternCodeableConcept' ))
+        return template
 
-        yaml_string = yaml.dump(properties, sort_keys=False)
-        with open("properties.yaml", "w") as output_stream:
-            yaml_string = yaml.dump(properties, sort_keys=False)
-            output_stream.write(yaml_string)            
+    
 
-
-        for include_path in self._config['properties']['include']:
-            if include_path not in properties:
-                logger.warning(f"include_path={include_path}")
-                continue
-            assert properties[include_path]
-            assert properties[include_path]['_code'], include_path
-
-
-        template = self.template
-        template['title'] = schema.get('title', schema['id'])
-        template['description'] = schema.get('description', f"//TODO {schema['id']} description goes here.")          
-        template["properties"]["type"]["enum"].append(schema['name'])
-
-        base = property_graph['_name']
-        template['id'] = base
-        template['category'] =  self._config.get('category', '//TODO')
-
-        
-        template = self.normalize(template, properties)
-        template['links'] = self.links(schema, base)
-
-        return template, paths
-
-        
 
 @click.command()
 @click.option('--path', default="./config.yaml", help='Location of config file.')
+@click.option('--output_path', default="./schemas", help='Location of output schemas.')
 
-def transform(path):
+def transform(path, output_path):
     """ Reads config file, transforms from FHIR to Gen3 data model."""
     with open(path, "r") as input_stream:
         config = yaml.safe_load(input_stream)
-    for resource in config:
-        logger.debug(f"working on {resource}")
-        # Read the schema
-        schema = FHIRSchema(resource, config[resource].get('source', None))
-        # Export to gen3
-        gen3_schema, paths = Gen3Configuration(schema, resource, config[resource]).transform()
-        file_name = f"./output/{resource}.yaml"
-        if 'alias' in config[resource]:
-            file_name = f"./output/{config[resource]['alias']}.yaml"
 
+    for resource in config:
+        gen3_config = Gen3Configuration(config)
+        # TODO move this to show paths
+        clazz = class_for_name(f"fhirclient.models.{resource.lower()}", resource)
+        source = config[resource].get('source', None)
+        logger.debug(f"working on {resource} {clazz} {source}")
+
+        # paths = gen3_config.show_paths_resource(clazz, source)
+        # file_name = f"./{output_path}/{resource}.paths.yaml"
+        # with open(file_name, "w") as output_stream:
+        #     yaml_string = yaml.dump(paths, sort_keys=False)
+        #     output_stream.write(yaml_string)
+        #     logger.info(f"Wrote paths to {file_name}")
+
+
+        gen3_schema = gen3_config.transform(clazz, source, resource=resource)
+        file_name = f"./{output_path}/{resource}.yaml"
         with open(file_name, "w") as output_stream:
             yaml_string = yaml.dump(gen3_schema, sort_keys=False)
-            yaml_string = re.sub(r'comment_.* ', '# ', yaml_string)
             output_stream.write(yaml_string)
             logger.info(f"Wrote gen3 config to {file_name}")
-
-        file_name = f"./output/paths/{resource}.txt"
-        with open(file_name, "w") as output_stream:
-            d = flatdict.FlatDict(paths, delimiter='.')
-            output_stream.write('\n'.join([k for k in d.keys()]))    
-            # json.dump(paths, output_stream, sort_keys=False)        
-            logger.info(f"Wrote nested property names to {file_name}")
-
+ 
+    # file_name = f'{output_path}/dump.json'
+    # with open(file_name, 'w') as f:
+    #     json.dump(dump_schemas_from_dir(output_path), f)
+    # logger.info(f"wrote schema to {file_name}")
 
 if __name__ == '__main__':
     transform()
