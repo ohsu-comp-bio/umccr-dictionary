@@ -1,0 +1,79 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: ResearchSubject
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A physical entity which is the primary unit of operational and/or administrative
+  interest in a study.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- status
+- projects
+- submitter_id
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ResearchSubject
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    type: string
+    enum:
+    - candidate
+    - enrolled
+    - active
+    - suspended
+    - withdrawn
+    - completed
+    term:
+      description: The current state of the subject.  Vocabulary from http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
+  assignedArm:
+    type: string
+    description: The name of the arm in the study the subject is expected to follow
+      as part of this study.
+  actualArm:
+    type: string
+    description: The name of the arm in the study the subject actually followed as
+      part of this study.

@@ -1,0 +1,100 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: QuestionnaireResponse
+type: object
+namespace: http://aced-idp.org
+category: Clinical
+program: '*'
+project: '*'
+description: A structured set of questions and their answers. The questions are ordered
+  and grouped into coherent subsets, corresponding to the structure of the grouping
+  of the questionnaire being responded to.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- status
+- submitter_id
+- item_linkId
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - QuestionnaireResponse
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  questionnaire:
+    type: string
+    description: The Questionnaire that defines and organizes the questions for which
+      answers are being provided.
+  status:
+    type: string
+    enum:
+    - in-progress
+    - completed
+    - amended
+    - entered-in-error
+    - stopped
+    term:
+      description: The position of the questionnaire response within its overall lifecycle.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1
+  item_answer_valueString:
+    type: string
+    comment_enum: No-concepts-found-in-codeset-http://hl7.org/fhir/ValueSet/questionnaire-answers|codeset-http://hl7.org/fhir/CodeSystem/snomedct
+    term:
+      description: A group or question item from the original questionnaire for which
+        answers are provided. The answer (or one of the answers) provided by the respondent
+        to the question.  Vocabulary from http://hl7.org/fhir/ValueSet/questionnaire-answers
+      termDef:
+        term: item.answer.valueString
+        source: fhir
+        cde_id: item.answer.valueString
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/questionnaire-answers
+  item_linkId:
+    type: string
+    description: A group or question item from the original questionnaire for which
+      answers are provided. The item from the Questionnaire that corresponds to this
+      item in the QuestionnaireResponse resource.
+  item_text:
+    type: string
+    description: A group or question item from the original questionnaire for which
+      answers are provided. Text that is displayed above the contents of the group
+      or as the text of the question being answered.

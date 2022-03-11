@@ -768,10 +768,10 @@ def transform(path, output_path):
             output_stream.write(yaml_string)
             logger.info(f"Wrote gen3 config to {file_name}")
  
-    # file_name = f'{output_path}/dump.json'
-    # with open(file_name, 'w') as f:
-    #     json.dump(dump_schemas_from_dir(output_path), f)
-    # logger.info(f"wrote schema to {file_name}")
+    file_name = f'{output_path}/dump.json'
+    with open(file_name, 'w') as f:
+        json.dump(dump_schemas_from_dir(output_path), f)
+    logger.info(f"wrote schema to {file_name}")
 
 if __name__ == '__main__':
     transform()

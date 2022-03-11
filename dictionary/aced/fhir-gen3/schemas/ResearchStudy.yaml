@@ -1,0 +1,94 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: ResearchStudy
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A process where a researcher or organization plans and then executes
+  a series of steps intended to increase the field of healthcare-related knowledge.  This
+  includes studies of safety, efficacy, comparative effectiveness and other information
+  about medications, devices, therapies and other interventional and investigative
+  techniques.  A ResearchStudy involves the gathering of information about human or
+  animal subjects.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- text.div
+- projects
+- submitter_id
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ResearchStudy
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  title:
+    type: string
+    description: A short, descriptive user-friendly label for the study.
+  primaryPurposeType_coding_code:
+    type: string
+    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+      may be defined by a formal reference to a terminology or ontology or may be
+      provided by text. A symbol in syntax defined by the system. The symbol may be
+      a predefined code or an expression in a syntax defined by the coding system
+      (e.g. post-coordination).'
+  text_div:
+    type: string
+    description: 'Base StructureDefinition for Narrative Type: A human-readable summary
+      of the resource conveying the essential clinical and business information for
+      the resource. The actual narrative content, a stripped down version of XHTML.'
+  focus_coding_code:
+    type: string
+    comment_enum: No-codeset-found-for-http://hl7.org/fhir/ValueSet/condition-code
+    term:
+      description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+        may be defined by a formal reference to a terminology or ontology or may be
+        provided by text. A symbol in syntax defined by the system. The symbol may
+        be a predefined code or an expression in a syntax defined by the coding system
+        (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/condition-code'
+      termDef:
+        term: focus.coding.code
+        source: fhir
+        cde_id: focus.coding.code
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/condition-code
+  focus_coding_system:
+    type: string
+    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+      may be defined by a formal reference to a terminology or ontology or may be
+      provided by text. The identification of the code system that defines the meaning
+      of the symbol in the code.'

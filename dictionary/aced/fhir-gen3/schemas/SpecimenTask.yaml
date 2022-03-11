@@ -1,0 +1,92 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: SpecimenTask
+type: object
+namespace: http://aced-idp.org
+category: Analysis
+program: '*'
+project: '*'
+description: A FHIR analysis task that takes at least one specimen as input and produces
+  at least one document.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- status
+- submitter_id
+- intent
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - SpecimenTask
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    type: string
+    enum:
+    - draft
+    - requested
+    - received
+    - accepted
+    - rejected
+    - ready
+    - cancelled
+    - in-progress
+    - on-hold
+    - failed
+    - completed
+    - entered-in-error
+    term:
+      description: The current status of the task.  Vocabulary from http://hl7.org/fhir/ValueSet/task-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/task-status|4.0.1
+  intent:
+    type: string
+    enum:
+    - unknown
+    term:
+      description: Indicates the "level" of actionability associated with the Task,
+        i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/task-intent|4.0.1
+      termDef:
+        term: intent
+        source: fhir
+        cde_id: intent
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/task-intent|4.0.1

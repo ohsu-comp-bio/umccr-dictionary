@@ -1,0 +1,82 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: PractitionerRole
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: A specific set of Roles/Locations/specialties/services that a practitioner
+  may perform at an organization for a period of time.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- submitter_id
+- projects
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - PractitionerRole
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  code_coding_code:
+    type: string
+    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+      may be defined by a formal reference to a terminology or ontology or may be
+      provided by text. A symbol in syntax defined by the system. The symbol may be
+      a predefined code or an expression in a syntax defined by the coding system
+      (e.g. post-coordination).'
+  telecom_system:
+    type: string
+    enum:
+    - phone
+    - fax
+    - email
+    - pager
+    - url
+    - sms
+    - other
+    term:
+      description: 'Base StructureDefinition for ContactPoint Type: Details for all
+        kinds of technology mediated contact points for a person or organization,
+        including telephone, email, etc. Telecommunications form for contact point
+        - what communications system is required to make use of the contact.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/contact-point-system|4.0.1'
+      termDef:
+        term: telecom.system
+        source: fhir
+        cde_id: telecom.system
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/contact-point-system|4.0.1

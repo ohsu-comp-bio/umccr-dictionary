@@ -1,0 +1,201 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: FamilyRelationship
+type: object
+namespace: http://aced-idp.org
+category: Administrative
+program: '*'
+project: '*'
+description: Representation of a family relationship.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- status
+- projects
+- submitter_id
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - FamilyRelationship
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    type: string
+    enum:
+    - registered
+    - preliminary
+    - final
+    - amended
+    - cancelled
+    - entered-in-error
+    - unknown
+    term:
+      description: The status of the result value.  Vocabulary from http://hl7.org/fhir/ValueSet/observation-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/observation-status|4.0.1
+  code_coding_code:
+    type: string
+    enum:
+    - ADOPTF
+    - ADOPTM
+    - HBRO
+    - NBRO
+    - STPBRO
+    - CHLDADOPT
+    - CHLDFOST
+    - DAUC
+    - NCHILD
+    - SONC
+    - STPCHLD
+    - DAUADOPT
+    - SONADOPT
+    - DAUFOST
+    - SONFOST
+    - DAU
+    - STPDAU
+    - AUNT
+    - COUSN
+    - GGRPRN
+    - GRNDCHILD
+    - GRPRN
+    - INLAW
+    - NIENEPH
+    - UNCLE
+    - CHILD
+    - EXT
+    - PRN
+    - SIB
+    - SIGOTHR
+    - FTHFOST
+    - NFTH
+    - STPFTH
+    - GGRFTH
+    - GGRMTH
+    - MGGRPRN
+    - PGGRPRN
+    - GRNDDAU
+    - GRNDSON
+    - GRFTH
+    - GRMTH
+    - MGRPRN
+    - PGRPRN
+    - HSIS
+    - CHLDINLAW
+    - PRNINLAW
+    - SIBINLAW
+    - GESTM
+    - MTHFOST
+    - NMTH
+    - STPMTH
+    - TWINBRO
+    - SON
+    - NFTHF
+    - NEPHEW
+    - NIECE
+    - NMTHF
+    - NSIS
+    - TWIN
+    - TWINSIS
+    - ADOPTP
+    - FTH
+    - MTH
+    - NPRN
+    - PRNFOST
+    - STPPRN
+    - FTHINLAW
+    - MTHINLAW
+    - MTHINLOAW
+    - BRO
+    - HSIB
+    - NSIB
+    - SIS
+    - STPSIB
+    - BROINLAW
+    - SISINLAW
+    - SISLINLAW
+    - DOMPART
+    - FMRSPS
+    - SPS
+    - STPSIS
+    - STPSON
+    - HUSB
+    - WIFE
+    - FTWIN
+    - ITWIN
+    - MUNCLE
+    - PUNCLE
+    term:
+      description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+        may be defined by a formal reference to a terminology or ontology or may be
+        provided by text. A symbol in syntax defined by the system. The symbol may
+        be a predefined code or an expression in a syntax defined by the coding system
+        (e.g. post-coordination).  Vocabulary from http://terminology.hl7.org/ValueSet/v3-FamilyMember'
+      termDef:
+        term: code.coding.code
+        source: fhir
+        cde_id: code.coding.code
+        cde_version: null
+        term_url: http://terminology.hl7.org/ValueSet/v3-FamilyMember
+  subject_reference:
+    type: string
+    description: 'Base StructureDefinition for Reference Type: A reference from one
+      resource to another. A reference to a location at which the other resource is
+      found. The reference may be a relative reference, in which case it is relative
+      to the service base URL, or an absolute URL that resolves to the location where
+      the resource is found. The reference may be version specific or not. If the
+      reference is not to a FHIR RESTful server, then it should be assumed to be version
+      specific. Internal fragment references (start with ''#'') refer to contained
+      resources.'
+  focus_reference:
+    type: string
+    description: 'Base StructureDefinition for Reference Type: A reference from one
+      resource to another. A reference to a location at which the other resource is
+      found. The reference may be a relative reference, in which case it is relative
+      to the service base URL, or an absolute URL that resolves to the location where
+      the resource is found. The reference may be version specific or not. If the
+      reference is not to a FHIR RESTful server, then it should be assumed to be version
+      specific. Internal fragment references (start with ''#'') refer to contained
+      resources.'
+  valueCodeableConcept_coding_code:
+    type: string
+    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
+      may be defined by a formal reference to a terminology or ontology or may be
+      provided by text. A symbol in syntax defined by the system. The symbol may be
+      a predefined code or an expression in a syntax defined by the coding system
+      (e.g. post-coordination).'

@@ -1,0 +1,87 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: null
+title: DocumentReference
+type: object
+namespace: http://aced-idp.org
+category: data_file
+program: '*'
+project: '*'
+description: A reference to a document of any kind for any purpose. Provides metadata
+  about the document so that the document can be discovered and managed. The scope
+  of a document is any seralized object with a mime-type, so includes formal patient
+  centric documents (CDA), cliical notes, scanned paper, and non-patient specific
+  documents like policy text.
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links: []
+required:
+- type
+- status
+- projects
+- submitter_id
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - DocumentReference
+    description: Gen3's type field.
+  id:
+    $ref: _definitions.yaml#/UUID
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    description: Each record in every node will have a "submitter_id", which is a
+      unique alphanumeric identifier for that record and is specified by the data
+      submitter, and a "type", which is simply the node name.
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+    description: Link to Gen3's project.
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  status:
+    type: string
+    enum:
+    - current
+    - superseded
+    - entered-in-error
+    term:
+      description: The status of this document reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
+      termDef:
+        term: status
+        source: fhir
+        cde_id: status
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
+  date:
+    description: When the document reference was created.
+    oneOf:
+    - type: string
+      format: date-time
+    - type: 'null'
+    term:
+      $ref: _terms.yaml#/datetime
+  description:
+    type: string
+    description: Human-readable description of the source document.
+  content_attachment_url:
+    type: string
+    description: The document and format referenced. There may be multiple content
+      element repetitions, each with a different format. A location where the data
+      can be accessed.
