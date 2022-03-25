@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: null
+id: DocumentReference
 title: DocumentReference
 type: object
 namespace: http://aced-idp.org
@@ -20,7 +20,14 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- comment_linkPatients: subject
+  name: subject
+  backref: DocumentReferences
+  label: subject
+  target_type: Patient
+  multiplicity: many_to_many
+  required: true
 required:
 - type
 - status
@@ -36,7 +43,9 @@ properties:
     - DocumentReference
     description: Gen3's type field.
   id:
-    $ref: _definitions.yaml#/UUID
+    type: string
+    description: The logical id of the resource, as used in the URL for the resource.
+      Once assigned, this value never changes.
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -55,6 +64,9 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
+  content_0_attachment_url:
+    type: string
+    description: A location where the data can be accessed.
   status:
     type: string
     enum:
@@ -69,19 +81,11 @@ properties:
         cde_id: status
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
-  date:
-    description: When the document reference was created.
-    oneOf:
-    - type: string
-      format: date-time
-    - type: 'null'
-    term:
-      $ref: _terms.yaml#/datetime
-  description:
+  subject_reference:
     type: string
-    description: Human-readable description of the source document.
-  content_attachment_url:
-    type: string
-    description: The document and format referenced. There may be multiple content
-      element repetitions, each with a different format. A location where the data
-      can be accessed.
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.

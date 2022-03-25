@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: null
+id: Patient
 title: Patient
 type: object
 namespace: http://aced-idp.org
@@ -17,7 +17,14 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- comment_linkOrganizations: managingOrganization
+  name: managingOrganization
+  backref: Patients
+  label: managingOrganization
+  target_type: Organization
+  multiplicity: many_to_many
+  required: true
 required:
 - type
 - submitter_id
@@ -32,7 +39,9 @@ properties:
     - Patient
     description: Gen3's type field.
   id:
-    $ref: _definitions.yaml#/UUID
+    type: string
+    description: The logical id of the resource, as used in the URL for the resource.
+      Once assigned, this value never changes.
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -51,33 +60,11 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  active:
-    type: boolean
-    description: "Whether this patient record is in active use. \nMany systems use\
-      \ this property to mark as non-current patients, such as those that have not\
-      \ been seen for a period of time based on an organization's business rules.\n\
-      \nIt is often used to filter patient lists to exclude inactive patients\n\n\
-      Deceased patients may also be marked as inactive for the same reasons, but may\
-      \ be active for some time after death."
-  name_text:
+  managingOrganization_reference:
     type: string
-    description: 'Base StructureDefinition for HumanName Type: A human''s name with
-      the ability to identify parts and usage. Specifies the entire name as it should
-      be displayed e.g. on an application UI. This may be provided instead of or as
-      well as the specific parts.'
-  gender:
-    type: string
-    enum:
-    - male
-    - female
-    - other
-    - unknown
-    term:
-      description: Administrative Gender - the gender that the patient is considered
-        to have for administration and record keeping purposes.  Vocabulary from http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
-      termDef:
-        term: gender
-        source: fhir
-        cde_id: gender
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.

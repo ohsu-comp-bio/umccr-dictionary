@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 
 import os
 import logging
 import requests
 import json
-import inspect
+import inflection
 import importlib
 from copy import deepcopy
 from data.valuesets import ValueSets
@@ -12,6 +13,7 @@ from fhirclient.models.domainresource import DomainResource
 from fhirclient.models.element import Element
 # for embedded types
 from fhirclient.models.backboneelement  import BackboneElement
+from datetime import date, datetime
 
 from dictionaryutils import dump_schemas_from_dir
 import flatdict
@@ -350,12 +352,14 @@ class Gen3Configuration(object):
                 my_definition['id'] = contentReference
                 logger.debug(f"{root_name}.{parent_name} contentReference {contentReference} de-reference, fetched {len(my_definition['snapshot']['element'])} children")
 
-
         # initialize paths with minimal information about resource
         paths = {'_root': {}}
         paths['_root']['description'] = my_definition['definition']
         paths['_root']['id'] = my_definition['id']
         paths['_root']['type'] = my_definition.get('name', my_definition['id'])
+        if parent_type:
+            paths['_root']['type'] = parent_type
+
 
         for name, jsname, typ, is_list, of_many, not_optional in obj.elementProperties():
 
@@ -363,7 +367,8 @@ class Gen3Configuration(object):
             if typ.__name__ in  ['Extension', 'Meta']:
                 continue
            
-            paths[name] = self._get_property_definition(name, jsname, typ, is_list, of_many, not_optional, None, parent_structure_definition=my_definition)
+            property_definition = self._get_property_definition(name, jsname, typ, is_list, of_many, not_optional, None, parent_structure_definition=my_definition)
+            paths[name] = property_definition
 
             # recurse if necessary
             child_names = self._show_paths(name, paths[name], parent_structure_definition=my_definition)
@@ -425,6 +430,14 @@ class Gen3Configuration(object):
         for p in ['id', 'description', 'type', 'name']:
             paths['_root'][p] = structure_definition[p]
         # logger.error(f"show_paths_resource {paths['_root']['name']}")
+        # paths['resourceType'] = {}
+        # paths['resourceType']['id'] = 'resourceType'
+        # paths['resourceType']['type'] = 'string'
+        # paths['resourceType']['description'] = 'Name of FHIR resource.'
+        # paths['submitter.id'] = {}
+        # paths['submitter.id']['id'] = 'submitter.id'
+        # paths['submitter.id']['type'] = 'string'
+        # paths['submitter.id']['description'] = 'Name of id in PFB.'        
 
         for name, jsname, typ, is_list, of_many, not_optional in obj.elementProperties():
 
@@ -443,7 +456,7 @@ class Gen3Configuration(object):
         return paths
 
 
-    def normalize(self, template, properties, paths):
+    def normalize(self, template, properties, paths, config):
         """Clean up, strict gen3 conformance, remove temporary attributes."""
 
         # xlate types to gen3 types
@@ -456,7 +469,8 @@ class Gen3Configuration(object):
             'str': 'string',
             'http://hl7.org/fhirpath/System.String': 'string',
             'bool': 'boolean',
-            'float': 'float'
+            'float': 'float',
+            'int': 'integer'
         }
         
         def update_uri(d):
@@ -518,7 +532,8 @@ class Gen3Configuration(object):
         # map types to json types, find system and code for codesets, apply description 
         for name, property in properties.items():
             _definition = property['_definition']
-            
+
+            assert 'not_optional' in _definition, (name, _definition) 
             if _definition['not_optional']:
                template['required'].append(name)
 
@@ -643,13 +658,54 @@ class Gen3Configuration(object):
             }
             del template['properties'][p]['description']
 
+        # # add default index to embedded paths
+        # def _get_list_count(k):
+        #     """Return configured list count."""
+        #     for list_item in config['properties'].get('lists', []):
+        #         if k in list_item:
+        #             return list_item[k]
+        #     return 0
+
+       
+        # def _recursive_path_index(path, parts, counts, paths=[]):
+        #     """Expand paths."""
+        #     assert len(parts) == len(counts)
+        #     if len(counts) == 0:
+        #         return paths
+        #     count = counts.pop(0)
+        #     part = parts.pop(0)
+        #     if not count:
+        #         if len(path) == 0:
+        #             paths.append(part)
+        #         else:
+        #             paths.append(f"{path}.{part}")
+        #         return _recursive_path_index(path, parts, counts, paths)
+        #     new_paths = []    
+        #     for i in range(count):
+        #         for p in paths:
+        #             new_paths.append(f"{p}.{part}.{i}")
+        #     return _recursive_path_index(path, parts, counts, new_paths)
+
+        # old_keys = set()
+        # updated_keys = {}
+
+        # for p in template['properties']:
+        #     parts = p.split('.')
+        #     counts = [_get_list_count(name_part) for name_part in parts]
+        #     paths = _recursive_path_index('', parts, counts)
+        #     for path in paths:
+        #         old_keys.add(p)
+        #         updated_keys[path] = template['properties'][p]
+
+        # for p in old_keys:
+        #     del template['properties'][p]
+        # template['properties'].update(updated_keys)
+
         # xlate . notation to _ underscore 
         old_keys = []
         updated_keys = {}
         for p in template['properties']:
             new_key = p.replace('.', '_')
-            # remove extraneous _value postscript
-            # new_key = new_key.replace('_value','')
             updated_keys[new_key] = template['properties'][p]
             old_keys.append(p)
         for p in old_keys:
@@ -659,7 +715,6 @@ class Gen3Configuration(object):
 
         for required in template['required']:
             new_key = required.replace('.', '_')
-            new_key = new_key.replace('_value','')
             template['required'].remove(required)
             template['required'].append(new_key)
 
@@ -687,6 +742,40 @@ class Gen3Configuration(object):
 
         return template
 
+    def link(self, path_name, path, base, config):
+        """Generate individual link."""
+        name = '.'.join(path['name'].split('.')[1:])
+        ## Read target profile from config
+        _neighbor = config['targetProfile']
+
+        assert _neighbor, 'Please configure links'        
+        target_type = _neighbor.split('/')[-1]
+        backref = inflection.pluralize(base)
+        name = inflection.pluralize(target_type)
+        return {
+            f'comment_link{name}': path['name'].split('.')[-1],
+            'name': path_name,
+            'backref': backref,
+            'label': path['name'].split('.')[-1],
+            'target_type': target_type,
+            'multiplicity': 'many_to_many',
+            'required': config.get('required', False),
+        }
+
+    def links(self, paths, resource):
+        """Generate links from config.links."""
+        links = []
+        white_list = self._config.get(resource, {}).get('links', [])
+        for path in paths:
+            # logger.debug(f"{el['id']} {white_list}")
+            if path in white_list:
+                links.append(self.link(path, paths[path], resource, white_list[path]))
+                white_list.pop(path)
+        for name in white_list:
+            links.append(self.link(name, paths[path], resource, white_list[name]))
+
+        return links
+
     def transform(self, parent_type, source, resource):
         """Render a gen3 schema."""
 
@@ -710,6 +799,10 @@ class Gen3Configuration(object):
         template = deepcopy(self.template)
         template['title'] = resource
 
+        template['id'] = resource
+        template['category'] =  self._config.get(resource, {}).get('category', '//TODO')
+
+
         # setup property root for embedded types
         _root = paths['_root']
         template['description'] = _root.get('description', f"//TODO {_root['id']} description goes here.")          
@@ -728,18 +821,81 @@ class Gen3Configuration(object):
                 '_definition': properties[property],
                 '_root': _root,
             }
+        
+        # add links
+        template['links'] = self.links(paths, resource)
+        
         # formalize template    
-        template = self.normalize(template, template_properties, paths)
+        template = self.normalize(template, template_properties, paths, config)
 
 
         return template
 
-    
+    def transform_instances(self, paths):
+        """Render a json schema."""
+
+        # filter only those properties in config
+        properties = {}
+        for k, path in paths.items():
+            if '_instances' in path:
+                for name in path['_instances']:
+                    properties[name] = path
+
+        resource = paths['_root']['name']
+
+        template = deepcopy(self.template)
+        template['title'] = resource
+
+        template['id'] = resource
+        template['category'] =  self._config.get(resource, {}).get('category', '//TODO')
+
+
+        # setup property root for embedded types
+        config = self._config[resource]
+
+        _root = paths['_root']
+        template['description'] = _root.get('description', f"//TODO {_root['id']} description goes here.")          
+        template["properties"]["type"]["enum"].append(resource)
+        template["category"] = config.get("category", "//TODO")
+
+        # add structure definition to template
+        template_properties = {}
+        for property in properties:
+            if property in config['links']:
+                continue
+            _root = None
+            if '.' in property:
+                root_name = property.split('.')[0] + '._root'
+                if root_name in paths:
+                    _root = paths[root_name]
+            template_properties[property] = {
+                '_definition': properties[property],
+                '_root': _root,
+            }
+        
+        # add links
+        template['links'] = self.links(paths, resource)
+        
+        # formalize template    
+        template = self.normalize(template, template_properties, paths, config)
+
+
+        return template
+
+
+
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    if isinstance(obj, (type)):
+        return [str(obj.__module__), str(obj.__name__)]
+    raise TypeError ("Type %s not serializable" % type(obj))    
 
 
 @click.command()
 @click.option('--path', default="./config.yaml", help='Location of config file.')
-@click.option('--output_path', default="./schemas", help='Location of output schemas.')
+@click.option('--output_path', default="./paths", help='Location of output schemas.')
 
 def transform(path, output_path):
     """ Reads config file, transforms from FHIR to Gen3 data model."""
@@ -753,25 +909,24 @@ def transform(path, output_path):
         source = config[resource].get('source', None)
         logger.debug(f"working on {resource} {clazz} {source}")
 
-        # paths = gen3_config.show_paths_resource(clazz, source)
-        # file_name = f"./{output_path}/{resource}.paths.yaml"
-        # with open(file_name, "w") as output_stream:
-        #     yaml_string = yaml.dump(paths, sort_keys=False)
-        #     output_stream.write(yaml_string)
-        #     logger.info(f"Wrote paths to {file_name}")
-
-
-        gen3_schema = gen3_config.transform(clazz, source, resource=resource)
-        file_name = f"./{output_path}/{resource}.yaml"
+        paths = gen3_config.show_paths_resource(clazz, source)
+        file_name = f"{output_path}/{resource}.paths.json"
         with open(file_name, "w") as output_stream:
-            yaml_string = yaml.dump(gen3_schema, sort_keys=False)
-            output_stream.write(yaml_string)
-            logger.info(f"Wrote gen3 config to {file_name}")
+            json.dump(paths, output_stream, default=json_serial)
+            logger.info(f"Wrote paths to {file_name}")
+
+
+        # gen3_schema = gen3_config.transform(clazz, source, resource=resource)
+        # file_name = f"./{output_path}/{resource}.yaml"
+        # with open(file_name, "w") as output_stream:
+        #     yaml_string = yaml.dump(gen3_schema, sort_keys=False)
+        #     output_stream.write(yaml_string)
+        #     logger.info(f"Wrote schema fragment to to {file_name}")
  
-    file_name = f'{output_path}/dump.json'
-    with open(file_name, 'w') as f:
-        json.dump(dump_schemas_from_dir(output_path), f)
-    logger.info(f"wrote schema to {file_name}")
+    # file_name = f'{output_path}/dump.json'
+    # with open(file_name, 'w') as f:
+    #     json.dump(dump_schemas_from_dir(output_path), f)
+    # logger.info(f"Wrote schema to {file_name}")
 
 if __name__ == '__main__':
     transform()

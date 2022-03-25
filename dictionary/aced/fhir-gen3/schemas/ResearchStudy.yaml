@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: null
+id: ResearchStudy
 title: ResearchStudy
 type: object
 namespace: http://aced-idp.org
@@ -21,10 +21,31 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- comment_linkResearchStudies: partOf
+  name: partOf
+  backref: ResearchStudies
+  label: partOf
+  target_type: ResearchStudy
+  multiplicity: many_to_many
+  required: false
+- comment_linkPractitioners: principalInvestigator
+  name: principalInvestigator
+  backref: ResearchStudies
+  label: principalInvestigator
+  target_type: Practitioner
+  multiplicity: many_to_many
+  required: true
+- comment_linkprojects: title
+  name: project
+  backref: ResearchStudies
+  label: title
+  target_type: project
+  multiplicity: many_to_many
+  required: true
 required:
 - type
-- text.div
+- status
 - projects
 - submitter_id
 uniqueKeys:
@@ -37,7 +58,9 @@ properties:
     - ResearchStudy
     description: Gen3's type field.
   id:
-    $ref: _definitions.yaml#/UUID
+    type: string
+    description: The logical id of the resource, as used in the URL for the resource.
+      Once assigned, this value never changes.
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -56,39 +79,28 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  title:
+  sponsor_reference:
     type: string
-    description: A short, descriptive user-friendly label for the study.
-  primaryPurposeType_coding_code:
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  status:
     type: string
-    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
-      may be defined by a formal reference to a terminology or ontology or may be
-      provided by text. A symbol in syntax defined by the system. The symbol may be
-      a predefined code or an expression in a syntax defined by the coding system
-      (e.g. post-coordination).'
-  text_div:
-    type: string
-    description: 'Base StructureDefinition for Narrative Type: A human-readable summary
-      of the resource conveying the essential clinical and business information for
-      the resource. The actual narrative content, a stripped down version of XHTML.'
-  focus_coding_code:
-    type: string
-    comment_enum: No-codeset-found-for-http://hl7.org/fhir/ValueSet/condition-code
+    enum:
+    - draft
+    - in-progress
+    - suspended
+    - stopped
+    - completed
+    - entered-in-error
     term:
-      description: 'Base StructureDefinition for CodeableConcept Type: A concept that
-        may be defined by a formal reference to a terminology or ontology or may be
-        provided by text. A symbol in syntax defined by the system. The symbol may
-        be a predefined code or an expression in a syntax defined by the coding system
-        (e.g. post-coordination).  Vocabulary from http://hl7.org/fhir/ValueSet/condition-code'
+      description: The current state of the study.  Vocabulary from http://hl7.org/fhir/ValueSet/research-study-status|4.0.1
       termDef:
-        term: focus.coding.code
+        term: status
         source: fhir
-        cde_id: focus.coding.code
+        cde_id: status
         cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/condition-code
-  focus_coding_system:
-    type: string
-    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
-      may be defined by a formal reference to a terminology or ontology or may be
-      provided by text. The identification of the code system that defines the meaning
-      of the symbol in the code.'
+        term_url: http://hl7.org/fhir/ValueSet/research-study-status|4.0.1

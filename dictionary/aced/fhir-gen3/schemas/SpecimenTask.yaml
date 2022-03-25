@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: null
+id: SpecimenTask
 title: SpecimenTask
 type: object
 namespace: http://aced-idp.org
@@ -17,12 +17,26 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- comment_linkSpecimen: input
+  name: input
+  backref: SpecimenTasks
+  label: input
+  target_type: Specimen
+  multiplicity: many_to_many
+  required: true
+- comment_linkDocumentReferences: output
+  name: output
+  backref: SpecimenTasks
+  label: output
+  target_type: DocumentReference
+  multiplicity: many_to_many
+  required: true
 required:
 - type
-- status
-- submitter_id
 - intent
+- submitter_id
+- status
 - projects
 uniqueKeys:
 - - id
@@ -34,7 +48,9 @@ properties:
     - SpecimenTask
     description: Gen3's type field.
   id:
-    $ref: _definitions.yaml#/UUID
+    type: string
+    description: The logical id of the resource, as used in the URL for the resource.
+      Once assigned, this value never changes.
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -53,6 +69,104 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
+  input_1_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  input_0_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  input_0_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  input_1_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  intent:
+    type: string
+    enum:
+    - unknown
+    term:
+      description: Indicates the "level" of actionability associated with the Task,
+        i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.  Vocabulary
+        from http://hl7.org/fhir/ValueSet/task-intent|4.0.1
+      termDef:
+        term: intent
+        source: fhir
+        cde_id: intent
+        cde_version: null
+        term_url: http://hl7.org/fhir/ValueSet/task-intent|4.0.1
+  output_0_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  output_4_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  output_3_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  output_2_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  output_1_type_coding_0_code:
+    type: string
+    description: A symbol in syntax defined by the system. The symbol may be a predefined
+      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
+  output_4_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  output_3_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  output_0_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  output_2_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
+  output_1_valueReference_reference:
+    type: string
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
   status:
     type: string
     enum:
@@ -76,17 +190,3 @@ properties:
         cde_id: status
         cde_version: null
         term_url: http://hl7.org/fhir/ValueSet/task-status|4.0.1
-  intent:
-    type: string
-    enum:
-    - unknown
-    term:
-      description: Indicates the "level" of actionability associated with the Task,
-        i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.  Vocabulary
-        from http://hl7.org/fhir/ValueSet/task-intent|4.0.1
-      termDef:
-        term: intent
-        source: fhir
-        cde_id: intent
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/task-intent|4.0.1

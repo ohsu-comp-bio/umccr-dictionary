@@ -1,228 +1,141 @@
-ResearchStudy:
+Organization:
   category: Administrative
   links:
-    ResearchStudy.partOf:
+    partOf:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+    researchStudy:
+      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-    ResearchStudy.principalInvestigator:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
       required: true
-    # ResearchStudy.sponsor:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    #   required: true
-    ResearchStudy.project:
+
+
+Practitioner:
+  category: Administrative
+  links:
+    project:
       # link to "native" gen3 project
       targetProfile: project
       required: true
-  properties:
-    include:
-    - title
-    - primaryPurposeType.coding.code
-    - text.div
-    - focus.coding.code
-    - focus.coding.system
+
+
+PractitionerRole:
+  category: Administrative
+  links:
+    organization:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
+      required: true
+    practitioner:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
+      required: true      
+
+
+ResearchStudy:
+  category: Administrative
+  links:
+    partOf:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+    principalInvestigator:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
+      required: true
+    project:
+      # link to "containing" project
+      targetProfile: project
+      required: true
   enums:
     focus.coding.code: http://hl7.org/fhir/ValueSet/condition-code
-
-
-ResearchSubject:
-  category: Administrative
-  submitter_id: urn:ncpi:unique-string
-  links:
-    ResearchSubject.study:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-      required: true
-    ResearchSubject.individual:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-      required: true
-  properties:
-    include:
-    - status
-    - assignedArm
-    - actualArm
 
 
 Patient:
   category: Administrative
   identifier: urn:ncpi:unique-string
   links:
-    Patient.managingOrganization:
+    managingOrganization:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
       required: true
-    # Patient.ResearchSubject:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchSubject
-    #   required: true
-  properties:
-    include:
-    - active
-    - name.text
-    - gender
-    # - birthDate.date.value
-    # - deceased[x]
+
+ResearchSubject:
+  category: Administrative
+  submitter_id: urn:ncpi:unique-string
+  links:
+    study:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
+      required: true
+    individual:
+      targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
+      required: true
 
 
 DocumentReference:
   category: data_file
   links:
-    # DocumentReference.custodian:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    #   required: true
-    DocumentReference.subject:
+    subject:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
       required: true
-  properties:
-    include:
-    - status
-    - date
-    - description
-    - content.attachment.url
   source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-drs-document-reference.json
 
 
 SpecimenTask:
   category: Analysis
+  subtype_of: Task
   links:
-    # Task.focus:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
-    #   required: true
-    # Task.for:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
-    #   required: true
-    # Task.owner:
-    #   targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    Task.input:
+    input:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
       required: true
-    Task.output:
+    output:
       targetProfile: http://hl7.org/fhir/StructureDefinition/DocumentReference
       required: true
-  properties:
-    include:
-    - status
-    - intent
-    # - code.coding.code.value
   source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-ncpi-specimen-task.json
 
 
 Specimen:
   category: Biospecimen
   links:
-    Specimen.subject:
+    subject:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
       required: true
-  properties:
-    include:
-    - status
-    - type.coding.code
-    - collection.bodySite.coding.code
-    - collection.method.coding.code
 
 Observation:
   category: Clinical
   links:
-    Observation.subject:
+    subject:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
       required: true
-    Observation.specimen:
+    specimen:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Specimen
-    Observation.focus:
+    focus:
       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy      
-  properties:
-    include:
-    - status
-    - code
-    - dataAbsentReason.coding.code
-    - interpretation.coding.code
-    - note.text
-    - valueQuantity.value
-    - valueQuantity.code
-    - valueQuantity.system
-    - valueQuantity.unit
-    - valueQuantity.comparator
   enums:
     valueQuantity.code: http://hl7.org/fhir/ValueSet/ucum-common
-
-
-Organization:
-  category: Administrative
-  links:
-    Organization.partOf:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-    Organization.researchStudy:
-      # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
-      targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
-      required: true
-  properties:
-    include:
-    - name
-
-PractitionerRole:
-  category: Administrative
-  links:
-    PractitionerRole.organization:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Organization
-      required: true
-    PractitionerRole.practitioner:
-      targetProfile: http://hl7.org/fhir/StructureDefinition/Practitioner
-      required: true      
-  properties:
-    include:
-    - code.coding.code
-    - telecom.system
-
 
 Questionnaire:
   category: Clinical
   links:
-    Questionnaire.researchStudy:
+    researchStudy:
       # In FHIR a Practitioner is a stand alone resource, however in Gen3 all entities need a link
       targetProfile: http://hl7.org/fhir/StructureDefinition/ResearchStudy
       required: true
-  properties:
-    include:
-    - name
-    - status
-
 
 QuestionnaireResponse:
   category: Clinical
   links:
-    QuestionnaireResponse.subject:
+    subject:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
       required: true
-    QuestionnaireResponse.questionnaire:
+    questionnaire:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Questionnaire
       required: true
-  properties:
-    include:
-    - questionnaire
-    - status
-    - item.answer.valueString
-    - item.linkId
-    - item.text
-    exclude:
-    - item.answer.valueAttachment
-    - item.answer.valueReference
-    - item.answer.valueCoding.version
-    - item.answer.valueCoding.display
-    - item.answer.valueCoding.userSelected
 
 
 FamilyRelationship:
   category: Administrative
   links:
-    FamilyRelationship.subject:
+    subject:
       targetProfile: http://hl7.org/fhir/StructureDefinition/Patient
       required: true  
-  properties:
-    include:
-    - status
-    - code.coding.code
-    - subject.reference
-    - focus.reference
-    - valueCodeableConcept.coding.code
-  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-family-relationship.json
   enums:
     code.coding.code: http://terminology.hl7.org/ValueSet/v3-FamilyMember
   constants:
     code.coding.code.value:
     - FA
+  source: https://nih-ncpi.github.io/ncpi-fhir-ig/StructureDefinition-family-relationship.json
+

@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: null
+id: Specimen
 title: Specimen
 type: object
 namespace: http://aced-idp.org
@@ -16,7 +16,14 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- comment_linkPatients: subject
+  name: subject
+  backref: Specimen
+  label: subject
+  target_type: Patient
+  multiplicity: many_to_many
+  required: true
 required:
 - type
 - submitter_id
@@ -31,7 +38,9 @@ properties:
     - Specimen
     description: Gen3's type field.
   id:
-    $ref: _definitions.yaml#/UUID
+    type: string
+    description: The logical id of the resource, as used in the URL for the resource.
+      Once assigned, this value never changes.
   state:
     $ref: _definitions.yaml#/state
   submitter_id:
@@ -50,35 +59,11 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  status:
+  subject_reference:
     type: string
-    enum:
-    - available
-    - unavailable
-    - unsatisfactory
-    - entered-in-error
-    term:
-      description: The availability of the specimen.  Vocabulary from http://hl7.org/fhir/ValueSet/specimen-status|4.0.1
-      termDef:
-        term: status
-        source: fhir
-        cde_id: status
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/specimen-status|4.0.1
-  type_coding_code:
-    type: string
-    description: 'Base StructureDefinition for CodeableConcept Type: A concept that
-      may be defined by a formal reference to a terminology or ontology or may be
-      provided by text. A symbol in syntax defined by the system. The symbol may be
-      a predefined code or an expression in a syntax defined by the coding system
-      (e.g. post-coordination).'
-  collection_bodySite_coding_code:
-    type: string
-    description: Details concerning the specimen collection. A symbol in syntax defined
-      by the system. The symbol may be a predefined code or an expression in a syntax
-      defined by the coding system (e.g. post-coordination).
-  collection_method_coding_code:
-    type: string
-    description: Details concerning the specimen collection. A symbol in syntax defined
-      by the system. The symbol may be a predefined code or an expression in a syntax
-      defined by the coding system (e.g. post-coordination).
+    description: A reference to a location at which the other resource is found. The
+      reference may be a relative reference, in which case it is relative to the service
+      base URL, or an absolute URL that resolves to the location where the resource
+      is found. The reference may be version specific or not. If the reference is
+      not to a FHIR RESTful server, then it should be assumed to be version specific.
+      Internal fragment references (start with '#') refer to contained resources.
