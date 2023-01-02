@@ -1,69 +1,150 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: Specimen
-title: Specimen
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Biospecimen
+description: " Sample for analysis.\n    \n    A sample to be used for analysis.\n\
+  \    "
+id: Specimen
+links:
+- backref: Specimen
+  label: Patients
+  multiplicity: many_to_many
+  name: Patients
+  required: true
+  target_type: Patient
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A sample to be used for analysis.
-additionalProperties: false
+properties:
+  collection_bodySite_coding_0_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_bodySite_coding_0_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_bodySite_coding_0_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_bodySite_text:
+    description: Plain text representation of the concept.
+    type:
+    - string
+    - 'null'
+  collection_method_coding_0_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_method_coding_0_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_method_coding_0_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  collection_method_text:
+    description: Plain text representation of the concept.
+    type:
+    - string
+    - 'null'
+  collection_quantity_code:
+    description: Coded form of the unit.
+    type:
+    - string
+    - 'null'
+  collection_quantity_system:
+    description: System that defines coded unit form.
+    type:
+    - string
+    - 'null'
+  collection_quantity_value:
+    description: Numerical value (with implicit precision).
+    type:
+    - number
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  subject_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  type_coding_0_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  type_coding_0_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  type_coding_0_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  type_text:
+    description: Plain text representation of the concept.
+    type:
+    - string
+    - 'null'
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkPatients: subject
-  name: subject
-  backref: Specimen
-  label: subject
-  target_type: Patient
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- submitter_id
-- projects
+- state
+title: Specimen
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - Specimen
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  subject_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
+validators: null

@@ -1,171 +1,153 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: Observation
-title: Observation
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Clinical
+description: " Measurements and simple assertions.\n    \n    Measurements and simple\
+  \ assertions made about a patient, device or other\n    subject.\n    "
+id: Observation
+links:
+- backref: Observations
+  label: ResearchStudies
+  multiplicity: many_to_many
+  name: ResearchStudies
+  required: false
+  target_type: ResearchStudy
+- backref: Observations
+  label: Specimen
+  multiplicity: many_to_many
+  name: Specimen
+  required: false
+  target_type: Specimen
+- backref: Observations
+  label: Patients
+  multiplicity: many_to_many
+  name: Patients
+  required: false
+  target_type: Patient
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: Measurements and simple assertions made about a patient, device or other
-  subject.
-additionalProperties: false
+properties:
+  code_coding_0_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  code_coding_0_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  code_coding_0_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  focus_0_reference:
+    description: What the observation is about, when it is not about the subject of
+      record.
+    type:
+    - string
+    - 'null'
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  meta_profile_0:
+    description: Profiles this resource claims to conform to.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  status:
+    description: The status of the result value.
+    type:
+    - string
+  subject_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  valueCodeableConcept_coding_0_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_coding_0_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_coding_0_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_coding_1_code:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_coding_1_display:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_coding_1_system:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  valueCodeableConcept_text:
+    description: Plain text representation of the concept.
+    type:
+    - string
+    - 'null'
+required:
+- submitter_id
+- type
+- text_status
+- text_div
+- status
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkResearchStudies: focus
-  name: focus
-  backref: Observations
-  label: focus
-  target_type: ResearchStudy
-  multiplicity: many_to_many
-  required: false
-- comment_linkSpecimen: specimen
-  name: specimen
-  backref: Observations
-  label: specimen
-  target_type: Specimen
-  multiplicity: many_to_many
-  required: false
-- comment_linkPatients: subject
-  name: subject
-  backref: Observations
-  label: subject
-  target_type: Patient
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- status
-- projects
-- submitter_id
+- state
+title: Observation
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - Observation
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  code_coding_0_code:
-    type: string
-    description: A symbol in syntax defined by the system. The symbol may be a predefined
-      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
-  code_coding_0_display:
-    type: string
-    description: A representation of the meaning of the code in the system, following
-      the rules of the system.
-  code_coding_0_system:
-    type: string
-    description: The identification of the code system that defines the meaning of
-      the symbol in the code.
-  component_2_code_coding_0_code:
-    type: string
-    description: A symbol in syntax defined by the system. The symbol may be a predefined
-      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
-  component_0_code_coding_0_code:
-    type: string
-    description: A symbol in syntax defined by the system. The symbol may be a predefined
-      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
-  component_1_code_coding_0_code:
-    type: string
-    description: A symbol in syntax defined by the system. The symbol may be a predefined
-      code or an expression in a syntax defined by the coding system (e.g. post-coordination).
-  component_2_code_coding_0_display:
-    type: string
-    description: A representation of the meaning of the code in the system, following
-      the rules of the system.
-  component_1_code_coding_0_display:
-    type: string
-    description: A representation of the meaning of the code in the system, following
-      the rules of the system.
-  component_0_code_coding_0_display:
-    type: string
-    description: A representation of the meaning of the code in the system, following
-      the rules of the system.
-  component_0_code_coding_0_system:
-    type: string
-    description: The identification of the code system that defines the meaning of
-      the symbol in the code.
-  component_2_code_coding_0_system:
-    type: string
-    description: The identification of the code system that defines the meaning of
-      the symbol in the code.
-  component_1_code_coding_0_system:
-    type: string
-    description: The identification of the code system that defines the meaning of
-      the symbol in the code.
-  component_1_valueInteger:
-    type: integer
-    description: The information determined as a result of making the observation,
-      if the information has a simple value.
-  component_0_valueInteger:
-    type: integer
-    description: The information determined as a result of making the observation,
-      if the information has a simple value.
-  component_2_valueQuantity_code:
-    type: string
-    description: A computer processable form of the unit in some unit representation
-      system.
-  component_2_valueQuantity_system:
-    type: string
-    description: The identification of the system that provides the coded form of
-      the unit.
-  component_2_valueQuantity_value:
-    type: float
-    description: The value of the measured amount. The value includes an implicit
-      precision in the presentation of the value.
-  focus_0_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
-  status:
-    type: string
-    enum:
-    - registered
-    - preliminary
-    - final
-    - amended
-    - cancelled
-    - entered-in-error
-    - unknown
-    term:
-      description: The status of the result value.  Vocabulary from http://hl7.org/fhir/ValueSet/observation-status|4.0.1
-      termDef:
-        term: status
-        source: fhir
-        cde_id: status
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/observation-status|4.0.1
+validators: null

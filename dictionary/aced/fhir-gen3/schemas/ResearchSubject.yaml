@@ -1,103 +1,92 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: ResearchSubject
-title: ResearchSubject
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Administrative
+description: " Physical entity which is the primary unit of interest in the study.\n\
+  \    \n    A physical entity which is the primary unit of operational and/or\n \
+  \   administrative interest in a study.\n    "
+id: ResearchSubject
+links:
+- backref: ResearchSubjects
+  label: Patients
+  multiplicity: many_to_many
+  name: Patients
+  required: true
+  target_type: Patient
+- backref: ResearchSubjects
+  label: ResearchStudies
+  multiplicity: many_to_many
+  name: ResearchStudies
+  required: true
+  target_type: ResearchStudy
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A physical entity which is the primary unit of operational and/or administrative
-  interest in a study.
-additionalProperties: false
+properties:
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  individual_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  status:
+    description: The current state of the subject.
+    type:
+    - string
+  study_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
+- status
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkPatients: individual
-  name: individual
-  backref: ResearchSubjects
-  label: individual
-  target_type: Patient
-  multiplicity: many_to_many
-  required: true
-- comment_linkResearchStudies: study
-  name: study
-  backref: ResearchSubjects
-  label: study
-  target_type: ResearchStudy
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- status
-- projects
-- submitter_id
+- state
+title: ResearchSubject
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - ResearchSubject
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  individual_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
-  status:
-    type: string
-    enum:
-    - candidate
-    - enrolled
-    - active
-    - suspended
-    - withdrawn
-    - completed
-    term:
-      description: The current state of the subject.  Vocabulary from http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
-      termDef:
-        term: status
-        source: fhir
-        cde_id: status
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1
-  study_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
+validators: null

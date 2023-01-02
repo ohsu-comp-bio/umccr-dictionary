@@ -1,0 +1,3 @@
+{"id": "anvil", "name": "Organization", "object": {"submitter_id": "anvil"}}
+{"id": "Public", "name": "Organization", "object": {"submitter_id": "Public", "partOf_reference": "Organization/anvil", "partOf": {"submitter_id": "anvil"}}}
+{"id": "b44a3c8f-b197-52e2-9a3a-32d3d64c57c2", "name": "Organization", "object": {"submitter_id": "b44a3c8f-b197-52e2-9a3a-32d3d64c57c2", "identifier_0_system": "https://anvil.terra.bio/#workspaces/anvil-datastorage/", "identifier_0_value": "1000G-high-coverage-2019", "partOf_reference": "Organization/Public", "partOf": {"submitter_id": "Public"}}}

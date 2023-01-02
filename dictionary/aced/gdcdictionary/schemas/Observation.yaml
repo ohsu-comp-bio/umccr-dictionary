@@ -1,204 +1,162 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: Observation
-title: Observation
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Clinical
+description: " Measurements and simple assertions.\n    \n    Measurements and simple\
+  \ assertions made about a patient, device or other\n    subject.\n    "
+id: Observation
+links:
+- backref: Observations
+  label: ResearchStudies
+  multiplicity: many_to_many
+  name: ResearchStudies
+  required: false
+  target_type: ResearchStudy
+- backref: Observations
+  label: Specimen
+  multiplicity: many_to_many
+  name: Specimen
+  required: false
+  target_type: Specimen
+- backref: Observations
+  label: Patients
+  multiplicity: many_to_many
+  name: Patients
+  required: true
+  target_type: Patient
+- backref: Observations
+  label: Ebcounters
+  multiplicity: many_to_many
+  name: Ebcounters
+  required: false
+  target_type: Ebcounter
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: Measurements and simple assertions made about a patient, device or other
-  subject.
-additionalProperties: false
-submittable: true
-validators: null
-systemProperties:
-- id
-- project_id
-- state
-- created_datetime
-- updated_datetime
-links:
-- # subject
-  name: Patients
-  backref: Observations
-  label: subject
-  target_type: Patient
-  multiplicity: many_to_many
-  required: true
-- # specimen
-  name: Specimen
-  backref: Observations
-  label: specimen
-  target_type: Specimen
-  multiplicity: many_to_many
-  required: false
-required:
-- type
-- status
-- note.text.value
-- projects
-- submitter_id
-- code_coding_code
-uniqueKeys:
-- - id
-- - project_id
-  - submitter_id
 properties:
-  type:
-    enum:
-    - Observation
-    description: Gen3's type field.
-  id:
-    $ref: _definitions.yaml#/UUID
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
+  category_coding_observation-category:
+    description: Code defined by a terminology system.
     type:
     - string
     - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
+  code_coding_loinc_org:
+    description: Code defined by a terminology system.
+    type:
+    - string
+    - 'null'
+  code_text:
+    description: Plain text representation of the concept.
+    type:
+    - string
+    - 'null'
   created_datetime:
     $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
+  effectiveDateTime:
+    description: Clinically relevant time/time-period for observation.
+    type:
+    - string
+    - 'null'
+  encounter_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  issued:
+    description: Date/Time this version was made available.
+    type:
+    - string
+    - 'null'
+  meta_profile_0:
+    description: Profiles this resource claims to conform to.
+    type:
+    - string
+    - 'null'
+  meta_profile_1:
+    description: Profiles this resource claims to conform to.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: One of the resource types defined as part of this version of FHIR
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
   status:
-    format: code
+    description: The status of the result value.. http://hl7.org/fhir/observation-status
     enum:
     - registered
     - preliminary
     - final
     - amended
+    - corrected
     - cancelled
     - entered-in-error
     - unknown
     term:
-      description: The status of the result value.  Vocabulary from http://hl7.org/fhir/ValueSet/observation-status|4.0.1
+      description: The status of the result value.. http://hl7.org/fhir/observation-status
       termDef:
-        term: status
-        source: fhir
-        cde_id: status
+        cde_id: http://hl7.org/fhir/observation-status
         cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/observation-status|4.0.1
-  code_coding_code:
-    format: code
-    # No-codeset-found-for-http://hl7.org/fhir/ValueSet/observation-codes
+        source: fhir
+        strength: required
+        term: http://hl7.org/fhir/observation-status
+        term_url: http://hl7.org/fhir/observation-status
+  subject_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  type:
     type: string
-    term:
-      description: Describes what was observed. Sometimes this is called the observation
-        "name". A reference to a code defined by a terminology system. A symbol in
-        syntax defined by the system. The symbol may be a predefined code or an expression
-        in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
-        from http://hl7.org/fhir/ValueSet/observation-codes
-      termDef:
-        term: code_coding_code
-        source: fhir
-        cde_id: code_coding_code
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/observation-codes
-  dataAbsentReason_coding_code:
-    format: code
-    enum:
-    - unknown
-    - asked
-    - temp
-    - not-asked
-    - masked
-    - unsupported
-    - astext
-    - error
-    - not-performed
-    term:
-      description: Provides a reason why the expected value in the element Observation.value[x]
-        is missing. A reference to a code defined by a terminology system. A symbol
-        in syntax defined by the system. The symbol may be a predefined code or an
-        expression in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
-        from http://hl7.org/fhir/ValueSet/data-absent-reason
-      termDef:
-        term: dataAbsentReason_coding_code
-        source: fhir
-        cde_id: dataAbsentReason_coding_code
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/data-absent-reason
-  interpretation_coding_code:
-    format: code
-    enum:
-    - _GeneticObservationInterpretation
-    - _ObservationInterpretationChange
-    - _ObservationInterpretationExceptions
-    - _ObservationInterpretationNormality
-    - _ObservationInterpretationSusceptibility
-    - EX
-    - HM
-    - ObservationInterpretationDetection
-    - ObservationInterpretationExpectation
-    - OBX
-    - ReactivityObservationInterpretation
-    - CAR
-    - Carrier
-    - B
-    - D
-    - U
-    - W
-    - <
-    - '>'
-    - AC
-    - IE
-    - QCF
-    - TOX
-    - A
-    - N
-    - I
-    - MS
-    - NCL
-    - NS
-    - R
-    - S
-    - VS
-    - AA
-    - H
-    - L
-    - HH
-    - LL
-    - HX
-    - LX
-    - H>
-    - HU
-    - E
-    - L<
-    - LU
-    - ND
-    - IND
-    - NEG
-    - POS
-    - EXP
-    - UNE
-    - DET
-    - SYN-R
-    - NR
-    - RR
-    - WR
-    - SDD
-    - SYN-S
-    term:
-      description: A categorical assessment of an observation value.  For example,
-        high, low, normal. A reference to a code defined by a terminology system.
-        A symbol in syntax defined by the system. The symbol may be a predefined code
-        or an expression in a syntax defined by the coding system (e.g. post-coordination).  Vocabulary
-        from http://hl7.org/fhir/ValueSet/observation-interpretation
-      termDef:
-        term: interpretation_coding_code
-        source: fhir
-        cde_id: interpretation_coding_code
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/observation-interpretation
-  note_text:
-    type: string
-    description: Comments about the observation or the results. The text of the annotation
-      in markdown format. Primitive value for markdown
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  valueQuantity_code:
+    description: Coded form of the unit.
+    type:
+    - string
+    - 'null'
+  valueQuantity_system:
+    description: System that defines coded unit form.
+    type:
+    - string
+    - 'null'
+  valueQuantity_unit:
+    description: Unit representation.
+    type:
+    - string
+    - 'null'
+  valueQuantity_value:
+    description: Numerical value (with implicit precision).
+    type:
+    - number
+    - 'null'
+required:
+- submitter_id
+- type
+- status
+submittable: true
+systemProperties:
+- id
+- project_id
+- created_datetime
+- updated_datetime
+- state
+title: Observation
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null

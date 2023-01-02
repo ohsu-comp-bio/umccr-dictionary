@@ -1,0 +1,1020 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<!--[if lt IE 8]>      <html class="js nav theme-purple lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]>         <html class="js nav theme-purple lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]>         <html class="js nav theme-purple lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]><!-->     <html class="js nav theme-purple" lang="en-us"> <!--<![endif]-->
+
+<head> 
+
+
+  <link rel="P3Pv1" href="w3c/p3p.xml"/>
+  
+  <link rel="stylesheet" href="css/all.css" type="text/css" media="screen,projection" />
+  <link rel="stylesheet" href="jquery.simpledialog/jquery.simpledialog.0.1.css" type="text/css" media="screen,projection" />
+  <link rel="stylesheet" href="css/fader.css" type="text/css" media="screen,projection" />
+<link rel="stylesheet" href="css/jquery.cluetip.css" type="text/css" media="screen,projection" />
+
+  <title>Value Set Details</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome; charset=utf-8">
+
+
+
+  <meta name="keywords" content="PHIN VADS Vocabulary Search" />
+  <meta name="description" content="Vocabulary, search" />
+
+
+
+		<link rel="shortcut icon" href="/TemplatePackage/3.0/images/favicon.ico" />
+
+
+
+ <script type='text/javascript' src='dwr/engine.js'></script>
+  <script type='text/javascript' src='dwr/util.js'></script>
+  <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>  
+  <script type="text/javascript" src="js/jquery.dimensions.pack.js"></script>  
+  <script type="text/javascript" src="js/dynamic.js"></script>
+  <script type="text/javascript" src="js/date.js"></script>  
+  <script type="text/javascript" src="js/jquery.datePicker.js"></script>  
+  <script type="text/javascript" src="js/vocabBrowser.js"></script>
+  <script type="text/javascript" src="jquery.simpledialog/jquery.simpledialog.0.1.min.js"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+  <script type='text/javascript' src='dwr/interface/searchManager.js'></script>
+  <script type='text/javascript' src='dwr/interface/searchResultsManager.js'></script>
+  <script type='text/javascript' src='dwr/interface/detailControlPanel.js'></script>
+  <script type='text/javascript' src='dwr/interface/subResultsManager.js'></script>
+
+  <script src="js/jquery.hoverIntent.minified.js" type="text/javascript"></script>
+  <script src="js/jquery.bgiframe.min.js" type="text/javascript"></script>
+  <script src="js/jquery.cluetip.js" type="text/javascript"></script>
+
+ 
+<!--
+		<script type="text/javascript" charset="utf-8">
+			$(function()
+			{
+				$('.date-pick').datePicker({startDate:'01/01/1996'});
+			});
+		</script>
+-->	
+ 
+  <!--[if lt IE 7]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="screen,projection" /><![endif]-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21026132-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>  
+<script type="text/javascript">
+  $(function()
+  {
+      var ctoptions = {
+    		  local: true,
+    		  width: 555,    		  
+          activation: 'click',
+          positionBy: 'auto', 
+          sticky: true,
+          closeText: '<img src="img/Crystal_Clear_action_stop.png" width="22" height="22" title="Close Window" alt="Close Window"  />',
+          closePosition: 'title'
+      };
+      $('a.mainpopup').cluetip(ctoptions);
+      $('body').click(function(event) {
+          if( $('#cluetip').hasClass("cluetip-default") ){
+              $(document).trigger('hideCluetip');
+          }
+      }); 
+  });
+</script>
+
+	<link rel="stylesheet" href="/vads/TemplatePackage/3.0/css/lib/bootstrap24.css" />
+	<link rel="stylesheet" href="/vads/TemplatePackage/3.0/css/app.css?3.1.14.1" />
+	<!--[if gt IE 9]><!--><!--<![endif]-->
+	<!--[if IE 7]>
+		<link rel="stylesheet" href="/vads/TemplatePackage/3.0/css/lib/font-awesome-ie7.css" />
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/vads/TemplatePackage/3.0/css/ie.css" />
+	<![endif]-->
+	<link rel="stylesheet" media="print" href="/vads/TemplatePackage/3.0/css/print.css?3.1.14.1" />
+	<script src="/vads/TemplatePackage/3.0/js/libs/modernizr-latest.js"></script>
+	<script>
+		if(!Date.now){Date.now=function now(){return new Date().getTime()}}
+		var page_timing = page_timing || {};
+		page_timing.page_start = Date.now();
+		function $$(e){if(window.$){e()}else{setTimeout(function(){$$(e)},50)}}
+		// (function(){function e(e,t){var n=e.length;while(n--){if(e[n].indexOf(t)>-1){return e[n]}}return false}var t=e(document.getElementsByTagName("html")[0].className.split(" "),"theme-");if(t){var n=document.createElement("link");n.rel="stylesheet";n.type="text/css";n.media="screen";n.href="/vads/TemplatePackage/3.0/css/themes/"+t+".css";document.getElementsByTagName("head")[0].appendChild(n)}})();
+
+		var settings = {}, addthis = null;
+	</script>
+
+	<meta name="application-name" content="CDC.gov"/>
+	<meta name="msapplication-TileColor" content="#0061aa" />
+	<meta name="msapplication-square70x70logo" content="/vads/TemplatePackage/3.0/images/Win8_tile_70x70.png" />
+	<meta name="msapplication-square150x150logo" content="/vads/TemplatePackage/3.0/images/Win8_tile_150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="/vads/TemplatePackage/3.0/images/Win8_tile_310x150.png" />
+	<meta name="msapplication-square310x310logo" content="/vads/TemplatePackage/3.0/images/Win8_tile_310x310.png" />
+
+ 
+
+
+</head>
+<body>
+
+ <div id="skipmenu">
+	<a href="#searchTarget" class="skippy">Skip directly to search</a>
+	<a href="#azTab" class="skippy">Skip directly to A to Z list</a>
+	<a href="#nav-container" class="skippy">Skip directly to navigation</a>
+	<a href="#share-bar" class="skippy">Skip directly to page options</a>
+	<a href="#contentArea" class="skippy">Skip directly to site content</a>
+</div>
+		<div id="wrapper">
+            
+<!-- references to this removed intentionally -->
+
+            <header id="header">
+				<div class="container">
+					<!-- header -->
+					<div class="row">
+						<!-- cdc -->
+						<div id="logo" class="span14">
+    			<a href="http://www.cdc.gov"><img src="/vads/TemplatePackage/3.0/images/masthead_subpage.png" alt="CDC. Centers for Disease Control and Prevention. CDC 24/7: Saving Lives. Protecting People." class="hidden-one" /><img src="/vads/TemplatePackage/3.0/images/masthead_1-col.png" alt="CDC. Centers for Disease Control and Prevention. CDC 24/7: Saving Lives. Protecting People.&#8482;" class="visible-one" /></a>
+
+<br>
+    					</div>
+						<!-- search -->
+
+					</div>
+
+
+					
+					
+
+					
+
+						
+					<!-- /header -->
+					<div class="titlebar">
+                        <h1><a href="SearchHome.action">Public Health Information Network Vocabulary Access and Distribution System (PHIN VADS)</a></h1> 
+					</div>
+                     <!-- emergency -->
+<div id="emergencyContainer">
+	<!--
+	<div class="alert alert-error en">
+		<b>Attention!</b> Uncomment this section and place the emergency message here.
+	</div>
+	<div class="alert alert-error esp">
+		<b>Â¡AtenciÃ³n!</b> Elimine el comentario de esta secciÃ³n y colocar el mensaje de emergencia aquÃ­.
+	</div>	
+	-->
+</div>
+
+<!-- no script -->
+<noscript>
+	<div class="alert alert-block"> Note: Javascript is disabled or is not supported by your browser. For this reason, some items on this page will be unavailable. For more information about this message, please visit this page: <a href="//www.cdc.gov/other/about_cdcgov.html">About CDC.gov</a>.</div>
+</noscript>
+<script>if (typeof page_timing !== 'undefined') { page_timing.noscript_load = Date.now(); }</script>
+
+				</div>
+			</header>
+			<div class="container">
+				<div id="content" class="noLinking noDecoration">
+					<div class="row">
+					<!-- left nav -->
+						<div id="nav-container" class="hidden-one hidden-two span5">
+							<nav id="left" class="hidden-one hidden-two">
+							 	  
+							</nav>
+							<div class="nav-related">
+<div class="module-typeA">
+<p>Application Version: 4.0.6.6<br>
+Content Version: 2021.03.26<p>
+
+<p><a href="downloads/4_0_6_6_Release_Notes.pdf" target="_blank">Release Notes [PDF278KB]</a><br>
+<a href="downloads/PHINVADS_Guide.pdf" target="_blank">User Guide [PDF6.08MB]</a><br>
+<img src="img/calendarlil.png" alt="calendar" width="20" height="20"> &nbsp; <a href="downloads/CodeSystem_UpdateCalendar.pdf" target="_blank">Code System Update Calendar  [PDF161KB]</a> <img src="img/star.png" alt="star" width="15" height="15"><br>
+<a href="mailto:phinvs@cdc.gov">Contact Us</a>
+<br><img src="img/rss.gif" alt="rss" width="17" height="17"> &nbsp; <a href="RssFeeds.action">Subscribe</a>
+</p>
+
+	<h3>Related Links</h3>
+	<ul class="list-block">
+		<li>
+			<a href="https://www.cdc.gov/phin/resources/vocabulary/index.html">PHIN Vocabulary Services</a>
+		</li>
+		<li>
+			<a href="https://www.cdc.gov/phin/tools/PHINvads/index.html">Quick Links / Mapping Tools</a>
+		</li>
+		
+<li><a href="ViewExternalResources.action">External Standards Resources</a></li>
+<li><a href="https://www.cdc.gov/phin/resources/guides.html">Message Guides</a></li>
+<li><a href="developersGuide.action">Developer's Guide</a></li>
+	</ul>
+
+<h3>Downloads</h3>
+<ul class="list-block">
+<li><a href="https://phinvads.cdc.gov/vads/DownloadCodeSystemRepresentation.action" target="_blank">Code System Representation [PDF-420KB]</a></li>
+<li><a href="https://phinvads.cdc.gov/vads/downloads/CSTE_TIG_Review_by_Communities_of_Practice.zip" target="_blank">CSTE Technical Implementation Guide Vocabulary Review [ZIP]</a></li>
+</ul>
+</div>
+
+							</div>
+
+
+
+
+						</div>
+						<div class="breadcrumbs hidden-one span19">
+						</div>
+						<div id="share-bar" class="span19">
+							<div class="socialmediabar">
+								<div class="row">
+									<div class="hidden-one pull-right">
+										
+										
+
+
+									</div>
+									
+	<div class="span8">
+										
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+						<!-- body -->
+						<div id="body" class="span19">
+							<div id="contentArea">
+
+
+
+
+
+
+<div class="global-page" 
+    
+>
+
+
+
+  <div id="page" class="search-page"><div class="page-top"><div class="page-bottom">
+<!--header-->
+     <div style="display:none;">  <div id="header2">
+      <ul class="header2">
+       
+        
+        
+   
+        <li class="rcmtData"><a href="ViewCodeSystemConcept.action?oid=2.16.840.1.114222.4.5.274&code=RCMT"><span class="linky" style="color:white;">RCMT</span></a>
+           &nbsp;&nbsp;<input alt="Enter text and hit ENTER to search RCMT conditions" title="Enter text and hit ENTER to search RCMT conditions" style="background-color: #D8F0FF;" id="rcmtquick" type="text" size="6" onkeypress="return quickSearchBoxType(event)"></input> <span class="linky" style="color:white;" onclick="quickSearch()"><em>Quick Search</em></span>
+        </li>     
+       
+      </ul>
+      
+    </div>
+</div>
+
+  
+<!--main-->
+<div id="main" class="sidebar-closed">
+
+    <div class="main-top"><div class="main-bottom">
+
+
+<!--content-->
+      <div id="content2">
+    		
+        
+
+<script type="text/javascript">
+function alertName(){
+alert("Form has been submitted from valueSet.jsp");
+} 
+</script> 
+
+
+
+
+
+    <script type="text/javascript">
+      $(function()
+      {
+          var ctoptions = {
+              cluetipClass: 'jtip',
+              activation: 'click',
+              positionBy: 'bottomTop', 
+              sticky: true,
+              closeText: '<img src="img/Crystal_Clear_action_stop.png" width="26" height="26" title="Close Window" alt="Close Window"  />',
+              closePosition: 'title',
+              width: 280,
+              topOffset: -30,
+              ajaxCache: false,
+              onShow: function() {
+                $('#popupDownloadLink').click(function(event) {
+                  if ( !$(event.target).closest('#cluetip .mybutton').length) {
+                	  $(document).trigger('hideCluetip');
+                  }
+                });
+              }
+          };
+          $('a.ctpopup').cluetip(ctoptions);
+      });
+    </script>
+<br/>
+
+
+<table width="98%">
+<tr>
+<td>
+  <div id="xsnazzy">
+		
+    <strong>Value Set Information</strong>
+    <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+    <div class="xboxcontent">
+      <table width="100%">
+        <tr>
+          <td class="key">Value Set Code</td>
+          <td>PHVS_BodySite_HITSP</td>
+          <td align="right" nowrap="nowrap" rowspan="3">
+				    <span class="downloadLink" style="display:block;">
+				      <a href="#" title="Download Options" rel="AJAXvalueSetDownloadPopup.action" id="vsodControlDownloadLink" class="ctpopup enabled"
+			          ><img src="img/bg-download.gif" align="top" alt="Download Value Set"/> Download Value Set</a><span id="vsodControlDownloadLinkDisabled"
+			          class="enabled">Download Value Set<img src="img/bg-download-disabled2.jpg" align="top" alt="Download Value Set"/></span>
+				    </span>
+				    <div><a class="message" id="detailMessage"></a><a class="spinner" id="detailSpinner"></a> </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="key">Value Set Name</td>
+          <td>Body Site Value Set
+          </td>
+        </tr>
+        <tr>
+          <td class="key">Value Set OID</td>
+          <td>2.16.840.1.113883.3.88.12.3221.8.9</td>
+        </tr>
+	    <tr>
+	      <td class="key">Value Set Description</td>
+	      <td>Contains values descending from the SNOMED CT&reg; Anatomical Structure (91723000) hierarchy or Acquired body structure (body structure) (280115004) or Anatomical site notations for tumor staging (body structure) (258331007) or Body structure, altered from its original anatomical structure (morphologic abnormality) (118956008) or Physical anatomical entity (body structure) (91722005) This indicates the anatomical site.</td>
+	      <td align="right"  valign="bottom" nowrap="nowrap">
+	       <span class="downloadLink">
+          <a href="ValueSetRssFeed.xml?oid=2.16.840.1.113883.3.88.12.3221.8.9"><img src="img/rss.gif" border="0" style="position: relative; top: 4px;" alt="Subscribe"/> Subscribe</a>
+         </span>
+	      </td>
+	    </tr>
+      </table>
+    </div>
+    <b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+  </div>
+</td>
+<td width="20%" valign="top">
+  <div id="xsnazzy" class="versionHistory">
+    <strong>Version History</strong>
+    <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+    <div class="xboxcontent">
+		  <div class="pager">
+		    <div class="body">
+		      <ul>
+		        <li class="prev">
+		          
+		            <a href="ViewValueSet.action?id=6031D535-9320-DF11-B334-0015173D1785">previous</a>
+		          
+		        </li>
+		        <li>
+		          Version <strong>3</strong>
+		          <br/>
+		          
+		          (Not Current)
+		        </li>
+		        <li class="next">
+		          
+		            <a href="ViewValueSet.action?id=F84E6B60-D54F-4766-961E-D24ED1648BBA">next</a>
+		          
+		        </li>
+		      </ul>
+		    </div>
+		  </div>
+    </div>
+    <b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+  </div>
+</td>
+</tr>
+</table>
+
+<div id="resultDetailsDiv">
+  
+
+
+
+
+
+<ul class="options-nav">
+  <li class="first active"><strong>Value Set Concepts</strong></li>
+	<li><a href="#" onclick="replaceDivContent('AJAXGetValueSetDetails.action?id=9A2D4051-3AA6-42EB-AE88-541C9094B0FB', 'resultDetailsDiv');">Value Set Details</a></li>
+</ul>
+
+<div id="searchResultsDiv">
+  
+
+
+
+      <script type="text/javascript">
+    $(function()
+      {
+          var ctoptions = {
+              cluetipClass: 'jtip',
+              activation: 'click',
+              positionBy: 'bottomTop', 
+              sticky: true,
+              closeText: '<img src="img/Crystal_Clear_action_stop.png" width="26" height="26" title="Close Window" alt="Close Window"  />',
+              closePosition: 'title',
+              width: 280,
+              topOffset: -30,
+              ajaxCache: false,
+              onShow: function() {
+                $('#popupDownloadLink').click(function(event) {
+                  if ( !$(event.target).closest('#cluetip .mybutton').length) {
+                    $(document).trigger('hideCluetip');
+                  }
+                });
+              }
+          };
+          $('a.ctpopup').cluetip(ctoptions);
+      });
+    </script>
+  
+    <div class="pager">
+      <div class="body">
+        <ul>
+          <li>
+            <strong>
+              25735  
+              Value Set Concepts found
+            </strong> 
+          </li>
+            
+	          <li class="first">
+	            
+	          </li>
+            <li class="prev">
+              
+            </li>
+            <li>
+							
+							<strong class="pageLink">1</strong>
+							
+	              
+	              
+	  							<a class="pageLink" href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=2', 'searchResultsDiv');">2</a>
+	              
+							
+	              
+	              
+	  							<a class="pageLink" href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=3', 'searchResultsDiv');">3</a>
+	              
+							
+	              
+	              
+	  							<a class="pageLink" href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=4', 'searchResultsDiv');">4</a>
+	              
+							
+	              
+	              
+	  							<a class="pageLink" href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=5', 'searchResultsDiv');">5</a>
+	              
+							
+	              
+	              
+	  							<a class="pageLink" href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=6', 'searchResultsDiv');">6</a>
+	              
+							
+            </li>
+            <li class="next">
+                            
+                
+                
+                  <a href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=2', 'searchResultsDiv');">next</a>
+                                        
+							
+            </li>
+						<li class="last">
+	                          
+	              
+	              
+	                <a href="#" onclick="replaceDivContent('AJAXGetNextValueSetConceptDirectResults.action?searchResultsManager.searchResults.currentPage=1716', 'searchResultsDiv');">last</a>
+	              
+	            
+						</li>
+          
+        </ul>
+      </div>
+    </div>
+
+
+    <table class="results">
+      <tr class="resultToolbar">
+        
+          <td colspan="7" class="resultToolbar">        
+          <ul class="left">
+            <li><a href="#" id="vscsrControlSelectAllLink" class="enabled"
+              onclick="subResultsManager.selectAllForDownload(updateDownloadControls);">Select All</a><span
+              id="vscsrControlSelectAllLinkDisabled" class="enabled">Select All</span></li>
+            <li><a href="#" id="vscsrControlClearAllLink" class="disabled"
+              onclick="subResultsManager.clearAllFromDownload(updateDownloadControls);">Clear All</a><span
+              id="vscsrControlClearAllLinkDisabled" class="disabled">Clear All</span></li>
+          </ul>
+          <div><p class="message" id="resultsMessage"></p></div>
+          <div><p class="spinner" id="resultsSpinner"></p></div>
+          <ul class="right">
+            <li><a href="#" title="Download Options" rel="AJAXvalueSetConceptDetailSearchResultsDownloadAllPopup.action" id="vscsrControlDownloadAllLink" class="ctpopup enabled"
+              >Download All</a><span id="vscsrControlDownloadAllLinkDisabled" 
+              class="enabled">Download All</span></li>
+            <li class="download"><a href="#" title="Download Options" rel="AJAXvalueSetConceptDetailSearchResultsDownloadPopup.action" id="vscsrControlDownloadSelectedLink" class="ctpopup disabled"
+              >Download Selected</a><span id="vscsrControlDownloadSelectedLinkDisabled"
+              class="disabled">Download Selected</span></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        
+        
+          <th class="results">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>        
+        
+        <th class="results">Concept Code</th>
+        
+        <th class="results">Concept Name</th>
+        <th class="results">Preferred Concept Name</th>
+        <th class="results">Code System</th>
+        <th class="results">Value Set</th>
+        <th class="results">&nbsp;</th>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[0]" value="true" id="selectResult-1" onclick="subResultsManager.selectForDownload(1, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-1" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[0]" value="true" /></div>
+        </td>
+        <td class="results">56244007</td>
+        
+        <td class="results">10 to 19 percent of body surface (body structure)</td>
+        <td class="results">10 to 19 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056EC0-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[1]" value="true" id="selectResult-2" onclick="subResultsManager.selectForDownload(2, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-2" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[1]" value="true" /></div>
+        </td>
+        <td class="results">37491003</td>
+        
+        <td class="results">12 nm filaments (cell structure)</td>
+        <td class="results">12 nm filaments (cell structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056E04-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[2]" value="true" id="selectResult-3" onclick="subResultsManager.selectForDownload(3, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-3" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[2]" value="true" /></div>
+        </td>
+        <td class="results">78777002</td>
+        
+        <td class="results">20 to 29 percent of body surface (body structure)</td>
+        <td class="results">20 to 29 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056F69-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[3]" value="true" id="selectResult-4" onclick="subResultsManager.selectForDownload(4, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-4" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[3]" value="true" /></div>
+        </td>
+        <td class="results">12423009</td>
+        
+        <td class="results">30 to 39 percent of body surface (body structure)</td>
+        <td class="results">30 to 39 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056BE8-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[4]" value="true" id="selectResult-5" onclick="subResultsManager.selectForDownload(5, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-5" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[4]" value="true" /></div>
+        </td>
+        <td class="results">36849000</td>
+        
+        <td class="results">40 to 49 percent of body surface (body structure)</td>
+        <td class="results">40 to 49 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056DDA-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[5]" value="true" id="selectResult-6" onclick="subResultsManager.selectForDownload(6, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-6" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[5]" value="true" /></div>
+        </td>
+        <td class="results">305024009</td>
+        
+        <td class="results">5/6 interchondral joint (body structure)</td>
+        <td class="results">5/6 interchondral joint (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=64BBEF66-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[6]" value="true" id="selectResult-7" onclick="subResultsManager.selectForDownload(7, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-7" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[6]" value="true" /></div>
+        </td>
+        <td class="results">76152003</td>
+        
+        <td class="results">50 to 59 percent of body surface (body structure)</td>
+        <td class="results">50 to 59 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056F59-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[7]" value="true" id="selectResult-8" onclick="subResultsManager.selectForDownload(8, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-8" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[7]" value="true" /></div>
+        </td>
+        <td class="results">305005006</td>
+        
+        <td class="results">6/7 interchondral joint (body structure)</td>
+        <td class="results">6/7 interchondral joint (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=64BBEF63-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[8]" value="true" id="selectResult-9" onclick="subResultsManager.selectForDownload(9, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-9" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[8]" value="true" /></div>
+        </td>
+        <td class="results">91551007</td>
+        
+        <td class="results">60 to 69 percent of body surface (body structure)</td>
+        <td class="results">60 to 69 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056FBB-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[9]" value="true" id="selectResult-10" onclick="subResultsManager.selectForDownload(10, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-10" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[9]" value="true" /></div>
+        </td>
+        <td class="results">64700008</td>
+        
+        <td class="results">7 nm filaments (cell structure)</td>
+        <td class="results">7 nm filaments (cell structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056EF6-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[10]" value="true" id="selectResult-11" onclick="subResultsManager.selectForDownload(11, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-11" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[10]" value="true" /></div>
+        </td>
+        <td class="results">305006007</td>
+        
+        <td class="results">7/8 interchondral joint (body structure)</td>
+        <td class="results">7/8 interchondral joint (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=64BBEF64-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[11]" value="true" id="selectResult-12" onclick="subResultsManager.selectForDownload(12, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-12" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[11]" value="true" /></div>
+        </td>
+        <td class="results">75324005</td>
+        
+        <td class="results">70 to 79 percent of body surface (body structure)</td>
+        <td class="results">70 to 79 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056F51-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[12]" value="true" id="selectResult-13" onclick="subResultsManager.selectForDownload(13, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-13" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[12]" value="true" /></div>
+        </td>
+        <td class="results">305007003</td>
+        
+        <td class="results">8/9 interchondral joint (body structure)</td>
+        <td class="results">8/9 interchondral joint (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=64BBEF65-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[13]" value="true" id="selectResult-14" onclick="subResultsManager.selectForDownload(14, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-14" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[13]" value="true" /></div>
+        </td>
+        <td class="results">19738007</td>
+        
+        <td class="results">80 to 89 percent of body surface (body structure)</td>
+        <td class="results">80 to 89 percent of body surface (body structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=60056C45-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+      <tr> 
+        <td class="results">
+          <div class="check"><input type="checkbox" name="searchResultsManager.searchResults.pageCheckBoxes[14]" value="true" id="selectResult-15" onclick="subResultsManager.selectForDownload(15, this.checked, updateDownloadControls);"/><input type="hidden" id="__checkbox_selectResult-15" name="__checkbox_searchResultsManager.searchResults.pageCheckBoxes[14]" value="true" /></div>
+        </td>
+        <td class="results">19904008</td>
+        
+        <td class="results">9 nm filaments (cell structure)</td>
+        <td class="results">9 nm filaments (cell structure)</td>
+        <td class="results">SNOMED-CT</td>
+        <td class="results">Body Site Value Set</td>
+        <td class="results"><a class="detailsLink" href="ViewValueSetConcept.action?id=6425A24B-A6BA-11DF-872A-005056A00BC8">Details</a></td>
+      </tr>
+    
+    </table>
+
+  
+  
+
+</div>
+  
+</div>
+
+
+   </div>
+    </div></div></div>
+
+  </div></div></div>
+</div>
+<!-- xxxxxxxxxxxxxxxxxx METRICS code begins here xxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id="metrics">
+
+<!-- SiteCatalyst code version: H.15.1. -->
+<script language="JavaScript" type="text/javascript">
+
+s.pageName=document.title
+s.channel="PHIN VADS"
+
+s.prop26=document.title
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<script language="JavaScript" type="text/javascript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><a href="http://www.omniture.com" title="Web Analytics"><img
+src="http://cdcgov.112.2O7.net/b/ss/cdcgov/1/H.15.1--NS/0"
+height="1" width="1" border="0" alt="" /></a></noscript><!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.15.1. -->
+</div>
+<!-- xxxxxxxxxxxxxxxxxx METRICS code ends here xxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+
+
+<!-- Related Nav Area -->
+								<div class="nav-related hidden-three hidden-four">
+<div class="module-typeA">
+<p>Application Version: 4.0.6.6<br>
+Content Version: 2021.03.26<p>
+
+<p><a href="downloads/4_0_6_6_Release_Notes.pdf" target="_blank">Release Notes [PDF278KB]</a><br>
+<a href="downloads/PHINVADS_Guide.pdf" target="_blank">User Guide [PDF6.08MB]</a><br>
+<img src="img/calendarlil.png" alt="calendar" width="20" height="20"> &nbsp; <a href="downloads/CodeSystem_UpdateCalendar.pdf" target="_blank">Code System Update Calendar  [PDF161KB]</a> <img src="img/star.png" alt="star" width="15" height="15"><br>
+<a href="mailto:phinvs@cdc.gov">Contact Us</a>
+<br><img src="img/rss.gif" alt="rss" width="17" height="17"> &nbsp; <a href="RssFeeds.action">Subscribe</a>
+</p>
+
+	<h3>Related Links</h3>
+	<ul class="list-block">
+		<li>
+			<a href="https://www.cdc.gov/phin/resources/vocabulary/index.html">PHIN Vocabulary Services</a>
+		</li>
+		<li>
+			<a href="https://www.cdc.gov/phin/tools/PHINvads/index.html">Quick Links / Mapping Tools</a>
+		</li>
+		
+<li><a href="ViewExternalResources.action">External Standards Resources</a></li>
+<li><a href="https://www.cdc.gov/phin/resources/guides.html">Message Guides</a></li>
+<li><a href="developersGuide.action">Developer's Guide</a></li>
+	</ul>
+
+<h3>Downloads</h3>
+<ul class="list-block">
+<li><a href="https://phinvads.cdc.gov/vads/DownloadCodeSystemRepresentation.action" target="_blank">Code System Representation [PDF-420KB]</a></li>
+<li><a href="https://phinvads.cdc.gov/vads/downloads/CSTE_TIG_Review_by_Communities_of_Practice.zip" target="_blank">CSTE Technical Implementation Guide Vocabulary Review [ZIP]</a></li>
+</ul>
+</div>
+
+
+								</div>
+								<!-- /end Related Nav Area -->
+								<!-- Persistent Content Area -->
+								<div id="content-secondary">
+									<!-- begin editable -->
+									<!--  // This area is optional
+									// All content in the Right Column (except for Page Option links and GovD) will be moved to the Persistent Content Area upon migration
+									// This area will need to enabled if it is being used otherwise not included in the page build...
+									-->
+									<!-- /end editable -->
+								</div><!-- /end #content-secondary -->
+							</div><!-- /end #contentArea -->
+						</div><!-- /end #body -->
+					</div>
+
+					<div class="row">
+						<div class="span24 visible-one">
+							<!--BEGIN PAGE OPTIONS - FOR DEMO PURPOSES ONLY - REMOVE INCLUDES BEFORE TEMPLATE USE. The markup in this region for page format & languages will be generated by the CMS via editorial options. -->
+    						<!-- END PAGE OPTIONS -->
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="span24">
+					       <div id="plugin-legend" class="pluginOff">
+	<h5>File Formats Help:</h5><span><a href="http://www.cdc.gov/Other/plugins/">How do I view different file formats (PDF, DOC, PPT, MPEG) on this site?</a></span>
+	<ul>
+		<li class="plugin-pdf"><a href="http://www.cdc.gov/Other/plugins/#pdf"><span class="sprite-16-pdf">Adobe PDF file</span></a></li>
+		<li class="plugin-ppt"><a href="http://www.cdc.gov/Other/plugins/#ppt"><span class="sprite-16-ppt">Microsoft PowerPoint file</span></a></li>
+		<li class="plugin-word"><a href="http://www.cdc.gov/Other/plugins/#doc"><span class="sprite-16-word">Microsoft Word file</span></a></li>
+		<li class="plugin-excel"><a href="http://www.cdc.gov/Other/plugins/#xls"><span class="sprite-16-excel">Microsoft Excel file</span></a></li>
+		<li class="plugin-wmv"><a href="http://www.cdc.gov/Other/plugins/#wmv"><span class="sprite-16-wmv">Audio/Video file</span></a></li>
+		<li class="plugin-qt"><a href="http://www.cdc.gov/Other/plugins/#qt"><span class="sprite-16-qt">Apple Quicktime file</span></a></li>
+		<li class="plugin-real"><a href="http://www.cdc.gov/Other/plugins/#ram"><span class="sprite-16-rp">RealPlayer file</span></a></li>
+		<li class="plugin-text"><a href="http://www.cdc.gov/Other/plugins/#text"><span class="sprite-16-txt">Text file</span></a></li>
+		<li class="plugin-zip"><a href="http://www.cdc.gov/Other/plugins/#zip"><span class="sprite-16-zip">Zip Archive file</span></a></li>
+		<li class="plugin-sas"><a href="http://www.cdc.gov/Other/plugins/#sas"><span class="sprite-16-sas">SAS file</span></a></li>
+		<li class="plugin-epub"><a href="http://www.cdc.gov/Other/plugins/#epub"><span class="sprite-16-ebook">ePub file</span></a></li>
+		<li class="plugin-ris"><a href="http://www.cdc.gov/Other/plugins/#ris"><span class="sprite-16-ris">RIS file</span></a></li>
+	</ul>
+</div>
+
+						</div>
+					</div>
+
+					<!-- date stamp -->
+					<div class="row" id="datestamp" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+						<div class="span24">
+							<ul>
+								<li class="last-reviewed">Page last reviewed:<span itemprop="lastReviewed">December 5, 2018</span></li>
+								<li class="last-updated">Page last updated:<span itemprop="dateModified">December 5, 2018</span></li>
+								<li class="content-source">Content source:
+									<ul>
+    							       	<li itemprop="sourceOrganization" itemscope="itemscope" itemtype="http://schema.org/Organization">
+		<a href="http://www.cdc.gov/" itemprop="url">Centers for Disease Control and Prevention</a>,&nbsp;
+	</li>
+
+    								</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div><!-- /end #content -->
+			</div><!-- / end .container -->
+</div><br clear="all">
+
+					<!-- footer -->
+				
+    			 	<footer id="footer" class="cdcSlimFooter">
+    			 	<div class="socialMedia">
+		<div class="container">
+			<nav class="followcdc">
+				<ul>
+					<li><a href="http://www.cdc.gov/Other/emailupdates/"><span class="sprite-24-govd"></span><span class="tp-sr-only">Email</span></a></li>
+					<li><a href="http://www.facebook.com/CDC" target="_blank"><span class="sprite-24-facebook"></span><span class="tp-sr-only">Recommend</span></a></li>
+					<li><a href="http://twitter.com/CDCgov" target="_blank"><span class="sprite-24-twitter"></span><span class="tp-sr-only">Tweet</span></a></li>
+					<li><a href="http://www.youtube.com/user/CDCstreamingHealth" target="_blank"><span class="sprite-24-youtube"></span><span class="tp-sr-only">YouTube</span></a></li>
+					<li><a href="https://instagram.com/CDCgov/" target="_blank"><span class="sprite-24-instagram"></span><span class="tp-sr-only">Instagram</span></a></li>
+				</ul>
+			</nav>
+			<nav class="cdcmedia">
+				<ul>
+					<li><a href="http://www2c.cdc.gov/podcasts/"><span class="sprite-24-listen"></span><span class="tp-sr-only">Listen</span></a></li>
+					<li><a href="http://www.cdc.gov/cdctv"><span class="sprite-24-watch"></span><span class="tp-sr-only">Watch</span></a></li>
+					<li><a href="http://www2c.cdc.gov/podcasts/rss.asp"><span class="sprite-24-rss"></span><span class="tp-sr-only">RSS</span></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+			
+		<div class="container">
+		<div class="cdcLinks">
+		<div class="container">
+				
+				<ul>
+				
+
+					 			<li>
+				<nav>
+					<h6 class="hidden-four hidden-three">ABOUT <span class="icon-plus visible-one pull-right"></span></h6>
+					<ul class="hidden-one">
+						<li><a href="http://www.cdc.gov/about/default.htm">About CDC</a></li>
+						<li><a href="http://jobs.cdc.gov/">Jobs</a></li>
+						<li><a href="http://www.cdc.gov/funding/">Funding</a></li>
+					</ul>
+				</nav>
+			</li>
+			<li>
+				<nav>
+					<h6 class="hidden-four hidden-three">LEGAL <span class="icon-plus visible-one pull-right"></span></h6>
+					<ul class="hidden-one">
+						<li><a href="http://www.cdc.gov/Other/policies.html">Policies</a></li>
+						<li><a href="http://www.cdc.gov/Other/privacy.html">Privacy</a></li>
+						<li><a href="http://www.cdc.gov/od/foia/">FOIA</a></li>
+						<li><a href="http://www.cdc.gov/eeo/nofearact/index.htm">No Fear Act</a></li>
+						<li><a href="http://oig.hhs.gov/" class="no-link">OIG</a></li>
+					</ul>
+				</nav>
+			</li>
+
+				
+				</ul>
+				
+			</div>
+		</div>
+		<div class="cdcContact">
+			<div class="container">
+				<ul>
+					<li class="local-contact">
+                    		 <section>
+	<address class="address" itemscope="itemscope" itemtype="http://www.schema.org/Organization">
+		<span class="value" itemprop="address" itemscope="itemscope" itemtype="http://www.schema.org/PostalAddress">
+			<span itemprop="streetAddress">1600 Clifton Road</span>
+			<span itemprop="addressLocality">Atlanta</span>,
+			<span itemprop="addressRegion">GA</span>
+			<span itemprop="postalCode">30329-4027</span>
+			<span itemprop="addressCountry">USA</span>
+		</span><br />
+		<span class="value" itemprop="telephone">800-CDC-INFO (800-232-4636)</span>,
+		<span class="value" itemprop="telephone">TTY: 888-232-6348</span><br />
+		<span class="value" itemprop="contactPoint" itemscope="itemscope" itemtype="http://www.schema.org/ContactPoint">
+			<span itemprop="url"><a href="https://wwwn.cdc.gov/dcs/ContactUs/Form" class=" default no-link">Email CDC-INFO</a></span>
+		</span>
+	</address>
+</section>
+
+						</li>
+				<li class="contact">
+			<section>
+	<address class="address" itemscope="itemscope" itemtype="http://www.schema.org/Organization">
+		<span class="value" itemprop="contactPoint" itemscope="itemscope" itemtype="http://www.schema.org/ContactPoint">
+			<span itemprop="url"><a href="http://www.hhs.gov/" class="no-link">U.S. Department of Health & Human Services</a></span>
+		</span><br />
+        <span class="value" itemprop="contactPoint" itemscope="itemscope" itemtype="http://www.schema.org/ContactPoint">
+        	<span itemprop="url"><a href="http://www.hhs.gov/open/" class="no-link">HHS/Open</a></span>
+        </span><br />
+        <span class="value" itemprop="contactPoint" itemscope="itemscope" itemtype="http://www.schema.org/ContactPoint">
+			<span itemprop="url"><a href="http://www.usa.gov/" class="no-link">USA.gov</a></span>
+		</span>
+	</address>
+</section>
+
+
+
+
+				</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+
+			</footer>
+				
+
+			
+			<!-- /#footer -->
+			<div id="totop" class="off visible-one">TOP</div>
+		</div>
+
+
+
+
+
+
+		
+</body>
+</html>

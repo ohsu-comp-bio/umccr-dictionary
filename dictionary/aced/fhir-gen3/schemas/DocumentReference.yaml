@@ -1,91 +1,104 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: DocumentReference
-title: DocumentReference
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: data_file
+description: " A reference to a document.\n    \n    A reference to a document of\
+  \ any kind for any purpose. Provides metadata\n    about the document so that the\
+  \ document can be discovered and managed. The\n    scope of a document is any seralized\
+  \ object with a mime-type, so includes\n    formal patient centric documents (CDA),\
+  \ cliical notes, scanned paper, and\n    non-patient specific documents like policy\
+  \ text.\n    "
+id: DocumentReference
+links:
+- backref: DocumentReferences
+  label: Patients
+  multiplicity: many_to_many
+  name: Patients
+  required: true
+  target_type: Patient
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A reference to a document of any kind for any purpose. Provides metadata
-  about the document so that the document can be discovered and managed. The scope
-  of a document is any seralized object with a mime-type, so includes formal patient
-  centric documents (CDA), cliical notes, scanned paper, and non-patient specific
-  documents like policy text.
-additionalProperties: false
+properties:
+  content_0_attachment_url:
+    description: Document referenced.
+    type:
+    - string
+  context_related_0_reference:
+    description: Related identifiers or resources.
+    type:
+    - string
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  custodian_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  meta_profile_0:
+    description: Profiles this resource claims to conform to.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  status:
+    description: The status of this document reference.
+    type:
+    - string
+  subject_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
+- status
+- content_0_attachment_url
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkPatients: subject
-  name: subject
-  backref: DocumentReferences
-  label: subject
-  target_type: Patient
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- status
-- projects
-- submitter_id
+- state
+title: DocumentReference
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - DocumentReference
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  content_0_attachment_url:
-    type: string
-    description: A location where the data can be accessed.
-  status:
-    type: string
-    enum:
-    - current
-    - superseded
-    - entered-in-error
-    term:
-      description: The status of this document reference.  Vocabulary from http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
-      termDef:
-        term: status
-        source: fhir
-        cde_id: status
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/document-reference-status|4.0.1
-  subject_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
+validators: null

@@ -291,10 +291,10 @@ pfb add -i ./output/SpecimenTask.json 1000G-refactored.pfb.avro
 
 # upload that PFB to google storage
 gsutil cp 1000G-refactored.pfb.avro gs://fhir-test-16-342800
-# TODO - why do we need to make it public? 
-# https://cloud.google.com/storage/docs/gsutil/commands/signurl
-gsutil acl ch -u AllUsers:R  gs://fhir-test-16-342800/1000G-refactored.pfb.avro
+# Sign it so terra can read it
+# or use with caution: gsutil acl ch -u AllUsers:R  gs://fhir-test-16-342800/1000G-refactored.pfb.avro
  
+# https://cloud.google.com/storage/docs/gsutil/commands/signurl
 gsutil -i <service-account-email> signurl --use-service-account  gs://fhir-test-16-342800/1000G-refactored.pfb.avro
 
 # note you will need to url-encode the signed url
@@ -302,7 +302,7 @@ gsutil -i <service-account-email> signurl --use-service-account  gs://fhir-test-
 # follow prompts in terra to import it into workspace
 open 'https://app.terra.bio/#import-data?format=PFB&url={uuencoded-signed-url}'
  
-open 'https://app.terra.bio/#import-data?format=PFB&url=https://storage.googleapis.com/fhir-test-16-342800/1000G-refactored.pfb.avro?x-goog-signature=b688a7fe945caf8302e9ebe7ff8bc2c96ecc74c6e751321dbb9d7e6828c804e4392cb709b037e65ec452242fc3a1b647a38f9749d9ddc07c452c90b1d180080c87f4611e87cf6cb90f1646e1e7597cfccf0cf8848fe85d26108abec683e06929d653c57bfb0f43ae9d59138a031f54a5799613c90f8efdae5aed22b0200cf40565e797c1fea7e5151b39bd25c834f854f6ef9e570dc921d6bd49c6ac37adf948ecdeaa27e90d218c1eb2a8602f6b122efdfeb9aa0ae77f715490afde2f98dc3b1c6dc912c97078c5b5352efe67aa9198ae609822f94712c6974d946d3d449b64930b3ff6d206f5e3c360a49cef551a6f27e8c0135873523d4ea61a285a82b9b2&x-goog-algorithm=GOOG4-RSA-SHA256&x-goog-credential=fhir-admin%40fhir-test-16-342800.iam.gserviceaccount.com%2F20220324%2Fus-west2%2Fstorage%2Fgoog4_request&x-goog-date=20220324T200220Z&x-goog-expires=43200&x-goog-signedheaders=host'
+open 'https://app.terra.bio/#import-data?format=PFB&url=https%3A%2F%2Fstorage.googleapis.com%2Ffhir-test-16-342800%2F1000G-refactored.pfb.avro%3Fx-goog-signature%3D75496cca23040dbfdfebbd6bab048f5a6098b771a91ede906fde66fd5b995ea9455b201afa1b3886f1ca7bdaa218a5cb722e21d701db9d64b1416ea155798dbe6a31446c2e05c3a24f668338baca182dc676e95dc77fda330420bb50b3340be29c6862b019126ea428b7ad93fbc0d57ba0aeb84731c576515dc224d271b2282ad472f509481fbc0003fbb14763a050e46e10063149a2826af1bbb221e9be53c02aa88f8aad9e424dc00602535c86b178d12a2cece68d6306a1627b43921bbd415312d5b08ae93cbee3bc444a963caaaad9538257ed34106253fa72343537071d46b5ec519100e953bbcdc6ea5f6c0c31139d81611d1941e9fe85277721a3edd5%26x-goog-algorithm%3DGOOG4-RSA-SHA256%26x-goog-credential%3Dfhir-admin%2540fhir-test-16-342800.iam.gserviceaccount.com%252F20220325%252Fus-west2%252Fstorage%252Fgoog4_request%26x-goog-date%3D20220325T161437Z%26x-goog-expires%3D43200%26x-goog-signedheaders%3Dhost'
 
 ```
 
@@ -317,7 +317,7 @@ pfb from -o 1000G-no-trim.pfb.avro json -s ncpi.schema.avro --program DEV --proj
 gsutil cp 1000G-no-trim.pfb.avro gs://fhir-test-16-342800
 # TODO - why do we need to make it public?
 gsutil acl ch -u AllUsers:R  gs://fhir-test-16-342800/1000G-no-trim.pfb.avro
-open 'https://app.terra.bio/#import-data?format=PFB&url=https://storage.googleapis.com/fhir-test-16-342800/1000G-no-trim.pfb.avro'
+open 'https://app.terra.bio/#import-data?format=PFB&url=https://storage.googleapis.com/fhir-test-16-342800/ncpi.pfb.avro'
 
 
 

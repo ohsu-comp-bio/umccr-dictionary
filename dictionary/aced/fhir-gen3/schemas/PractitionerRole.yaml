@@ -1,85 +1,132 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: PractitionerRole
-title: PractitionerRole
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Administrative
+description: " Roles/organizations the practitioner is associated with.\n    \n  \
+  \  A specific set of Roles/Locations/specialties/services that a practitioner\n\
+  \    may perform at an organization for a period of time.\n    "
+id: PractitionerRole
+links:
+- backref: PractitionerRoles
+  label: Organizations
+  multiplicity: many_to_many
+  name: Organizations
+  required: true
+  target_type: Organization
+- backref: PractitionerRoles
+  label: Practitioners
+  multiplicity: many_to_many
+  name: Practitioners
+  required: true
+  target_type: Practitioner
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A specific set of Roles/Locations/specialties/services that a practitioner
-  may perform at an organization for a period of time.
-additionalProperties: false
+properties:
+  active:
+    description: Whether this practitioner role record is in active use.
+    type:
+    - boolean
+    - 'null'
+  code_0_coding_0_code:
+    description: Roles which this practitioner may perform.
+    type:
+    - string
+    - 'null'
+  code_0_coding_0_display:
+    description: Roles which this practitioner may perform.
+    type:
+    - string
+    - 'null'
+  code_0_coding_0_system:
+    description: Roles which this practitioner may perform.
+    type:
+    - string
+    - 'null'
+  code_0_text:
+    description: ''
+    type:
+    - string
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  organization_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  practitioner_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  telecom_0_rank:
+    description: Contact details that are specific to the role/location/service.
+    type:
+    - number
+    - 'null'
+  telecom_0_system:
+    description: Contact details that are specific to the role/location/service.
+    type:
+    - string
+    - 'null'
+  telecom_0_use:
+    description: Contact details that are specific to the role/location/service.
+    type:
+    - string
+    - 'null'
+  telecom_0_value:
+    description: Contact details that are specific to the role/location/service.
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkOrganizations: organization
-  name: organization
-  backref: PractitionerRoles
-  label: organization
-  target_type: Organization
-  multiplicity: many_to_many
-  required: true
-- comment_linkPractitioners: practitioner
-  name: practitioner
-  backref: PractitionerRoles
-  label: practitioner
-  target_type: Practitioner
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- submitter_id
-- projects
+- state
+title: PractitionerRole
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - PractitionerRole
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  organization_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
-  practitioner_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
+validators: null

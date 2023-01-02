@@ -1,106 +1,102 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: ResearchStudy
-title: ResearchStudy
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Administrative
+description: " Investigation to increase healthcare-related patient-independent knowledge.\n\
+  \    \n    A process where a researcher or organization plans and then executes\
+  \ a\n    series of steps intended to increase the field of healthcare-related\n\
+  \    knowledge.  This includes studies of safety, efficacy, comparative\n    effectiveness\
+  \ and other information about medications, devices, therapies\n    and other interventional\
+  \ and investigative techniques.  A ResearchStudy\n    involves the gathering of\
+  \ information about human or animal subjects.\n    "
+id: ResearchStudy
+links:
+- backref: ResearchStudies
+  label: ResearchStudies
+  multiplicity: many_to_many
+  name: ResearchStudies
+  required: false
+  target_type: ResearchStudy
+- backref: ResearchStudies
+  label: Practitioners
+  multiplicity: many_to_many
+  name: Practitioners
+  required: false
+  target_type: Practitioner
+- backref: ResearchStudies
+  label: Organizations
+  multiplicity: many_to_many
+  name: Organizations
+  required: false
+  target_type: Organization
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A process where a researcher or organization plans and then executes
-  a series of steps intended to increase the field of healthcare-related knowledge.  This
-  includes studies of safety, efficacy, comparative effectiveness and other information
-  about medications, devices, therapies and other interventional and investigative
-  techniques.  A ResearchStudy involves the gathering of information about human or
-  animal subjects.
-additionalProperties: false
+properties:
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  principalInvestigator_reference:
+    description: Literal reference, Relative, internal or absolute URL.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  status:
+    description: The current state of the study.
+    type:
+    - string
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  title:
+    description: Name for this study.
+    type:
+    - string
+    - 'null'
+  type:
+    type: string
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
+- status
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkResearchStudies: partOf
-  name: partOf
-  backref: ResearchStudies
-  label: partOf
-  target_type: ResearchStudy
-  multiplicity: many_to_many
-  required: false
-- comment_linkPractitioners: principalInvestigator
-  name: principalInvestigator
-  backref: ResearchStudies
-  label: principalInvestigator
-  target_type: Practitioner
-  multiplicity: many_to_many
-  required: true
-- comment_linkprojects: title
-  name: project
-  backref: ResearchStudies
-  label: title
-  target_type: project
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- status
-- projects
-- submitter_id
+- state
+title: ResearchStudy
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - ResearchStudy
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  sponsor_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
-  status:
-    type: string
-    enum:
-    - draft
-    - in-progress
-    - suspended
-    - stopped
-    - completed
-    - entered-in-error
-    term:
-      description: The current state of the study.  Vocabulary from http://hl7.org/fhir/ValueSet/research-study-status|4.0.1
-      termDef:
-        term: status
-        source: fhir
-        cde_id: status
-        cde_version: null
-        term_url: http://hl7.org/fhir/ValueSet/research-study-status|4.0.1
+validators: null

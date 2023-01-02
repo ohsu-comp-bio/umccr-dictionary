@@ -1,79 +1,158 @@
 $schema: http://json-schema.org/draft-04/schema#
-id: Organization
-title: Organization
-type: object
-namespace: http://aced-idp.org
+additionalProperties: false
 category: Administrative
+description: " A grouping of people or organizations with a common purpose.\n    \n\
+  \    A formally or informally recognized grouping of people or organizations\n \
+  \   formed for the purpose of achieving some form of collective action.\n    Includes\
+  \ companies, institutions, corporations, departments, community\n    groups, healthcare\
+  \ practice groups, payer/insurer, etc.\n    "
+id: Organization
+links:
+- backref: Organizations
+  label: Organizations
+  multiplicity: many_to_many
+  name: Organizations
+  required: false
+  target_type: Organization
+namespace: http://hl7.org/fhir
 program: '*'
 project: '*'
-description: A formally or informally recognized grouping of people or organizations
-  formed for the purpose of achieving some form of collective action.  Includes companies,
-  institutions, corporations, departments, community groups, healthcare practice groups,
-  payer/insurer, etc.
-additionalProperties: false
+properties:
+  active:
+    description: Whether the organization's record is still in active use.
+    type:
+    - boolean
+    - 'null'
+  address_0_city:
+    description: An address for the organization.
+    type:
+    - string
+    - 'null'
+  address_0_line_0:
+    description: An address for the organization.
+    type:
+    - string
+    - 'null'
+  address_0_postalCode:
+    description: An address for the organization.
+    type:
+    - string
+    - 'null'
+  address_0_state:
+    description: An address for the organization.
+    type:
+    - string
+    - 'null'
+  address_0_text:
+    description: ''
+    type:
+    - string
+    - 'null'
+  address_0_type:
+    description: The kind(s) of organization that this is.
+    type:
+    - string
+    - 'null'
+  address_0_use:
+    description: An address for the organization.
+    type:
+    - string
+    - 'null'
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  id:
+    description: ''
+    type:
+    - string
+    - 'null'
+  name:
+    description: Name used for the organization.
+    type:
+    - string
+    - 'null'
+  project_id:
+    $ref: _definitions.yaml#/project_id
+  resourceType:
+    description: ''
+    type:
+    - string
+    - 'null'
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  telecom_0_rank:
+    description: A contact detail for the organization.
+    type:
+    - number
+    - 'null'
+  telecom_0_system:
+    description: A contact detail for the organization.
+    type:
+    - string
+    - 'null'
+  telecom_0_use:
+    description: A contact detail for the organization.
+    type:
+    - string
+    - 'null'
+  telecom_0_value:
+    description: A contact detail for the organization.
+    type:
+    - string
+    - 'null'
+  text_div:
+    description: Limited xhtml content.
+    type:
+    - string
+  text_status:
+    description: The status of the narrative - whether it's entirely generated (from
+      just the defined data or the extensions too), or whether a human authored it
+      and it may contain additional data.
+    type:
+    - string
+  type:
+    type: string
+  type_0_coding_0_code:
+    description: The kind(s) of organization that this is.
+    type:
+    - string
+    - 'null'
+  type_0_coding_0_display:
+    description: The kind(s) of organization that this is.
+    type:
+    - string
+    - 'null'
+  type_0_coding_0_system:
+    description: The kind(s) of organization that this is.
+    type:
+    - string
+    - 'null'
+  type_0_text:
+    description: ''
+    type:
+    - string
+    - 'null'
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+required:
+- submitter_id
+- type
+- text_status
+- text_div
 submittable: true
-validators: null
 systemProperties:
 - id
 - project_id
-- state
 - created_datetime
 - updated_datetime
-links:
-- comment_linkOrganizations: partOf
-  name: partOf
-  backref: Organizations
-  label: partOf
-  target_type: Organization
-  multiplicity: many_to_many
-  required: false
-- comment_linkResearchStudies: text
-  name: researchStudy
-  backref: Organizations
-  label: text
-  target_type: ResearchStudy
-  multiplicity: many_to_many
-  required: true
-required:
-- type
-- submitter_id
-- projects
+- state
+title: Organization
+type: object
 uniqueKeys:
 - - id
 - - project_id
   - submitter_id
-properties:
-  type:
-    enum:
-    - Organization
-    description: Gen3's type field.
-  id:
-    type: string
-    description: The logical id of the resource, as used in the URL for the resource.
-      Once assigned, this value never changes.
-  state:
-    $ref: _definitions.yaml#/state
-  submitter_id:
-    description: Each record in every node will have a "submitter_id", which is a
-      unique alphanumeric identifier for that record and is specified by the data
-      submitter, and a "type", which is simply the node name.
-    type:
-    - string
-    - 'null'
-  projects:
-    $ref: _definitions.yaml#/to_many_project
-    description: Link to Gen3's project.
-  project_id:
-    type: string
-  created_datetime:
-    $ref: _definitions.yaml#/datetime
-  updated_datetime:
-    $ref: _definitions.yaml#/datetime
-  partOf_reference:
-    type: string
-    description: A reference to a location at which the other resource is found. The
-      reference may be a relative reference, in which case it is relative to the service
-      base URL, or an absolute URL that resolves to the location where the resource
-      is found. The reference may be version specific or not. If the reference is
-      not to a FHIR RESTful server, then it should be assumed to be version specific.
-      Internal fragment references (start with '#') refer to contained resources.
+validators: null
