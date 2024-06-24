@@ -4,7 +4,7 @@ from subprocess import check_call
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
-BANNER = "AnVIL"
+BANNER = "HTAN"
 
 
 class InstallCommand(install):

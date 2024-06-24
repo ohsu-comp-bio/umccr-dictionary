@@ -1,0 +1,119 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: ovarian_cancer_tier3
+title: OvarianCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Ovarian cancer specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: ovarian_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - ovarian_cancer_tier3
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # OvarianCancerTier3
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  OvarianCancerHistologicSubtype:
+    description: Text term to describe the histological subtype of ovarian cancer
+      in the participant
+    enum:
+    - High-gradeserous
+    - Low-gradeserous
+    - High-gradeendometrioid
+    - Low-gradeendometrioid
+    - Clearcell
+    - Mucinous
+    - Sex-cordstromal
+    - Germcell
+    - Other
+    - Unknown
+    - Datanotavailable
+  OvarianCancerPlatinumStatus:
+    description: Text term to indicate the status of treatment with platinum in participant
+      with ovarian cancer
+    enum:
+    - Platinum-refractory
+    - Platinum-sensitive
+    - Platinum-resistant
+    - Datanotavailable
+    - Unknown
+  OvarianCancerSurgicalOutcome:
+    description: Text term that describes the kind of surgical treatment administered.
+    enum:
+    - R0resection
+    - Optimalcytoreduction
+    - Sub-optimalcytoreduction
+    - Other
+    - Unknown
+    - Datanotavailable
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

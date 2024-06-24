@@ -1,0 +1,247 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: colorectal_cancer_tier3
+title: ColorectalCancerTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Colorectal cancer specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: colorectal_cancer_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - colorectal_cancer_tier3
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # ColorectalCancerTier3
+  ColonPolypOccurenceIndicator:
+    description: Yes/No indicator to describe if the subject had a previous history
+      of colon polyps as noted in the history/physical or previous endoscopic report
+      (s).
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  ColorectalCancerDetectionMethodType:
+    description: The means, manner of procedure, or systematic course of actions performed
+      in order to discover or identify colorectal cancer
+    enum:
+    - Fecaloccultbloodtest
+    - Sigmoidoscopy
+    - Colonoscopy
+    - Virtualcolonoscopy
+    - DNAstooltest
+    - Other
+    - Unknown
+    - Datanotavailable
+  ColorectalCancerKRASIndicator:
+    description: The yes/no/not applicable indicator that describes if patient has
+      diagnosis of colorectal cancer with known KRAS.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  ColorectalCancerTumorBorderConfiguration:
+    description: The description of the border configuration of a colorectal tumor
+      at pathologic assessment.
+    enum:
+    - Indeterminate
+    - Infiltrating
+    - Other
+    - Pushing
+    - NotApplicable
+  ColorectalPolypAdenomaType:
+    description: Type of adenoma associated with the polyp
+    enum:
+    - Tubular
+    - Villous
+    - Tubulovillous
+    - Sessileserrated
+    - Traditionalserrated
+    - Serratednotspecified
+    - Notstated
+    - NotApplicable
+  ColorectalPolypCount:
+    type: number
+    description: The total number of polyps detected
+  ColorectalPolypNewIndicator:
+    description: A yes/no response to a question that asks whether any new polyps
+      greater or equal to two millimeter were identified.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  ColorectalPolypShape:
+    description: Shape of polyp identified in the participant
+    enum:
+    - Pedunculated
+    - Sessile
+    - Flat
+    - Notstated
+    - NotApplicable
+  ColorectalPolypType:
+    description: Type of polyp found in the participant
+    enum:
+    - Adenoma
+    - Hyperplastic
+    - Mixed
+    - Papillomatous
+    - Normal
+    - Cancer
+    - Other
+    - Unknown
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  FamilyColonCancerHistoryIndicator:
+    description: The indicator to designate if any first degree relative has a history
+      of colorectal cancer.
+    enum:
+    - 'Yes'
+    - 'No'
+    - NotApplicable
+    - Unknown
+  FamilyHistoryColorectalPolyp:
+    description: A yes/no/unknown/not applicable indicator related to family medical
+      history diagnosis of polypoid lesion that arises from the colon or rectum and
+      protrudes into the lumen.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  FamilyMedicalHistoryColorectalPolypDiagnosis:
+    description: A yes/no/unknown/not applicable indicator related to family medical
+      history diagnosis of polypoid lesion that arises from the colon or rectum and
+      protrudes into the lumen.
+    enum:
+    - 'Yes'
+    - 'No'
+    - NotApplicable
+    - Unknown
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  HistoryofPriorColonPolyps:
+    description: Yes/No indicator to describe if the subject had a previous history
+      of colon polyps as noted in the history/physical or previous endoscopic report
+      (s).
+    enum:
+    - 'Yes'
+    - 'No'
+    - NotApplicable
+    - Unknown
+  ImmediateFamilyHistoryEndometrialCancer:
+    description: Text that describes the age at which the family member was diagnosed
+      with endometrial or uterine cancer in relationship to their 50th birthday.
+    enum:
+    - Beforeage50
+    - Notbeforeage50
+    - Unknown
+    - NotApplicable
+  ImmediateFamilyHistoryOvarianCancer:
+    description: Text that describes the age at which the family member was diagnosed
+      with ovarian cancer in relationship to their 50th birthday.
+    enum:
+    - Beforeage50
+    - Notbeforeage50
+    - Unknown
+    - NotApplicable
+  MLH1PromoterMethylationStatus:
+    description: 'Text term to define the status of promoter methylation for the MLH1
+      gene. Note: MLH1 gene is commonly associated with hereditary nonpolyposis colorectal
+      cancer. Testing for methylation of the MLH1 promoter can help distinguish sporadic
+      from inherited cancers.'
+    enum:
+    - Absent
+    - Indeterminate
+    - NotAssessed
+    - Present
+  PatientColonoscopyPerformedIndicator:
+    description: The yes/no indicator that records if the subject has undergone a
+      previous colonoscopy.
+    enum:
+    - 'Yes'
+    - 'No'
+    - NotApplicable
+    - Unknown
+  PatientInflammatoryBowelDiseasePersonalMedicaHistory:
+    description: The indicator for patient's personal medical history of inflammatory
+      bowel disease (chronic, non-specific disorders of unknown etiology, including
+      Crohn disease and ulcerative colitis).
+    enum:
+    - Yes-Crohn'sdisease
+    - Yes-Ulcerativecolitis
+    - 'No'
+    - Unknown
+    - NotApplicable
+  SizeofPolypRemoved:
+    type: string
+    description: Size of the polyp removed in cm
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

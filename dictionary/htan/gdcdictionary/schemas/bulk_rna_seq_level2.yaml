@@ -1,0 +1,266 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: bulk_rna_seq_level2
+title: BulkRNA-seqLevel2
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Bulk RNA-seq alignment protocol description
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: assays
+  backref: bulk_rna_seq_level2s
+  label: refers_to
+  target_type: assay
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- assays
+- AlignmentWorkflowType
+- AlignmentWorkflowUrl
+- Component
+- GenomicReference
+- GenomicReferenceURL
+- HTANDataFileID
+- HTANParentDataFileID
+- IndexFileName
+- fileFormat
+- filename
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - bulk_rna_seq_level2
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  bulk_rna_seq_level1s:
+    $ref: _definitions.yaml#/to_many
+  # BulkRNA-seqLevel2
+  AlignmentWorkflowType:
+    description: Generic name for the workflow used to analyze a data set.
+    enum:
+    - BWA
+    - BWAwithBQSR
+    - BWA-aln
+    - BWA-mem
+    - BWAwithMarkDuplicatesandBQSR
+    - STAR2-Pass
+    - STAR2-PassChimeric
+    - STAR2-PassGenome
+    - STAR2-PassTranscriptome
+  AlignmentWorkflowUrl:
+    type: string
+    description: Link to workflow used for read alignment. DockStore.org recommended.
+      String
+  AverageBaseQuality:
+    type: number
+    description: Average base quality collected from samtools. Number
+  AverageInsertSize:
+    type: string
+    description: Average insert size collected from samtools. Integer
+  AverageReadLength:
+    type: string
+    description: Average read length collected from samtools. Integer
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  Contamination:
+    type: number
+    description: Fraction of reads coming from cross-sample contamination collected
+      from GATK4. Number
+  ContaminationError:
+    type: number
+    description: Estimation error of cross-sample contamination collected from GATK4.
+      Number
+  GenomicReference:
+    type: string
+    description: Exact version of the human genome reference used in the alignment
+      of reads (e.g. https://www.gencodegenes.org/human/)
+  GenomicReferenceURL:
+    type: string
+    description: Link to human genome sequence (e.g. ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz)
+      [URL]
+  HTANDataFileID:
+    type: string
+    description: Self-identifier for this data file - HTAN ID of this file HTAN ID
+      SOP (eg HTANx_yyy_zzz)
+  HTANParentDataFileID:
+    type: string
+    description: HTAN Data File Identifier indicating the file(s) from which these
+      files were derived
+  IndexFileName:
+    type: string
+    description: The name (or part of a name) of a file (of any type). String
+  MSIScore:
+    type: number
+    description: Numeric score denoting the aligned reads file's MSI score from MSIsensor.
+      Number
+  MSIStatus:
+    description: MSIsensor determination of either microsatellite stability or instability.
+    enum:
+    - MSI
+    - MSI-low
+    - MSI-high
+    - MSS
+  MSIWorkflowLink:
+    type: string
+    description: Link to method workflow (or command) used in estimating the MSI.
+      URL
+  MeanCoverage:
+    type: number
+    description: Mean coverage for whole genome sequencing, or mean target coverage
+      for whole exome and targeted sequencing, collected from Picard. Number
+  PairsOnDiffCHR:
+    type: string
+    description: Pairs on different chromosomes collected from samtools. Integer
+  Proportion:
+    type: string
+    description: TBD
+  ProportionBaseMismatch:
+    type: number
+    description: Proportion of mismatched bases collected from samtools. Number
+  ProportionReadsDuplicated:
+    type: number
+    description: Proportion of duplicated reads collected from samtools. Number
+  ProportionReadsMapped:
+    type: number
+    description: Proportion of mapped reads collected from samtools. Number
+  ShortReads:
+    type: number
+    description: Number of reads that were too short. Integer
+  TargetsNoCoverage:
+    type: string
+    description: TBD
+  TotalReads:
+    type: number
+    description: Total number of reads per sample. Integer
+  TotalUniquelyMapped:
+    type: number
+    description: Number of reads that map to genome. Integer
+  TotalUnmappedreads:
+    type: number
+    description: Number of reads that did not map to genome. Integer
+  fileFormat:
+    description: Format of a file (e.g. txt, csv, fastq, bam, etc.)
+    enum:
+    - Hdf5
+    - Bedgraph
+    - Idx
+    - Idat
+    - Bam
+    - Bai
+    - Excel
+    - Powerpoint
+    - Tif
+    - Tiff
+    - OME-TIFF
+    - Png
+    - Doc
+    - Pdf
+    - Fasta
+    - Fastq
+    - Sam
+    - Vcf
+    - Bcf
+    - Maf
+    - Bed
+    - Chp
+    - Cel
+    - Sif
+    - Tsv
+    - Csv
+    - Txt
+    - Plink
+    - Bigwig
+    - Wiggle
+    - Gct
+    - Bgzip
+    - Zip
+    - Seg
+    - Html
+    - Mov
+    - Hyperlink
+    - Svs
+    - Md
+    - Flagstat
+    - Gtf
+    - Raw
+    - Msf
+    - Rmd
+    - BednarrowPeak
+    - BedbroadPeak
+    - BedgappedPeak
+    - Avi
+    - Pzfx
+    - Fig
+    - Xml
+    - Tar
+    - Rscript
+    - Abf
+    - Bpm
+    - Dat
+    - Jpg
+    - Locs
+    - Sentrixdescriptorfile
+    - Pythonscript
+    - Sav
+    - Gzip
+    - Sdf
+    - RData
+    - Hic
+    - Ab1
+    - 7z
+    - Gff3
+    - Json
+    - Sqlite
+    - Svg
+    - Sra
+    - Recal
+    - Tranches
+    - Mtx
+    - TagAlign
+    - Dup
+    - DICOM
+    - Czi
+    - Mex
+    - Cloupe
+    - Am
+    - Cellam
+    - Mpg
+    - M
+  filename:
+    type: string
+    description: 'Name of a file '
+  assays:
+    $ref: _definitions.yaml#/to_many

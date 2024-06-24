@@ -1,0 +1,112 @@
+[
+    {
+        "Component": "2bb96628f9",
+        "HTANParticipantID": "44737406a3",
+        "RelativewithCancerHistory": "None",
+        "patients": {
+            "submitter_id": "patient_5236da4db0"
+        },
+        "submitter_id": "family_history_b612c52ca7",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "b61d5abbb5",
+        "HTANParticipantID": "6de06af7a7",
+        "RelativewithCancerHistory": "NotReported",
+        "patients": {
+            "submitter_id": "patient_399fade713"
+        },
+        "submitter_id": "family_history_001379893b",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "df846cefa4",
+        "HTANParticipantID": "b25ba8ce4e",
+        "RelativewithCancerHistory": "Yes-CancerHistoryRelative",
+        "patients": {
+            "submitter_id": "patient_944516011c"
+        },
+        "submitter_id": "family_history_8461bb8d25",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "cb0c8dfa8c",
+        "HTANParticipantID": "23756458d3",
+        "RelativewithCancerHistory": "Unknown",
+        "patients": {
+            "submitter_id": "patient_b12facdb50"
+        },
+        "submitter_id": "family_history_4a72137235",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "bb302c906d",
+        "HTANParticipantID": "6c614f72cf",
+        "RelativewithCancerHistory": "NotReported",
+        "patients": {
+            "submitter_id": "patient_850b47c767"
+        },
+        "submitter_id": "family_history_d2834a3918",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "e50208514d",
+        "HTANParticipantID": "b767c540f6",
+        "RelativewithCancerHistory": "Yes-CancerHistoryRelative",
+        "patients": {
+            "submitter_id": "patient_e325abb768"
+        },
+        "submitter_id": "family_history_1e9099e5c7",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "1c5155a486",
+        "HTANParticipantID": "ffccabd127",
+        "RelativewithCancerHistory": "None",
+        "patients": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "family_history_9411af293a",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "e7959622f8",
+        "HTANParticipantID": "90ec9aca6c",
+        "RelativewithCancerHistory": "NotReported",
+        "patients": {
+            "submitter_id": "patient_46582a1fa9"
+        },
+        "submitter_id": "family_history_45471f89f4",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "a8bedb6827",
+        "HTANParticipantID": "0e07f14724",
+        "RelativewithCancerHistory": "Unknown",
+        "patients": {
+            "submitter_id": "patient_3dfb62c1f6"
+        },
+        "submitter_id": "family_history_2a830eb0dc",
+        "subtype": null,
+        "type": "family_history"
+    },
+    {
+        "Component": "1d958d509d",
+        "HTANParticipantID": "d69e75d3b5",
+        "RelativewithCancerHistory": "NotReported",
+        "patients": {
+            "submitter_id": "patient_e5caea354c"
+        },
+        "submitter_id": "family_history_efefdf5b53",
+        "subtype": null,
+        "type": "family_history"
+    }
+]

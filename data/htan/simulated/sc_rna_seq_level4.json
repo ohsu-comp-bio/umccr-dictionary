@@ -1,0 +1,182 @@
+[
+    {
+        "Component": "9373f8bfc5",
+        "HTANDataFileID": "e3c9cd1a5f",
+        "HTANParentDataFileID": "cce89510f9",
+        "ScRNAseqWorkflowParametersDescription": "ee8a008373",
+        "ScRNAseqWorkflowType": "SEQC",
+        "WorkflowEndDatetime": "6825c45782",
+        "WorkflowLink": "1f8991f3b4",
+        "WorkflowStartDatetime": "da1c301b1b",
+        "WorkflowVersion": "fdab0ea77e",
+        "assays": {
+            "submitter_id": "assay_9bbcbd83cf"
+        },
+        "fileFormat": "BedbroadPeak",
+        "filename": "5a18a034d0",
+        "submitter_id": "sc_rna_seq_level4_21379d762d",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "2ea14cb56f",
+        "HTANDataFileID": "8a71add2f2",
+        "HTANParentDataFileID": "f0a04998ad",
+        "ScRNAseqWorkflowParametersDescription": "25f68b637d",
+        "ScRNAseqWorkflowType": "Cufflinks",
+        "WorkflowEndDatetime": "392b6af46b",
+        "WorkflowLink": "13919a9642",
+        "WorkflowStartDatetime": "e2c81746cf",
+        "WorkflowVersion": "3163b0a830",
+        "assays": {
+            "submitter_id": "assay_d043ad4eeb"
+        },
+        "fileFormat": "Bgzip",
+        "filename": "4965fe790c",
+        "submitter_id": "sc_rna_seq_level4_618b3d851f",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "c9a362cfb0",
+        "HTANDataFileID": "fe6611d3bd",
+        "HTANParentDataFileID": "c14f7fb87f",
+        "ScRNAseqWorkflowParametersDescription": "0cb86f822a",
+        "ScRNAseqWorkflowType": "STARsolo",
+        "WorkflowEndDatetime": "61a8663cc4",
+        "WorkflowLink": "8838197655",
+        "WorkflowStartDatetime": "25e6f861be",
+        "WorkflowVersion": "4d693c491d",
+        "assays": {
+            "submitter_id": "assay_49fb47aa19"
+        },
+        "fileFormat": "Dat",
+        "filename": "f815c5b688",
+        "submitter_id": "sc_rna_seq_level4_68ece86bd4",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "dc46effcb5",
+        "HTANDataFileID": "4bddc88428",
+        "HTANParentDataFileID": "8b3abcdd5a",
+        "ScRNAseqWorkflowParametersDescription": "a9d03dd6e6",
+        "ScRNAseqWorkflowType": "SEQC",
+        "WorkflowEndDatetime": "3edd4f8c74",
+        "WorkflowLink": "fbc9ed914a",
+        "WorkflowStartDatetime": "070ae034b1",
+        "WorkflowVersion": "d066bb801d",
+        "assays": {
+            "submitter_id": "assay_c9f8e51611"
+        },
+        "fileFormat": "Md",
+        "filename": "73b230ddec",
+        "submitter_id": "sc_rna_seq_level4_5b5e5cc221",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "a55cb2b0ad",
+        "HTANDataFileID": "cd535e3e8e",
+        "HTANParentDataFileID": "35a01db514",
+        "ScRNAseqWorkflowParametersDescription": "1044c31752",
+        "ScRNAseqWorkflowType": "HTSeq-FPKM",
+        "WorkflowEndDatetime": "c7d03f291f",
+        "WorkflowLink": "e783331e5d",
+        "WorkflowStartDatetime": "5c237a5917",
+        "WorkflowVersion": "0480a5810e",
+        "assays": {
+            "submitter_id": "assay_3ae906b281"
+        },
+        "fileFormat": "M",
+        "filename": "b77aa3a4d3",
+        "submitter_id": "sc_rna_seq_level4_395dc18d97",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "fcd4e647bb",
+        "HTANDataFileID": "0d15defeff",
+        "HTANParentDataFileID": "f93352e23a",
+        "ScRNAseqWorkflowParametersDescription": "cad3907705",
+        "ScRNAseqWorkflowType": "HTSeq-FPKM",
+        "WorkflowEndDatetime": "af4fbf7878",
+        "WorkflowLink": "7bcc3e50f3",
+        "WorkflowStartDatetime": "34af387cd5",
+        "WorkflowVersion": "fa1bd6969e",
+        "assays": {
+            "submitter_id": "assay_02f3828bd0"
+        },
+        "fileFormat": "Cel",
+        "filename": "477f1f40d4",
+        "submitter_id": "sc_rna_seq_level4_2998ba26a3",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "a67a87697e",
+        "HTANDataFileID": "fd4c56415b",
+        "HTANParentDataFileID": "153fa17fe1",
+        "ScRNAseqWorkflowParametersDescription": "d4d56bf258",
+        "ScRNAseqWorkflowType": "Differentiationtrajectoryanalysis",
+        "WorkflowEndDatetime": "238a4d89c2",
+        "WorkflowLink": "07cd085a0c",
+        "WorkflowStartDatetime": "c5247723df",
+        "WorkflowVersion": "a3c86f8773",
+        "assays": {
+            "submitter_id": "assay_9db8f50685"
+        },
+        "fileFormat": "Mtx",
+        "filename": "34625b001f",
+        "submitter_id": "sc_rna_seq_level4_f69465cc4c",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "61c11de23d",
+        "HTANDataFileID": "103f8e8b5a",
+        "HTANParentDataFileID": "757aa62d66",
+        "ScRNAseqWorkflowParametersDescription": "9f585918ee",
+        "ScRNAseqWorkflowType": "HCAOptimus",
+        "WorkflowEndDatetime": "136e22ea28",
+        "WorkflowLink": "1237bee864",
+        "WorkflowStartDatetime": "86ecc27f45",
+        "WorkflowVersion": "474bd2903e",
+        "assays": {
+            "submitter_id": "assay_23f47b3d93"
+        },
+        "fileFormat": "Ab1",
+        "filename": "045a745788",
+        "submitter_id": "sc_rna_seq_level4_8866cc846d",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "aa5f266d65",
+        "HTANDataFileID": "7a5a19e6fa",
+        "HTANParentDataFileID": "5107234006",
+        "ScRNAseqWorkflowParametersDescription": "283e5e56de",
+        "ScRNAseqWorkflowType": "Other",
+        "WorkflowEndDatetime": "174c2d5991",
+        "WorkflowLink": "17e49d4f8f",
+        "WorkflowStartDatetime": "413557760f",
+        "WorkflowVersion": "2345617737",
+        "assays": {
+            "submitter_id": "assay_e6b70f4847"
+        },
+        "fileFormat": "Wiggle",
+        "filename": "38ebae5c51",
+        "submitter_id": "sc_rna_seq_level4_933848bb14",
+        "type": "sc_rna_seq_level4"
+    },
+    {
+        "Component": "b7ab8f086c",
+        "HTANDataFileID": "1eab40985e",
+        "HTANParentDataFileID": "ccf062c484",
+        "ScRNAseqWorkflowParametersDescription": "64f76f347b",
+        "ScRNAseqWorkflowType": "CellRanger",
+        "WorkflowEndDatetime": "85246f02f9",
+        "WorkflowLink": "81aec60db9",
+        "WorkflowStartDatetime": "f045b79f4e",
+        "WorkflowVersion": "dedff0af8d",
+        "assays": {
+            "submitter_id": "assay_a6298a60e7"
+        },
+        "fileFormat": "Jpg",
+        "filename": "61f60f00f8",
+        "submitter_id": "sc_rna_seq_level4_9cb5882134",
+        "type": "sc_rna_seq_level4"
+    }
+]

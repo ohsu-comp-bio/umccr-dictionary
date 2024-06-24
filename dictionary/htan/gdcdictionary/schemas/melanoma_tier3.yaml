@@ -1,0 +1,222 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: melanoma_tier3
+title: MelanomaTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Melanoma specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: melanoma_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - melanoma_tier3
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # MelanomaTier3
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  CutaneousMelanomaAdditionalFindings:
+    description: Significant pathologic finding present in addition to the cutaneous
+      melanoma.
+    enum:
+    - ActinicKeratosis
+    - NevusRemnant
+    - SolarElastosis
+    - FibrosingRegression
+    - NestingMelanoma
+    - PagetoidSpread
+    - VascularProliferation
+    - Other
+    - Unknown
+    - NotApplicable
+  CutaneousMelanomaSurgicalMargins:
+    description: Text term to indicate presence of tumor at resection margins
+    enum:
+    - Positive
+    - Negative
+    - Unknown
+    - NotReported
+  CutaneousMelanomaTumorInfiltratingLymphocytes:
+    description: Description of degree of lymphocytic infiltration surrounding and
+      disrupting tumor cells of the vertical growth phase in a cutaneous melanoma.
+    enum:
+    - Absent
+    - Brisk
+    - Nonbrisk
+    - Unknown
+  CutaneousMelanomaTumorRegressionRange:
+    description: Description of the degree to which tumor cells are replaced by lymphocytic
+      inflammation with or without dermal melanophages and fibrosis._Range; the difference
+      between the lowest and highest numerical values.
+    enum:
+    - Absent
+    - Presentinvolving75%ormore
+    - Presentinvolvinglessthan75%
+    - Unknown
+  CutaneousMelanomaUlceration:
+    description: Description of extent of disruption to the surface of the skin caused
+      by the cutaneous melanoma.
+    enum:
+    - Absent
+    - Present
+    - Unknown
+    - NotReported
+  FitzpatrickSkinTone:
+    description: The Fitzpatrick classification of skin phototype
+    enum:
+    - I
+    - II
+    - III
+    - IV
+    - V
+    - VI
+    - Unknown
+    - NotReported
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  HistoryofAtypicalNevi:
+    description: Patient has a history of atypical nevi
+    enum:
+    - Yes(morethan50)
+    - Yes(lessthan50)
+    - 'No'
+    - Unknown
+    - NotReported
+  HistoryofBlisteringSunburn:
+    description: Patient has history of blistering sunburn
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotReported
+  HistoryofChronicUVExposure:
+    description: History of chronic UV exposure
+    enum:
+    - Outdooroccupational
+    - Outdoorrecreational
+    - Therapeutic
+    - None
+    - NotReported
+  HistoryofTanningBedUse:
+    description: History of tanning bed use of the patient
+    enum:
+    - Never
+    - Lessthan10times
+    - 10-50times
+    - 50-100times
+    - Morethan100times
+    - NotReported
+  ImmediateFamilyHistoryMelanoma:
+    description: Text that describes the age at which the family member was diagnosed
+      with melanoma skin cancer in relationship to their 50th birthday.
+    enum:
+    - Beforeage50
+    - Notbeforeage50
+    - Unknown
+  MelanomaBiopsyResectionSites:
+    description: Biopsy resection sites specific to melanoma (not covered in Tiers
+      1 and 2)
+    enum:
+    - Skinofscalp
+    - Skinofeyelid
+    - Skinofnose
+    - Skinoflip
+    - Skinofear
+    - Skinofneck
+    - Skinofotherpartsofface
+    - Skinofchest
+    - Skinofback
+    - Skinofabdomen
+    - Skinoftrunk-other
+    - Skinofbreast
+    - Skinofupperlimbandshoulder
+    - Skinofpalm
+    - Skinoflowerlimbandhip
+    - Skinofsole
+    - Skinofpenis
+    - Skinofscrotum
+    - Skinofvulva
+    - Skinother
+    - SkinNOS
+    - NotReported
+  MelanomaLesionSize:
+    type: string
+    description: Diameter of lesion determined on skin examination (pre-bx), in mm
+  MelanomaSpecimenClarkLevelValue:
+    description: Definition of the Clark level or depth of involvement of a melanoma
+      in the skin or a specimen.
+    enum:
+    - I
+    - II
+    - III
+    - IV
+    - V
+    - NoSourceDocumentation
+    - Unknown
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

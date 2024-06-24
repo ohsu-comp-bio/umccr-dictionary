@@ -1,0 +1,838 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: clinical_data_tier2
+title: ClinicalDataTier2
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Cancer related clinical data
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: clinical_data_tier2s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - clinical_data_tier2
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # ClinicalDataTier2
+  COVID19AntibodyTesting:
+    description: Text term that demonstrates the test results of immunoglobulin M
+      (IgM) and immunoglobulin G (IgG) antibodies to the SARS-CoV-2 virus in subject
+      serum samples.
+    enum:
+    - SARS-CoV-2IgMantibodypositive
+    - SARS-CoV-2IgGantibodypositive
+    - SARS-CoV-2IgG/IgMantibodypositive
+    - SARS-CoV-2IgMantibodynegative
+    - SARS-CoV-2IgGantibodynegative
+    - SARS-CoV-2IgG/IgMantibodynegative
+    - Unknown
+    - NotApplicable
+    - NotDone
+  COVID19CancerTreatmentFollowup:
+    description: Indicator that describes if cancer treatment was modified for the
+      patient due to COVID-19 infectious disorder
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+  COVID19ComplicationsSeverity:
+    description: Text term that retrospectively indicates the worst complications
+      during COVID-19 infectious disorder in the patient.
+    enum:
+    - Cardiaccomplications
+    - Pulmonarycomplications
+    - Systemiccomplications
+    - Other
+    - NotApplicable
+    - Unknown
+  COVID19CurrentStatus:
+    description: The patient's current COVID-19 status of sign or symptom events or
+      interventions
+    enum:
+    - Patientcurrentlyhassymptoms
+    - Patienthadsymptomsbutnowisfullyrecovered
+    - PatientneverhadanysymptomsofCOVID-19
+    - StatusunknownduetogeneralCOVID-19relatedtravelrestrictions
+    - Statusunknownduetolackofdisease/tumorassessmentduetoCOVID-19diagnosis
+    - Statusunknownduetootherreasons
+  COVID19OccurrenceIndicator:
+    description: The indicator that describes whether or not a COVID-19 infectious
+      disorder occurred.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+    - NotDone
+  COVID19PositiveLabTestIndicator:
+    description: The indicator that describes whether or not there was a COVID-19
+      positive test result.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+    - NotDone
+  CancerAssociatedGeneMutations:
+    description: Type of inherited germline or other gene mutations that confers heightened
+      susceptibility to cancer identified in patient history
+    enum:
+    - APCmutation
+    - ALKmutation
+    - ARFmutation
+    - ATMmutation
+    - ATRXmutation
+    - ACVR1mutation
+    - BAP1mutation
+    - BMPR1Amutation
+    - BLMmutation
+    - BRCA1mutation
+    - BRCA1and2mutation
+    - BRCA2mutation
+    - BRAFmutation
+    - CDH1mutation
+    - CDKN2Amutation
+    - CDKN2Aandp14ARFmutation
+    - CHKmutation
+    - ETV6mutation
+    - EGFRmutation
+    - FHmutation
+    - FLCNmutation
+    - GREM1mutation
+    - HOXB13mutation
+    - H3K27Mmutation
+    - H3G34R/Vmutation
+    - IKZF1mutation
+    - KITmutation
+    - KRASmutation
+    - MAXmutation
+    - MEN1mutation
+    - METmutation
+    - MLH1mutation
+    - MSH2mutation
+    - MSH6mutation
+    - MUTYHmutation
+    - NF1mutation
+    - NF2mutation
+    - NotApplicable
+    - NotReported
+    - P14ARFmutation
+    - PALB2mutation
+    - PAX5mutation
+    - PDGFRAmutation
+    - PHOX2Bmutation
+    - PMS2mutation
+    - PolDmutation
+    - PolEmutation
+    - POT1mutation
+    - PRKAR1Amutation
+    - PTCHmutation
+    - PTENmutation
+    - ROS1mutation
+    - RB1mutation
+    - RETmutation
+    - SDHAF2mutation
+    - SDHBmutation
+    - SDHCmutation
+    - SDHDmutation
+    - SETD2mutation
+    - SMAD4mutation
+    - SMARCA4mutation
+    - SMARCB1mutation
+    - STK11mutation
+    - TMEM127mutation
+    - TP53mutation
+    - TSC1mutation
+    - TSC2mutation
+    - Unknown
+    - VHLmutation
+  Chewingtobaccodailyusecount:
+    type: string
+    description: The quantity of daily use of tobacco, in the form of a plug, usually
+      flavored, for chewing rather than smoking.
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  ConcomitantMedicationReceivedType:
+    description: An enumerated list of the type of concomitant medication received
+      by the patient.
+    enum:
+    - Anticoagulantagents
+    - Anticonvulsant
+    - Antifungal
+    - Antiplateletagents
+    - Antidepressants-ModerateCYP2D6inhibitors
+    - Antidepressants-StrongCYP2D6inhibitors
+    - Antidepressants-weakCYP2D2inhibitorsornon-inhibitors
+    - Anxiolyticsorsedatives
+    - Aspirin
+    - Bisphosphonatesfortreatment/preventionofboneloss
+    - Corticosteroid
+    - COX-2inhibitor
+    - Decadron
+    - Diabetes-Insulin
+    - Diabetes-Metformincontainingagents
+    - Growthfactor
+    - Intravaginalestrogenpreparations
+    - Lipid-loweringdrugs
+    - Non-prescriptionsupplementsformemory
+    - Non-prescriptionsupplementsforreliefofhotflashes
+    - Non-steroidalanti-inflammatoryagents
+    - Opioids
+    - Other
+    - Prescriptionmedicationsformemory
+    - Prescriptionmedicationsforreliefofhotflashes
+    - Prophylacticantiplatelettherapy
+    - Tricyclicantidepressants
+    - NotApplicable
+    - Unknown
+    - NotReported
+  Ecigvape30dayusenum:
+    type: number
+    description: Number of days e-cigarettes or vaping device was used in the last
+      30 days
+  Ecigvapetimesperday:
+    type: string
+    description: "e-cig frequency of use (times per day\u2014one \u201Ctime\u201D\
+      \ consists of around 15 puffs or lasts around 10 minutes)"
+  Ecigvapeuse:
+    description: Use of non-traditional cigarette nicotine delivery device (electronic
+      cigarette, ENDS - electronic nicotine delivery system)
+    enum:
+    - Current
+    - Former
+    - Never
+    - Unknown
+  ExtentofTumorResection:
+    description: The degree to which the lesion has been cut out, or resected.
+    enum:
+    - GrossTotalResection
+    - OpenBiopsy
+    - SubtotalResection
+    - ExtensiveSubtotal
+    - Minor
+    - Optimaldebulking
+    - Other
+    - Partialdebulking
+    - Segmental
+    - Suboptimal
+    - Suboptimaldebulking
+    - NTR
+    - Unknown
+    - NotReported
+    - NotApplicable
+  FamilyMemberVitalStatusIndicator:
+    description: The response indicates whether the family member of the patient with
+      a history of cancer is alive. (Extension to GDC attributes in Family History
+      Tier 1)
+    enum:
+    - VitalStatusAlive
+    - VitalStatusDead
+    - Unknown
+    - NotReported
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  HereditaryCancerPredispositionSyndrome:
+    description: History of presence of inherited genetic predisposition syndrome
+      that confers heightened susceptibility to cancer in the patient.
+    enum:
+    - Alpha-1antitrypsin
+    - Attenuatedfamilialadenomatouspolyposis
+    - BAP1mutantdisease
+    - Beckwith-Wiedemann
+    - Biliarydisorder
+    - Birt-Hogg-Dubesyndrome
+    - Carneycomplex
+    - Cirrhosisunknownetiology
+    - Constitutionalmismatchrepairdeficiency
+    - Familialadenomatouspolyposis
+    - Familialgastrointestinalstromaltumor
+    - Familialpancreaticcancer
+    - Familialprostatecancer
+    - Familialrenalcancer
+    - Fanconianemia
+    - GlycogenStorageDisease
+    - Gorlinsyndrome
+    - "Hereditarybreast\u2013ovariancancersyndrome"
+    - Hereditarydiffusegastriccancer
+    - Hereditaryleiomyoma-renalcellcarcinoma
+    - Hereditarymelanoma
+    - Hereditarymixedpolyposissyndrome
+    - HereditarypapillaryRCC
+    - Hereditarypapillaryrenalcellcarcinoma
+    - "Hereditaryparaganglioma\u2013pheochromocytomasyndrome"
+    - Hereditaryrenaloncocytoma
+    - Hereditaryretinoblastoma
+    - Juvenilepolyposissyndrome
+    - Li-Fraumenisyndrome
+    - Lynchsyndrome
+    - "Melanoma\u2013astrocytomasyndrome"
+    - MultipleendocrineneoplasiatypeI
+    - MultipleendocrineneoplasiatypeII
+    - MUTYH-associatedpolyposis
+    - Nevoidbasalcellcarcinomasyndrome
+    - NotApplicable
+    - NotReported
+    - "Peutz\u2013Jegherssyndrome"
+    - Cowdensyndrome
+    - RhabdoidtumorpredispositionsyndrometypeI
+    - RhabdoidtumorpredispositionsyndrometypeII
+    - Rubinstein-Taybisyndrome
+    - SDHassociatedrenalcancer
+    - Serratedpolyposissyndrome
+    - Tuberoussclerosiscomplex
+    - Turcotsyndrome
+    - Tyrosinemia
+    - Unknown
+    - VonHippel-LindauSyndrome
+  Immunosuppression:
+    description: The indicator that describes whether or not immunosuppressive therapy
+      was administered.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+    - NotApplicable
+    - NotDone
+  KnownGeneticPredispositionMutation:
+    description: A yes/no/unknown indicator to identify whether there is a known genetic
+      predisposition mutation present in the patient.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  LabTestsforMMRStatus:
+    description: Laboratory tests used to evaluate the status of mismatch repair pathways
+    enum:
+    - IHCstainingformismatchrepairproteins
+    - PCRtoevaluatemicrosatelliteinstability
+    - "MLH1\_promotermethylationanalysis"
+    - "BRAF\_sequencing"
+    - Other
+    - NotApplicable
+    - Unknown
+  MismatchRepairSystemStatus:
+    description: The text that best describes the condition or state of MMR (mismatch
+      repair system) in the patient
+    enum:
+    - MismatchrepairdeficiencyMMRD
+    - MismatchrepairproficiencyMMPP
+    - MicrosatelliteinstabilityhighMSIH
+    - MicrosatellitestableMSS
+    - Unknownorother
+  ModeofCancerDetection:
+    description: Text term used to describe the mode of cancer detection, like standard
+      of care screening or random detection
+    enum:
+    - StandardofCareScreening
+    - ClinicalExaminationofunrelatedcancersymptoms
+    - Incidentaloma
+    - IntervalCancer
+    - Datanotavailable
+  MutationalSignatures:
+    description: 'Mutational signatures identified in the patient, includes signatures
+      linked to selected exogenous carcinogens, endogenous and enzymatic modification
+      of DNA or defective DNA repair. Note: Include only outputs of tests that were
+      completed clinically for the participant and only include data from a diagnostic
+      array that was completed prior to research sequencing was done. '
+    enum:
+    - UVlightinducedmutations
+    - AlkylatingAgents(Temozolomide)inducedmutations
+    - Tobaccouseassociatedmutations
+    - Ageofcancerdiagnosis
+    - Transcriptionalstrandbias
+    - Microsatelliteinstability(additionsanddeletions)
+    - MethylatedCpGsequencesmutagenesis(deaminationof5-methyl-cytosine)
+    - ActivationInducedDeaminases(AID)associatedmutations
+    - APOBECenzymesassociatedmutations
+    - "Alteredactivityoftheerror-pronepolymerasePOL\u03B5(POLE)"
+    - Localizedsubstitutionhypermutation(kataegis)
+    - DNAMMRDeficiency
+    - Iggenehypermutation
+    - Signature1A
+    - Signature1B
+    - Signature2
+    - Signature3
+    - Signature4
+    - Signature5
+    - Signature6
+    - Signature7
+    - Signature8
+    - Signature9
+    - Signature10
+    - Signature11
+    - Signature12
+    - Signature13
+    - Signature14
+    - Signature15
+    - Signature16
+    - Signature17
+    - Signature18
+    - Signature19
+    - Signature20
+    - Signature21
+    - Other
+    - Datanotavailable
+    - NotApplicable
+    - NotReported
+    - Unknown
+  OtherBiopsyResectionSite:
+    type: string
+    description: A description of the location on or within the human body where the
+      surgical biopsy/resection procedure was performed (Not covered under HTAN Clinical
+      Data Tier 1)
+  PrecancerousConditionType:
+    description: The classification of pre-cancerous cells found in a specific collection
+      of data being studied by the Consortium for Molecular and Cellular Characterization
+      of Screen-Detected Lesions (MCL).
+    enum:
+    - DuctalCarcinomaInSitu
+    - PancreaticIntraductalPapillary-MucinousNeoplasm
+    - AtypicalAdenomatousLungHyperplasia
+    - Other
+    - PancreaticIntraepithelialNeoplasia
+    - ProstaticIntraepithelialNeoplasia
+    - Melanocytichyperplasia
+    - Atypicalmelanocyticproliferation
+    - Melanomainsitu
+    - Superficialspreading
+    - Melanomainsitu
+    - Lentigomalignatype
+    - Melanomainsitu
+    - Acral-lentiginous
+    - Melanomainsituarisinginagiantcongenitalnevus
+    - Persistentmelanomainsitu
+    - Melanomainsitunototherwiseclassified
+    - Scar-noresidualmelanoma
+    - Invasivemelanoma-superficialspreading
+    - Invasivemelanoma-nodulartype
+    - Invasivemelanoma-lentigomaligna
+    - Invasivemelanoma-acrallentiginous
+    - Invasivemelanoma-desmoplastic
+    - Invasivemelanoma-nevoid
+    - Invasivemelanoma
+    - NormalWDA
+    - Reservecellhyperplasia
+    - Squamousmetaplasia-mature
+    - Squamousmetaplasia-immature
+    - Milddysplasia
+    - Moderatedysplasia
+    - Severedysplasia
+    - Atypicaladenomatoushyperplasia
+    - Adenocarcinomainsitu-nonmucinous
+    - Adenocarcinomainsitu-mucinous
+    - BenigntumorNOS
+    - Hamartoma
+    - CarcinomaNOS
+    - Nodiagnosispossible
+  PriorSitesofRadiation:
+    description: The anatomic location to which radiation treatment was administered
+      to a patient prior to enrollment on a protocol.
+    enum:
+    - Abdomentotal
+    - AbdominalWall
+    - Acetabulum
+    - Adenoid
+    - Adipose
+    - Adrenal
+    - AlveolarRidge
+    - AmnioticFluid
+    - AmpullaofVater
+    - AnalSphincter
+    - Ankle
+    - Anorectum
+    - AntecubitalFossa
+    - Antrum
+    - Anus
+    - Aorta
+    - AorticBody
+    - Appendix
+    - AqueousFluid
+    - Arm
+    - Artery
+    - AscendingColon
+    - AscendingColonHepaticFlexure
+    - Ascites
+    - AuditoryCanal
+    - AutonomicNervousSystem
+    - Axilla
+    - Back
+    - BileDuct
+    - Bladder
+    - Blood
+    - BloodVessel
+    - Bodytotal
+    - Bone
+    - BoneMarrow
+    - Bonenon-spine
+    - Bowel
+    - Brain
+    - BrainStem
+    - Breast
+    - BroadLigament
+    - Bronchiole
+    - Bronchus
+    - Brow
+    - BuccalCavity
+    - BuccalMucosa
+    - Buttock
+    - Calf
+    - Capillary
+    - Cardia
+    - Carina
+    - CarotidArtery
+    - CarotidBody
+    - Cartilage
+    - Cecum
+    - Cell-Line
+    - CentralNervousSystem
+    - Cerebellum
+    - CerebralCortex
+    - CerebrospinalFluid
+    - Cerebrum
+    - CervicalSpine
+    - Cervix
+    - Chest
+    - ChestWall
+    - Chin
+    - Clavicle
+    - Clitoris
+    - Colon
+    - ColonMucosaOnly
+    - CommonDuct
+    - Conjunctiva
+    - ConnectiveTissue
+    - Dermal
+    - DescendingColon
+    - Diaphragm
+    - DistantSite
+    - Duodenum
+    - Ear
+    - EarCanal
+    - EarPinna(External)
+    - Elbow
+    - EndocrineGland
+    - Epididymis
+    - EpiduralSpace
+    - Epitrochlear
+    - EsophagogastricJunction
+    - Esophagus
+    - EsophagusMucosaOnly
+    - Eye
+    - FallopianTube
+    - FemoralArtery
+    - FemoralVein
+    - Femur
+    - Fibroblasts
+    - Fibula
+    - Finger
+    - FloorofMouth
+    - Fluid
+    - Foot
+    - Forearm
+    - Forehead
+    - Foreskin
+    - FrontalCortex
+    - FrontalLobe
+    - FundusofStomach
+    - Gallbladder
+    - Ganglia
+    - GastroesophagealJunction
+    - GastrointestinalTract
+    - GastrointestinalIntestine
+    - GenitourinaryNOS
+    - Groin
+    - Gum
+    - Hand
+    - HardPalate
+    - HeadFaceOrNeckNos
+    - HeadandNeck
+    - Heart
+    - Hepatic
+    - HepaticDuct
+    - HepaticVein
+    - Hilar
+    - Hip
+    - Hippocampus
+    - Humerus
+    - Hypopharynx
+    - IleocecalValve
+    - Ileum
+    - Ilium
+    - IndexFinger
+    - Ischium
+    - IsletCells
+    - Jaw
+    - Jejunum
+    - Joint
+    - Kidney
+    - Knee
+    - LacrimalGland
+    - LargeBowel
+    - Laryngopharynx
+    - Larynx
+    - Leg
+    - Leptomeninges
+    - Ligament
+    - Lip
+    - Liver
+    - LumbarSpine
+    - Lung
+    - LymphNode
+    - LymphNode(s)Axilla
+    - LymphNode(s)Cervical
+    - LymphNode(s)Distant
+    - LymphNode(s)Epitrochlear
+    - LymphNode(s)Femoral
+    - LymphNode(s)Hilar
+    - LymphNode(s)Iliac-Common
+    - LymphNode(s)Iliac-External
+    - LymphNode(s)Inguinal
+    - LymphNode(s)InternalMammary
+    - LymphNode(s)Mammary
+    - LymphNode(s)Mediastinal
+    - LymphNode(s)Mesenteric
+    - LymphNode(s)Occipital
+    - LymphNode(s)Paraaortic
+    - LymphNode(s)Parotid
+    - LymphNode(s)Pelvic
+    - LymphNode(s)Popliteal
+    - LymphNode(s)Regional
+    - LymphNode(s)Retroperitoneal
+    - LymphNode(s)Scalene
+    - LymphNode(s)Splenic
+    - LymphNode(s)Subclavicular
+    - LymphNode(s)Submandibular
+    - LymphNode(s)Supraclavicular
+    - Mandible
+    - Mantle
+    - Maxilla
+    - MediastinalSoftTissue
+    - Mediastinum
+    - Mesentery
+    - Mesothelium
+    - MiddleFinger
+    - Mitochondria
+    - Muscle
+    - Nails
+    - NasalCavity
+    - NasalSoftTissue
+    - Nasopharynx
+    - Neck
+    - Nerve
+    - Nerve(s)Cranial
+    - OccipitalCortex
+    - OcularOrbits
+    - Omentum
+    - OralCavity
+    - OralCavityMucosaOnly
+    - Oropharynx
+    - Other
+    - Ovary
+    - Palate
+    - Pancreas
+    - Parametrium
+    - ParaspinalGanglion
+    - Parathyroid
+    - ParotidGland
+    - Patella
+    - Pelvis
+    - Penis
+    - Pericardium
+    - PeriorbitalSoftTissue
+    - PeritonealCavity
+    - Peritoneum
+    - Pharynx
+    - Pineal
+    - PinealGland
+    - PituitaryGland
+    - Placenta
+    - Pleura
+    - PoplitealFossa
+    - Pouch
+    - PrimaryTumorField
+    - Primarytumorsite
+    - Prostate
+    - ProstateBed
+    - ProstateSeminalVesiclesandLymphNodes
+    - Pylorus
+    - RectosigmoidJunction
+    - Rectum
+    - RegionalSite
+    - Retina
+    - Retro-OrbitalRegion
+    - Retroperitoneum
+    - Rib
+    - RingFinger
+    - RoundLigament
+    - Sacrum
+    - SalivaryGland
+    - Scalp
+    - Scapula
+    - SciaticNerve
+    - Scrotum
+    - SeminalVesicle
+    - Shoulder
+    - SigmoidColon
+    - Sinus
+    - Sinus(es)Maxillary
+    - SkeletalMuscle
+    - Skin
+    - Skinlowerextremitylocal
+    - Skintotal
+    - Skintrunklocal
+    - Skinupperextremitylocal
+    - Skull
+    - SmallBowel
+    - SmallBowelMucosaOnly
+    - SmallFinger
+    - SoftTissue
+    - SpinalColumn
+    - SpinalCord
+    - Spine
+    - Spleen
+    - SplenicFlexure
+    - Sternum
+    - Stomach
+    - StomachMucosaOnly
+    - SubcutaneousTissue
+    - Synovium
+    - TemporalCortex
+    - Tendon
+    - Testis
+    - Thigh
+    - ThoracicSpine
+    - Thorax
+    - Throat
+    - Thumb
+    - Thymus
+    - Thyroid
+    - Tibia
+    - Tongue
+    - Tonsil
+    - Tonsil(Pharyngeal)
+    - Trachea/MajorBronchi
+    - TransverseColon
+    - Trunk
+    - UmbilicalCord
+    - Unknown
+    - Ureter
+    - Urethra
+    - UrinaryTract
+    - Uterus
+    - Uvula
+    - Vagina
+    - VasDeferens
+    - Vein
+    - Venous
+    - Vertebra
+    - Vulva
+    - WhiteBloodCells
+    - Wrist
+    - NotReported
+  SatelliteMetastasisPresentIndicator:
+    description: A yes/no indicator to ask if intransit metastases or satellite lesions
+      are present.
+    enum:
+    - 'Yes'
+    - 'No'
+    - Unknown
+  Secondhandsmokeexposureyears:
+    type: number
+    description: The number of cumulative years of the patient's exposure to second-hand
+      cigarette smoke
+  SentinelLymphNodeCount:
+    type: number
+    description: Numeric count of sentinel lymph nodes.
+  SentinelNodePositiveAssessmentCount:
+    type: number
+    description: The number or amount of metastatic neoplasms related to the confirmed
+      presence of disease or specific microorganisms during examination of the first
+      rounded mass of lymphatic tissue to which cancer is likely to spread from the
+      primary tumor.
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  TumorExtranodalExtensionIndicator:
+    description: The indicator to determine extranodal involvement or extent of the
+      disease.
+    enum:
+    - Absent
+    - Indeterminate
+    - 'NO'
+    - 'YES'
+    - Nosourcedocumentation
+    - Notapplicable
+    - Notsampledordissected
+    - Present
+    - Present-extensive
+    - Present-minimal
+    - UNKNOWN
+    - Unspecified
+  Typeofsmokeexposurecumulativeyears:
+    type: number
+    description: The number of cumulative years of the patient's specific type of
+      smoke exposure
+  patients:
+    $ref: _definitions.yaml#/to_many

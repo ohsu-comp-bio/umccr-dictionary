@@ -1,0 +1,120 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: acute_lymphoblastic_leukemia_tier3
+title: AcuteLymphoblasticLeukemiaTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Acute Lymphoblastic Leukemia attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: acute_lymphoblastic_leukemia_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - acute_lymphoblastic_leukemia_tier3
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # AcuteLymphoblasticLeukemiaTier3
+  CNSLeukemiaStatus:
+    description: The status of central nervous system leukemia at the time of diagnosis.
+    enum:
+    - CNS1
+    - CNS2
+    - CNS3
+    - CNS2a
+    - CNS2b
+    - CNS2c
+    - CNS3a
+    - CNS3b
+    - CNS3c
+    - Notevaluated
+    - Unknown
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  MRDALLDiagnosticSensitivity:
+    description: The assay sensitivity results of a diagnostic assessment of Minimal
+      Residual Disease in patients diagnosed with Acute Lymphoblastic Leukemia.
+    enum:
+    - Optimal
+    - Suboptimal
+    - Indeterminate
+    - Unknown
+  NCIALLRiskGroup:
+    description: The NCI risk group assigned to a patient at initial diagnosis with
+      Acute Lymphoblastic Leukemia.
+    enum:
+    - NCIHighRisk
+    - NCIStandardRisk
+    - Unknown
+  SpecimenBlastCountPercentageValue:
+    type: number
+    description: The value, in percent(%) of the medical procedure that involves testing
+      a sample of blood for blast cells, immature (undifferentiated) cells during
+      diagnosis
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

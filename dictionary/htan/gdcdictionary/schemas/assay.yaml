@@ -18,8 +18,8 @@ systemProperties:
 - created_datetime
 - updated_datetime
 links:
-- name: biospecimens
-  backref: files
+- name: biospecimen
+  backref: assays
   label: reference_to
   target_type: biospecimen
   multiplicity: many_to_many
@@ -35,13 +35,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Assay
-  subtype:
-    enum:
-    - Device
-    - ImagingLevel2
-    - OtherAssay
-    - Sequencing
+    - assay
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -53,319 +47,46 @@ properties:
     - 'null'
   projects:
     $ref: _definitions.yaml#/to_many_project
+  name:
+    type: string
+    description: The common name referring to this assay, e.g. IHC
+  panel:
+    type: string
+    description: The common name referring to this panel, e.g. MYLOID
+  lab:
+    type: string
+    description: The university and data producing lab, ORGANIZATION-LAB e.g. OHSU-CHIN
   project_id:
     type: string
   created_datetime:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  # Device
-  # ImagingLevel2
-  ChannelMetadataFilename:
-    type: string
-    description: Full path of uploaded companion CSV file containing channel-level
-      metadata details
-  Comment:
-    type: string
-    description: Free text field (generally for QC comment)
-  Component:
-    type: string
-    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
-      1, etc.); provide the same one for all items/rows.
-  DimensionOrder:
-    description: The order in which the individual planes of data are interleaved.
-    enum:
-    - XYZCT
-    - XYZTC
-    - XYCTZ
-    - XYCZT
-    - XYTZC
-  FOVX:
-    type: string
-    description: Field of view X dimension. Floating point
-  FOVXUnit:
-    description: 'Field of view X dimension units. See OME enumeration of allowed
-      values for the UnitsLength attribute -- default: microns (um)'
-    enum:
-    - Cm
-    - Mm
-    - "\u039Cm"
-    - Nm
-    - "\xC5"
-  FOVY:
-    type: string
-    description: Field  of view Y dimension. Floating point value
-  FOVYUnit:
-    description: 'Field of view Y dimension units. See OME enumeration of allowed
-      values for the UnitsLength attribute -- default: microns (um)'
-    enum:
-    - Cm
-    - Mm
-    - "\u039Cm"
-    - Nm
-    - "\xC5"
-  FOVnumber:
-    type: string
-    description: Index of FOV (as it pertains to its sequence order). Integer >= 1
-  FrameAveraging:
-    type: string
-    description: Number of frames averaged together (if no averaging, set to 1). Integer
-      >= 1
-  HTANDataFileID:
-    type: string
-    description: Self-identifier for this data file - HTAN ID of this file HTAN ID
-      SOP (eg HTANx_yyy_zzz)
-  HTANParentBiospecimenID:
-    type: string
-    description: HTAN Biospecimen Identifier (eg HTANx_yyy_zzz) indicating the biospecimen(s)
-      from which these files were derived; multiple parent biospecimen should be comma-separated
-  HTANParticipantID:
-    type: string
-    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
-      )
-  ImageID:
-    type: string
-    description: Unique internal image identifier. eg "Image:0". (To be extracted
-      from OME-XML)
-  ImagingAssayType:
-    description: Type of imaging assay
-    enum:
-    - H&E
-    - CyCIF
-    - T-CyCIF
-    - IHC
-    - MIHC
-    - MxIF
-    - SABER
-    - IMC
-    - CODEX
-    - GeoMX-DSP
-    - MIBI
-    - MERFISH
-  Immersion:
-    description: Immersion medium
-    enum:
-    - Air
-    - Oil
-    - Other
-  LensNA:
-    type: string
-    description: The numerical aperture of the lens. Floating point value > 0.
-  Microscope:
-    type: string
-    description: Microscope type (manufacturer, model, etc) used for this experiment
-  NominalMagnification:
-    type: string
-    description: The magnification of the lens as specified by the manufacturer -
-      i.e. '60' is a 60X lens. floating point value > 1(no units)
-  Objective:
-    type: string
-    description: Objective
-  PassedQC:
-    description: Did all channels pass QC (if not add free text Comment)
-    enum:
-    - 'Yes'
-    - No-ChannelsQC
-  PhysicalSizeX:
-    type: string
-    description: Physical size (X-dimension) of a pixel. Units are set by PhysicalSizeXUnit.
-      Floating point value > 0.
-  PhysicalSizeXUnit:
-    description: 'The units of the physical size of a pixel. See OME enumeration of
-      allowed values for the UnitsLength attribute -- default: microns (um)'
-    enum:
-    - Cm
-    - Mm
-    - "\u039Cm"
-    - Nm
-    - "\xC5"
-  PhysicalSizeY:
-    type: string
-    description: Physical size (Y-dimension) of a pixel. Units are set by PhysicalSizeYUnit.
-      Floating point value > 0.
-  PhysicalSizeYUnit:
-    type: string
-    description: 'The units of the physical size of a pixel. See OME enumeration of
-      allowed values for the UnitsLength attribute -- default: microns (um)'
-  PhysicalSizeZ:
-    type: string
-    description: TBD
-  PhysicalSizeZUnit:
-    type: string
-    description: TBD
-  PixelType:
-    description: Data type for each pixel value. E.g. "uint16"
-    enum:
-    - Int8
-    - Int16
-    - Int32
-    - Uint8
-    - Uint16
-    - Uint32
-    - Float
-    - Double
-    - Bit
-  PixelsBigEndian:
-    description: Boolean (True/False)
-    enum:
-    - 'True'
-    - 'False'
-  PlaneCount:
-    type: string
-    description: Number of Z-planes (not to be confused with downsampled "pyramid").
-      Integer >=1
-  ProtocolLink:
-    type: string
-    description: Protocols.io ID or DOI link to a free/open protocol resource describing
-      in detail the assay protocol (e.g. surface markers used in Smart-seq, dissociation
-      duration,  lot/batch numbers for key reagents such as primers, sequencing reagent
-      kits, etc.) or the protocol by which the sample was obtained or generated.
-  Pyramid:
-    description: Does data file contain pyramid of images
-    enum:
-    - 'Yes'
-    - 'No'
-  SizeC:
-    type: string
-    description: Number of channels. Integer >= 1
-  SizeT:
-    type: string
-    description: Number of time points. Integer >= 1
-  SizeX:
-    type: string
-    description: 'Size of image: X dimension (in pixels). Integer >= 1'
-  SizeY:
-    type: string
-    description: 'Size of image: Y dimension (in pixels). Integer >= 1'
-  SizeZ:
-    type: string
-    description: 'Size of image: Z dimension (in pixels). Integer >= 1'
-  SoftwareandVersion:
-    type: string
-    description: Name of software used to generate expression values. String
-  Tseries:
-    description: Does data file contain a time-series of images
-    enum:
-    - 'Yes'
-    - 'No'
-  WorkflowEndDatetime:
-    type: string
-    description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
-  WorkflowStartDatetime:
-    type: string
-    description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
-  WorkingDistance:
-    type: string
-    description: The working distance of the lens, expressed as a floating point number.
-      Floating point > 0.
-  WorkingDistanceUnit:
-    description: 'The units of the working distance. See OME enumeration of allowed
-      values for the UnitsLength attribute -- default: microns (um)'
-    enum:
-    - Cm
-    - Mm
-    - "\u039Cm"
-    - Nm
-    - "\xC5"
-  Zstack:
-    description: Does data file contain a Z-stack of images
-    enum:
-    - 'Yes'
-    - 'No'
-  fileFormat:
-    description: Format of a file (e.g. txt, csv, fastq, bam, etc.)
-    enum:
-    - Hdf5
-    - Bedgraph
-    - Idx
-    - Idat
-    - Bam
-    - Bai
-    - Excel
-    - Powerpoint
-    - Tif
-    - Tiff
-    - OME-TIFF
-    - Png
-    - Doc
-    - Pdf
-    - Fasta
-    - Fastq
-    - Sam
-    - Vcf
-    - Bcf
-    - Maf
-    - Bed
-    - Chp
-    - Cel
-    - Sif
-    - Tsv
-    - Csv
-    - Txt
-    - Plink
-    - Bigwig
-    - Wiggle
-    - Gct
-    - Bgzip
-    - Zip
-    - Seg
-    - Html
-    - Mov
-    - Hyperlink
-    - Svs
-    - Md
-    - Flagstat
-    - Gtf
-    - Raw
-    - Msf
-    - Rmd
-    - BednarrowPeak
-    - BedbroadPeak
-    - BedgappedPeak
-    - Avi
-    - Pzfx
-    - Fig
-    - Xml
-    - Tar
-    - Rscript
-    - Abf
-    - Bpm
-    - Dat
-    - Jpg
-    - Locs
-    - Sentrixdescriptorfile
-    - Pythonscript
-    - Sav
-    - Gzip
-    - Sdf
-    - RData
-    - Hic
-    - Ab1
-    - 7z
-    - Gff3
-    - Json
-    - Sqlite
-    - Svg
-    - Sra
-    - Recal
-    - Tranches
-    - Mtx
-    - TagAlign
-    - Dup
-    - DICOM
-    - Czi
-    - Mex
-    - Cloupe
-    - Am
-    - Cellam
-    - Mpg
-    - M
-  filename:
-    type: string
-    description: 'Name of a file '
-  # OtherAssay
-  AssayType:
-    type: string
-    description: The type and level of assay this metadata applies to (e.g. RPPA,
-      Nanostring DSP, etc.)
-  # Sequencing
+  bulk_rna_seq_level1s:
+    $ref: _definitions.yaml#/to_many
+  bulk_rna_seq_level2s:
+    $ref: _definitions.yaml#/to_many
+  bulk_rna_seq_level3s:
+    $ref: _definitions.yaml#/to_many
+  bulk_wes_level1s:
+    $ref: _definitions.yaml#/to_many
+  bulk_wes_level2s:
+    $ref: _definitions.yaml#/to_many
+  bulk_wes_level3s:
+    $ref: _definitions.yaml#/to_many
+  sc_atac_seq_level1s:
+    $ref: _definitions.yaml#/to_many
+  sc_rna_seq_level1s:
+    $ref: _definitions.yaml#/to_many
+  sc_rna_seq_level2s:
+    $ref: _definitions.yaml#/to_many
+  sc_rna_seq_level3s:
+    $ref: _definitions.yaml#/to_many
+  sc_rna_seq_level4s:
+    $ref: _definitions.yaml#/to_many
+  workflow_parameters_descriptions:
+    $ref: _definitions.yaml#/to_many
+  workflow_types:
+    $ref: _definitions.yaml#/to_many
+  biospecimen:
+    $ref: _definitions.yaml#/to_many

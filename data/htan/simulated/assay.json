@@ -1,0 +1,72 @@
+[
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_e9191ac8f0"
+        },
+        "submitter_id": "assay_9bbcbd83cf",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_43253e9a68"
+        },
+        "submitter_id": "assay_d043ad4eeb",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_a69e31d334"
+        },
+        "submitter_id": "assay_49fb47aa19",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_ebd22a7915"
+        },
+        "submitter_id": "assay_c9f8e51611",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_8a7c7214a4"
+        },
+        "submitter_id": "assay_3ae906b281",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_e5dc7f3cb5"
+        },
+        "submitter_id": "assay_02f3828bd0",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_fb942a51bc"
+        },
+        "submitter_id": "assay_9db8f50685",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_4d0d9a5c02"
+        },
+        "submitter_id": "assay_23f47b3d93",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_75f73d3e3b"
+        },
+        "submitter_id": "assay_e6b70f4847",
+        "type": "assay"
+    },
+    {
+        "biospecimen": {
+            "submitter_id": "biospecimen_217c377cf4"
+        },
+        "submitter_id": "assay_a6298a60e7",
+        "type": "assay"
+    }
+]

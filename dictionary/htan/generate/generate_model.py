@@ -2,9 +2,13 @@ import graphviz
 import json
 from yaml import dump
 import click
-from pprint import pprint
 import re
 import inflection
+
+# see https://github.com/ncihtan/htan-portal/blob/f496b6173fc7e2553c02e79fe239fe879e0ac56f/lib/dataSchemaHelpers.ts#L139
+NUMERICAL_SCHEMA_DATA_LOOKUP = ['AgeAtDiagnosis', 'YearOfDiagnosis', 'DaysToLastFollowup', 'DaysToLastKnownDiseaseStatus', 'DaysToDiagnosis', 'PercentTumorInvasion', 'GrossTumorWeight', 'BreslowThickness', 'MitoticCount', 'MarginDistance', 'TumorDepth', 'DaysToBirth', 'CollectionDaysfromIndex', 'ProcessingDaysfromIndex', 'DysplasiaFraction',
+                      'NumberProliferatingCells', 'PercentEosinophilInfiltration', 'PercentGranulocyteInfiltration', 'PercentInflamInfiltration', 'PercentLymphocyteInfiltration', 'PercentMonocyteInfiltration', 'PercentNecrosis', 'PercentNeutrophilInfiltration', 'PercentNormalCells', 'PercentStromalCells', 'PercentTumorCells', 'PercentTumorNuclei', ]
+
 
 class HTANSchema(object):
 
@@ -30,7 +34,6 @@ class HTANSchema(object):
 
         self._rangeMembers = set(self._rangeMembers)                    
         self._dependencies = set(self._dependencies)                    
-        
 
     @property
     def nodes(self):
@@ -66,14 +69,14 @@ class HTANSchema(object):
                 include = n["schema:domainIncludes"]
                 if not isinstance(include, list):
                     include = [include]
-                for i in include:    
+                for i in include:
                     if id == i['@id']:
                         includes.append(n['@id'])
             if "rdfs:subClassOf" in n:
                 subclass = n["rdfs:subClassOf"]
                 if not isinstance(subclass, list):
                     subclass = [subclass]
-                for s in subclass:    
+                for s in subclass:
                     if id == s['@id']:
                         superClassOf.append(n['@id'])
 
@@ -84,8 +87,24 @@ class HTANSchema(object):
         subclasses = self._subclasses(id)
         subclasses = set(list(subclasses) + superClassOf) - self._rangeMembers - self._dependencies
         neighbors = neighbors - subclassOf
-        return {'@id':id,
-                'properties':sorted(list(dependencies) + list(includes)),
+        # special cases
+        if id == 'bts:Biospecimen':            
+            dependencies = dependencies | set(subclasses)
+            subclasses = []
+
+        # special cases
+        if id == 'bts:Patient':
+            neighbors = ['bts:AcuteLymphoblasticLeukemiaTier3', 'bts:BrainCancerTier3', 'bts:BreastCancerTier3', 'bts:ClinicalDataTier2', 'bts:ColorectalCancerTier3',
+                         'bts:LungCancerTier3', 'bts:MelanomaTier3', 'bts:OvarianCancerTier3', 'bts:PancreaticCancerTier3', 'bts:ProstateCancerTier3', 'bts:SarcomaTier3']
+            subclasses = []
+        if id == 'bts:Sequencing':
+            neighbors = subclasses
+            subclasses = []
+        if id == 'bts:Assay':
+            neighbors = ['bts:BulkRNA-seqLevel3', 'bts:BulkWESLevel2', 'bts:BulkWESLevel1', 'bts:BulkWESLevel3', 'bts:ScRNA-seqLevel1', 'bts:WorkflowType', 'bts:BulkRNA-seqLevel1', 'bts:ScRNA-seqLevel2', 'bts:ScRNA-seqLevel3', 'bts:ScRNA-seqLevel4', 'bts:BulkRNA-seqLevel2', 'bts:WorkflowParametersDescription', 'bts:ScATAC-seqLevel1']
+            subclasses = []
+        return {'@id': id,
+                'properties': sorted(list(dependencies) + list(includes)),
                 'subclasses': sorted(list(subclasses)),
                 'super': subclassOf,
                 'neighbors': sorted(list(neighbors)),
@@ -141,8 +160,6 @@ class HTANSchemaFigure(object):
         graphviz.Source(dot).view(filename=label)
 
 
- 
-
 class Gen3Configuration(object):
     def __init__(self, schema, node, parent=None) -> None:
         super().__init__()
@@ -186,9 +203,6 @@ class Gen3Configuration(object):
             ],
             "properties": {
                 "type": {
-                    "enum": []
-                },
-                "subtype": {
                     "enum": []
                 },
                 "id": {
@@ -261,11 +275,38 @@ class Gen3Configuration(object):
             'required': True,
         }
 
-
     def links(self):
         return [self.link(l) for l in self.node['neighbors']]
 
-    def properties(self, template,node):
+    def property_type(self, property_name, schema_node):
+        """Determine type of simple properties."""
+        property_name = property_name.split(':')[-1]
+        if property_name in NUMERICAL_SCHEMA_DATA_LOOKUP:
+            return "number"
+        if 'Count' in property_name:
+            return "number"
+        if 'Percentage' in property_name:
+            return "number"
+        comment = schema_node['rdfs:comment'].lower()
+        if 'alphanumeric' in comment:
+            return "string"
+        if 'numeric' in comment:
+            return "number"
+        if 'number' in comment:
+            return "number"
+        return 'string'
+
+    def is_required(self, property_name, schema_node):
+        """Determine if simple property mandatory."""
+        # property_name = property_name.split(':')[-1]
+        if schema_node['sms:required'].lower() == 'sms:true':
+            # print(property_name, schema_node, schema_node.keys())
+            return True
+        return False
+
+
+
+    def properties(self, template, node):
         """Render gen3 properties."""
         schema_node = self.schema.node(node['@id'])
         template["properties"][f"comment_{schema_node['rdfs:label']}"] = f'{schema_node["rdfs:label"]}'
@@ -273,7 +314,7 @@ class Gen3Configuration(object):
             schema_node = self.schema._nodes[p]
             if "schema:rangeIncludes" not in schema_node:
                 template["properties"][schema_node['rdfs:label']] = {
-                    'type': 'string',
+                    'type': self.property_type(p, schema_node),
                     'description': f'{schema_node["rdfs:comment"]}'
                 }
             else:
@@ -290,7 +331,6 @@ class Gen3Configuration(object):
             return 'data_file'
         return 'clinical'
 
-
     def save(self):
         node = self.node
         template = self.template
@@ -300,27 +340,54 @@ class Gen3Configuration(object):
         # template['description'] = schema_node['rdfs:comment']
         template['category'] = self.category(template['id'])
         # template['links'] = self.links()
-        template["properties"]["type"]["enum"].append(schema_node['rdfs:label'])
+        template["properties"]["type"]["enum"].append(self._name(schema_node))
         for st in node['subclasses']:
             schema_node = self.schema._nodes[st]
-            template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
+            # template["properties"]["subtype"]["enum"].append(schema_node['rdfs:label'])
             st_node = self.schema.properties(id=st)
-            self.properties(template,st_node)
+            self.properties(template, st_node)
         for neighbor_id in self.node['neighbors']:
             _neighbor = self.schema.node(neighbor_id)
             _backref = inflection.pluralize(self._name(_neighbor))
-            template["properties"][_backref] = {"$ref": "_definitions.yaml#/to_many"}            
+            if _backref == 'patients':
+                print(f"Skipping link {template['id']}->{_backref}")
+                continue
+            # to parent
+            template["properties"][_backref] = {
+                "$ref": "_definitions.yaml#/to_many"}
 
         if len(node['properties']) > 0:  # len(node['subclasses']) == 0 and
             self.properties(template, node)
 
         if self.parent:
             parent_link = self.parent_link()
-            template['links'].append(parent_link)
-            template['required'].append(parent_link['name'])
-            template["properties"][parent_link['name']] = {
-                "$ref": "_definitions.yaml#/to_many"}
+            if parent_link['name'] == 'biospecimen' and parent_link['backref']:
+                print(f"Skipping link {parent_link['name']}->{parent_link['backref']}")
+            else:
+                template['links'].append(parent_link)
+                template['required'].append(parent_link['name'])
+                template["properties"][parent_link['name']] = {
+                    "$ref": "_definitions.yaml#/to_many"}
+                for p in node['properties']:
+                    schema_node = self.schema._nodes[p]
+                    if self.is_required(p, schema_node):
+                        template['required'].append(p.split(':')[-1])
 
+        # special case for demographic, link back to patient
+        if template['id'] == 'demographic':
+            template["links"].append(
+                {
+                    "name": "patient",
+                    "backref": "demographics",
+                    "label": "reference_to",
+                    "target_type": "patient",
+                    "multiplicity": "many_to_many",
+                    "required": True
+                }
+            )
+            template["properties"]["patient"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
         # special case for patient, link back to project
         if template['id'] == 'patient':
             template["links"].append(
@@ -329,11 +396,11 @@ class Gen3Configuration(object):
                     "backref": "patients",
                     "label": "reference_to",
                     "target_type": "project",
-                    "multiplicity": "many_to_one",
+                    "multiplicity": "many_to_many",
                     "required": True
                 }
             )
-        # special case for file, link back to biospecimen
+        # special case for file, link back to assay
         if template['id'] == 'file':
             template["links"].append(
                 {
@@ -341,42 +408,107 @@ class Gen3Configuration(object):
                     "backref": "files",
                     "label": "reference_to",
                     "target_type": "assay",
-                    "multiplicity": "many_to_one",
-                    "required": True
-                }
-            )
-            # template["properties"]["files"] = {
-            #     "$ref": "_definitions.yaml#/to_many"
-            # }
-        # special case for assay, link back to biospecimen
-        if template['id'] == 'assay':
-            template["links"].append(
-                {
-                    "name": "biospecimens",
-                    "backref": "files",
-                    "label": "reference_to",
-                    "target_type": "biospecimen",
                     "multiplicity": "many_to_many",
                     "required": True
                 }
             )
-            # template["properties"]["files"] = {
-            #     "$ref": "_definitions.yaml#/to_many"
-            # }
+            template["links"].append(
+                {
+                    "name": "core_metadata_collections",
+                    "backref": "files",
+                    "label": "data_from",
+                    "target_type": "core_metadata_collection",
+                    "multiplicity": "many_to_many",
+                    "required": False
+                }
+            )
+            template["properties"]["assay"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
+            template["properties"]["core_metadata_collections"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
+            template["properties"]["$ref"] = "_definitions.yaml#/data_file_properties"
+            template["properties"]["data_format"] = {
+                "term": {
+                    "$ref": "_terms.yaml#/data_format"
+                },
+                "enum": [
+                    "VCF",
+                    "junc",
+                    "tbi",
+                    "txt",
+                    "tsv",
+                    "xlsx",
+                    "bam",
+                    "bai",
+                    "fastq",
+                    "bigWig",
+                    "crai",
+                    "cram",
+                    "bed",
+                    "bim",
+                    "fam",
+                    "pdf",
+                    "idat",
+                    "svs",
+                    "tab",
+                    "gds",
+                    "other"
+                ]
+            }
+            # move HTAN fileFormat to gen3 required field data_type
+            template["properties"]["data_type"] = template["properties"]["fileFormat"]
+            del template["properties"]["fileFormat"]
+            template["properties"]["data_category"] = {
+                "term": {
+                    "$ref": "_terms.yaml#/data_category"
+                },
+                "enum": [
+                    "Analysis",
+                    "Sequencing Reads",
+                    "Single Nucleotide Variation",
+                    "Simple Nucleotide Variation",
+                    "Transcriptome Profiling",
+                    "Clinical",
+                    "Imaging",
+                    "Supplemental",
+                    "Other"
+                ]
+            }
+            template["required"].extend(['data_type', 'data_format', 'data_category'])
+        # special case for assay, link back to biospecimen
+        if template['id'] == 'assay':
+            template["links"].append(
+                {
+                    "name": "biospecimen",
+                    "backref": "assays",
+                    "label": "reference_to",
+                    "target_type": "biospecimen",
+                    "multiplicity": "many_to_many",
+                    "required": True                
+                }
+            )
+            template["properties"]["biospecimen"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
+        # special case for biospecimen, link back to patient
+        if template['id'] == 'biospecimen':
+            template["links"].append(
+                {
+                    "name": "patient",
+                    "backref": "biospecimens",
+                    "label": "reference_to",
+                    "target_type": "patient",
+                    "multiplicity": "many_to_many",
+                    "required": True
+                }
+            )
+            template["properties"]["patient"] = {
+                "$ref": "_definitions.yaml#/to_many"
+            }
 
 
-        # # special case for biospecimen, link back to patients
-        # if template['id'] == 'biospecimen':
-        #     template["links"].append(
-        #         {
-        #             "name": "patients",
-        #             "backref": "biospecimens",
-        #             "label": "reference_to",
-        #             "target_type": "patient",
-        #             "multiplicity": "many_to_many",
-        #             "required": True
-        #         }
-        #     )
 
         # save this node
         yaml_string = dump(template, sort_keys=False)

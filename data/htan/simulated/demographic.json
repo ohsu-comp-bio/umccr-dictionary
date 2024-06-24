@@ -1,0 +1,202 @@
+[
+    {
+        "AgeIsObfuscated": "False",
+        "Component": "e6a01145aa",
+        "CountryofResidence": "Azerbaijan",
+        "DaystoBirth": 79.39582579571089,
+        "Ethnicity": "Nothispanicorlatino",
+        "Gender": "NotReported",
+        "HTANParticipantID": "c665f6fb85",
+        "OccupationDurationYears": 23.256831068163542,
+        "PrematureAtBirth": "NotReported",
+        "Race": "Asian",
+        "VitalStatus": "Dead",
+        "WeeksGestationatBirth": 38.33766905366854,
+        "YearOfBirth": 1.41361797942271,
+        "patient": {
+            "submitter_id": "patient_5236da4db0"
+        },
+        "submitter_id": "demographic_61f1bd0b62",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "False",
+        "Component": "fe7e2009d1",
+        "CountryofResidence": "Cambodia",
+        "DaystoBirth": 85.67304823197075,
+        "Ethnicity": "NotReported",
+        "Gender": "Unknown",
+        "HTANParticipantID": "5b9d3026a8",
+        "OccupationDurationYears": 11.505902078478536,
+        "PrematureAtBirth": "No",
+        "Race": "NotReported",
+        "VitalStatus": "Alive",
+        "WeeksGestationatBirth": 43.79220364325498,
+        "YearOfBirth": 60.20630902555785,
+        "patient": {
+            "submitter_id": "patient_399fade713"
+        },
+        "submitter_id": "demographic_8c2d690818",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "790a1126bc",
+        "CountryofResidence": "Grenada",
+        "DaystoBirth": 28.919964004838917,
+        "Ethnicity": "Hispanicorlatino",
+        "Gender": "NotReported",
+        "HTANParticipantID": "8b39b4c550",
+        "OccupationDurationYears": 97.85737431849108,
+        "PrematureAtBirth": "NotReported",
+        "Race": null,
+        "VitalStatus": "Alive",
+        "WeeksGestationatBirth": 96.00791106278788,
+        "YearOfBirth": 2.7263113469245592,
+        "patient": {
+            "submitter_id": "patient_944516011c"
+        },
+        "submitter_id": "demographic_268905509f",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "ff1acf3abd",
+        "CountryofResidence": "Philippines",
+        "DaystoBirth": 70.43425255146795,
+        "Ethnicity": "Hispanicorlatino",
+        "Gender": "Unknown",
+        "HTANParticipantID": "1cebbdb7c4",
+        "OccupationDurationYears": 63.268010581919356,
+        "PrematureAtBirth": "Unknown",
+        "Race": "Blackorafricanamerican",
+        "VitalStatus": "Alive",
+        "WeeksGestationatBirth": 13.54573872124385,
+        "YearOfBirth": 45.94008242495601,
+        "patient": {
+            "submitter_id": "patient_b12facdb50"
+        },
+        "submitter_id": "demographic_c8a544d929",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "False",
+        "Component": "07efb9b85e",
+        "CountryofResidence": "SaoTomeandPrincipe",
+        "DaystoBirth": 6.267811215495389,
+        "Ethnicity": "Hispanicorlatino",
+        "Gender": "Male",
+        "HTANParticipantID": "8d71c75592",
+        "OccupationDurationYears": 45.82115843131184,
+        "PrematureAtBirth": "Yes",
+        "Race": null,
+        "VitalStatus": "Unknown",
+        "WeeksGestationatBirth": 36.1286569477369,
+        "YearOfBirth": 30.979347033723194,
+        "patient": {
+            "submitter_id": "patient_850b47c767"
+        },
+        "submitter_id": "demographic_7dd8a185d0",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "False",
+        "Component": "b4ca4f61e0",
+        "CountryofResidence": "PapuaNewGuinea",
+        "DaystoBirth": 94.18725015730065,
+        "Ethnicity": "Unknown",
+        "Gender": "Female",
+        "HTANParticipantID": "4010819472",
+        "OccupationDurationYears": 73.12305003790468,
+        "PrematureAtBirth": "No",
+        "Race": "Unknown",
+        "VitalStatus": "Alive",
+        "WeeksGestationatBirth": 66.92299221683184,
+        "YearOfBirth": 48.97253496176571,
+        "patient": {
+            "submitter_id": "patient_e325abb768"
+        },
+        "submitter_id": "demographic_22b39724bc",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "a86b926765",
+        "CountryofResidence": "Ecuador",
+        "DaystoBirth": 17.389748297052787,
+        "Ethnicity": "NotReported",
+        "Gender": "Female",
+        "HTANParticipantID": "2075dc9d11",
+        "OccupationDurationYears": 99.28958780446264,
+        "PrematureAtBirth": null,
+        "Race": "Asian",
+        "VitalStatus": "NotReported",
+        "WeeksGestationatBirth": 77.62573727978176,
+        "YearOfBirth": 22.959632911545413,
+        "patient": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "demographic_e6e72e00ae",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "d82423842e",
+        "CountryofResidence": "PuertoRico",
+        "DaystoBirth": 68.01265042520322,
+        "Ethnicity": "Unknown",
+        "Gender": "Unspecified",
+        "HTANParticipantID": "3717a16b41",
+        "OccupationDurationYears": 77.29786027294894,
+        "PrematureAtBirth": "Yes",
+        "Race": "Nativehawaiianorotherpacificislander",
+        "VitalStatus": "NotReported",
+        "WeeksGestationatBirth": 88.03171821041425,
+        "YearOfBirth": 49.99836928172874,
+        "patient": {
+            "submitter_id": "patient_46582a1fa9"
+        },
+        "submitter_id": "demographic_b32ac76bf7",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "8c77ca417e",
+        "CountryofResidence": "FalklandIslands(Malvinas)",
+        "DaystoBirth": 15.359910294002809,
+        "Ethnicity": "Unknown",
+        "Gender": "Unspecified",
+        "HTANParticipantID": "767dc0bf41",
+        "OccupationDurationYears": 6.234568177285804,
+        "PrematureAtBirth": "NotReported",
+        "Race": "Blackorafricanamerican",
+        "VitalStatus": null,
+        "WeeksGestationatBirth": 15.338353916627712,
+        "YearOfBirth": 3.4035433746794297,
+        "patient": {
+            "submitter_id": "patient_3dfb62c1f6"
+        },
+        "submitter_id": "demographic_ee5c40c38c",
+        "type": "demographic"
+    },
+    {
+        "AgeIsObfuscated": "True",
+        "Component": "26eb67c67b",
+        "CountryofResidence": "UnitedKingdom",
+        "DaystoBirth": 93.14081117152696,
+        "Ethnicity": "Hispanicorlatino",
+        "Gender": "Female",
+        "HTANParticipantID": "4bde797be9",
+        "OccupationDurationYears": 51.086269699684436,
+        "PrematureAtBirth": "Unknown",
+        "Race": "Nativehawaiianorotherpacificislander",
+        "VitalStatus": "Dead",
+        "WeeksGestationatBirth": 68.76965095202013,
+        "YearOfBirth": 89.42453596322578,
+        "patient": {
+            "submitter_id": "patient_e5caea354c"
+        },
+        "submitter_id": "demographic_66449402c6",
+        "type": "demographic"
+    }
+]

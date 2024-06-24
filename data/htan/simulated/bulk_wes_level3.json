@@ -1,0 +1,212 @@
+[
+    {
+        "Component": "9b143bde0f",
+        "GenomicReference": "892c4d196a",
+        "GenomicReferenceURL": "2a4b65128f",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "b3cc81a1cc",
+        "HTANDataFileID": "62bd999ae6",
+        "HTANParentDataFileID": "6b7e7f3035",
+        "SomaticVariantsSampleType": "ControlSample",
+        "SomaticVariantsWorkflowType": "MuSE",
+        "SomaticVariantsWorkflowURL": "3b3f5890f2",
+        "StructuralVariantWorkflowType": "GATK4",
+        "StructuralVariantWorkflowURL": "822802116f",
+        "assays": {
+            "submitter_id": "assay_9bbcbd83cf"
+        },
+        "fileFormat": "Bam",
+        "filename": "392e4a8c31",
+        "submitter_id": "bulk_wes_level3_baf88707c4",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "366da2e515",
+        "GenomicReference": "1eb02e9bc5",
+        "GenomicReferenceURL": "fbcfe203f6",
+        "GermlineVariantsWorkflowType": "GATK4",
+        "GermlineVariantsWorkflowURL": "0fda7c92be",
+        "HTANDataFileID": "574d6b3c8f",
+        "HTANParentDataFileID": "85a92b0baa",
+        "SomaticVariantsSampleType": "ControlSample",
+        "SomaticVariantsWorkflowType": "MuTect2",
+        "SomaticVariantsWorkflowURL": "7d5a03afe6",
+        "StructuralVariantWorkflowType": "CNVkit",
+        "StructuralVariantWorkflowURL": "71be2653ed",
+        "assays": {
+            "submitter_id": "assay_d043ad4eeb"
+        },
+        "fileFormat": "Mov",
+        "filename": "f565176bbe",
+        "submitter_id": "bulk_wes_level3_62f74d3365",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "445eea3f83",
+        "GenomicReference": "36ef671101",
+        "GenomicReferenceURL": "af96109649",
+        "GermlineVariantsWorkflowType": "GATK4",
+        "GermlineVariantsWorkflowURL": "e3286e50c1",
+        "HTANDataFileID": "fde2322828",
+        "HTANParentDataFileID": "2d8d106e62",
+        "SomaticVariantsSampleType": "CaseSample",
+        "SomaticVariantsWorkflowType": "GATK4",
+        "SomaticVariantsWorkflowURL": "d10797faca",
+        "StructuralVariantWorkflowType": "CNV",
+        "StructuralVariantWorkflowURL": "1dcfd3b1c1",
+        "assays": {
+            "submitter_id": "assay_49fb47aa19"
+        },
+        "fileFormat": "Fasta",
+        "filename": "44ff1d3862",
+        "submitter_id": "bulk_wes_level3_e1897814b4",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "ee38ad1ea2",
+        "GenomicReference": "33a0e65f55",
+        "GenomicReferenceURL": "c8b7969e89",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "e5ade74071",
+        "HTANDataFileID": "3eab1aa6ca",
+        "HTANParentDataFileID": "90d988b7ef",
+        "SomaticVariantsSampleType": "CaseSample",
+        "SomaticVariantsWorkflowType": "GATK4",
+        "SomaticVariantsWorkflowURL": "985dc6c58e",
+        "StructuralVariantWorkflowType": "CNV",
+        "StructuralVariantWorkflowURL": "7ddbd102ed",
+        "assays": {
+            "submitter_id": "assay_c9f8e51611"
+        },
+        "fileFormat": "Excel",
+        "filename": "38f7f372a2",
+        "submitter_id": "bulk_wes_level3_b34954a800",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "85dffb40e0",
+        "GenomicReference": "e33f920f62",
+        "GenomicReferenceURL": "90afd5494c",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "909b4ba561",
+        "HTANDataFileID": "6642b2ecef",
+        "HTANParentDataFileID": "65347cdf2b",
+        "SomaticVariantsSampleType": "ControlSample",
+        "SomaticVariantsWorkflowType": "GATK4",
+        "SomaticVariantsWorkflowURL": "a579069ed2",
+        "StructuralVariantWorkflowType": "GATK4",
+        "StructuralVariantWorkflowURL": "3bfe6d6dd8",
+        "assays": {
+            "submitter_id": "assay_3ae906b281"
+        },
+        "fileFormat": "DICOM",
+        "filename": "a9090dff80",
+        "submitter_id": "bulk_wes_level3_35ecdba534",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "481d12b15f",
+        "GenomicReference": "924c8f6da9",
+        "GenomicReferenceURL": "0a17782573",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "c07a4c6959",
+        "HTANDataFileID": "7f5fb56a77",
+        "HTANParentDataFileID": "69549ff3ad",
+        "SomaticVariantsSampleType": "ControlSample",
+        "SomaticVariantsWorkflowType": "MuTect2",
+        "SomaticVariantsWorkflowURL": "351991f7ca",
+        "StructuralVariantWorkflowType": "GATK4",
+        "StructuralVariantWorkflowURL": "acc008fbee",
+        "assays": {
+            "submitter_id": "assay_02f3828bd0"
+        },
+        "fileFormat": "Mtx",
+        "filename": "b23304f9e3",
+        "submitter_id": "bulk_wes_level3_b3bd411dda",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "25f47c68a8",
+        "GenomicReference": "932ace4721",
+        "GenomicReferenceURL": "7321d8f5d6",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "c364f1d2c8",
+        "HTANDataFileID": "727eb3d4d4",
+        "HTANParentDataFileID": "bb024b9a70",
+        "SomaticVariantsSampleType": "CaseSample",
+        "SomaticVariantsWorkflowType": "CaVEMan",
+        "SomaticVariantsWorkflowURL": "d464610c20",
+        "StructuralVariantWorkflowType": "BRASS",
+        "StructuralVariantWorkflowURL": "8cd945d253",
+        "assays": {
+            "submitter_id": "assay_9db8f50685"
+        },
+        "fileFormat": "Fasta",
+        "filename": "1dff882c13",
+        "submitter_id": "bulk_wes_level3_c3165aef4c",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "6ba04786ad",
+        "GenomicReference": "55e5b2bd1c",
+        "GenomicReferenceURL": "85186dfcf5",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "3891b83c9d",
+        "HTANDataFileID": "88302c5237",
+        "HTANParentDataFileID": "75cd1bd2f0",
+        "SomaticVariantsSampleType": "CaseSample",
+        "SomaticVariantsWorkflowType": "Pindel",
+        "SomaticVariantsWorkflowURL": "92b0b2984b",
+        "StructuralVariantWorkflowType": "BRASS",
+        "StructuralVariantWorkflowURL": "d99c5dd663",
+        "assays": {
+            "submitter_id": "assay_23f47b3d93"
+        },
+        "fileFormat": "Flagstat",
+        "filename": "bd78bf1ee8",
+        "submitter_id": "bulk_wes_level3_fe4ee98744",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "5b70fdd29f",
+        "GenomicReference": "dbdc7c7314",
+        "GenomicReferenceURL": "98912a7587",
+        "GermlineVariantsWorkflowType": "GATK4",
+        "GermlineVariantsWorkflowURL": "ea3935cd15",
+        "HTANDataFileID": "aaab22fde5",
+        "HTANParentDataFileID": "951e8e9396",
+        "SomaticVariantsSampleType": "CaseSample",
+        "SomaticVariantsWorkflowType": "Pindel",
+        "SomaticVariantsWorkflowURL": "d1e575bdc9",
+        "StructuralVariantWorkflowType": "CNVkit",
+        "StructuralVariantWorkflowURL": "4d05edec41",
+        "assays": {
+            "submitter_id": "assay_e6b70f4847"
+        },
+        "fileFormat": "Tif",
+        "filename": "b2bba4057e",
+        "submitter_id": "bulk_wes_level3_a97e1e6de6",
+        "type": "bulk_wes_level3"
+    },
+    {
+        "Component": "6e4580c1c8",
+        "GenomicReference": "fb5caac5c1",
+        "GenomicReferenceURL": "65f93a79b3",
+        "GermlineVariantsWorkflowType": "Other",
+        "GermlineVariantsWorkflowURL": "4a08624271",
+        "HTANDataFileID": "16fccae15a",
+        "HTANParentDataFileID": "169dce1384",
+        "SomaticVariantsSampleType": "ControlSample",
+        "SomaticVariantsWorkflowType": "VarScan2",
+        "SomaticVariantsWorkflowURL": "7b4b13a4ea",
+        "StructuralVariantWorkflowType": "CNV",
+        "StructuralVariantWorkflowURL": "50e49eb1f9",
+        "assays": {
+            "submitter_id": "assay_a6298a60e7"
+        },
+        "fileFormat": "Dup",
+        "filename": "40a532ebad",
+        "submitter_id": "bulk_wes_level3_b453776cf5",
+        "type": "bulk_wes_level3"
+    }
+]

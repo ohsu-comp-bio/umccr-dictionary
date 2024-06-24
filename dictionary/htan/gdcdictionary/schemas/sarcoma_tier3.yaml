@@ -1,0 +1,123 @@
+$schema: http://json-schema.org/draft-04/schema#
+id: sarcoma_tier3
+title: SarcomaTier3
+type: object
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Sarcoma specific attributes in Clinical Data Tier 3
+additionalProperties: false
+submittable: true
+validators: null
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+links:
+- name: patients
+  backref: sarcoma_tier3s
+  label: refers_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
+required:
+- submitter_id
+- type
+- projects
+- patients
+- Component
+- HTANParticipantID
+- StartDaysfromIndex
+- TimepointLabel
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+properties:
+  type:
+    enum:
+    - sarcoma_tier3
+  id:
+    $ref: _definitions.yaml#/UUID
+    systemAlias: node_id
+  state:
+    $ref: _definitions.yaml#/state
+  submitter_id:
+    type:
+    - string
+    - 'null'
+  projects:
+    $ref: _definitions.yaml#/to_many_project
+  project_id:
+    type: string
+  created_datetime:
+    $ref: _definitions.yaml#/datetime
+  updated_datetime:
+    $ref: _definitions.yaml#/datetime
+  # SarcomaTier3
+  Component:
+    type: string
+    description: Category of metadata (e.g. Diagnosis, Biospecimen, scRNA-seq Level
+      1, etc.); provide the same one for all items/rows.
+  HTANParticipantID:
+    type: string
+    description: HTAN ID associated with a patient based on HTAN ID SOP (eg HTANx_yyy
+      )
+  SarcomaDiagnosisClassificationCategory:
+    description: High level grouping to describe a diagnostic grouping or category
+      for sarcoma, a malignant mesenchymal cell tumor most commonly arising from muscle,
+      fat, fibrous tissue, bone, cartilage, and blood vessels.
+    enum:
+    - BoneSarcoma
+    - MusculoskeletalSarcoma
+    - SoftTissueSarcoma
+    - Unknown
+    - NotReported
+  SarcomaSubtype:
+    description: The subtype related to the scientific determination and investigation,
+      analysis and recognition of the presence and nature of disease, condition, or
+      injury from expressed signs and symptoms of tissue growth resulting from uncontrolled
+      cell proliferation.
+    enum:
+    - Undifferentiatedpleomorphicsarcoma
+    - Leiomyosarcoma(uterineorextra-uterine)
+    - OtherSynovialSarcomaOrMalignantPeripheralNerveSheathTumorSarcoma
+    - GastrointestinalStromalTumor
+    - Liposarcoma
+    - Undifferentiatedpleomorphicsarcomaormalignantfibroushistiosarcoma
+    - Other
+    - Unknown
+    - NotReported
+  SarcomaTumorExtensionType:
+    description: The field to indicate the organs and structures to which the tumor
+      has become adherent or has invaded.
+    enum:
+    - Extraosseous
+    - Intracranial
+    - Lymphnodes
+    - Parameningeal
+    - Thoraciccavity
+    - Other
+    - Unknown
+    - NotReported
+  StartDaysfromIndex:
+    type: number
+    description: Number of days from the date of birth (index date) to the date of
+      an event (e.g. exposure to environmental factor, treatment start, etc.). If
+      not applicable please enter 'Not Applicable'
+  StopDaysfromIndex:
+    type: number
+    description: 'Number of days from the date of birth (index date) to the end date
+      of the event (e.g. exposure to environmental factor, treatment start, etc.).
+      Note: if the event occurs at a single time point, e.g. a diagnosis or a lab
+      test, the values for this column is ''Not Applicable'''
+  TimepointLabel:
+    type: string
+    description: Label to identify the time point at which the clinical data or biospecimen
+      was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
+      PHI/PII INFORMATION IS ALLOWED.
+  patients:
+    $ref: _definitions.yaml#/to_many

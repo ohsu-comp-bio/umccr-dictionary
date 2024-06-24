@@ -17,7 +17,13 @@ systemProperties:
 - state
 - created_datetime
 - updated_datetime
-links: []
+links:
+- name: patient
+  backref: biospecimens
+  label: reference_to
+  target_type: patient
+  multiplicity: many_to_many
+  required: true
 required:
 - submitter_id
 - type
@@ -29,12 +35,7 @@ uniqueKeys:
 properties:
   type:
     enum:
-    - Biospecimen
-  subtype:
-    enum:
-    - AntigenRetrieval
-    - BiospecimenSlideLocation
-    - StainingMarkers
+    - biospecimen
   id:
     $ref: _definitions.yaml#/UUID
     systemAlias: node_id
@@ -52,11 +53,6 @@ properties:
     $ref: _definitions.yaml#/datetime
   updated_datetime:
     $ref: _definitions.yaml#/datetime
-  # AntigenRetrieval
-  # BiospecimenSlideLocation
-  # StainingMarkers
-  patients:
-    $ref: _definitions.yaml#/to_many
   # Biospecimen
   AcquisitionMethodType:
     description: Records the method of acquisition or source for the specimen under
@@ -78,6 +74,17 @@ properties:
     type: string
     description: List of HTAN Identifiers (separated by commas) of adjacent biospecimens
       cut from the same sample; for example HTA3_3000_3, HTA3_3000_4, ...
+  AntigenRetrieval:
+    type: string
+    description: 'Imaging specific: information on antigen retrieval when it is used
+      for a pathology specimen. E.g. pH 6 (Citric Acid), pH 8 (tris), or pH 10. [Text
+      - max length 100] '
+  BiospecimenSlideLocation:
+    type: string
+    description: 'Imaging specific: text term to capture the relative position and
+      orientation of the core location within a piece of tissue on the slide relative
+      to the region of interest slide coordinates. use https://docs.openmicroscopy.org/ome-model/6.0.1/developers/roi.html#shape-concrete-implementations
+      if applciable'
   BiospecimenType:
     description: Biospecimen Type
     enum:
@@ -93,7 +100,7 @@ properties:
     - BoneMarrowBiospecimenType
     - CellsBiospecimenType
   CollectionDaysfromIndex:
-    type: string
+    type: number
     description: Number of days from the research participant's index date that the
       biospecimen was obtained.
   CollectionMedia:
@@ -121,7 +128,7 @@ properties:
     - CarcinomainSitu
     - Unknown
   DysplasiaFraction:
-    type: string
+    type: number
     description: 'Resulting value to represent the number of pieces of dysplasia divided
       by the total number of pieces. [Text: max length 5]'
   FiducialMarker:
@@ -204,54 +211,54 @@ properties:
     - Unknown
     - NotReported
   NumberProliferatingCells:
-    type: string
+    type: number
     description: Numeric value that represents the count of proliferating cells determined
       during pathologic review of the sample slide(s).
   PercentEosinophilInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by eosinophils
       in a tumor sample or specimen.
   PercentGranulocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by granulocytes
       in a tumor sample or specimen.
   PercentInflamInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent local response to cellular injury, marked
       by capillary dilatation, edema and leukocyte infiltration; clinically, inflammation
       is manifest by redness, heat, pain, swelling and loss of function, with the
       need to heal damaged tissue.
   PercentLymphocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by lymphocytes
       in a solid tissue normal sample or specimen.
   PercentMonocyteInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of monocyte infiltration
       in a sample or specimen.
   PercentNecrosis:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of cell death in a malignant
       tumor sample or specimen.
   PercentNeutrophilInfiltration:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of infiltration by neutrophils
       in a tumor sample or specimen.
   PercentNormalCells:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of normal cell content
       in a malignant tumor sample or specimen.
   PercentStromalCells:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of reactive cells that
       are present in a malignant tumor sample or specimen but are not malignant such
       as fibroblasts, vascular structures, etc.
   PercentTumorCells:
-    type: string
+    type: number
     description: Numeric value that represents the percentage of infiltration by tumor
       cells in a sample.
   PercentTumorNuclei:
-    type: string
+    type: number
     description: Numeric value to represent the percentage of tumor nuclei in a malignant
       neoplasm sample or specimen.
   PreinvasiveMorphology:
@@ -275,7 +282,7 @@ properties:
     - Invasivemelanoma-nevoid
     - Invasivemelanoma-other
   ProcessingDaysfromIndex:
-    type: string
+    type: number
     description: Number of days from the research participant's index date that the
       biospecimen was processed
   ProcessingLocation:
@@ -284,7 +291,7 @@ properties:
       Any identifier used within the center to identify processing location. No PHI/PII
       is allowed.
   ProtocolLink:
-    type: string
+    type: number
     description: Protocols.io ID or DOI link to a free/open protocol resource describing
       in detail the assay protocol (e.g. surface markers used in Smart-seq, dissociation
       duration,  lot/batch numbers for key reagents such as primers, sequencing reagent
@@ -642,6 +649,10 @@ properties:
     - Other
     - Unknown
     - NotReported
+  StainingMarkers:
+    type: string
+    description: 'Imaging specific: text to identify proteins/ antibodies selected
+      for staining'
   StorageMethod:
     description: The method by which a biomaterial was stored after preservation or
       before another protocol was used.
@@ -667,5 +678,7 @@ properties:
       was obtained (e.g. Baseline, End of Treatment, Overall survival, Final). NO
       PHI/PII INFORMATION IS ALLOWED.
   TumorInfiltratingLymphocytes:
-    type: string
+    type: number
     description: Measure of Tumor-Infiltrating Lymphocytes [Number]
+  patient:
+    $ref: _definitions.yaml#/to_many

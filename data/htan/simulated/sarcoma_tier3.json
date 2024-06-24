@@ -1,0 +1,152 @@
+[
+    {
+        "Component": "7406fd2680",
+        "HTANParticipantID": "d51c1ffa9f",
+        "SarcomaDiagnosisClassificationCategory": "NotReported",
+        "SarcomaSubtype": "Unknown",
+        "SarcomaTumorExtensionType": "Extraosseous",
+        "StartDaysfromIndex": 84.89342903278693,
+        "StopDaysfromIndex": 70.17164849084477,
+        "TimepointLabel": "a65e03fccc",
+        "patients": {
+            "submitter_id": "patient_5236da4db0"
+        },
+        "submitter_id": "sarcoma_tier3_fa9f80d692",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "ad6f1ac1c9",
+        "HTANParticipantID": "4c4e6b93d7",
+        "SarcomaDiagnosisClassificationCategory": "BoneSarcoma",
+        "SarcomaSubtype": "NotReported",
+        "SarcomaTumorExtensionType": "Unknown",
+        "StartDaysfromIndex": 42.081271379882836,
+        "StopDaysfromIndex": 61.01647369947531,
+        "TimepointLabel": "145d33820e",
+        "patients": {
+            "submitter_id": "patient_399fade713"
+        },
+        "submitter_id": "sarcoma_tier3_89438af5e4",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "b267361bc4",
+        "HTANParticipantID": "cc02be9e28",
+        "SarcomaDiagnosisClassificationCategory": "SoftTissueSarcoma",
+        "SarcomaSubtype": "Other",
+        "SarcomaTumorExtensionType": null,
+        "StartDaysfromIndex": 5.712697803939848,
+        "StopDaysfromIndex": 75.65950511927811,
+        "TimepointLabel": "c6fb9afb65",
+        "patients": {
+            "submitter_id": "patient_944516011c"
+        },
+        "submitter_id": "sarcoma_tier3_ef3233e445",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "5e05bc83a8",
+        "HTANParticipantID": "d2f8df21c5",
+        "SarcomaDiagnosisClassificationCategory": null,
+        "SarcomaSubtype": "Undifferentiatedpleomorphicsarcoma",
+        "SarcomaTumorExtensionType": "Extraosseous",
+        "StartDaysfromIndex": 13.751100771650615,
+        "StopDaysfromIndex": 64.62923826766111,
+        "TimepointLabel": "848021978e",
+        "patients": {
+            "submitter_id": "patient_b12facdb50"
+        },
+        "submitter_id": "sarcoma_tier3_093c5c4b40",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "bd9cd55eef",
+        "HTANParticipantID": "9d480bb07f",
+        "SarcomaDiagnosisClassificationCategory": "BoneSarcoma",
+        "SarcomaSubtype": "NotReported",
+        "SarcomaTumorExtensionType": null,
+        "StartDaysfromIndex": 94.4676300714822,
+        "StopDaysfromIndex": 43.940496720203804,
+        "TimepointLabel": "81bfe683ae",
+        "patients": {
+            "submitter_id": "patient_850b47c767"
+        },
+        "submitter_id": "sarcoma_tier3_32ead49374",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "15c80f9ff6",
+        "HTANParticipantID": "6366569699",
+        "SarcomaDiagnosisClassificationCategory": "MusculoskeletalSarcoma",
+        "SarcomaSubtype": "Liposarcoma",
+        "SarcomaTumorExtensionType": "NotReported",
+        "StartDaysfromIndex": 28.219930616957043,
+        "StopDaysfromIndex": 65.213723790124,
+        "TimepointLabel": "1ac312ad48",
+        "patients": {
+            "submitter_id": "patient_e325abb768"
+        },
+        "submitter_id": "sarcoma_tier3_25405e5e86",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "a7c7d99f7b",
+        "HTANParticipantID": "1f0bb9e082",
+        "SarcomaDiagnosisClassificationCategory": "SoftTissueSarcoma",
+        "SarcomaSubtype": "Unknown",
+        "SarcomaTumorExtensionType": "NotReported",
+        "StartDaysfromIndex": 20.726818748582577,
+        "StopDaysfromIndex": 15.353685753791835,
+        "TimepointLabel": "0b81c5aeea",
+        "patients": {
+            "submitter_id": "patient_9f7dbdfe76"
+        },
+        "submitter_id": "sarcoma_tier3_836df56f00",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "b872180485",
+        "HTANParticipantID": "d720c7e4bb",
+        "SarcomaDiagnosisClassificationCategory": "BoneSarcoma",
+        "SarcomaSubtype": "OtherSynovialSarcomaOrMalignantPeripheralNerveSheathTumorSarcoma",
+        "SarcomaTumorExtensionType": null,
+        "StartDaysfromIndex": 43.09823543647665,
+        "StopDaysfromIndex": 91.24705828825844,
+        "TimepointLabel": "e4dae75907",
+        "patients": {
+            "submitter_id": "patient_46582a1fa9"
+        },
+        "submitter_id": "sarcoma_tier3_0a42317dcf",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "a184dec23b",
+        "HTANParticipantID": "c96ba899bb",
+        "SarcomaDiagnosisClassificationCategory": "MusculoskeletalSarcoma",
+        "SarcomaSubtype": "GastrointestinalStromalTumor",
+        "SarcomaTumorExtensionType": "Unknown",
+        "StartDaysfromIndex": 43.73421723961971,
+        "StopDaysfromIndex": 17.82628838840168,
+        "TimepointLabel": "978a7ab749",
+        "patients": {
+            "submitter_id": "patient_3dfb62c1f6"
+        },
+        "submitter_id": "sarcoma_tier3_8118132f04",
+        "type": "sarcoma_tier3"
+    },
+    {
+        "Component": "9806dd13dd",
+        "HTANParticipantID": "6e93de619e",
+        "SarcomaDiagnosisClassificationCategory": "BoneSarcoma",
+        "SarcomaSubtype": "Undifferentiatedpleomorphicsarcomaormalignantfibroushistiosarcoma",
+        "SarcomaTumorExtensionType": "Unknown",
+        "StartDaysfromIndex": 46.279356409491676,
+        "StopDaysfromIndex": 51.6437600513539,
+        "TimepointLabel": "adba925129",
+        "patients": {
+            "submitter_id": "patient_e5caea354c"
+        },
+        "submitter_id": "sarcoma_tier3_4b0e7f2f03",
+        "type": "sarcoma_tier3"
+    }
+]

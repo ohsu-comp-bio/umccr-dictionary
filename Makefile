@@ -37,8 +37,10 @@ ps:
 
 # -- DBA targets: may require SA (sysadmin) privilege for PostgreSQL
 
+psql:   SHELL:=/bin/bash
 psql:
-	@docker exec -e PGPASSWORD=$(PG_PASS) -it ddpostgres psql -h $(PG_HOST) -d $(PG_NAME) -U $(PG_USER)
+	# @docker exec -e PGPASSWORD=$(PG_PASS) -it ddpostgres psql -h $(PG_HOST) -d $(PG_NAME) -U $(PG_USER)
+	$(PSQL)
 
 reset:
 	@docker exec -e PGPASSWORD=$(POSTGRES_PASSWORD) -it ddpostgres \
@@ -55,7 +57,7 @@ reset:
 convert:
 	@[ -n "$(program)" ] || { echo "Please specify program argument e.g.  make convert program=umccr"; exit 1; }	
 	@rm -f schema/$(program).json
-	@docker compose exec g3po g3po dd convert /dictionary/$(program)/gdcdictionary/schemas --out /schema/$(program).json
+	@docker-compose exec g3po g3po dd convert /dictionary/$(program)/gdcdictionary/schemas --out /schema/$(program).json
 
 # alias to convert
 compile: convert
@@ -91,6 +93,7 @@ simulate: validate
 
 	@test -f data/$(program)/$(project)/DataImportOrder.txt  || { echo "data/$(program)/$(project)/DataImportOrder.txt does not exist" ; exit 1; }
 	@echo "data/$(program)/$(project)/DataImportOrder.txt exists."
+	@sudo chmod 666 data/$(program)/$(project)/DataImportOrder.txt
 
 	@echo "program\n`cat data/$(program)/$(project)/DataImportOrder.txt`"  > data/$(program)/$(project)/DataImportOrder.txt
 	@grep -q program data/$(program)/$(project)/DataImportOrder.txt || { echo "no 'program' found data/$(program)/$(project)/DataImportOrder.txt" ; exit 1; }
